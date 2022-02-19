@@ -1,8 +1,7 @@
 <!--相当于html文件中的body部分-->
 <template>
   <!-- 调用子组件 -->
-  <send></send>
-  <receive></receive>
+  <hello-world></hello-world>
 </template>
 <!--相当于html文件中的style标签,scoped属性表示这个标签内的样式只作用于此组件,不会溢出,原理是自定义html属性和属性选择器的连用-->
 <style scoped>
@@ -15,8 +14,6 @@
 <script>
 // 以自定义变量接收子组件
 import HelloWorld from "./components/HelloWorld.vue";
-import send from "./brothers/send.vue";
-import receive from "./brothers/receive.vue";
 // 组件对象
 export default {
   //本组件名为App
