@@ -225,26 +225,62 @@ export default {
 }
 </script>
 ~~~
-### 8. Vue生命周期
+### 8. 自定义指令
+- 把生命周期钩子封装成一个类名
+- 每个钩子里都有四个参数
+    - `el`，DOM元素
+    - `binding`，包含以下属性的对象
+        - `instance`，使用此指令的组件实例
+        - `value`，指令的值
+        - `oldValue`，旧值（仅更新的两个钩子可用）
+        - `arg`，指令的参数
+        - `modifiers`，修饰符
+        - `dir`，指令对象
+    - `vnode`，虚拟DOM
+    - `prevVnode`，上一个虚拟DOM
 ~~~vue
 <script>
 export default {
-    beforeCreate(),
-    created(),
-    beforeMount(),
-    Mount(),
-    BeforeUpdate(),
-    updated(),
+    directives:{
+        variable:{
+            created(){},
+            beforeMount(){},
+            Mount(){},
+            BeforeUpdate(){},
+            updated(){},
+            // Vue2
+            beforeDestory(){},
+            destoryed(){},
+            // Vue3
+            BeforeUnmount(){},
+            Unmounted(){}
+        }
+    }
+}
+</script>
+~~~
+### 9. Vue生命周期
+~~~vue
+<script>
+export default {
+    beforeCreate(){},
+    created(){},
+    beforeMount(){},
+    Mount(){},
+    BeforeUpdate(){},
+    updated(){},
     // keep-alive
-    activated(),
-    deactivated(),
+    activated(){},
+    deactivated(){},
     // Vue2
-    beforeDestory(),
-    destoryed(),
+    beforeDestory(){},
+    destoryed(){},
     // Vue3
-    BeforeUnmount(),
-    Unmounted()
+    BeforeUnmount(){},
+    Unmounted(){}
 }
 </script>
 ~~~
 ## 4. Vue全局
+### 1. 注册组件
+### 2. 使用插件
