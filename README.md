@@ -9,17 +9,17 @@ npm run dev
 ~~~
 ### 2. `Vue-cli`法
 - 安装`Vue-cli`
-      ~~~powershell
-      npm i -g @vue/cli
-      ~~~
-    - UI法
-      ~~~powershell
-      vue ui
-      ~~~
-    - 命令行法
-      ~~~powershell
-      vue create '项目名称'
-      ~~~
+~~~powershell
+npm i -g @vue/cli
+~~~
+- UI法
+~~~powershell
+vue ui
+~~~
+- 命令行法
+~~~powershell
+vue create '项目名称'
+~~~
 ## 2. vue指令
 ### 1. 内容渲染
 - `v-html`
@@ -143,7 +143,7 @@ export defalut {
 </script>
 ~~~
 ### 3. `data()`
-    - Vue组件中`this`默认指向`data()`返回的对象
+- Vue组件中`this`默认指向`data()`返回的对象
 ~~~vue
 <script>
 export default {
@@ -156,7 +156,7 @@ export default {
 </script>
 ~~~
 ### 4. `computed`
-    - 方法内`this`后的属性的依赖发生变化时，方法会被执行一次
+- 方法内`this`后的属性的依赖发生变化时，方法会被执行一次
 ~~~vue
 <script>
 export default {
