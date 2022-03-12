@@ -9,43 +9,43 @@ npm run dev
 ~~~
 2. `Vue-cli`法
     - 安装`Vue-cli`
-      >~~~powershell
-      >npm i -g @vue/cli
-      >~~~
+      ~~~powershell
+      npm i -g @vue/cli
+      ~~~
     - UI法
-      >~~~powershell
-      >vue ui
-      >~~~
+      ~~~powershell
+      vue ui
+      ~~~
     - 命令行法
-      >~~~powershell
-      >vue create '项目名称'
-      >~~~
+      ~~~powershell
+      vue create '项目名称'
+      ~~~
 ## 2. vue指令
 1. 内容渲染
     - `v-html`
-        >~~~html
-        ><p v-html='<span>文本节点</span>'></p>
-        >~~~
+        ~~~html
+        <p v-html='<span>文本节点</span>'></p>
+        ~~~
     - `v-text`
-        >~~~html
-        ><p v-text='文本节点'></p>
-        >~~~
+        ~~~html
+        <p v-text='文本节点'></p>
+        ~~~
     - `{{}}`
-        >~~~html
-        ><p>{{variable}}<p>
-        >~~~
+        ~~~html
+        <p>{{variable}}<p>
+        ~~~
 2. 属性绑定
     - `v-bind`
-        >~~~html
-        ><p v-bind:style='variable'></p>
-        ><p :style='variable'></p>
-        >~~~
+        ~~~html
+        <p v-bind:style='variable'></p>
+        <p :style='variable'></p>
+        ~~~
 3. 事件绑定
     - `v-on`
-        >~~~html
-        ><div v-on:click='function'></div>
-        ><div @click='function'></div>
-        >~~~
+        ~~~html
+        <div v-on:click='function'></div>
+        <div @click='function'></div>
+        ~~~
     - `$event`
         - 不指定绑定事件的参数时，默认的第一个参数为`event`对象
         - 指定参数时，`event`对象会被覆盖
@@ -67,5 +67,56 @@ npm run dev
         - `.lazy`，改值时才更新
 5. 条件渲染
     - `v-if`
+    - `v-else-if`
+    - `v-else`
     - `v-show`
 6. 列表渲染
+    - `v-for`
+    ~~~vue
+    <template>
+    <li v-for='(item,index) in arr' :key='variable'></li>
+    </template>
+    <script>
+    export defalut {
+    data(){
+        return {
+           arr:[
+               {variable:1,num:'值'},
+               {variable:2,num:'值'}
+           ]
+           }
+       }
+    }
+    </script>
+    ~~~
+    - 注意
+        1. `:key`的值只能是`number`或`string`
+        2. `:key`的值不能重复
+        3. 常用`id`作为`:key`属性
+        4. 不建议用`index`作为`:key`，DOM发生变动时`index`的指向会发生变化
+        5. `:key`能提升性能
+## 3. Vue组件
+0. `name`
+~~~vue
+export default {
+    name:componentName
+}
+~~~
+1. `data()`
+    - Vue组件中`this`默认指向`data()`返回的对象
+~~~vue
+export default {
+    data(){
+        return {
+            variable:'值'
+        }
+    }
+}
+~~~
+2. `methods`
+~~~vue
+export defalut {
+    fun(){}
+}
+~~~
+3. 
