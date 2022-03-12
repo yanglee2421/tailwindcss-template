@@ -60,7 +60,7 @@ npm run dev
     - `.enter`，按键为Enter
 ### 4. 双向绑定
 - `v-model`
-        >设置`input`标题的`value`为一个变量
+    >设置`input`标题的`value`为一个变量
 - 修饰符
     - `.number`，转为`number`类型
     - `.trim`，过滤首尾空格
