@@ -104,7 +104,7 @@ export default {
 }
 </script>
 ~~~
-1. `props`
+### 1. `props`
     - 简单用法
     ~~~vue
     <script>
@@ -134,7 +134,7 @@ export default {
     }
     </script>
     ~~~
-2. `methods`
+### 2. `methods`
 ~~~vue
 <script>
 export defalut {
@@ -142,7 +142,7 @@ export defalut {
 }
 </script>
 ~~~
-3. `data()`
+### 3. `data()`
     - Vue组件中`this`默认指向`data()`返回的对象
 ~~~vue
 <script>
@@ -155,7 +155,7 @@ export default {
 }
 </script>
 ~~~
-4. `computed`
+### 4. `computed`
     - 方法内`this`后的属性的依赖发生变化时，方法会被执行一次
 ~~~vue
 <script>
@@ -173,7 +173,7 @@ export default {
 }
 </script>
 ~~~
-5. `watch`
+### 5. `watch`
     - 普通用法
     ~~~vue
     <script>
@@ -200,7 +200,7 @@ export default {
     }
     </script>
     ~~~
-6. `components`
+### 6. `components`
 ~~~vue
 <script>
 export default {
@@ -210,7 +210,7 @@ export default {
 } 
 </script>
 ~~~
-7. `emits`
+### 7. `emits`
 ~~~vue
 <script>
 export default {
@@ -225,7 +225,7 @@ export default {
 }
 </script>
 ~~~
-8. Vue生命周期
+### 8. Vue生命周期
 ~~~vue
 <script>
 export default {
