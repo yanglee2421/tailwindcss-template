@@ -98,13 +98,54 @@ npm run dev
 ## 3. Vue组件
 0. `name`
 ~~~vue
+<script>
 export default {
     name:componentName
 }
+</script>
 ~~~
-1. `data()`
+1. `props`
+    - 简单用法
+    ~~~vue
+    <script>
+    export defalut {
+        props:[]
+    }
+    </script>
+    ~~~
+    - 高级用法
+    ~~~vue
+    <script>
+    export default {
+        props:{
+            variable:{
+                type:'数据类型',
+                //是否必填
+                required:true,
+                //默认值
+                default:'默认值',
+                //自定义函数验证
+                fun(){
+                    //返回Boolean，表示是否通过
+                    return true
+                }
+            }
+        }
+    }
+    </script>
+    ~~~
+2. `methods`
+~~~vue
+<script>
+export defalut {
+    fun(){}
+}
+</script>
+~~~
+3. `data()`
     - Vue组件中`this`默认指向`data()`返回的对象
 ~~~vue
+<script>
 export default {
     data(){
         return {
@@ -112,11 +153,98 @@ export default {
         }
     }
 }
+</script>
 ~~~
-2. `methods`
+4. `computed`
+    - 方法内`this`后的属性的依赖发生变化时，方法会被执行一次
 ~~~vue
-export defalut {
-    fun(){}
+<script>
+export default {
+    computed:{
+        variable(){
+            return this.variable + 1
+        }
+    },
+    data(){
+        return {
+            variable
+        }
+    }
 }
+</script>
 ~~~
-3. 
+5. `watch`
+    - 普通用法
+    ~~~vue
+    <script>
+    export default {
+        watch:{
+            variable(newNum,oldNum){}
+        }
+    }
+    </script>
+    ~~~
+    - 高级用法
+    ~~~vue
+    <script>
+    export default {
+        watch:{
+            variable:{
+                //加载时调用
+                immediate:true,
+                //深度监测
+                deep:true,
+                handler(newNum,oldNum){}
+            }
+        }
+    }
+    </script>
+    ~~~
+6. `components`
+~~~vue
+<script>
+export default {
+    components:{
+        componentName
+    }
+} 
+</script>
+~~~
+7. `emits`
+~~~vue
+<script>
+export default {
+    // 声明自定义事件
+    emits:['事件名'],
+    methods:{
+        fun(){
+            // 触发自定义事件,并将第二个参数(可选)作为事件方法的第一个参数
+            this.$emit('事件名',this.variable)
+        }
+    }
+}
+</script>
+~~~
+8. Vue生命周期
+~~~vue
+<script>
+export default {
+    beforeCreate(),
+    created(),
+    beforeMount(),
+    Mount(),
+    BeforeUpdate(),
+    updated(),
+    // keep-alive
+    activated(),
+    deactivated(),
+    // Vue2
+    beforeDestory(),
+    destoryed(),
+    // Vue3
+    BeforeUnmount(),
+    Unmounted()
+}
+</script>
+~~~
+## 4. Vue全局
