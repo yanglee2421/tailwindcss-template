@@ -11,6 +11,7 @@ npm run dev
 - 安装`Vue-cli`
 ~~~powershell
 npm i -g @vue/cli
+npm run serve
 ~~~
 - UI法
 ~~~powershell
@@ -334,6 +335,23 @@ export default {
     </script>
     ~~~
 ***
+### 0. `ref`
+- 用来获取DOM元素
+~~~vue
+<template>
+    <h1 ref='variable'></h1>
+</template>
+<script>
+export default {
+    methods:{
+        fun(){
+            // 以此调用DOM元素
+            $refs.variable
+        }
+    }
+}
+</script>
+~~~
 ### 1. `keep-alive`
 ~~~vue
 <template>
@@ -393,23 +411,8 @@ export default {
         </myComponents>
     </template>
     ~~~
-### 3. `ref`
-- 用来获取DOM元素
-~~~vue
-<template>
-    <h1 ref='variable'></h1>
-</template>
-<script>
-export default {
-    methods:{
-        fun(){
-            // 以此调用DOM元素
-            $refs.variable
-        }
-    }
-}
-</script>
-~~~
+### 3. `component`
+- 
 ***
 ### 1. `scoped`
 ~~~vue
@@ -452,14 +455,36 @@ app.component(mycomponents.name, mycomponents)
 app.mount('#DOM_id')
 ~~~
 ### 6. `provide`
+- 向所有组件传递一个参数，在组件内以`inject`接收
+~~~js
+app.provide('variable', '值')
+~~~
+
 ### 7. `unmount`
 - 卸载根组件实例
 ~~~js
 app.unmount()
 ~~~
 ### 8. `use`
-- 安装Vue插件
-    - 
+- 在Vue安装插件，类似注册全局组件
+#### `element-plus`
+>在项目中安装模块
+~~~powershell
+npm i element-ui
+~~~
+>在Vue中安装
+- 完整引入
+~~~js
+import ElementUI from 'element-plus'
+import 'node_modules\element-plus\theme-chalk\index.css'
+app.use(ElementUI)
+~~~
+- 按需引入
+#### `vue-router`
+>在项目中安装模块
+~~~powershell
+npm i vue-router@next
+~~~
 ### 9. `version`
 - 字符串形式的Vue版本号
 ~~~js
