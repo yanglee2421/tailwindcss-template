@@ -104,6 +104,7 @@ export default {
 }
 </script>
 ~~~
+***
 ### 1. `props`
 - 简单用法
 ~~~vue
@@ -283,7 +284,57 @@ export default {
 }
 </script>
 ~~~
-### 10. keep-alive
+### 10. `provide()`
+- 向后代传参
+    - 非响应式
+    ~~~vue
+    <script>
+    export default {
+        provide(){
+            return {
+                variable:'值'
+            }
+        }
+    }
+    </script>
+    ~~~
+    - 响应式写法
+    ~~~vue
+    <script>
+    import { computed } from 'vue'
+    export default {
+        provide(){
+            return {
+                variable:computed(() => this.variable)
+            }
+        }
+    }
+    </script>
+    ~~~
+### 11. `inject`
+- 接收`provide`传递的参数
+    - 非响应式
+    ~~~vue
+    <script>
+    export default {
+        inject:['variable']
+    }
+    </script>
+    ~~~
+    - 响应式
+    ~~~vue
+    <template>
+        <!-- 此时，需要以.value方式调用 -->
+        {{variable.value}}
+    </template>
+    <script>
+    export default {
+        inject:['variable']
+    }
+    </script>
+    ~~~
+***
+### 1. `keep-alive`
 ~~~vue
 <template>
     <keep-alive>
@@ -291,7 +342,7 @@ export default {
     </keep-alive>
 </template>
 ~~~
-### 11. slot
+### 2. `slot`
 - 普通用法
     - 声明
     ~~~vue
@@ -342,7 +393,7 @@ export default {
         </myComponents>
     </template>
     ~~~
-### 12. ref
+### 3. `ref`
 - 用来获取DOM元素
 ~~~vue
 <template>
@@ -359,7 +410,8 @@ export default {
 }
 </script>
 ~~~
-### 13. scoped
+***
+### 1. `scoped`
 ~~~vue
 <style scoped>
 /* 若要对子组件也生效 */
@@ -369,5 +421,47 @@ export default {
 </style>
 ~~~
 ## 4. Vue全局
-### 1. 注册组件
-### 2. 使用插件
+### 1. `component`
+- 用于注册全局组件
+- 以驼峰法命名可以被短横线调用，反之不行。在局部注册中也一样
+~~~js
+import myComponents from '组件路径'
+app.component('组件名', myComponents)
+//惯用套路
+app.component(mycomponents.name, mycomponents)
+~~~
+### 2. `config`
+### 3. `directive`
+- 用于注册全局指令
+    - 常规写法
+    ~~~js
+    app.directive('指令名', {
+        /*这个对象的写法跟局部组件中的写法一样*/
+    })
+    ~~~
+    - 简写
+    ~~~js
+    app.directive('指令名', ()=>{
+        /* 视作mounted和update的回调 */
+    })
+    ~~~
+### 4. `mixin`
+### 5. `mount`
+- 用于注册根组件实例
+~~~js
+app.mount('#DOM_id')
+~~~
+### 6. `provide`
+### 7. `unmount`
+- 卸载根组件实例
+~~~js
+app.unmount()
+~~~
+### 8. `use`
+- 安装Vue插件
+    - 
+### 9. `version`
+- 字符串形式的Vue版本号
+~~~js
+app.version
+~~~
