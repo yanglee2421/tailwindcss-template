@@ -138,7 +138,9 @@ export default {
 ~~~vue
 <script>
 export defalut {
-    fun(){}
+    methods:{
+        fun(){}
+    }
 }
 </script>
 ~~~
@@ -225,7 +227,7 @@ export default {
 }
 </script>
 ~~~
-### 8. 自定义指令
+### 8. `directives`
 - 把生命周期钩子封装成一个类名
 - 每个钩子里都有四个参数
     - `el`，DOM元素
@@ -280,6 +282,91 @@ export default {
     Unmounted(){}
 }
 </script>
+~~~
+### 10. keep-alive
+~~~vue
+<template>
+    <keep-alive>
+        <myComponents></myComponents>
+    </keep-alive>
+</template>
+~~~
+### 11. slot
+- 普通用法
+    - 声明
+    ~~~vue
+    <template>
+        <solt>
+            当插槽没有被使用时，此处的内容会显示出来
+        </solt>
+    </template>
+    ~~~
+    - 调用
+    ~~~vue
+    <template>
+        <myComponents>
+            <h1>将此标签嵌入到插槽的位置</h1>
+        </myComponents>
+    </template>
+    ~~~
+- 具名插槽
+    - 声明
+    ~~~vue
+    <template>
+        <solt name='名字'></solt>
+    </template>
+    ~~~
+    - 调用
+    ~~~vue
+    <template>
+        <myComponents>
+            <template v-solt:'名字'></template>
+        </myComponents>
+    </template>
+    ~~~
+- 作用域插槽
+    >由子组件向父组件传参，若要传多个参可用解构赋值
+    - 声明
+    ~~~vue
+    <template>
+        <solt :info='variable'></solt>
+    </template>
+    ~~~
+    - 调用
+    ~~~vue
+    <template>
+        <myComponents>
+            <template v-solt:default='接收的名字'>
+                {{接收的名字}}
+            </template>
+        </myComponents>
+    </template>
+    ~~~
+### 12. ref
+- 用来获取DOM元素
+~~~vue
+<template>
+    <h1 ref='variable'></h1>
+</template>
+<script>
+export default {
+    methods:{
+        fun(){
+            // 以此调用DOM元素
+            $refs.variable
+        }
+    }
+}
+</script>
+~~~
+### 13. scoped
+~~~vue
+<style scoped>
+/* 若要对子组件也生效 */
+/deep/ .className {}
+/* Vue3中建议使用新方法 */
+:deep(.className) {}
+</style>
 ~~~
 ## 4. Vue全局
 ### 1. 注册组件
