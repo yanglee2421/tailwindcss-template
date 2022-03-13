@@ -497,6 +497,7 @@ import 'node_modules\element-plus\theme-chalk\index.css'
 app.use(ElementUI)
 ~~~
 - 按需引入
+#### 路由实例
 #### `vuex`
 ### 9. `version`
 - 字符串形式的Vue版本号
