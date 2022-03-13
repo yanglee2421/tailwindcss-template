@@ -412,7 +412,21 @@ export default {
     </template>
     ~~~
 ### 3. `component`
-- 
+- 用于组件切换
+~~~vue
+<template>
+    <!-- is属性的值是一个string -->
+    <component :is='componentName'></component>
+</template>
+<script>
+import componentName from '组件路径'
+export default {
+    components:{
+        componentName
+    }
+}
+</script>
+~~~
 ***
 ### 1. `scoped`
 ~~~vue
@@ -459,7 +473,6 @@ app.mount('#DOM_id')
 ~~~js
 app.provide('variable', '值')
 ~~~
-
 ### 7. `unmount`
 - 卸载根组件实例
 ~~~js
@@ -480,13 +493,27 @@ import 'node_modules\element-plus\theme-chalk\index.css'
 app.use(ElementUI)
 ~~~
 - 按需引入
-#### `vue-router`
->在项目中安装模块
-~~~powershell
-npm i vue-router@next
-~~~
+#### `vuex`
 ### 9. `version`
 - 字符串形式的Vue版本号
 ~~~js
 app.version
+~~~
+## 5. `vue-router`
+### 1. 安装
+>在项目中安装模块，不写在main.js中，新在自定义的router.js中
+~~~powershell
+npm i vue-router@next
+~~~
+>在Vue中安装
+~~~js
+import myComponent from '组件路径'
+import { createRouter, createWebHashHistory } from 'vue-router'
+const router = createRouter({
+    history:createWebHashHistory(),
+    routes:[
+        { path:'组件路径', component:myComponent }
+    ]
+})
+export default router
 ~~~
