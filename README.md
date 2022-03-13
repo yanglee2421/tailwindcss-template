@@ -11,7 +11,6 @@ npm run dev
 - 安装`Vue-cli`
 ~~~powershell
 npm i -g @vue/cli
-npm run serve
 ~~~
 - UI法
 ~~~powershell
@@ -20,6 +19,10 @@ vue ui
 - 命令行法
 ~~~powershell
 vue create '项目名称'
+~~~
+- 运行项目
+~~~powershell
+npm run serve
 ~~~
 ## 2. vue指令
 ### 1. 内容渲染
@@ -448,12 +451,13 @@ app.component('组件名', myComponents)
 app.component(mycomponents.name, mycomponents)
 ~~~
 ### 2. `config`
+- 包含Vue配置的对象
 ### 3. `directive`
 - 用于注册全局指令
     - 常规写法
     ~~~js
     app.directive('指令名', {
-        /*这个对象的写法跟局部组件中的写法一样*/
+        /* 这个对象的写法跟局部组件中的写法一样 */
     })
     ~~~
     - 简写
@@ -483,7 +487,7 @@ app.unmount()
 #### `element-plus`
 >在项目中安装模块
 ~~~powershell
-npm i element-ui
+npm i element-plus
 ~~~
 >在Vue中安装
 - 完整引入
@@ -517,3 +521,49 @@ const router = createRouter({
 })
 export default router
 ~~~
+### 2. 路由高亮
+- 默认方式
+~~~css
+.router-link-active {
+    background-color:'red'
+}
+~~~
+- 自定义方式
+~~~js
+const router = createRouter({
+    linkActiveClass:'自定义高亮类名'
+})
+~~~
+### 3. 嵌套路由
+~~~js
+const router = createRouter({
+    routes:[
+        {
+            path:'自定义路径',
+            component:myComponent,
+            children:[
+                {
+                    path:'自定义路径',
+                    component:myComponent2
+                }
+            ]
+        }
+    ]
+})
+~~~
+### 4. 重定向
+~~~js
+const router = createRouter({
+    routers:[
+        {
+            path:'自定义路径',
+            components:myComponent,
+            redirect:'自定义'
+        }
+    ]
+})
+~~~
+### 5. 动态路由
+### 6. 编程序导航
+### 7. 命名路由
+### 8. 路由钩子
