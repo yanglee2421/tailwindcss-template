@@ -1,8 +1,8 @@
 <!--
  * @Author: 张远航
  * @Date: 2022-03-21 13:51:28
- * @LastEditTime: 2022-03-21 14:10:20
- * @LastEditors: 江雪玲
+ * @LastEditTime: 2022-03-21 16:58:43
+ * @LastEditors: 张圣
  * @Description: 
  * @FilePath: \vue3note\sass.md
 -->
@@ -25,7 +25,9 @@ $height-color；#f90
     color:#fff;
   }
 }
-/* 编译后 */
+~~~
+编译后
+~~~css
 #id1 #id2{
   color:#fff;
 }
