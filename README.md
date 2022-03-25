@@ -78,7 +78,7 @@ npm run serve
 - `v-for`
 ~~~vue
 <template>
-<li v-for='(item,index) in arr' :key='variable'></li>
+<li v-for='(item,index) in arr' :key='item.variable'></li>
 </template>
 <script>
 export defalut {
