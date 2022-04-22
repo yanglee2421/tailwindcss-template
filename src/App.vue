@@ -1,39 +1,59 @@
-<!--相当于html文件中的body部分-->
 <template>
-  <!-- 调用子组件 -->
-  <hello-world></hello-world>
+  <div class="b w-50 moa">
+    <el-form :model="data" ref="fref">
+      <el-form-item
+        v-for="(item, index) in data.arr"
+        :key="item.key"
+        :prop="`arr.${index}`"
+        :rules="{ validator: check, message: 'p必须大于p2', trigger: 'change' }"
+      >
+        <div class="flex">
+          <el-form-item>
+            <el-input-number v-model="item.p" :prop="`arr.${index}.p`" />
+          </el-form-item>
+          <el-form-item :prop="`arr.${index}.p2`" :rules="{ required: true }">
+            <el-input-number v-model="item.p2" />
+          </el-form-item>
+        </div>
+      </el-form-item>
+    </el-form>
+  </div>
+  <el-button @click="add">添加</el-button>
+  <el-button @click="submitForm(fref)">提交</el-button>
 </template>
-<!--相当于html文件中的style标签,scoped属性表示这个标签内的样式只作用于此组件,不会溢出,原理是自定义html属性和属性选择器的连用-->
-<style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-</style>
-<script>
-// 以自定义变量接收子组件
-import HelloWorld from "./components/HelloWorld.vue";
-// 组件对象
-export default {
-  //本组件名为App
-  name: "App",
-  // 数据函数,返回的对象中包含此组件中要用到的变量和值
-  data() {
-    //在这个script标签中所有的this关键字都指向这个对象,这个对象中的属性值发生变动时,DOM会被重新渲染一次
-    return {};
-  },
-  // 子组件对象,用来接收被引入的子组件
-  components: {
-    HelloWorld,
-  },
-  // 方法对象,用来保存此组件中要用到的方法
-  methods: {
-    fun() {
-      console.log("这是一个方法");
+<script setup>
+import { reactive, ref } from "vue";
+const data = reactive({
+  arr: [
+    {
+      key: Date.now(),
+      p: 0,
+      p2: 0,
     },
-  },
-  // 计算属性对象,用来进行组件中一些值的计算,与methods不同其结果会被存入缓存
-  computer: {},
+  ],
+});
+const add = () => {
+  data.arr.push({
+    key: Date.now,
+    p: 0,
+    p2: 0,
+  });
+};
+const check = (rule, value) => {
+  console.log(value);
+  return value.p > value.p2;
+};
+const fref = ref();
+const submitForm = (formEl) => {
+  if (!formEl) return;
+  formEl.validate((valid) => {
+    if (valid) {
+      console.log(data);
+    } else {
+      console.log(data);
+      return false;
+    }
+  });
 };
 </script>
+<style lang='less' scoped></style>

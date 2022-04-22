@@ -6,7 +6,8 @@
     "build": "vite build"
   },
   "dependencies": {
-    "element-plus": "^2.1.0",
+    "@element-plus/icons-vue": "^1.1.4",
+    "element-plus": "^2.1.10",
     "mitt": "^3.0.0",
     "vue": "^3.0.4"
   },
