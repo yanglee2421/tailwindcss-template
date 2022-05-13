@@ -1,29 +1,6 @@
 # Vue基础
-## 1. 搭建Vue项目
-### 1. `vite`法
-~~~powershell
-npm create vite-app '项目名称'
-cd '项目名称'
-npm i
-npm run dev
-~~~
-### 2. `Vue-cli`法
-- 安装`Vue-cli`
-~~~powershell
-npm i -g @vue/cli
-~~~
-- UI法
-~~~powershell
-vue ui
-~~~
-- 命令行法
-~~~powershell
-vue create '项目名称'
-~~~
-- 运行项目
-~~~powershell
-npm run serve
-~~~
+## 1. 搭建
+- 请转到分支get-start
 ## 2. vue指令
 ### 1. 内容渲染
 - `v-html`
@@ -75,7 +52,7 @@ npm run serve
 - `v-else`
 - `v-show`
 ### 6. 列表渲染
-- `v-for`
+- `v-for`，`str`，`num`，`obj`，`arr`
 ~~~vue
 <template>
 <li v-for='(item,index) in arr' :key='item.variable'></li>
@@ -124,7 +101,7 @@ export defalut {
 export default {
     props:{
         variable:{
-            type:'数据类型',
+            type:'该类型的构造函数',
             //是否必填
             required:true,
             //默认值
@@ -168,15 +145,10 @@ export default {
 <script>
 export default {
     computed:{
-        variable(){
-            return this.variable + 1
+        var(){
+            return this.var + 1
         }
     },
-    data(){
-        return {
-            variable:'值'
-        }
-    }
 }
 </script>
 ~~~
@@ -244,7 +216,7 @@ export default {
         - `modifiers`，修饰符
         - `dir`，指令对象
     - `vnode`，虚拟DOM
-    - `prevVnode`，上一个虚拟DOM
+    - `prevVnode`，上一个虚拟DOM（仅update中有效）
 ~~~vue
 <script>
 export default {
@@ -434,10 +406,10 @@ export default {
 ### 1. `scoped`
 ~~~vue
 <style scoped>
-/* 若要对子组件也生效 */
-/deep/ .className {}
-/* Vue3中建议使用新方法 */
+/* 需要对子元素内的元素也生效 */
 :deep(.className) {}
+/* 在全局中注册 */
+:global(#idName) {}
 </style>
 ~~~
 ## 4. Vue全局
@@ -484,21 +456,9 @@ app.unmount()
 ~~~
 ### 8. `use`
 - 在Vue安装插件，类似注册全局组件
-#### `element-plus`
->在项目中安装模块
-~~~powershell
-npm i element-plus
-~~~
->在Vue中安装
-- 完整引入
-~~~js
-import ElementUI from 'element-plus'
-import 'node_modules\element-plus\theme-chalk\index.css'
-app.use(ElementUI)
-~~~
-- 按需引入
-#### 路由实例
-#### `vuex`
+    - `element-plus`
+    - `vue-router`
+    - `vuex`
 ### 9. `version`
 - 字符串形式的Vue版本号
 ~~~js

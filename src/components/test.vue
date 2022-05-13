@@ -1,18 +1,15 @@
 <template>
-  <div class="b">{{ num }}</div>
+  <h2>{{ num }}</h2>
   <el-button @click="num++">num++</el-button>
-  <Test></Test>
-  <router-view />
 </template>
 <script setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
-import Test from "@/components/test.vue"
+
 const store = useStore()
-store.commit("num", 5)
 const num = computed({
   get() {
-    return store.state.num
+    return store.state.num;
   },
   set(newVal) {
     store.commit("num", newVal)

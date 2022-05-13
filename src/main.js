@@ -1,17 +1,21 @@
-import {
-    createApp
-} from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
-import './index.sass'
+
 const app = createApp(App)
 import ElementPlus from "element-plus"
-import locale from "element-plus/es/locale/lang/zh-cn.mjs"
 import 'element-plus/dist/index.css'
+import locale from 'element-plus/es/locale/lang/zh-cn'
 import * as icons from "@element-plus/icons-vue"
-app.use(ElementPlus, {
-    locale
-})
 Object.keys(icons).forEach(item => {
+  if (Reflect.has(icons, item)) {
     app.component(item, icons[item])
+  }
 })
+app.use(ElementPlus, {
+  locale
+})
+import router from "@/router"
+app.use(router)
+import vuex from "@/vuex"
+app.use(vuex)
 app.mount('#app')

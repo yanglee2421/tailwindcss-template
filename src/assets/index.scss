@@ -1,0 +1,9 @@
+.b {
+  border: 1px dashed rgb(random(255), random(255), random(255));
+}
+
+:global(*) {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
