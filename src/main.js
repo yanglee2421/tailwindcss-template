@@ -2,7 +2,7 @@ import {
     createApp
 } from 'vue'
 import App from './App.vue'
-import './index.css'
+import './index.sass'
 const app = createApp(App)
 import ElementPlus from "element-plus"
 import locale from "element-plus/es/locale/lang/zh-cn.mjs"
