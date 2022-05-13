@@ -289,26 +289,14 @@ export default {
     ~~~
 ### 11. `inject`
 - 接收`provide`传递的参数
-    - 非响应式
-    ~~~vue
-    <script>
-    export default {
-        inject:['variable']
-    }
-    </script>
-    ~~~
-    - 响应式
-    ~~~vue
-    <template>
-        <!-- 此时，需要以.value方式调用 -->
-        {{variable.value}}
-    </template>
-    <script>
-    export default {
-        inject:['variable']
-    }
-    </script>
-    ~~~
+~~~vue
+<script>
+export default {
+    inject:['variable']
+}
+</script>
+~~~
+- 传递的过程中并不会为参数添加`get()`和`set()`，原本有就有，反之则无
 ***
 ### 0. `ref`
 - 用来获取DOM元素
@@ -321,7 +309,7 @@ export default {
     methods:{
         fun(){
             // 以此调用DOM元素
-            $refs.variable
+            this.$refs.variable
         }
     }
 }
