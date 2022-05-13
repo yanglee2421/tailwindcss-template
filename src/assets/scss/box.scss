@@ -1,0 +1,5 @@
+@for $i from 1 through 3 {
+  .m-#{$i} {
+    margin: #{$i}0px;
+  }
+}

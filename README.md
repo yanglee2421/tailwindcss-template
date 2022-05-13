@@ -53,30 +53,13 @@
 - `v-show`
 ### 6. 列表渲染
 - `v-for`，`str`，`num`，`obj`，`arr`
-~~~vue
-<template>
-<li v-for='(item,index) in arr' :key='item.variable'></li>
-</template>
-<script>
-export defalut {
-    data(){
-        return {
-           arr:[
-               {variable:1,num:'值'},
-               {variable:2,num:'值'}
-           ]
-        }
-    }
-}
-</script>
-~~~
 - 注意
     1. `:key`的值只能是`number`或`string`
     2. `:key`的值不能重复
     3. 常用`id`作为`:key`属性
     4. 不建议用`index`作为`:key`，DOM发生变动时`index`的指向会发生变化
     5. `:key`能提升性能
-## 3. Vue组件
+## 3. 配置项
 0. `name`
 ~~~vue
 <script>

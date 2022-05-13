@@ -15,7 +15,8 @@ app.use(ElementPlus, {
   locale
 })
 import router from "@/router"
-app.use(router)
+// app.use(router)
 import vuex from "@/vuex"
-app.use(vuex)
+// app.use(vuex)
 app.mount('#app')
+console.log(app.version);
