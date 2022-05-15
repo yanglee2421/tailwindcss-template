@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>left</h2>
-    <el-input v-model="mes.name" />
+    <el-input v-model="mes" />
     <!-- <el-input v-model="mes.age" /> -->
   </div>
 </template>
@@ -11,7 +11,14 @@ import { computed, reactive, watch } from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore()
-const mes = computed(() => store.state.obj)
+const mes = computed({
+  get() {
+    return store.state.obj
+  },
+  set(newVal) {
+    store.dispatch('obj', newVal)
+  }
+})
 </script>
 <style lang='scss' scoped>
 //

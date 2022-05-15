@@ -3,9 +3,7 @@ const store = createStore({
   strict: true,
   state() {
     return {
-      obj: {
-        name: ""
-      }
+      obj: ''
     }
   },
   mutations: {
