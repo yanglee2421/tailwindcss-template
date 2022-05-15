@@ -1,24 +1,25 @@
 <template>
     <div>
         <h2>right</h2>
-        <el-input v-model="mes" />
-        <!-- <el-input v-model="mes.age" /> -->
-        <!-- <el-button @click="mes.age = 18">变化</el-button> -->
+        <el-input v-model="state.obj.name" />
+        <el-button @click="store.commit('pushArr', ++id)">add</el-button>
+        <div v-for="item, index in state.arr" :key="index">{{ item }}</div>
     </div>
 </template>
 <script setup>
-import { computed, reactive, readonly, watch } from 'vue';
-import { useStore } from 'vuex';
-
+import { ElMessage } from 'element-plus';
+import { computed, reactive, watch, ref } from 'vue';
+import { mapActions, mapState, useStore } from 'vuex';
 const store = useStore()
-const mes = computed({
-    get() {
-        return store.state.obj
-    },
-    set(newVal) {
-        store.dispatch("obj", newVal)
-    }
+const state = reactive({})
+Object.keys(mapState(['obj', 'arr'])).forEach(key => {
+    state[key] = computed(mapState(['obj', 'arr'])[key].bind({ $store: store }))
 })
+const actions = {}
+Object.keys(mapActions(['obj', 'arr'])).forEach(key => {
+    actions[key] = computed(mapActions(['obj', 'arr'])[key].bind({ $store: store }))
+})
+let id = 0
 </script>
 <style lang='scss' scoped>
 //
