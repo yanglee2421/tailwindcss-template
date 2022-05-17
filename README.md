@@ -52,13 +52,14 @@
 - `v-else`
 - `v-show`
 ### 6. 列表渲染
-- `v-for`，`str`，`num`，`obj`，`arr`
+- `v-for`
+- 能遍历：`str`、`num`、`obj`、`arr`
 - 注意
     1. `:key`的值只能是`number`或`string`
     2. `:key`的值不能重复
     3. 常用`id`作为`:key`属性
     4. 不建议用`index`作为`:key`，DOM发生变动时`index`的指向会发生变化
-    5. `:key`能提升性能
+    5. `:key`触发diff算法以提升性能
 ## 3. 配置项
 0. `name`
 ~~~vue
@@ -85,9 +86,7 @@ export default {
     props:{
         variable:{
             type:'该类型的构造函数',
-            //是否必填
             required:true,
-            //默认值
             default:'默认值',
             //自定义函数验证
             fun(){
