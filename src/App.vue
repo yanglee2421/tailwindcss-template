@@ -1,21 +1,21 @@
 <template>
   <el-scrollbar view-class="h-100 flex-column" :view-style="{ minWidth: '704px' }">
     <header class="">
-      <el-form inline class="py-1 flex justify-between align-center">
+      <el-form ref="formRef" :model="filter" inline class="py-1 flex justify-between align-center">
         <div>
-          <el-form-item label="部门">
+          <el-form-item label="部门" prop="label" required>
             <el-cascader :options="res" :props="{ value: 'label', emitPath: false }" filterable v-model="filter.label"
               clearable />
           </el-form-item>
-          <el-form-item label="年龄">
+          <el-form-item label="年龄" prop="age">
             <el-select filterable clearable v-model="filter.age">
               <el-option v-for="item, index in 100" :key="index" :label="`${item}岁`" :value="item" />
             </el-select>
           </el-form-item>
         </div>
         <div class="flex align-center">
-          <el-button type="primary">查询</el-button>
-          <el-button>重置</el-button>
+          <el-button type="primary" @click="submitForm(formRef)">查询</el-button>
+          <el-button @click="formRef.resetFields()">重置</el-button>
         </div>
       </el-form>
     </header>
@@ -47,8 +47,7 @@
   </el-scrollbar>
 </template>
 <script setup>
-import { computed, reactive, ref, watchEffect } from 'vue';
-const selec = ref(0)
+import { computed, onMounted, reactive, ref, watchEffect } from 'vue';
 const res = ref([])
 const state = reactive({
   currentPage: 1,
@@ -79,12 +78,12 @@ const initTable = () => {
   state.table = arr.splice((state.currentPage - 1) * state.pageSize, state.pageSize)
 }
 watchEffect(() => {
-  console.log(filter);
   initTable()
 })
 const vFocus = (el) => {
   el.__vueParentComponent.exposed.focus()
 }
+const formRef = ref()
 const submitForm = (formRef) => {
   if (formRef) return formRef.validate(valid => {
     if (valid) {
