@@ -3,7 +3,7 @@
     <el-form inline class="py-1 flex justify-between">
       <div>
         <el-form-item label="部门">
-          <el-cascader />
+          <el-cascader filterable />
         </el-form-item>
         <el-form-item label="标题">
           <el-select filterable clearable v-model="selec">
@@ -28,6 +28,10 @@
       </el-table-column>
       <el-table-column align='center' label="地址" prop="address"></el-table-column>
       <el-table-column align='center' label="联系方式" prop="tel"></el-table-column>
+      <el-table-column align='center' label="描述" show-overflow-tooltip>Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Deserunt
+        assumenda, sit quos illo, ut eaque voluptatibus odit dolore, nesciunt similique voluptas sed culpa facilis
+        incidunt! Nulla praesentium inventore unde natus!</el-table-column>
     </el-table>
   </main>
   <footer class="flex justify-end">
@@ -69,6 +73,15 @@ watchEffect(() => {
 })
 const vFocus = (el) => {
   el.__vueParentComponent.exposed.focus()
+}
+const submitForm = (formRef) => {
+  if (formRef) return formRef.validate(valid => {
+    if (valid) {
+      console.log('成功');
+    } else {
+      return false
+    }
+  })
 }
 </script>
 <style lang='scss' scoped>
