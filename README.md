@@ -41,7 +41,10 @@
     - `.enter`，按键为Enter
 ### 4. 双向绑定
 - `v-model`
-    >设置`input`标题的`value`为一个变量
+    >- 设置`input`标题的`value`为一个变量
+    >- 绑定给`input type=radio`时，指向`name`相同的`radio`中被激活的那一个的`value`
+    >- 绑定给单个`input type=checkbox`时，指向`checked`不指向`value`，值只有`true`和`false`
+    >- 绑定多个`input type=checkbox`时，`v-model`的值为一个数组，`value`在该数组中的`checkbox`被激活
 - 修饰符
     - `.number`，转为`number`类型
     - `.trim`，过滤首尾空格
@@ -445,6 +448,9 @@ Vue.set(vm.obj, 'age', 18)
 Vue.set(this.obj, 'age', 18)
 this.$set(this.obj, 'age', 18)
 //vm.obj.age = 18
+
+/* 也可以用于数组 */
+Vue.set(this.arr, 1 ,'新值')
 ~~~
 ### `delete(obj, key, value)`
 ~~~js

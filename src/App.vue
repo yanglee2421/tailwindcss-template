@@ -1,25 +1,15 @@
 <template>
-  <el-cascader v-model="value" :options="cascader" :props="{ emitPath: false }" :show-all-levels="false" clearable />
+  <input type="checkbox" v-model="arr" value="1">
+  <input type="checkbox" v-model="arr" value="2">
+  <input type="checkbox" v-model="arr" value="3">
+  <input type="checkbox" v-model="arr" value="4">
+  <el-button @click="arr.push('3')">加</el-button>
+  <el-button @click="arr.pop('3')">减</el-button>
 </template>
 <script setup>
-import { reactive, ref, watchEffect } from 'vue';
-import axios from "axios"
-const cascader = reactive([
-  {
-    label: '1',
-    value: 1,
-    children: [
-      {
-        label: "1-1",
-        value: 100
-      },
-    ]
-  }
-])
-const value = ref()
-watchEffect(() => {
-  console.log(value.value);
-})
+import { reactive } from 'vue';
+
+const arr = reactive(['1', '2'])
 </script>
 <style lang='scss' scoped>
 //
