@@ -424,7 +424,7 @@ app.provide('variable', '值')
 ~~~js
 app.unmount()
 ~~~
-### 8. `use`
+### 8. `use(plug[, option])`
 - 在Vue安装插件，类似注册全局组件
     - `element-plus`
     - `vue-router`
@@ -433,4 +433,27 @@ app.unmount()
 - 字符串形式的Vue版本号
 ~~~js
 app.version
+~~~
+### 10. `set(obj, key, value)`
+~~~js
+/*
+向vm上的引用类型属性值，添加响应式属性使用的API
+不能为vm或vm._data添加响应式属性
+*/
+Vue.set(vm._data.obj, 'age', 18)
+Vue.set(vm.obj, 'age', 18)
+Vue.set(this.obj, 'age', 18)
+this.$set(this.obj, 'age', 18)
+//vm.obj.age = 18
+~~~
+### `delete(obj, key, value)`
+~~~js
+/*
+与set()的作用正好相反
+*/
+Vue.delete(vm._data.obj, 'age', 18)
+Vue.delete(vm.obj, 'age', 18)
+Vue.delete(this.obj, 'age', 18)
+this.$delete(this.obj, 'age', 18)
+//vm.obj.age = undefined
 ~~~
