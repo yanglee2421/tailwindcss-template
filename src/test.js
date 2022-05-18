@@ -1,9 +1,11 @@
 const obj = {
-  name: "123",
-  fun(params, par) {
-    console.log(this.name);
-    console.log(params);
-    console.log(par);
-  }
+  name: "obj"
 }
-obj.fun.bind({ name: "456" }, 456)(789)
+const cb = () => {
+  console.log(this);
+}
+function cba() {
+  console.log(this);
+}
+cb.call(obj)
+cba.call(obj)

@@ -1,4 +1,6 @@
 @import "@/assets/scss/box.scss";
+@import "@/assets/scss/overflow.scss";
+@import "@/assets/scss/flex.scss";
 
 .b {
   border: 1px dashed rgb(random(255), random(255), random(255));
@@ -8,4 +10,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+:global(#app) {
+  width: 100vw;
+  height: 100vh;
+  @extend.flex-column;
+  @extend.overflow-hidden;
 }
