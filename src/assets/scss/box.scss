@@ -68,6 +68,18 @@
   }
 }
 
+$wh: 25, 50, 75, 100;
+
+@each $item in $wh {
+  .w-#{$item} {
+    width: #{$item+'%'};
+  }
+
+  .h-#{$item} {
+    height: #{$item+'%'};
+  }
+}
+
 .b {
   border: 1px dashed red;
 }

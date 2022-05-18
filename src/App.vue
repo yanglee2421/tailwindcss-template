@@ -1,43 +1,48 @@
 <template>
-  <header class="">
-    <el-form inline class="py-1 flex justify-between">
-      <div>
-        <el-form-item label="部门">
-          <el-cascader filterable />
-        </el-form-item>
-        <el-form-item label="标题">
-          <el-select filterable clearable v-model="selec">
-            <el-option v-for="item, index in 100" :key="index" :label="`选项${item}`" :value="item" />
-          </el-select>
-        </el-form-item>
-      </div>
-      <div>
-        <el-button type="primary">查询</el-button>
-        <el-button>重置</el-button>
-      </div>
-    </el-form>
-  </header>
-  <main class="flex-1-hidden">
-    <el-table height="100%" :data="state.table" border>
-      <el-table-column align='center' label="姓名" prop="label"></el-table-column>
-      <el-table-column align='center' label="年龄" prop="age">
-        <template #default="{ row }">
-          <p @dblclick="row.edit = !row.edit" v-if="!row.edit">{{ row.age }}</p>
-          <el-input @change="row.edit = false" @blur="row.edit = false" v-else v-model="row.age" v-focus />
-        </template>
-      </el-table-column>
-      <el-table-column align='center' label="地址" prop="address"></el-table-column>
-      <el-table-column align='center' label="联系方式" prop="tel"></el-table-column>
-      <el-table-column align='center' label="描述" show-overflow-tooltip>Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Deserunt
-        assumenda, sit quos illo, ut eaque voluptatibus odit dolore, nesciunt similique voluptas sed culpa facilis
-        incidunt! Nulla praesentium inventore unde natus!</el-table-column>
-    </el-table>
-  </main>
-  <footer class="flex justify-end">
-    <el-pagination layout="prev,pager,next,sizes,jumper,total" :total="state.total"
-      v-model:currentPage="state.currentPage" v-model:pageSize="state.pageSize" :pageSizes="[5, 10, 20, 30]" />
-  </footer>
+  <el-scrollbar view-class="h-100 flex-column">
+    <header class="">
+      <el-form inline class="py-1 flex justify-between align-center">
+        <div>
+          <el-form-item label="部门">
+            <el-cascader filterable />
+          </el-form-item>
+          <el-form-item label="标题">
+            <el-select filterable clearable v-model="selec">
+              <el-option v-for="item, index in 100" :key="index" :label="`选项${item}`" :value="item" />
+            </el-select>
+          </el-form-item>
+        </div>
+        <div class="flex align-center">
+          <el-button type="primary">查询</el-button>
+          <el-button>重置</el-button>
+        </div>
+      </el-form>
+    </header>
+    <section class="p-1">
+      <el-button>导出</el-button>
+    </section>
+    <main class="flex-1-hidden">
+      <el-table height="100%" :data="state.table" border>
+        <el-table-column align='center' label="姓名" prop="label"></el-table-column>
+        <el-table-column align='center' label="年龄" prop="age">
+          <template #default="{ row }">
+            <p @dblclick="row.edit = !row.edit" v-if="!row.edit">{{ row.age }}</p>
+            <el-input @change="row.edit = false" @blur="row.edit = false" v-else v-model="row.age" v-focus />
+          </template>
+        </el-table-column>
+        <el-table-column align='center' label="地址" prop="address"></el-table-column>
+        <el-table-column align='center' label="联系方式" prop="tel"></el-table-column>
+        <el-table-column align='center' label="描述" show-overflow-tooltip>Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Deserunt
+          assumenda, sit quos illo, ut eaque voluptatibus odit dolore, nesciunt similique voluptas sed culpa facilis
+          incidunt! Nulla praesentium inventore unde natus!</el-table-column>
+      </el-table>
+    </main>
+    <footer class="flex justify-end">
+      <el-pagination layout="prev,pager,next,sizes,jumper,total" :total="state.total"
+        v-model:currentPage="state.currentPage" v-model:pageSize="state.pageSize" :pageSizes="[5, 10, 20, 30]" />
+    </footer>
+  </el-scrollbar>
 </template>
 <script setup>
 import { computed, reactive, ref, watchEffect } from 'vue';
@@ -87,6 +92,9 @@ const submitForm = (formRef) => {
 <style lang='scss' scoped>
 //
 .el-form-item {
-  @extend.m-0
+  @extend.m-0;
 }
+</style>
+<style lang="scss">
+//
 </style>
