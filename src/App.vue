@@ -4,11 +4,12 @@
       <el-form inline class="py-1 flex justify-between align-center">
         <div>
           <el-form-item label="部门">
-            <el-cascader filterable />
+            <el-cascader :options="res" :props="{ value: 'label', emitPath: false }" filterable v-model="filter.label"
+              clearable />
           </el-form-item>
-          <el-form-item label="标题">
-            <el-select filterable clearable v-model="selec">
-              <el-option v-for="item, index in 100" :key="index" :label="`选项${item}`" :value="item" />
+          <el-form-item label="年龄">
+            <el-select filterable clearable v-model="filter.age">
+              <el-option v-for="item, index in 100" :key="index" :label="`${item}岁`" :value="item" />
             </el-select>
           </el-form-item>
         </div>
@@ -55,18 +56,21 @@ const state = reactive({
   total: 0,
   table: [],
 })
+const filter = reactive({})
 for (let i = 0; i < 100; i++) {
   res.value.push({
     index: i,
     label: '张三' + i,
-    age: 18,
+    age: 18 + i,
     address: "光谷",
     tel: 15171504348
   })
 }
 const initTable = () => {
   const arr = res.value.filter((item, index) => {
-    return item.index + 1 > selec.value
+    return Object.keys(filter).filter(key => filter[key]).every(key => {
+      return item[key] === filter[key]
+    })
   }).map(item => {
     item.edit = false
     return item
@@ -75,6 +79,7 @@ const initTable = () => {
   state.table = arr.splice((state.currentPage - 1) * state.pageSize, state.pageSize)
 }
 watchEffect(() => {
+  console.log(filter);
   initTable()
 })
 const vFocus = (el) => {
