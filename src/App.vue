@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar view-class="h-100 flex-column w-100">
+  <el-scrollbar view-class="h-100 flex-column" :view-style="{ minWidth: '704px' }">
     <header class="">
       <el-form inline class="py-1 flex justify-between align-center">
         <div>
@@ -72,7 +72,7 @@ const initTable = () => {
     return item
   })
   state.total = arr.length
-  state.table = arr.splice((state.currentPage - 1) * state.pageSize, state.currentPage * state.pageSize)
+  state.table = arr.splice((state.currentPage - 1) * state.pageSize, state.pageSize)
 }
 watchEffect(() => {
   initTable()
