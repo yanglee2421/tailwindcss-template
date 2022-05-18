@@ -20,7 +20,12 @@
   <main class="flex-1-hidden">
     <el-table height="100%" :data="state.table" border>
       <el-table-column align='center' label="姓名" prop="label"></el-table-column>
-      <el-table-column align='center' label="年龄" prop="age"></el-table-column>
+      <el-table-column align='center' label="年龄" prop="age">
+        <template #default="{ row }">
+          <p @dblclick="row.edit = !row.edit" v-if="!row.edit">{{ row.age }}</p>
+          <el-input @change="row.edit = false" @blur="row.edit = false" v-else v-model="row.age" v-focus />
+        </template>
+      </el-table-column>
       <el-table-column align='center' label="地址" prop="address"></el-table-column>
       <el-table-column align='center' label="联系方式" prop="tel"></el-table-column>
     </el-table>
@@ -52,6 +57,9 @@ for (let i = 0; i < 100; i++) {
 const initTable = () => {
   const arr = res.value.filter((item, index) => {
     return item.index + 1 > selec.value
+  }).map(item => {
+    item.edit = false
+    return item
   })
   state.total = arr.length
   state.table = arr.splice((state.currentPage - 1) * state.pageSize, state.currentPage * state.pageSize)
@@ -59,6 +67,9 @@ const initTable = () => {
 watchEffect(() => {
   initTable()
 })
+const vFocus = (el) => {
+  el.__vueParentComponent.exposed.focus()
+}
 </script>
 <style lang='scss' scoped>
 //
