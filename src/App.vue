@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar view-class="h-100 flex-column">
+  <el-scrollbar view-class="h-100 flex-column w-100">
     <header class="">
       <el-form inline class="py-1 flex justify-between align-center">
         <div>
@@ -23,16 +23,17 @@
     </section>
     <main class="flex-1-hidden">
       <el-table height="100%" :data="state.table" border>
-        <el-table-column align='center' label="姓名" prop="label"></el-table-column>
-        <el-table-column align='center' label="年龄" prop="age">
+        <el-table-column align='center' label="姓名" prop="label" fixed min-width="180"></el-table-column>
+        <el-table-column align='center' label="年龄" prop="age" min-width="180">
           <template #default="{ row }">
             <p @dblclick="row.edit = !row.edit" v-if="!row.edit">{{ row.age }}</p>
             <el-input @change="row.edit = false" @blur="row.edit = false" v-else v-model="row.age" v-focus />
           </template>
         </el-table-column>
-        <el-table-column align='center' label="地址" prop="address"></el-table-column>
-        <el-table-column align='center' label="联系方式" prop="tel"></el-table-column>
-        <el-table-column align='center' label="描述" show-overflow-tooltip>Lorem ipsum dolor sit amet consectetur
+        <el-table-column align='center' label="地址" prop="address" min-width="180"></el-table-column>
+        <el-table-column align='center' label="联系方式" prop="tel" min-width="180"></el-table-column>
+        <el-table-column align='center' label="描述" show-overflow-tooltip min-width="180">Lorem ipsum dolor sit amet
+          consectetur
           adipisicing elit. Deserunt
           assumenda, sit quos illo, ut eaque voluptatibus odit dolore, nesciunt similique voluptas sed culpa facilis
           incidunt! Nulla praesentium inventore unde natus!</el-table-column>
@@ -90,7 +91,6 @@ const submitForm = (formRef) => {
 }
 </script>
 <style lang='scss' scoped>
-//
 .el-form-item {
   @extend.m-0;
 }
