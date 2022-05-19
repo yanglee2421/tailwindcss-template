@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar view-class="h-100 flex-column" :view-style="{ minWidth: '704px' }">
+  <el-scrollbar view-class="h-100 flex-column" :view-style="{ minWidth: '716px' }">
     <header class="">
       <el-form ref="formRef" :model="filter" inline class="py-1 flex justify-between align-center">
         <div>
