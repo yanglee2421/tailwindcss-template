@@ -13,7 +13,7 @@ Object.keys(icons).forEach(item => {
 })
 app.use(ElementPlus, { locale })
 import router from "@/router.js"
-// app.use(router)
+app.use(router)
 import vuex from "@/vuex.js"
 app.use(vuex)
 app.mount('#app')

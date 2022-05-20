@@ -42,8 +42,4 @@ const log = (i) => {
 </script>
 
 <style lang="scss" scoped>
-//
-</style>
-<style lang="scss">
-//
 </style>

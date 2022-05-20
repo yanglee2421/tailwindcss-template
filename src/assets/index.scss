@@ -1,27 +1,4 @@
-@import "@/assets/scss/box.scss";
 @import "@/assets/scss/overflow.scss";
 @import "@/assets/scss/flex.scss";
 @import "@/assets/scss/position.scss";
-
-.b {
-  border: 1px dashed rgb(random(255), random(255), random(255));
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-ul {
-  list-style: none;
-}
-
-#app {
-  width: 100vw;
-  height: 100vh;
-  @extend.pt-1;
-  @extend.px-1;
-  @extend.flex-column;
-  @extend.overflow-hidden;
-}
+@import "@/assets/scss/box.scss";

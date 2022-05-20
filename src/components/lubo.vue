@@ -1,26 +1,28 @@
 <template>
-  <ul class="m-center border">
-    <template v-for="(item, index) in 10" :key="index">
-      <transition :name="swiper">
-        <li v-if="index === currentIndex % 10">{{ item }}</li>
-      </transition>
-    </template>
-  </ul>
   <div>
-    <el-button @click="currentIndex--">上一张</el-button>
-    <el-button @click="currentIndex++">下一张</el-button>
-    <el-button @click="currentIndex = 5">6</el-button>
-    <el-button @click="currentIndex = 6">7</el-button>
+    <ul class="m-center border">
+      <template v-for="(item, index) in 10" :key="index">
+        <transition :name="swiper">
+          <li v-if="index === currentIndex % 10">{{ item }}</li>
+        </transition>
+      </template>
+    </ul>
+    <div class="">
+      <el-button @click="currentIndex--">上一张</el-button>
+      <el-button @click="currentIndex++">下一张</el-button>
+      <el-button @click="currentIndex = 5">6</el-button>
+      <el-button @click="currentIndex = 6">7</el-button>
+    </div>
   </div>
 </template>
 <script setup>
 import { reactive, ref, watch, watchEffect } from "vue";
 const arr = reactive([]);
-const currentIndex = ref(10);
+const currentIndex = ref(0);
 const swiper = ref();
 const value = ref();
 watch(currentIndex, (newVal, oldVal) => {
-  if (newVal === -1) {
+  if (newVal === -1 && oldVal === 0) {
     currentIndex.value = 9;
     swiper.value = "swiper02";
   } else if (newVal - oldVal > 0) {
@@ -31,13 +33,13 @@ watch(currentIndex, (newVal, oldVal) => {
 });
 watchEffect(() => {
   console.log(currentIndex.value);
+  console.log(swiper.value);
 });
 const log = (i) => {
   console.log(i);
 };
 </script>
 <style lang='scss' scoped>
-//
 $w: 100px;
 li {
   width: $w;
