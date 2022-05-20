@@ -20,6 +20,21 @@
   @extend.flex-direction-column;
 }
 
+.flex-row {
+  @extend.flex;
+  @extend.between-center;
+}
+
+.between-center {
+  @extend.justify-between;
+  @extend.align-center;
+}
+
+.center-center {
+  @extend.justify-center;
+  @extend.align-center;
+}
+
 $align: start, center, end, between, around, evenly;
 
 @each $item in $align {

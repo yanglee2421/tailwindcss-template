@@ -1,3 +1,8 @@
+.m-center {
+  width: fit-content;
+  margin: 0 auto;
+}
+
 @for $i from 0 through 3 {
   .p-#{$i} {
     padding: #{$i}0px;

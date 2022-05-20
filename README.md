@@ -228,9 +228,9 @@ export default {
 <script>
 export default {
     //初始化生命周期、事件，数据代理尚未开始
-    beforeCreate(){},//拿不到配置项中的内容
+    beforeCreate(){},//配置项不能用
     //初始化数据监测和数据代理
-    created(){},//配置项设置完毕
+    created(){},//配置项能用了
     //解析模板，生成Vnode；若存在el，则开始render；反之，停在这里
     beforeMount(){},//显示原始html
     //Vnode转DOM-Node
