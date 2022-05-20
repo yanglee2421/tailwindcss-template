@@ -1,10 +1,7 @@
 <template>
-  <div>
-    <App02></App02>
-  </div>
+  <router-view></router-view>
 </template>
 <script setup>
-import App02 from "@/components/lubo.vue";
 </script>
 <style lang='scss' scoped>
 //
