@@ -227,21 +227,28 @@ export default {
 ~~~vue
 <script>
 export default {
-    beforeCreate(){},
-    created(){},
-    beforeMount(){},
-    Mount(){},
-    BeforeUpdate(){},
-    updated(){},
+    //初始化生命周期、事件，数据代理尚未开始
+    beforeCreate(){},//拿不到配置项中的内容
+    //初始化数据监测和数据代理
+    created(){},//配置项设置完毕
+    //解析模板，生成Vnode；若存在el，则开始render；反之，停在这里
+    beforeMount(){},//显示原始html
+    //Vnode转DOM-Node
+    Mount(){},//展示Vue初次编译的DOM
+    //
+    BeforeUpdate(){},//数据是新的，页面是旧的
+    //根据新数据生成新的Vnode、diff比较、re-render
+    updated(){},//数据是新的，页面也是新的
     // keep-alive
     activated(){},
     deactivated(){},
     // Vue2
     beforeDestory(){},
     destoryed(){},
-    // Vue3
-    BeforeUnmount(){},
-    Unmounted(){}
+    // Vue3，app.unmount()被调用、v-if为假值
+    BeforeUnmount(){},//配置项中的内容还在，但数据的变动不会再触发render
+    //移除所有的监测，子组件，自定义事件
+    Unmounted(){}//vm不可用
 }
 </script>
 ~~~
