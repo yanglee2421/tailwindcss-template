@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="m-center border" :id="currentIndex">
+    <ul class="m-center border" :data-whatever="currentIndex">
       <template v-for="(item, index) in 10" :key="item">
         <transition :name="swiper">
           <li v-show="index === currentIndex % 10">{{ item }}</li>

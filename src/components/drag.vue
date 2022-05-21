@@ -1,22 +1,24 @@
 <template>
-  <div class="flex-row">
-    <el-checkbox-group v-model="value" class="b">
-      <div
-        v-for="(item, index) in arr"
-        :key="item"
-        draggable="true"
-        @dragstart="start(index, $event)"
-        @dragover.prevent="over($event)"
-        @dragleave="leave($event)"
-        @drop="drop(index, $event)"
-      >
-        <el-checkbox :label="item" />
-      </div>
-    </el-checkbox-group>
-    <div class="b"><el-button @click="log(arr)">输出</el-button></div>
+  <div>
+    <div class="flex-row">
+      <el-checkbox-group v-model="value" class="b">
+        <div
+          v-for="(item, index) in arr"
+          :key="item"
+          draggable="true"
+          @dragstart="start(index, $event)"
+          @dragover.prevent="over($event)"
+          @dragleave="leave($event)"
+          @drop="drop(index, $event)"
+        >
+          <el-checkbox :label="item" />
+        </div>
+      </el-checkbox-group>
+      <div class="b"><el-button @click="log(arr)">输出</el-button></div>
+    </div>
+    <progress class="p-1" max="100" value="70">50%</progress>
+    <el-progress :percentage="70"></el-progress>
   </div>
-  <progress class="p-1" max="100" value="70">50%</progress>
-  <el-progress :percentage="70"></el-progress>
 </template>
 <script setup>
 import { reactive, ref, watchEffect } from "vue";

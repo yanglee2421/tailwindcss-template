@@ -1,7 +1,12 @@
 <template>
   <div class="h-100 flex-column">
     <header class="flex-row pr-1">
-      <el-menu mode="horizontal" class="flex-1-hidden bb-0" router>
+      <el-menu
+        mode="horizontal"
+        default-active="1"
+        class="flex-1-hidden bb-0"
+        router
+      >
         <el-menu-item :route="{ name: 'drag' }" index="1">拖拽</el-menu-item>
         <el-menu-item :route="{ name: 'lunbo' }" index="2">轮播</el-menu-item>
         <el-menu-item :route="{ name: 'table' }" index="3">表格</el-menu-item>
@@ -18,6 +23,15 @@
   </div>
 </template>
 <script setup>
+import { onMounted, reactive } from "vue";
+import { useRouter } from "vue-router";
+const state = reactive({
+  comName: "drag",
+});
+const router = useRouter();
+onMounted(() => {
+  router.push({ name: state.comName });
+});
 </script>
 <style lang='scss' scoped>
 header {
