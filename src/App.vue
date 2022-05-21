@@ -18,9 +18,9 @@ ul {
 #app {
   width: 100vw;
   height: 100vh;
-  @extend.pt-1;
-  @extend.px-1;
+  @extend.p-1;
   @extend.flex-column;
   @extend.overflow-hidden;
+  background-color: #cdd0d6;
 }
 </style>
