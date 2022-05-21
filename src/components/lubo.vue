@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="m-center border" :id="currentIndex">
-      <template v-for="(item, index) in 10" :key="index">
+      <template v-for="(item, index) in 10" :key="item">
         <transition :name="swiper">
           <li v-show="index === currentIndex % 10">{{ item }}</li>
         </transition>
@@ -19,13 +19,13 @@
 import { onBeforeUpdate, reactive, ref, watch } from "vue";
 const arr = reactive([]);
 const currentIndex = ref(0);
-const swiper = ref();
+const swiper = ref("toRight");
 const value = ref();
 watch(
   () => currentIndex.value,
   (newVal, oldVal) => {
     const res = newVal - oldVal;
-    if (res > 0 || res === -6) {
+    if (res > 0 || res === -9) {
       swiper.value = "toRight";
     } else {
       swiper.value = "toLeft";
@@ -55,32 +55,29 @@ ul {
 .border {
   border: 1px red solid;
 }
-.toRight-enter-active,
-.toRight-leave-active {
-  transition: 0.5s;
-}
-.toRight-enter-from {
-  transform: translateX(100%);
-}
-.toRight-leave-to {
-  transform: translateX(-100%);
-}
-.toRight-enter-to,
-.toRight-leave-from {
-  transform: translateX(0);
-}
-.toLeft-enter-active,
-.toLeft-leave-active {
-  transition: 0.5s;
-}
-.toLeft-enter-from {
-  transform: translateX(-100%);
-}
-.toLeft-leave-to {
-  transform: translateX(100%);
-}
-.toLeft-enter-to,
-.toLeft-leave-from {
-  transform: translateX(0);
+$swiper: "toRight", "toLeft";
+@each $item in $swiper {
+  .#{$item}-enter-active,
+  .#{$item}-leave-active {
+    transition: 0.5s;
+  }
+  .#{$item}-enter-to,
+  .#{$item}-leave-from {
+    transform: translateX(0);
+  }
+  .#{$item}-enter-from {
+    @if $item == "toRight" {
+      transform: translateX(100%);
+    } @else {
+      transform: translateX(-100%);
+    }
+  }
+  .#{$item}-leave-to {
+    @if $item == "toRight" {
+      transform: translateX(-100%);
+    } @else {
+      transform: translateX(100%);
+    }
+  }
 }
 </style>
