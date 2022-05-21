@@ -11,11 +11,11 @@ $wh: 25, 50, 75, 100;
 
 @each $item in $wh {
   .w-#{$item} {
-    width: #{$item+'%'};
+    width: #{$item}+'%';
   }
 
   .h-#{$item} {
-    height: #{$item+'%'};
+    height: #{$item}+'%';
   }
 }
 
