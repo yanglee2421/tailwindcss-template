@@ -2,6 +2,7 @@ import Drag from "@/components/drag.vue"
 import Lunbo from '@/components/lubo.vue'
 import Index from '@/components/index.vue'
 import Table from '@/components/table.vue'
+import Scroll from '@/components/scroll.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHashHistory(),
@@ -11,6 +12,7 @@ const router = createRouter({
         { path: 'drag', component: Drag, name: "drag" },
         { path: 'lunbo', component: Lunbo, name: "lunbo" },
         { path: 'table', component: Table, name: "table" },
+        { path: 'scroll', component: Scroll, name: "scroll" },
       ]
     },
   ]

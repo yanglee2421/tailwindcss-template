@@ -1,15 +1,24 @@
+$dirs: 'x', 'y';
+
+@each $dir in $dirs {
+
+  .overflow-#{$dir}-auto {
+    overflow-#{$dir}: auto;
+  }
+
+  .overflow-#{$dir}-hidden {
+    overflow-#{$dir}: hidden;
+  }
+
+  .overflow-#{$dir}-scroll {
+    overflow-#{$dir}: scroll;
+  }
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
 
 .overflow-auto {
   overflow: auto;
-}
-
-.overflow-x-auto {
-  overflow-x: auto;
-}
-
-.overflow-y-auto {
-  overflow-y: auto;
 }
