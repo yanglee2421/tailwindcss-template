@@ -12,9 +12,6 @@
 ul {
   list-style: none;
 }
-.b {
-  border: 1px dashed rgb(random(255), random(255), random(255));
-}
 #app {
   width: 100vw;
   height: 100vh;

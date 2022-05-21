@@ -95,7 +95,7 @@
         :total="state.total"
         v-model:currentPage="state.currentPage"
         v-model:pageSize="state.pageSize"
-        :pageSizes="[5, 10, 20, 30]"
+        :pageSizes="[10, 20, 30]"
       />
     </footer>
   </el-scrollbar>

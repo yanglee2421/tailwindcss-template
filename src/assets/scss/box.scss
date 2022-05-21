@@ -3,74 +3,8 @@
   margin: 0 auto;
 }
 
-@for $i from 0 through 3 {
-  .p-#{$i} {
-    padding: #{$i}0px;
-  }
-
-  .pt-#{$i} {
-    padding-top: #{$i}0px;
-  }
-
-  .pr-#{$i} {
-    padding-right: #{$i}0px;
-  }
-
-  .pb-#{$i} {
-    padding-bottom: #{$i}0px;
-  }
-
-  .pl-#{$i} {
-    padding-left: #{$i}0px;
-  }
-
-  .px-#{$i} {
-    padding: {
-      left: #{$i}0px;
-      right: #{$i}0px;
-    }
-  }
-
-  .py-#{$i} {
-    padding: {
-      top: #{$i}0px;
-      bottom: #{$i}0px;
-    }
-  }
-
-  .m-#{$i} {
-    margin: #{$i}0px;
-  }
-
-  .mt-#{$i} {
-    margin-top: #{$i}0px;
-  }
-
-  .mr-#{$i} {
-    margin-right: #{$i}0px;
-  }
-
-  .mb-#{$i} {
-    margin-bottom: #{$i}0px;
-  }
-
-  .ml-#{$i} {
-    margin-left: #{$i}0px;
-  }
-
-  .mx-#{$i} {
-    margin: {
-      left: #{$i}0px;
-      right: #{$i}0px;
-    }
-  }
-
-  .my-#{$i} {
-    margin: {
-      top: #{$i}0px;
-      bottom: #{$i}0px;
-    }
-  }
+.b {
+  border: 1px dashed rgb(random(255), random(255), random(255));
 }
 
 $wh: 25, 50, 75, 100;
@@ -85,6 +19,52 @@ $wh: 25, 50, 75, 100;
   }
 }
 
-.bb-0 {
-  border-bottom: 0 !important;
+$spas: 'p', 'b', 'm';
+
+@each $spa in $spas {
+  $var: null;
+
+  @if $spa=='p' {
+    $var: 'padding';
+  }
+
+  @else if $spa=='b' {
+    $var: 'border'
+  }
+
+  @else if $spa=='m' {
+    $var: 'margin';
+  }
+
+  @for $i from 0 through 3 {
+    .#{$spa}-#{$i} {
+      #{$var}:#{$i}0px !important;
+    }
+
+    .#{$spa}x-#{$i} {
+      #{$var}-left:#{$i}0px;
+      #{$var}-right:#{$i}0px;
+    }
+
+    .#{$spa}y-#{$i} {
+      #{$var}-top:#{$i}0px;
+      #{$var}-bottom:#{$i}0px;
+    }
+
+    .#{$spa}t-#{$i} {
+      #{$var}-top:#{$i}0px
+    }
+
+    .#{$spa}r-#{$i} {
+      #{$var}-right:#{$i}0px;
+    }
+
+    .#{$spa}b-#{$i} {
+      #{$var}-bottom:#{$i}0px;
+    }
+
+    .#{$spa}l-#{$i} {
+      #{$var}-left:#{$i}0px;
+    }
+  }
 }
