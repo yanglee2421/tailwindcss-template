@@ -16,7 +16,7 @@
   </div>
 </template>
 <script setup>
-import { onBeforeUpdate, reactive, ref, watch, watchEffect } from "vue";
+import { onBeforeUpdate, reactive, ref, watch } from "vue";
 const arr = reactive([]);
 const currentIndex = ref(0);
 const swiper = ref();
@@ -26,9 +26,9 @@ watch(
   (newVal, oldVal) => {
     const res = newVal - oldVal;
     if (res > 0 || res === -6) {
-      swiper.value = "swiper";
+      swiper.value = "toRight";
     } else {
-      swiper.value = "swiper02";
+      swiper.value = "toLeft";
     }
   }
 );
@@ -37,13 +37,6 @@ onBeforeUpdate(() => {
     currentIndex.value = 9;
   }
 });
-watchEffect(() => {
-  console.log(currentIndex.value);
-  console.log(swiper.value);
-});
-const log = (i) => {
-  console.log(i);
-};
 </script>
 <style lang='scss' scoped>
 $w: 100px;
@@ -62,32 +55,32 @@ ul {
 .border {
   border: 1px red solid;
 }
-.swiper-enter-active,
-.swiper-leave-active {
+.toRight-enter-active,
+.toRight-leave-active {
   transition: 0.5s;
 }
-.swiper-enter-from {
+.toRight-enter-from {
   transform: translateX(100%);
 }
-.swiper-leave-to {
+.toRight-leave-to {
   transform: translateX(-100%);
 }
-.swiper-enter-to,
-.swiper-leave-from {
+.toRight-enter-to,
+.toRight-leave-from {
   transform: translateX(0);
 }
-.swiper02-enter-active,
-.swiper02-leave-active {
+.toLeft-enter-active,
+.toLeft-leave-active {
   transition: 0.5s;
 }
-.swiper02-enter-from {
+.toLeft-enter-from {
   transform: translateX(-100%);
 }
-.swiper02-leave-to {
+.toLeft-leave-to {
   transform: translateX(100%);
 }
-.swiper02-enter-to,
-.swiper02-leave-from {
+.toLeft-enter-to,
+.toLeft-leave-from {
   transform: translateX(0);
 }
 </style>
