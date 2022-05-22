@@ -37,6 +37,7 @@
 ul {
   @extend.overflow-x-auto;
   @extend.overflow-y-hidden;
+  overflow: overlay;
   //不能被点击的设备
   @media (any-pointer: none) {
     scrollbar-color: red, blue;

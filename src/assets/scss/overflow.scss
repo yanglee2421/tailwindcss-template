@@ -13,6 +13,10 @@ $dirs: 'x', 'y';
   .overflow-#{$dir}-scroll {
     overflow-#{$dir}: scroll;
   }
+
+  .overflow-#{$dir}-overlay {
+    overflow-#{$dir}: overlay;
+  }
 }
 
 .overflow-hidden {
@@ -21,4 +25,12 @@ $dirs: 'x', 'y';
 
 .overflow-auto {
   overflow: auto;
+}
+
+.overflow-scroll {
+  overflow: scroll;
+}
+
+.overflow-overlay {
+  overflow: overlay;
 }
