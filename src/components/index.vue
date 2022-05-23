@@ -10,6 +10,9 @@
         <el-menu-item :route="{ name: 'drag' }" index="1">拖拽</el-menu-item>
         <el-menu-item :route="{ name: 'lunbo' }" index="2">轮播</el-menu-item>
         <el-menu-item :route="{ name: 'table' }" index="3">表格</el-menu-item>
+        <el-menu-item :route="{ name: 'scroll' }" index="4"
+          >滚动条</el-menu-item
+        >
       </el-menu>
       <el-select filterable></el-select>
     </header>
