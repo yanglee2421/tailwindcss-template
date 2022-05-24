@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="m-center border" :data-whatever="currentIndex">
+    <ul class="m-center border">
       <template v-for="(item, index) in 10" :key="item">
         <transition :name="swiper">
           <li v-show="index === currentIndex % 10">{{ item }}</li>
@@ -16,11 +16,9 @@
   </div>
 </template>
 <script setup>
-import { onBeforeUpdate, reactive, ref, watch } from "vue";
-const arr = reactive([]);
+import { onBeforeUpdate, onUpdated, reactive, ref, watch } from "vue";
 const currentIndex = ref(0);
-const swiper = ref("toRight");
-const value = ref();
+const swiper = ref();
 watch(
   () => currentIndex.value,
   (newVal, oldVal) => {

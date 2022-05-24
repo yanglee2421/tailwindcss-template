@@ -12,6 +12,7 @@
 <style lang='scss' scoped>
 .scroll {
   height: 50px;
+  cursor: pointer;
   @extend.my-1;
   ::-webkit-scrollbar {
     height: 8px;
