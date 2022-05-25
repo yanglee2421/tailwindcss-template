@@ -60,6 +60,7 @@ $w: 200px;
 li {
   @extend.absolute;
   @extend.wh-100;
+  text-align: center;
   background-color: aquamarine;
 }
 ul {
@@ -75,7 +76,7 @@ $swiper: "toRight", "toLeft";
 @each $item in $swiper {
   .#{$item}-enter-active,
   .#{$item}-leave-active {
-    transition: 0.7s ease-in-out;
+    transition: 0.7s;
   }
   .#{$item}-enter-to,
   .#{$item}-leave-from {
