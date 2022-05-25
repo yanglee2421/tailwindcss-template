@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-25 b overflow-auto overflow-overlay p-1">
     <ul class="m-center border" :data-whatever="state.currentIndex">
       <template v-for="(item, index) in 10" :key="item">
         <transition :name="state.swiper">
@@ -12,6 +12,12 @@
       <el-button @click="currentIndex++">下一张</el-button>
       <el-button @click="currentIndex = 0">1</el-button>
       <el-button @click="currentIndex = 6">7</el-button>
+    </div>
+    <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum unde
+      libero, repudiandae cupiditate sequi voluptatem dignissimos perferendis
+      dolor ad, impedit dolorem odit. Neque, animi quae? Nobis voluptates
+      nesciunt dolorem voluptatem?
     </div>
   </div>
 </template>

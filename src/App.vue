@@ -8,9 +8,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-ul {
-  list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  @media (any-hover: none) {
+    scrollbar-width: none;
+  }
 }
 #app {
   width: 100vw;
@@ -19,5 +21,28 @@ ul {
   @extend.flex-column;
   @extend.overflow-hidden;
   background-color: #cdd0d6;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  @media (any-hover: hover) {
+    cursor: pointer;
+  }
+  @media (any-hover: none) {
+    display: none;
+  }
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.2);
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 }
 </style>
