@@ -6,10 +6,10 @@
           v-for="(item, index) in arr01"
           :key="item"
           draggable="true"
-          @dragstart="dragFn.start(index, $event)"
+          @dragstart="dragFn.start($event, index)"
           @dragover.prevent="dragFn.over($event)"
           @dragleave="dragFn.leave($event)"
-          @drop="dragFn.drop(index, $event)"
+          @drop="dragFn.drop($event, index)"
         >
           <el-checkbox :label="item" />
         </div>
@@ -23,7 +23,7 @@ import { reactive, ref } from "vue";
 const value = ref([]);
 const arr01 = reactive(["123", "456", "789"]);
 const dragFn = {
-  start(index, $event) {
+  start($event, index) {
     $event.dataTransfer.setData("dragIndex", index);
   },
   over($event) {
@@ -32,7 +32,7 @@ const dragFn = {
   leave($event) {
     $event.currentTarget.style.borderTop = "";
   },
-  drop(index, $event) {
+  drop($event, index) {
     const arr = arr01;
     $event.currentTarget.style.borderTop = "";
     const dragIndex = +$event.dataTransfer.getData("dragIndex");
