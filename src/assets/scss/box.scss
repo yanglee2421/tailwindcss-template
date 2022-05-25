@@ -17,6 +17,11 @@ $wh: 25, 50, 75, 100;
   .h-#{$item} {
     height: #{$item}+'%';
   }
+
+  .wh-#{$item} {
+    width: #{$item}+'%';
+    height: #{$item}+'%';
+  }
 }
 
 $spas: 'p', 'b', 'm';

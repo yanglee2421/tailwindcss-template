@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="m-center border">
+    <ul class="m-center border" :data-whatever="i">
       <template v-for="(item, index) in 10" :key="item">
         <transition :name="swiper">
           <li v-show="index === currentIndex % 10">{{ item }}</li>
@@ -16,9 +16,21 @@
   </div>
 </template>
 <script setup>
-import { onBeforeUpdate, onUpdated, reactive, ref, watch } from "vue";
-const currentIndex = ref(0);
+import { computed, onBeforeUpdate, onMounted, ref, watch } from "vue";
 const swiper = ref();
+const i = ref(0);
+const currentIndex = computed({
+  get() {
+    return i.value;
+  },
+  set(newVal) {
+    for (let i = 0; i < 10000; i++) {
+      clearTimeout(i);
+    }
+    i.value = newVal;
+    start();
+  },
+});
 watch(
   () => currentIndex.value,
   (newVal, oldVal) => {
@@ -31,24 +43,31 @@ watch(
   }
 );
 onBeforeUpdate(() => {
-  if (currentIndex.value < 0) {
-    currentIndex.value = 9;
+  if (i.value < 0) {
+    i.value = 9;
   }
+});
+const start = () => {
+  setTimeout(() => {
+    currentIndex.value++;
+  }, 3000);
+};
+onMounted(() => {
+  start();
 });
 </script>
 <style lang='scss' scoped>
-$w: 100px;
+$w: 200px;
 li {
-  width: $w;
-  height: $w;
   @extend.absolute;
+  @extend.wh-100;
   background-color: aquamarine;
 }
 ul {
-  width: $w !important;
-  height: $w;
-  @extend.overflow-hidden;
   @extend.relative;
+  width: $w !important;
+  height: 100px;
+  @extend.overflow-hidden;
 }
 .border {
   border: 1px red solid;
@@ -57,7 +76,7 @@ $swiper: "toRight", "toLeft";
 @each $item in $swiper {
   .#{$item}-enter-active,
   .#{$item}-leave-active {
-    transition: 0.5s;
+    transition: 0.7s ease-in-out;
   }
   .#{$item}-enter-to,
   .#{$item}-leave-from {

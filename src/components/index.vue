@@ -33,7 +33,7 @@ const state = reactive({
 });
 const router = useRouter();
 onMounted(() => {
-  router.push({ name: state.comName });
+  // router.push({ name: state.comName });
 });
 </script>
 <style lang='scss' scoped>
