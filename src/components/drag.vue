@@ -5,11 +5,7 @@
         <div
           v-for="(item, index) in arr01"
           :key="item"
-          draggable="true"
-          @dragstart="dragFn.start($event, index)"
-          @dragover.prevent="dragFn.over($event)"
-          @dragleave="dragFn.leave($event)"
-          @drop="dragFn.drop($event, index)"
+          v-drag="{ index, arr: arr01 }"
         >
           <el-checkbox :label="item" />
         </div>
@@ -22,25 +18,27 @@
 import { reactive, ref } from "vue";
 const value = ref([]);
 const arr01 = reactive(["123", "456", "789"]);
-const dragFn = {
-  start($event, index) {
-    $event.dataTransfer.setData("dragIndex", index);
-  },
-  over($event) {
-    $event.currentTarget.style.borderTop = "1px red solid";
-  },
-  leave($event) {
-    $event.currentTarget.style.borderTop = "";
-  },
-  drop($event, index) {
-    const arr = arr01;
-    $event.currentTarget.style.borderTop = "";
-    const dragIndex = +$event.dataTransfer.getData("dragIndex");
-    arr.splice(index, 1, ...arr.splice(dragIndex, 1, arr[index]));
-  },
-};
 const log = (i) => {
   console.log(i);
+};
+const vDrag = (el, binding) => {
+  const { index, arr } = binding.value;
+  el.draggable = true;
+  el.ondragstart = (e) => {
+    e.dataTransfer.setData("dragIndex", index);
+  };
+  el.ondragover = (e) => {
+    e.preventDefault();
+    e.currentTarget.style.borderTop = "1px red solid";
+  };
+  el.ondragleave = (e) => {
+    e.currentTarget.style.borderTop = "";
+  };
+  el.ondrop = (e) => {
+    e.currentTarget.style.borderTop = "";
+    const dragIndex = +e.dataTransfer.getData("dragIndex");
+    arr.splice(index, 1, ...arr.splice(dragIndex, 1, arr[index]));
+  };
 };
 </script>
 
