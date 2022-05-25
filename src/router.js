@@ -19,4 +19,9 @@ const router = createRouter({
     },
   ]
 })
+router.beforeEach((to, from) => {
+  if (to.name) {
+    localStorage.setItem('router', to.name)
+  }
+})
 export default router

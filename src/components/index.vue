@@ -3,14 +3,18 @@
     <header class="flex-row pr-1">
       <el-menu
         mode="horizontal"
-        default-active="1"
+        :default-active="state.index"
         class="flex-1-hidden bb-0"
         router
       >
-        <el-menu-item :route="{ name: 'drag' }" index="1">拖拽</el-menu-item>
-        <el-menu-item :route="{ name: 'lunbo' }" index="2">轮播</el-menu-item>
-        <el-menu-item :route="{ name: 'table' }" index="3">表格</el-menu-item>
-        <el-menu-item :route="{ name: 'scroll' }" index="4"
+        <el-menu-item :route="{ name: 'drag' }" index="drag">拖拽</el-menu-item>
+        <el-menu-item :route="{ name: 'lunbo' }" index="lunbo"
+          >轮播</el-menu-item
+        >
+        <el-menu-item :route="{ name: 'table' }" index="table"
+          >表格</el-menu-item
+        >
+        <el-menu-item :route="{ name: 'scroll' }" index="scroll"
           >滚动条</el-menu-item
         >
         <div></div>
@@ -30,11 +34,17 @@
 import { onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
 const state = reactive({
-  comName: "drag",
+  index: "drag",
 });
 const router = useRouter();
 onMounted(() => {
-  // router.push({ name: state.comName });
+  let name = localStorage.getItem("router");
+  if (!name) {
+    localStorage.setItem("router", "drag");
+    name = localStorage.getItem("router");
+  }
+  state.index = name;
+  router.push({ name });
 });
 </script>
 <style lang='scss' scoped>
