@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ul class="m-center border" :data-whatever="i">
+    <ul class="m-center border" :data-whatever="state.currentIndex">
       <template v-for="(item, index) in 10" :key="item">
-        <transition :name="swiper">
+        <transition :name="state.swiper">
           <li v-show="index === currentIndex % 10">{{ item }}</li>
         </transition>
       </template>
@@ -16,44 +16,43 @@
   </div>
 </template>
 <script setup>
-import { computed, onBeforeUpdate, onMounted, ref, watch } from "vue";
-const swiper = ref();
-const i = ref(0);
+import { computed, onBeforeUpdate, onMounted, reactive, watch } from "vue";
+
+const state = reactive({
+  currentIndex: 0,
+  swiper: "",
+});
 const currentIndex = computed({
   get() {
-    return i.value;
+    return state.currentIndex;
   },
   set(newVal) {
-    for (let i = 0; i < 10000; i++) {
-      clearTimeout(i);
-    }
-    i.value = newVal;
+    clearTimeout(state.timer);
+    state.currentIndex = newVal;
     start();
   },
 });
+const start = () => {
+  state.timer = setTimeout(() => {
+    currentIndex.value++;
+  }, 3000);
+};
 watch(
   () => currentIndex.value,
   (newVal, oldVal) => {
     const res = newVal - oldVal;
     if (res > 0 || res === -9) {
-      swiper.value = "toRight";
+      state.swiper = "toRight";
     } else {
-      swiper.value = "toLeft";
+      state.swiper = "toLeft";
     }
   }
 );
-onBeforeUpdate(() => {
-  if (i.value < 0) {
-    i.value = 9;
-  }
-});
-const start = () => {
-  setTimeout(() => {
-    currentIndex.value++;
-  }, 3000);
-};
 onMounted(() => {
   start();
+});
+onBeforeUpdate(() => {
+  if (state.currentIndex < 0) state.currentIndex = 9;
 });
 </script>
 <style lang='scss' scoped>
