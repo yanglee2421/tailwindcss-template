@@ -31,19 +31,22 @@
   </div>
 </template>
 <script setup>
-import { onMounted, reactive } from "vue";
+import { onBeforeMount, onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
 const state = reactive({
-  index: "drag",
+  index: "",
 });
 const router = useRouter();
-onMounted(() => {
-  let name = localStorage.getItem("router");
+let name;
+onBeforeMount(() => {
+  name = localStorage.getItem("router");
   if (!name) {
     localStorage.setItem("router", "drag");
     name = localStorage.getItem("router");
   }
   state.index = name;
+});
+onMounted(() => {
   router.push({ name });
 });
 </script>
