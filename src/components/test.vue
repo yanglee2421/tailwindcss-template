@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-input-number v-focus></el-input-number>
+    <el-input-number v-focus />
   </div>
 </template>
 <script setup>
