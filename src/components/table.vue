@@ -13,10 +13,10 @@
         <div>
           <el-form-item label="部门" prop="label" required>
             <el-cascader
+              v-model="filter.label"
               :options="res"
               :props="{ value: 'label', emitPath: false }"
               filterable
-              v-model="filter.label"
               clearable
             />
           </el-form-item>
@@ -101,7 +101,8 @@
   </el-scrollbar>
 </template>
 <script setup>
-import { computed, onMounted, reactive, ref, watchEffect } from "vue";
+import vFocus from "@/hook/vFocus.js";
+import { reactive, ref, watchEffect } from "vue";
 const res = ref([]);
 const state = reactive({
   currentPage: 1,
@@ -141,9 +142,6 @@ const initTable = () => {
 watchEffect(() => {
   initTable();
 });
-const vFocus = (el) => {
-  el.__vueParentComponent.exposed.focus();
-};
 const formRef = ref();
 const submitForm = (formRef) => {
   if (formRef)
