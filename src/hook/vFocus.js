@@ -1,5 +1,5 @@
 /*
-elment-plus的v-focus
+element-plus的v-focus
 输入框mounted和updated时自动聚焦
 仅支持el-input和el-input-number
 */

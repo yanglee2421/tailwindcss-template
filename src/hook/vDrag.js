@@ -19,6 +19,8 @@ export default (el, binding) => {
         e.currentTarget.style.borderTop = "";
     };
     el.ondrop = (e) => {
+        e.preventDefault()
+        console.log(e.dataTransfer.files);
         e.currentTarget.style.borderTop = "";
         const dragIndex = +e.dataTransfer.getData("dragIndex");
         arr.splice(index, 1, ...arr.splice(dragIndex, 1, arr[index]));
