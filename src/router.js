@@ -38,8 +38,11 @@ const router = createRouter({
   ]
 })
 router.beforeEach((to, from) => {
-  if (to.name) {
-    localStorage.setItem('router', to.name)
+  if (to.matched[1]) {
+    localStorage.setItem('router', to.matched[1].name)
+  }
+  if (to.matched[2]) {
+    localStorage.setItem('p-router', to.matched[2].name)
   }
 })
 export default router

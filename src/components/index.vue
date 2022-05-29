@@ -17,6 +17,9 @@
         <el-menu-item :route="{ name: 'scroll' }" index="scroll"
           >滚动条</el-menu-item
         >
+        <el-menu-item :route="{ name: 'parameter' }" index="parameter"
+          >传参</el-menu-item
+        >
       </el-menu>
       <el-select filterable></el-select>
     </header>
@@ -30,22 +33,28 @@
   </div>
 </template>
 <script setup>
-import { onBeforeMount, onBeforeUpdate, onMounted, reactive } from "vue";
+import {
+  nextTick,
+  onBeforeMount,
+  onBeforeUpdate,
+  onMounted,
+  reactive,
+} from "vue";
 import { useRouter } from "vue-router";
 const state = reactive({});
-const befRou = () => {
+const init = () => {
   state.name = localStorage.getItem("router");
   if (!state.name) {
     localStorage.setItem("router", "drag");
     state.name = localStorage.getItem("router");
   }
 };
-onBeforeMount(befRou);
+onBeforeMount(init);
 const router = useRouter();
 onMounted(() => {
-  router.push({ name });
+  router.push({ name: state.name });
 });
-onBeforeUpdate(befRou);
+onBeforeUpdate(init);
 </script>
 <style lang='scss' scoped>
 header {
