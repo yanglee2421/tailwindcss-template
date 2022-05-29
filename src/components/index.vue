@@ -3,7 +3,7 @@
     <header class="flex-row pr-1">
       <el-menu
         mode="horizontal"
-        :default-active="state.index"
+        :default-active="state.name"
         class="flex-1-hidden bb-0"
         router
       >
@@ -32,20 +32,16 @@
 <script setup>
 import { onBeforeMount, onBeforeUpdate, onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
-const state = reactive({
-  index: "",
-});
-const router = useRouter();
-let name;
+const state = reactive({});
 const befRou = () => {
-  name = localStorage.getItem("router");
-  if (!name) {
+  state.name = localStorage.getItem("router");
+  if (!state.name) {
     localStorage.setItem("router", "drag");
-    name = localStorage.getItem("router");
+    state.name = localStorage.getItem("router");
   }
-  state.index = name;
 };
 onBeforeMount(befRou);
+const router = useRouter();
 onMounted(() => {
   router.push({ name });
 });
