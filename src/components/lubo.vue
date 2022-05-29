@@ -1,5 +1,5 @@
 <template>
-  <div class="h-25 b overflow-auto overflow-overlay p-1">
+  <div class="b overflow-auto overflow-overlay p-1">
     <ul class="m-center border" :data-whatever="state.currentIndex">
       <template v-for="(item, index) in 10" :key="item">
         <transition :name="state.swiper">
@@ -13,16 +13,10 @@
       <el-button @click="currentIndex = 0">1</el-button>
       <el-button @click="currentIndex = 6">7</el-button>
     </div>
-    <div>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum unde
-      libero, repudiandae cupiditate sequi voluptatem dignissimos perferendis
-      dolor ad, impedit dolorem odit. Neque, animi quae? Nobis voluptates
-      nesciunt dolorem voluptatem?
-    </div>
   </div>
 </template>
 <script setup>
-import { computed, onBeforeUpdate, onMounted, reactive, watch } from "vue";
+import { computed, onBeforeUpdate, onMounted, reactive } from "vue";
 
 const state = reactive({
   currentIndex: 0,
@@ -34,6 +28,12 @@ const currentIndex = computed({
   },
   set(newVal) {
     clearTimeout(state.timer);
+    const res = newVal - state.currentIndex;
+    if (res > 0 || res === -9) {
+      state.swiper = "toRight";
+    } else {
+      state.swiper = "toLeft";
+    }
     state.currentIndex = newVal;
     start();
   },
@@ -43,17 +43,6 @@ const start = () => {
     currentIndex.value++;
   }, 3000);
 };
-watch(
-  () => currentIndex.value,
-  (newVal, oldVal) => {
-    const res = newVal - oldVal;
-    if (res > 0 || res === -9) {
-      state.swiper = "toRight";
-    } else {
-      state.swiper = "toLeft";
-    }
-  }
-);
 onMounted(() => {
   start();
 });
