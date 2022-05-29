@@ -17,3 +17,4 @@ app.use(router)
 import vuex from "@/vuex.js"
 app.use(vuex)
 app.mount('#app')
+console.log(app.version);
