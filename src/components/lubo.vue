@@ -1,6 +1,6 @@
 <template>
   <div class="b overflow-auto overflow-overlay p-1">
-    <ul class="m-center border" :data-whatever="state.currentIndex">
+    <ul class="m-center border">
       <template v-for="(item, index) in 10" :key="item">
         <transition :name="state.swiper">
           <li v-show="index === currentIndex % 10">{{ item }}</li>
@@ -12,11 +12,12 @@
       <el-button @click="currentIndex++">下一张</el-button>
       <el-button @click="currentIndex = 0">1</el-button>
       <el-button @click="currentIndex = 6">7</el-button>
+      <el-checkbox label="自动" class="p-1" v-model="state.auto"></el-checkbox>
     </div>
   </div>
 </template>
 <script setup>
-import { computed, onBeforeUpdate, onMounted, reactive } from "vue";
+import { computed, onMounted, reactive, watchEffect } from "vue";
 
 const state = reactive({
   currentIndex: 0,
@@ -34,20 +35,20 @@ const currentIndex = computed({
     } else {
       state.swiper = "toLeft";
     }
+    if (newVal < 0) newVal = 9;
     state.currentIndex = newVal;
     start();
   },
 });
 const start = () => {
-  state.timer = setTimeout(() => {
-    currentIndex.value++;
-  }, 3000);
+  if (state.auto) {
+    state.timer = setTimeout(() => {
+      currentIndex.value++;
+    }, 3000);
+  }
 };
-onMounted(() => {
+watchEffect(() => {
   start();
-});
-onBeforeUpdate(() => {
-  if (state.currentIndex < 0) state.currentIndex = 9;
 });
 </script>
 <style lang='scss' scoped>
