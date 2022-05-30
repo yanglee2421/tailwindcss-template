@@ -17,7 +17,7 @@
   </div>
 </template>
 <script setup>
-import { computed, onMounted, reactive, watchEffect } from "vue";
+import { computed, reactive, watchEffect } from "vue";
 
 const state = reactive({
   currentIndex: 0,
