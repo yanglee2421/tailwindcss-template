@@ -61,7 +61,7 @@ $spas: 'p', 'b', 'm';
     }
 
     .#{$spa}r-#{$i} {
-      #{$var}-right:#{$i}0px;
+      #{$var}-right:#{$i}0px !important;
     }
 
     .#{$spa}b-#{$i} {

@@ -1,7 +1,7 @@
 import Drag from "@/components/drag.vue"
 import Lunbo from '@/components/lubo.vue'
 import Index from '@/components/index.vue'
-import Table from '@/components/table.vue'
+import EsTable from '@/components/EsTable.vue'
 import Scroll from '@/components/scroll.vue'
 import Test from '@/components/test.vue'
 import Parameter from '@/components/parameter/parameter.vue'
@@ -10,6 +10,7 @@ import StF from "@/components/parameter/S-F/father.vue"
 import FtStF from "@/components/parameter/F-S-F/father.vue"
 import AtO from "@/components/parameter/A-O/ancestors.vue"
 import BtB from "@/components/parameter/B-B/father.vue"
+// import detail from "@/components/"
 import { createRouter, createWebHashHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHashHistory(),
@@ -18,7 +19,7 @@ const router = createRouter({
       path: "/", component: Index, children: [
         { path: 'drag', component: Drag, name: "drag" },
         { path: 'lunbo', component: Lunbo, name: "lunbo" },
-        { path: 'table', component: Table, name: "table" },
+        { path: 'table', component: EsTable, name: "table" },
         { path: 'scroll', component: Scroll, name: "scroll" },
         { path: 'test', component: Test, name: "test" },
         {

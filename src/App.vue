@@ -22,6 +22,9 @@
   @extend.overflow-hidden;
   background-color: #cdd0d6;
 }
+[v-cloak] {
+  display: none !important;
+}
 ul {
   list-style: none;
 }
