@@ -5,12 +5,13 @@
 </template>
 <script setup>
 const vShowImg = (el) => {
-  let ranStr = [];
+  let arr = [];
   for (let i = 0; i < 8; i++) {
-    ranStr.push(Math.floor(Math.random() * 16).toString(16));
+    arr.push(Math.floor(Math.random() * 16).toString(16));
   }
-  el.setAttribute(`showImg-${ranStr.join("")}`, "");
-  const imgArr = document.querySelectorAll("[showimg] img");
+  const ranStr = arr.join("");
+  el.setAttribute(`showImg-${ranStr}`, "");
+  const imgArr = document.querySelectorAll(`[showimg-${ranStr}] img`);
   [...imgArr].forEach((img) => {
     img.draggable = false;
     /*  img.oncontextmenu = (event) => {
