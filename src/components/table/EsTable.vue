@@ -48,8 +48,8 @@
           <el-table-column align="center" label="所在区域" />
           <el-table-column align="center" label="最后跟进时间" />
           <el-table-column align="center" label="操作">
-            <template #default>
-              <el-link type="primary" @click="initTable">详情</el-link>
+            <template #default="{ row }">
+              <el-link type="primary" @click="toDetail(row.Id)">详情</el-link>
             </template>
           </el-table-column>
         </el-table>
@@ -68,6 +68,7 @@
 <script setup>
 import { ElMessage } from "element-plus";
 import { reactive, ref, watchEffect } from "vue";
+import { useRouter } from "vue-router";
 
 const state = reactive({
   table: [],
@@ -118,6 +119,10 @@ for (let i = 0; i < 100; i++) {
     Name: "张三" + i,
   });
 }
+const router = useRouter();
+const toDetail = (Id) => {
+  router.push({ name: "detail", params: { Id } });
+};
 </script>
 <style lang='scss' scoped>
 </style>
