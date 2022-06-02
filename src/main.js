@@ -1,20 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-
-const app = createApp(App)
-import ElementPlus from "element-plus"
 import 'element-plus/dist/index.css'
-import locale from 'element-plus/es/locale/lang/zh-cn'
-import * as icons from "@element-plus/icons-vue"
-Object.keys(icons).forEach(item => {
-  if (Reflect.has(icons, item)) {
-    app.component(item, icons[item])
-  }
-})
-app.use(ElementPlus, { locale })
-import router from "@/router.js"
-app.use(router)
-import vuex from "@/vuex.js"
-app.use(vuex)
+import getStart from '@/plugins/getStart'
+const app = createApp(App)
+app.use(getStart)
 app.mount('#app')
-console.log(app.version);

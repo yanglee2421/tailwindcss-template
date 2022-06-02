@@ -16,7 +16,6 @@
 </template>
 <script setup>
 import { reactive, ref } from "vue";
-import vDrag from "@/hook/vDrag.js";
 const value = ref([]);
 const arr01 = reactive(["123", "456", "789"]);
 const log = (i) => {
