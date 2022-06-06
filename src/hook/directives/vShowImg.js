@@ -11,7 +11,7 @@ export default (el) => {
         /*  img.oncontextmenu = (event) => {
           event.preventDefault();
         }; */
-        img.addEventListener("click", (event) => {
+        img.onclick = (event) => {
             event.preventDefault();
             const showImg = document.createElement("img");
             showImg.draggable = false;
@@ -33,6 +33,6 @@ export default (el) => {
                 if (event.target === event.currentTarget)
                     document.body.removeChild(mask);
             };
-        });
+        }
     });
 };

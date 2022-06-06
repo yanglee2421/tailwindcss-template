@@ -12,6 +12,12 @@
       </el-checkbox-group>
       <div class="b"><el-button @click="log(arr)">输出</el-button></div>
     </div>
+    <div v-showImg>
+      <img src="@/assets/logo.png" alt="" />
+    </div>
+    <div v-showImg>
+      <img src="@/assets/logo.png" alt="" />
+    </div>
   </div>
 </template>
 <script setup>

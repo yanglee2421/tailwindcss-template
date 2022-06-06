@@ -70,39 +70,29 @@ export default {
                 /*  img.oncontextmenu = (event) => {
                   event.preventDefault();
                 }; */
-                img.addEventListener("click", (event) => {
+                img.onclick = (event) => {
                     event.preventDefault();
+                    const showImg = document.createElement("img");
+                    showImg.draggable = false;
+                    showImg.src = event.currentTarget.src;
                     const mask = document.createElement("div");
                     mask.style.position = "fixed";
                     mask.style.top = 0;
                     mask.style.right = 0;
                     mask.style.bottom = 0;
                     mask.style.left = 0;
-                    mask.style.zIndex = 9;
+                    mask.style.zIndex = 999;
                     mask.style.display = "flex";
                     mask.style.justifyContent = "center";
                     mask.style.alignItems - "center";
                     mask.style.backgroundColor = "rgba(0,0,0,.5)";
-                    const showImg = document.createElement("img");
-                    showImg.draggable = false;
-                    showImg.src = event.currentTarget.src;
-                    const btnClose = document.createElement('div')
-                    btnClose.style.width = '30px'
-                    btnClose.style.height = '30px'
-                    btnClose.style.backgroundColor = '#fff'
-                    btnClose.style.position = 'absolute'
-                    btnClose.style.top = 0
-                    btnClose.style.right = 0
-                    btnClose.style.zIndex = 99
-                    btnClose.onclick = (event) => {
+                    mask.appendChild(showImg);
+                    document.body.appendChild(mask);
+                    mask.onclick = (event) => {
                         if (event.target === event.currentTarget)
                             document.body.removeChild(mask);
                     };
-                    mask.appendChild(btnClose)
-                    mask.appendChild(showImg);
-                    document.body.appendChild(mask);
-                    // mask.onclick = 
-                });
+                }
             });
         })
         console.log(app.version);
