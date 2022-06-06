@@ -13,10 +13,10 @@
       <div class="b"><el-button @click="log(arr)">输出</el-button></div>
     </div>
     <div v-showImg>
-      <img src="@/assets/logo.png" alt="" />
+      <img :src="src" alt="" />
     </div>
     <div v-showImg>
-      <img src="@/assets/logo.png" alt="" />
+      <img :src="src" alt="" />
     </div>
   </div>
 </template>
@@ -27,7 +27,13 @@ const arr01 = reactive(["123", "456", "789"]);
 const log = (i) => {
   console.log(i);
 };
+const src = ref(
+  "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"
+);
 </script>
 
 <style lang="scss" scoped>
+img {
+  width: 150px;
+}
 </style>

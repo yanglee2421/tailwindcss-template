@@ -1,9 +1,12 @@
 /*
 仅适用于Vue3
 自动安装
-- 除css以外的Element-plus
+- Element-plus及图标
 - router实例
 - vuex实例
+- v-drag
+- v-focus(仅适用于el-input，el-input-number)
+- v-showImg
 */
 import ElementPlus from "element-plus"
 import 'element-plus/dist/index.css'
@@ -66,6 +69,7 @@ export default {
             el.setAttribute(`showImg-${ranStr}`, "");
             const imgArr = document.querySelectorAll(`[showimg-${ranStr}] img`);
             [...imgArr].forEach((img) => {
+                console.dir(img);
                 img.draggable = false;
                 /*  img.oncontextmenu = (event) => {
                   event.preventDefault();
