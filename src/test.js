@@ -1,3 +1,5 @@
-let str = '1'
-str.padEnd(18, '2')
-console.log(str);
+const obj = {
+    name: '张三'
+}
+Object.assign(obj, { name: '李四' })
+console.log(obj);
