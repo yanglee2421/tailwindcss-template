@@ -5,6 +5,7 @@ const galSty = {
     right: 0,
     bottom: 0,
     left: 0,
+    zIndex: 99,
     display: `none`,
     gridTemplate: `none/1fr auto 1fr`,
     background: `rgba(0, 0, 0, .8)`,
@@ -57,6 +58,11 @@ const $all = (selector) => document.querySelectorAll(selector)
 const _ = (el) => document.createElement(el)
 const style = (el, sty) => Object.assign(el.style, sty)
 const body = $('body')
+const padd_1 = (...arr) => {
+    arr.forEach(el => {
+        el.style.padding = '8px'
+    })
+}
 // gallery不存则创建一个
 const gallery = _('section')
 gallery.className = 'swz-gallery'
@@ -83,6 +89,7 @@ navIndex.style.color = `#409EFF`
 const navSpa = _('span')
 navSpa.innerText = '/'
 const navTotal = _('span')
+padd_1(navIndex, navSpa, navTotal)
 nav.appendChild(navIndex)
 nav.appendChild(navSpa)
 nav.appendChild(navTotal)
@@ -154,6 +161,7 @@ const showGallery = (el, index, arr) => {
         gallery.style.display = 'grid'
     }
 }
+console.log('导入了');
 export default {
     mounted(el) {
         if (!body.contains(gallery))

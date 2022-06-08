@@ -22,6 +22,9 @@
     <div v-showImg class="mt-1">
       <img :src="src" alt="" />
     </div>
+    <div v-gallery class="mt-1">
+      <img :src="src" alt="" />
+    </div>
   </div>
 </template>
 <script setup>
