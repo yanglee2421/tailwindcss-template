@@ -14,6 +14,7 @@ import locale from 'element-plus/es/locale/lang/zh-cn'
 import * as icons from "@element-plus/icons-vue"
 import router from "@/plugins/router"
 import vuex from "@/plugins/vuex"
+import vGallery from "../hook/directives/vGallery"
 export default {
     async install(app, options) {
         app.use(ElementPlus, { locale })
@@ -69,7 +70,6 @@ export default {
             el.setAttribute(`showImg-${ranStr}`, "");
             const imgArr = document.querySelectorAll(`[showimg-${ranStr}] img`);
             [...imgArr].forEach((img) => {
-                console.dir(img);
                 img.draggable = false;
                 /*  img.oncontextmenu = (event) => {
                   event.preventDefault();
@@ -99,6 +99,7 @@ export default {
                 }
             });
         })
+        app.directive('gallery', vGallery)
         console.log(app.version);
     }
 }
