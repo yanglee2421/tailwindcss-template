@@ -10,12 +10,16 @@
           <el-checkbox :label="item" />
         </div>
       </el-checkbox-group>
+      <div
+        v-for="(item, index) in arr01"
+        :key="item"
+        v-drag="{ index, arr: arr01 }"
+      >
+        <p class="b">{{ index }}---{{ item }}</p>
+      </div>
       <div class="b"><el-button @click="log(arr)">输出</el-button></div>
     </div>
-    <div v-showImg>
-      <img :src="src" alt="" />
-    </div>
-    <div v-showImg>
+    <div v-showImg class="mt-1">
       <img :src="src" alt="" />
     </div>
   </div>

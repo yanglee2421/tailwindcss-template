@@ -14,7 +14,10 @@ import locale from 'element-plus/es/locale/lang/zh-cn'
 import * as icons from "@element-plus/icons-vue"
 import router from "@/plugins/router"
 import vuex from "@/plugins/vuex"
-import vGallery from "../hook/directives/vGallery"
+import vGallery from "@/hook/directives/vGallery"
+import vShowImg from "@/hook/directives/vShowImg"
+import vFocus from "@/hook/directives/vFocus"
+import vDrag from '@/hook/directives/vDrag'
 export default {
     async install(app, options) {
         app.use(ElementPlus, { locale })
@@ -25,80 +28,13 @@ export default {
         })
         app.use(router)
         app.use(vuex)
-        //拖拽指令
-        app.directive('drag', (el, binding) => {
-            const { index, arr } = binding.value;
-            if (!Array.isArray(arr)) throw new Error('arr必须是一个数组')
-            el.draggable = true;
-            el.ondragstart = (e) => {
-                e.dataTransfer.setData("dragIndex", index);
-            };
-            el.ondragover = (e) => {
-                e.preventDefault();
-                e.currentTarget.style.borderTop = "1px red solid";
-            };
-            el.ondragleave = (e) => {
-                e.currentTarget.style.borderTop = "";
-            };
-            el.ondrop = (e) => {
-                e.preventDefault()
-                console.log(e.dataTransfer.files);
-                e.currentTarget.style.borderTop = "";
-                const dragIndex = +e.dataTransfer.getData("dragIndex");
-                arr.splice(index, 1, ...arr.splice(dragIndex, 1, arr[index]));
-            };
-        })
-        //自动聚焦指令
-        app.directive('focus', (el) => {
-            if (el.className !== 'el-input' && el.className !== 'el-input-number') {
-                throw new Error('仅支持el-input或el-input-number')
-            }
-            const { exposed, setupState } = el.__vueParentComponent
-            if (exposed) {
-                exposed.focus();
-            } else {
-                setupState.focus();
-            }
-        })
+        //v-drag
+        app.directive('drag', vDrag)
+        //v-focus
+        app.directive('focus', vFocus)
         //v-showImg
-        app.directive('showImg', (el) => {
-            let arr = [];
-            for (let i = 0; i < 8; i++) {
-                arr.push(Math.floor(Math.random() * 16).toString(16));
-            }
-            const ranStr = arr.join("");
-            el.setAttribute(`showImg-${ranStr}`, "");
-            const imgArr = document.querySelectorAll(`[showimg-${ranStr}] img`);
-            [...imgArr].forEach((img) => {
-                img.draggable = false;
-                /*  img.oncontextmenu = (event) => {
-                  event.preventDefault();
-                }; */
-                img.onclick = (event) => {
-                    event.preventDefault();
-                    const showImg = document.createElement("img");
-                    showImg.draggable = false;
-                    showImg.src = event.currentTarget.src;
-                    const mask = document.createElement("div");
-                    mask.style.position = "fixed";
-                    mask.style.top = 0;
-                    mask.style.right = 0;
-                    mask.style.bottom = 0;
-                    mask.style.left = 0;
-                    mask.style.zIndex = 999;
-                    mask.style.display = "flex";
-                    mask.style.justifyContent = "center";
-                    mask.style.alignItems - "center";
-                    mask.style.backgroundColor = "rgba(0,0,0,.5)";
-                    mask.appendChild(showImg);
-                    document.body.appendChild(mask);
-                    mask.onclick = (event) => {
-                        if (event.target === event.currentTarget)
-                            document.body.removeChild(mask);
-                    };
-                }
-            });
-        })
+        app.directive('showImg', vShowImg);
+        //v-gallery
         app.directive('gallery', vGallery)
         console.log(app.version);
     }
