@@ -1,14 +1,20 @@
-// 整体的样式
+// gallery的样式
 const galSty = {
     position: `fixed`,
     top: 0,
     right: 0,
     bottom: 0,
     left: 0,
-    zIndex: 99,
+    zIndex: 9,
     display: `none`,
     gridTemplate: `none/1fr auto 1fr`,
     background: `rgba(0, 0, 0, .8)`,
+}
+// 图片的样式
+const imgSty = {
+    maxWidth: '100vw',
+    maxHeight: '100vh',
+    placeSelf: 'center',
 }
 //导航的样式
 const navSty = {
@@ -57,57 +63,68 @@ const $ = (selector) => document.querySelector(selector)
 const $all = (selector) => document.querySelectorAll(selector)
 const _ = (el) => document.createElement(el)
 const style = (el, sty) => Object.assign(el.style, sty)
-const body = $('body')
+HTMLElement.prototype.setStyle = function (sty) {
+    Object.assign(this.style, sty)
+}
+HTMLElement.prototype.appChds = function (...arr) {
+    arr.forEach(el => {
+        this.appendChild(el)
+    })
+}
+HTMLElement.prototype.appChain = function (...arr) {
+    arr.forEach((item, index) => {
+        if (arr[index + 1])
+            item.appendChild(arr[index + 1])
+    })
+    this.appendChild(arr[0])
+}
 const padd_1 = (...arr) => {
     arr.forEach(el => {
         el.style.padding = '8px'
     })
 }
-// gallery不存则创建一个
+// 创建gallery
+const body = $('body')
 const gallery = _('section')
 gallery.className = 'swz-gallery'
-style(gallery, galSty)
+gallery.setStyle(galSty)
 const left = _('aside')
 const poiLef = _('div')
-style(poiLef, poiSty)
+poiLef.setStyle(poiSty)
 poiLef.style.borderWidth = '0 0 5px 5px'
-left.appendChild(poiLef)
-gallery.appendChild(left)
+gallery.appChain(left, poiLef)
 const cenImg = _('img')
-cenImg.style.placeSelf = 'center'
+cenImg.setStyle(imgSty)
 gallery.appendChild(cenImg)
 const right = _('aside')
 const poiRig = _('div')
-style(poiRig, poiSty)
+poiRig.setStyle(poiSty)
 poiRig.style.borderWidth = '5px 5px 0 0'
-right.appendChild(poiRig)
-gallery.appendChild(right)
+gallery.appChain(right, poiRig)
 const nav = _('nav')
-style(nav, navSty)
+nav.setStyle(navSty)
 const navIndex = _('span')
 navIndex.style.color = `#409EFF`
 const navSpa = _('span')
 navSpa.innerText = '/'
 const navTotal = _('span')
 padd_1(navIndex, navSpa, navTotal)
-nav.appendChild(navIndex)
-nav.appendChild(navSpa)
-nav.appendChild(navTotal)
+nav.appChds(navIndex, navSpa, navTotal)
 gallery.appendChild(nav)
 const btn = _('div')
-style(btn, btnSty)
+btn.setStyle(btnSty)
 btn.onclick = () => {
     gallery.style.display = 'none'
 }
 const btnX_1 = _('div')
 btnX_1.style.transform = 'rotate(45deg)'
-style(btnX_1, xSty)
+btnX_1.setStyle(xSty)
 const btnX_2 = _('div')
 btnX_2.style.transform = 'rotate(-45deg)'
-style(btnX_2, xSty)
-btn.appendChild(btnX_1)
-btn.appendChild(btnX_2)
+btnX_2.setStyle(xSty)
+btn.appChds(btnX_1, btnX_2)
 gallery.appendChild(btn)
+// 绑定事件
 const onEvent = (isLeft, index, arr) => {
     const pointer = isLeft ? poiLef : poiRig
     const el = isLeft ? left : right
@@ -127,6 +144,7 @@ const onEvent = (isLeft, index, arr) => {
         isLeft ? arr[index - 1]?.click?.() : arr[index + 1]?.click?.()
     }
 }
+// 清空事件
 const clearEvent = (...arr) => {
     arr.forEach(el => {
         el.onmouseover = null
@@ -161,7 +179,6 @@ const showGallery = (el, index, arr) => {
         gallery.style.display = 'grid'
     }
 }
-console.log('导入了');
 export default {
     mounted(el) {
         if (!body.contains(gallery))

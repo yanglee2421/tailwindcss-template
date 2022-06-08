@@ -33,13 +33,7 @@
   </div>
 </template>
 <script setup>
-import {
-  nextTick,
-  onBeforeMount,
-  onBeforeUpdate,
-  onMounted,
-  reactive,
-} from "vue";
+import { onBeforeMount, onBeforeUpdate, onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
 const state = reactive({});
 const init = () => {
