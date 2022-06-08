@@ -181,8 +181,7 @@ const showGallery = (el, index, arr) => {
 }
 export default {
     mounted(el) {
-        if (!body.contains(gallery))
-            body.appendChild(gallery)
+        !body.contains(gallery) && body.appendChild(gallery)
         let ranStr = [];
         for (let i = 0; i < 8; i++) {
             ranStr.push(Math.floor(Math.random() * 16).toString(16));
@@ -206,7 +205,7 @@ export default {
             showGallery(img, index, arr)
         })
     },
-    beforeUnmount(el) {
+    beforeUnmount() {
         gallery.parentNode?.removeChild?.(gallery)
     }
 }
