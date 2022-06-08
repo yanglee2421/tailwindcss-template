@@ -19,7 +19,7 @@ import vShowImg from "@/hook/directives/vShowImg"
 import vFocus from "@/hook/directives/vFocus"
 import vDrag from '@/hook/directives/vDrag'
 export default {
-    async install(app, options) {
+    install(app, options) {
         app.use(ElementPlus, { locale })
         Object.keys(icons).forEach(key => {
             if (Reflect.has(icons, key)) {

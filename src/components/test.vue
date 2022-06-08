@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    <input type="text" v-focus />
+  </div>
 </template>
 <script setup>
 </script>
