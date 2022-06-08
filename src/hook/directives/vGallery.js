@@ -62,7 +62,6 @@ const poiSty = {
 const $ = (selector) => document.querySelector(selector)
 const $all = (selector) => document.querySelectorAll(selector)
 const _ = (el) => document.createElement(el)
-const style = (el, sty) => Object.assign(el.style, sty)
 HTMLElement.prototype.setStyle = function (sty) {
     Object.assign(this.style, sty)
 }
