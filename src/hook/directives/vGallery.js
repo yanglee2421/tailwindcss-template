@@ -51,56 +51,56 @@ const poiSty = {
     borderRadius: `5px`,
     transformOrigin: `left top`,
 }
+//操作元素的方法简写
 const $ = (selector) => document.querySelector(selector)
 const $all = (selector) => document.querySelectorAll(selector)
 const _ = (el) => document.createElement(el)
 const style = (el, sty) => Object.assign(el.style, sty)
-if (!$('.swz-gallery')) {
-    var gallery = _('section')
-    gallery.className = 'swz-gallery'
-    style(gallery, galSty)
-    var left = _('aside')
-    var poiLef = _('div')
-    style(poiLef, poiSty)
-    poiLef.style.borderWidth = '0 0 5px 5px'
-    left.appendChild(poiLef)
-    gallery.appendChild(left)
-    var cenImg = _('img')
-    cenImg.style.placeSelf = 'center'
-    gallery.appendChild(cenImg)
-    var right = _('aside')
-    var poiRig = _('div')
-    style(poiRig, poiSty)
-    poiRig.style.borderWidth = '5px 5px 0 0'
-    right.appendChild(poiRig)
-    gallery.appendChild(right)
-    var nav = _('nav')
-    style(nav, navSty)
-    var navIndex = _('span')
-    navIndex.style.color = `#409EFF`
-    var navSpa = _('span')
-    navSpa.innerText = '/'
-    var navTotal = _('span')
-    nav.appendChild(navIndex)
-    nav.appendChild(navSpa)
-    nav.appendChild(navTotal)
-    gallery.appendChild(nav)
-    var btn = _('div')
-    style(btn, btnSty)
-    btn.onclick = () => {
-        gallery.style.display = 'none'
-    }
-    var btnX_1 = _('div')
-    btnX_1.style.transform = 'rotate(45deg)'
-    style(btnX_1, xSty)
-    var btnX_2 = _('div')
-    btnX_2.style.transform = 'rotate(-45deg)'
-    style(btnX_2, xSty)
-    btn.appendChild(btnX_1)
-    btn.appendChild(btnX_2)
-    gallery.appendChild(btn)
-    $('body').appendChild(gallery)
+const body = $('body')
+// gallery不存则创建一个
+const gallery = _('section')
+gallery.className = 'swz-gallery'
+style(gallery, galSty)
+const left = _('aside')
+const poiLef = _('div')
+style(poiLef, poiSty)
+poiLef.style.borderWidth = '0 0 5px 5px'
+left.appendChild(poiLef)
+gallery.appendChild(left)
+const cenImg = _('img')
+cenImg.style.placeSelf = 'center'
+gallery.appendChild(cenImg)
+const right = _('aside')
+const poiRig = _('div')
+style(poiRig, poiSty)
+poiRig.style.borderWidth = '5px 5px 0 0'
+right.appendChild(poiRig)
+gallery.appendChild(right)
+const nav = _('nav')
+style(nav, navSty)
+const navIndex = _('span')
+navIndex.style.color = `#409EFF`
+const navSpa = _('span')
+navSpa.innerText = '/'
+const navTotal = _('span')
+nav.appendChild(navIndex)
+nav.appendChild(navSpa)
+nav.appendChild(navTotal)
+gallery.appendChild(nav)
+const btn = _('div')
+style(btn, btnSty)
+btn.onclick = () => {
+    gallery.style.display = 'none'
 }
+const btnX_1 = _('div')
+btnX_1.style.transform = 'rotate(45deg)'
+style(btnX_1, xSty)
+const btnX_2 = _('div')
+btnX_2.style.transform = 'rotate(-45deg)'
+style(btnX_2, xSty)
+btn.appendChild(btnX_1)
+btn.appendChild(btnX_2)
+gallery.appendChild(btn)
 const onEvent = (isLeft, index, arr) => {
     const pointer = isLeft ? poiLef : poiRig
     const el = isLeft ? left : right
@@ -120,19 +120,20 @@ const onEvent = (isLeft, index, arr) => {
         isLeft ? arr[index - 1]?.click?.() : arr[index + 1]?.click?.()
     }
 }
-const clearEvent = (el) => {
-    el.onmouseover = null
-    el.onmousemove = null
-    el.onmouseout = null
-    el.onclick = null
+const clearEvent = (...arr) => {
+    arr.forEach(el => {
+        el.onmouseover = null
+        el.onmousemove = null
+        el.onmouseout = null
+        el.onclick = null
+    })
 }
 const showGallery = (el, index, arr) => {
     el.onclick = () => {
         navIndex.innerText = index + 1
         navTotal.innerText = arr.length
         cenImg.src = el.src
-        clearEvent(left)
-        clearEvent(right)
+        clearEvent(left, right)
         if (index > 0 && index < arr.length - 1) {
             onEvent(true, index, arr)
             onEvent(false, index, arr)
@@ -149,12 +150,14 @@ const showGallery = (el, index, arr) => {
             right.style.cursor = 'default'
             poiRig.style.display = 'none'
         }
-        $('body').style.overflow = 'hidden'
+        body.style.overflow = 'hidden'
         gallery.style.display = 'grid'
     }
 }
 export default {
     mounted(el) {
+        if (!body.contains(gallery))
+            body.appendChild(gallery)
         let ranStr = [];
         for (let i = 0; i < 8; i++) {
             ranStr.push(Math.floor(Math.random() * 16).toString(16));
@@ -178,7 +181,7 @@ export default {
             showGallery(img, index, arr)
         })
     },
-    beforeUnmounted(el) {
-        $('body').removeChild(gallery)
+    beforeUnmount(el) {
+        gallery.parentNode?.removeChild?.(gallery)
     }
 }
