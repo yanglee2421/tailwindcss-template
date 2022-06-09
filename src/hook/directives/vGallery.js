@@ -31,6 +31,7 @@ const btnSty = {
     right: 0,
     width: `45px`,
     height: `45px`,
+    transition: '0.3s ease-in-out',
 }
 //关闭按钮那个X的样式
 const xSty = {
@@ -113,6 +114,12 @@ const btn = _('div')
 btn.setStyle(btnSty)
 btn.onclick = () => {
     gallery.style.display = 'none'
+}
+btn.onmouseover = () => {
+    btn.style.transform = 'rotate(180deg)'
+}
+btn.onmouseout = () => {
+    btn.style.transform = null
 }
 const btnX_1 = _('div')
 btnX_1.style.transform = 'rotate(45deg)'
