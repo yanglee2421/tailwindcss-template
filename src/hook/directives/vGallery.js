@@ -72,8 +72,7 @@ HTMLElement.prototype.appChds = function (...arr) {
 }
 HTMLElement.prototype.appChain = function (...arr) {
     arr.forEach((item, index) => {
-        if (arr[index + 1])
-            item.appendChild(arr[index + 1])
+        arr[index + 1] && item.appendChild(arr[index + 1])
     })
     this.appendChild(arr[0])
 }
