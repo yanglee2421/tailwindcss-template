@@ -12,7 +12,6 @@ export default (el) => {
           event.preventDefault();
         }; */
         img.onclick = (event) => {
-            event.preventDefault();
             const showImg = document.createElement("img");
             showImg.draggable = false;
             showImg.src = event.currentTarget.src;
