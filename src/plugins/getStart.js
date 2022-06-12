@@ -7,6 +7,7 @@
 - v-drag
 - v-focus(仅适用于el-input，el-input-number)
 - v-showImg
+- v-gallery
 */
 import ElementPlus from "element-plus"
 import 'element-plus/dist/index.css'
