@@ -1,38 +1,304 @@
 <template>
-  <div>
-    <!-- <input type="text" v-focus />
-      -->
-    <el-radio-group v-model="radio1" size="large">
-      <el-radio-button label="New York" />
-      <el-radio-button label="Washington" />
-      <el-radio-button label="Los Angeles" />
-      <el-radio-button label="Chicago" />
-    </el-radio-group>
+  <div class="b overflow-hidde">
+    <el-table
+      :data="options"
+      row-key="value"
+      :show-header="false"
+      @current-change="fun"
+      highlight-current-row
+    >
+      <el-table-column prop="value"></el-table-column>
+    </el-table>
+    <!-- 
+
+      <el-cascader :options="options" :props="{ checkStrictly: true }" />
+     -->
   </div>
 </template>
 <script setup>
 import { ref, watchEffect } from "vue";
 
-const radio1 = ref(true);
+const options = [
+  {
+    value: "guide",
+    label: "Guide",
+    children: [
+      {
+        value: "disciplines",
+        label: "Disciplines",
+        children: [
+          {
+            value: "consistency",
+            label: "Consistency",
+          },
+          {
+            value: "feedback",
+            label: "Feedback",
+          },
+          {
+            value: "efficiency",
+            label: "Efficiency",
+          },
+          {
+            value: "controllability",
+            label: "Controllability",
+          },
+        ],
+      },
+      {
+        value: "navigation",
+        label: "Navigation",
+        children: [
+          {
+            value: "side nav",
+            label: "Side Navigation",
+          },
+          {
+            value: "top nav",
+            label: "Top Navigation",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    value: "component",
+    label: "Component",
+    children: [
+      {
+        value: "basic",
+        label: "Basic",
+        children: [
+          {
+            value: "layout",
+            label: "Layout",
+          },
+          {
+            value: "color",
+            label: "Color",
+          },
+          {
+            value: "typography",
+            label: "Typography",
+          },
+          {
+            value: "icon",
+            label: "Icon",
+          },
+          {
+            value: "button",
+            label: "Button",
+          },
+        ],
+      },
+      {
+        value: "form",
+        label: "Form",
+        children: [
+          {
+            value: "radio",
+            label: "Radio",
+          },
+          {
+            value: "checkbox",
+            label: "Checkbox",
+          },
+          {
+            value: "input",
+            label: "Input",
+          },
+          {
+            value: "input-number",
+            label: "InputNumber",
+          },
+          {
+            value: "select",
+            label: "Select",
+          },
+          {
+            value: "cascader",
+            label: "Cascader",
+          },
+          {
+            value: "switch",
+            label: "Switch",
+          },
+          {
+            value: "slider",
+            label: "Slider",
+          },
+          {
+            value: "time-picker",
+            label: "TimePicker",
+          },
+          {
+            value: "date-picker",
+            label: "DatePicker",
+          },
+          {
+            value: "datetime-picker",
+            label: "DateTimePicker",
+          },
+          {
+            value: "upload",
+            label: "Upload",
+          },
+          {
+            value: "rate",
+            label: "Rate",
+          },
+          {
+            value: "form",
+            label: "Form",
+          },
+        ],
+      },
+      {
+        value: "data",
+        label: "Data",
+        children: [
+          {
+            value: "table",
+            label: "Table",
+          },
+          {
+            value: "tag",
+            label: "Tag",
+          },
+          {
+            value: "progress",
+            label: "Progress",
+          },
+          {
+            value: "tree",
+            label: "Tree",
+          },
+          {
+            value: "pagination",
+            label: "Pagination",
+          },
+          {
+            value: "badge",
+            label: "Badge",
+          },
+        ],
+      },
+      {
+        value: "notice",
+        label: "Notice",
+        children: [
+          {
+            value: "alert",
+            label: "Alert",
+          },
+          {
+            value: "loading",
+            label: "Loading",
+          },
+          {
+            value: "message",
+            label: "Message",
+          },
+          {
+            value: "message-box",
+            label: "MessageBox",
+          },
+          {
+            value: "notification",
+            label: "Notification",
+          },
+        ],
+      },
+      {
+        value: "navigation",
+        label: "Navigation",
+        children: [
+          {
+            value: "menu",
+            label: "Menu",
+          },
+          {
+            value: "tabs",
+            label: "Tabs",
+          },
+          {
+            value: "breadcrumb",
+            label: "Breadcrumb",
+          },
+          {
+            value: "dropdown",
+            label: "Dropdown",
+          },
+          {
+            value: "steps",
+            label: "Steps",
+          },
+        ],
+      },
+      {
+        value: "others",
+        label: "Others",
+        children: [
+          {
+            value: "dialog",
+            label: "Dialog",
+          },
+          {
+            value: "tooltip",
+            label: "Tooltip",
+          },
+          {
+            value: "popover",
+            label: "Popover",
+          },
+          {
+            value: "card",
+            label: "Card",
+          },
+          {
+            value: "carousel",
+            label: "Carousel",
+          },
+          {
+            value: "collapse",
+            label: "Collapse",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    value: "resource",
+    label: "Resource",
+    children: [
+      {
+        value: "axure",
+        label: "Axure Components",
+      },
+      {
+        value: "sketch",
+        label: "Sketch Templates",
+      },
+      {
+        value: "docs",
+        label: "Design Documentation",
+      },
+    ],
+  },
+];
+const value = ref();
+const i = ref(0);
 watchEffect(() => {
-  console.log(radio1.value);
+  console.log(i.value);
+  console.log(value.value);
 });
+const fun = (current, old) => {
+  console.log(current);
+};
 </script>
 <style lang='scss' scoped>
-.el-radio-group {
-  width: 200px;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.el-radio-button {
-  width: 100%;
-  margin-bottom: 5px;
-  :deep(span) {
-    width: 100% !important;
-    border: 0;
-    border-radius: 0 !important;
-    text-align: start;
-    border: var(--el-border);
-  }
+:deep(.el-table__body tr.current-row > td.el-table__cell) {
+  --el-table-current-row-bg-color: red;
+  background-color: var(--el-table-current-row-bg-color);
 }
 </style>
