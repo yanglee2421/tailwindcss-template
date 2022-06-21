@@ -1,0 +1,12 @@
+.num-no-btn {
+
+    input[type=number] {
+        -moz-appearance: none;
+
+        &::-webkit-outer-spin-button,
+
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+    }
+}

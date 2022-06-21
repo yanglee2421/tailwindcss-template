@@ -9,10 +9,6 @@
     >
       <el-table-column prop="value"></el-table-column>
     </el-table>
-    <!-- 
-
-      <el-cascader :options="options" :props="{ checkStrictly: true }" />
-     -->
   </div>
 </template>
 <script setup>
