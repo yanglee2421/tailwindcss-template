@@ -1,22 +1,48 @@
 <template>
-  <div class="b overflow-hidde">
-    <input v-model="value" class="num-no-btn" @change="fun" />
+  <div>
+    <div v-select>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam beatae
+      officiis hic saepe minus! Libero dolorem ipsum voluptates eos repellendus
+      porro. Illum itaque officia id dolorum, animi magnam numquam fugit.
+    </div>
   </div>
+  <teleport to="body">
+    <ul ref="menu" v-show="state.menuVis" class="fixed menu">
+      <li>复制</li>
+    </ul>
+  </teleport>
 </template>
 <script setup>
-import { ref, watchEffect } from "vue";
-const value = ref("");
-const i = ref(0);
-watchEffect(() => {
-  console.log(value.value);
+import { reactive, ref } from "vue";
+const state = reactive({
+  menuVis: false,
 });
-const fun = () => {
-  value.value = value.value.replace(/[^\d]/g, "");
+const menu = ref();
+const vSelect = (el) => {
+  el.oncontextmenu = (event) => {
+    event.preventDefault();
+    const { clientX, clientY } = event;
+    console.log(event);
+    menu.value.style.transform = `translate(${clientX}px,${clientY}px)`;
+    state.menuVis = true;
+    menu.value.onclick = () => {
+      const text = event.target.innerText;
+      const sel = getSelection();
+      const selectA = sel.getRangeAt(0);
+      // selectA.setStart(event.target, 0);
+      selectA.selectNode(event.target);
+      navigator.clipboard.writeText(text);
+    };
+  };
 };
 </script>
 <style lang='scss' scoped>
-:deep(.el-table__body tr.current-row > td.el-table__cell) {
-  --el-table-current-row-bg-color: red;
-  background-color: var(--el-table-current-row-bg-color);
+.menu {
+  @extend.b;
+  z-index: 99;
+  left: 0;
+  top: 0;
+  user-select: none;
+  background-color: #fff;
 }
 </style>
