@@ -22,23 +22,21 @@ const vSelect = (el) => {
   el.oncontextmenu = (event) => {
     event.preventDefault();
     const { clientX, clientY } = event;
-    console.log(event);
     menu.value.style.transform = `translate(${clientX}px,${clientY}px)`;
-    state.menuVis = true;
     menu.value.onclick = () => {
-      const text = event.target.innerText;
-      const sel = getSelection();
-      const selectA = sel.getRangeAt(0);
-      // selectA.setStart(event.target, 0);
-      selectA.selectNode(event.target);
+      const range = document.createRange();
+      range.selectNodeContents(event.target);
+      const selection = getSelection();
+      selection.addRange(range);
+      const text = range.toString();
       navigator.clipboard.writeText(text);
     };
+    state.menuVis = true;
   };
 };
 </script>
 <style lang='scss' scoped>
 .menu {
-  @extend.b;
   z-index: 99;
   left: 0;
   top: 0;
