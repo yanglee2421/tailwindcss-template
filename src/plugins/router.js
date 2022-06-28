@@ -23,6 +23,7 @@ const router = createRouter({
         { path: 'detail', component: Detail, name: "detail" },
         { path: 'scroll', component: Scroll, name: "scroll" },
         { path: 'test', component: Test, name: "test" },
+        { path: 'copy', component: () => import("@/views/copy.vue"), name: "copy" },
         { path: 'gallery', component: () => import('@/components/gallery.vue'), name: "gallery" },
         {
           path: 'parameter',
