@@ -4,7 +4,6 @@ import Index from '@/components/index.vue'
 import EsTable from '@/components/table/EsTable.vue'
 import Detail from "@/components/table/Detail.vue"
 import Scroll from '@/components/scroll.vue'
-import Test from '@/components/test.vue'
 import Parameter from '@/components/parameter/parameter.vue'
 import FtS from '@/components/parameter/F-S/father.vue'
 import StF from "@/components/parameter/S-F/father.vue"
@@ -22,7 +21,7 @@ const router = createRouter({
         { path: 'table', component: EsTable, name: "table" },
         { path: 'detail', component: Detail, name: "detail" },
         { path: 'scroll', component: Scroll, name: "scroll" },
-        { path: 'test', component: Test, name: "test" },
+        { path: 'test', component: () => import('@/components/test.vue'), name: "test" },
         { path: 'copy', component: () => import("@/views/copy.vue"), name: "copy" },
         { path: 'gallery', component: () => import('@/components/gallery.vue'), name: "gallery" },
         {
