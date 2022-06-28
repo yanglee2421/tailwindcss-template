@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-select>
+    <div class="b" v-select>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam beatae
       officiis hic saepe minus! Libero dolorem ipsum voluptates eos repellendus
       porro. Illum itaque officia id dolorum, animi magnam numquam fugit.
@@ -19,21 +19,34 @@ const state = reactive({
 });
 const menu = ref();
 const vSelect = (el) => {
+  const selection = getSelection();
   el.oncontextmenu = (event) => {
     event.preventDefault();
     const { clientX, clientY } = event;
     menu.value.style.transform = `translate(${clientX}px,${clientY}px)`;
-    menu.value.onclick = () => {
-      const range = document.createRange();
-      range.selectNodeContents(event.target);
-      const selection = getSelection();
-      selection.addRange(range);
-      const text = range.toString();
+    menu.value.oncontextmenu = (e) => {
+      e.preventDefault();
+    };
+    menu.value.onclick = (e) => {
+      e.stopPropagation();
+      selection.selectAllChildren(event.target);
+      const text = selection.toString();
       navigator.clipboard.writeText(text);
     };
     state.menuVis = true;
+    document.body.addEventListener(
+      "click",
+      () => {
+        state.menuVis = false;
+        selection.removeAllRanges();
+      },
+      {
+        once: true,
+      }
+    );
   };
 };
+console.log(globalThis);
 </script>
 <style lang='scss' scoped>
 .menu {
