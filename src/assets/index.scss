@@ -1,6 +1,5 @@
-@import "@/assets/scss/overflow.scss";
-@import "@/assets/scss/flex.scss";
-@import "@/assets/scss/position.scss";
-@import "@/assets/scss/box.scss";
-@import "@/assets/scss/display.scss";
-@import "@/assets/scss/common.scss";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
