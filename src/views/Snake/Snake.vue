@@ -25,7 +25,7 @@
 </template>
 <script lang="ts" setup>
 import { onMounted } from "vue";
-import GameControl from "@/hooks/GameControl";
+import GameControl from "./GameControl";
 onMounted(() => {
   const gameControl = new GameControl();
   gameControl.init();
@@ -67,7 +67,7 @@ $bg-color: #b7d4a8;
     border: 2px #000 solid;
 
     .snake {
-      > div {
+      >div {
         position: absolute;
         left: 0;
         top: 0;
@@ -89,7 +89,7 @@ $bg-color: #b7d4a8;
       width: 10px;
       height: 10px;
 
-      > div {
+      >div {
         width: 4px;
         height: 4px;
         background-color: #000;
