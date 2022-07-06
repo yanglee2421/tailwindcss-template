@@ -1,16 +1,16 @@
 <template>
   <div>
-    <Snake></Snake>
-    <div class="123" id="123" v-for="item in 10" :key="10" disabled>
-    </div>
-    <el-input />
+    <router-view></router-view>
   </div>
 </template>
 
 <script lang="ts" setup>
-import Snake from "@/views/Snake.vue";
-import { reactive, ref } from "vue";
 </script>
 
 <style lang="scss">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 </style>
