@@ -1,4 +1,4 @@
-import arr from "@/hooks/test.js"
+import arr from "abc"
 arr.forEach((element: Record<string, unknown>) => {
     element.name = 123
 });
