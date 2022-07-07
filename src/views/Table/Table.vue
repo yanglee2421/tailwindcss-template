@@ -20,7 +20,7 @@
                 <el-button type="primary" @click="form.validate()">查询</el-button>
             </div>
         </el-form>
-        <!--  <div class="flex-1-hidden">
+        <div class="flex-1-hidden">
             <el-table :data="state.data" height="100%" border>
                 <el-table-column label="姓名" prop="name" />
                 <el-table-column label="年龄" prop="age">
@@ -32,19 +32,15 @@
         </div>
         <el-pagination layout="total,sizes,prev,pager,next,jumper" :total="state.Total"
             v-model:currentPage="state.CurrentPage" v-model:pageSize="state.PageSize" :PageSizes="[10, 20, 30]"
-            class="my-1" /> -->
+            class="my-1" />
+        <el-dialog title=""></el-dialog>
     </div>
 </template>
 <script lang='ts' setup>
-import Form from "@/views/Table/form"
+import { FormInstance } from "element-plus";
 import { onMounted, reactive, ref } from "vue";
-const formRef = ref()
-const form = reactive(new Form(formRef, {
-    name: "123",
-    age: 18,
-    gender: "男",
-    address: "武汉",
-}))
+const formRef = ref<el.FormInstance>()
+const form = reactive<FormInstance>({})
 onMounted(() => {
 })
 </script>

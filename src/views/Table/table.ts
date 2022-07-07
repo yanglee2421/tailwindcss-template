@@ -1,3 +1,4 @@
+enum Gender { unknown = 0, men = 1, women = 2 }
 interface tableItem {
     name: string
     age: number

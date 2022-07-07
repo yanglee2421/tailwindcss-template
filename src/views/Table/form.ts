@@ -1,5 +1,5 @@
-import type { FormInstance, FormRules } from 'element-plus'
-enum Gender { men = 1, women = 0, unknown = 2 }
+import type { FormInstance, FormRules } from "element-plus"
+enum Gender { unknown = 0, men = 1, women = 2 }
 interface formItem {
     name: string
     age: number
@@ -12,12 +12,10 @@ class FormItem implements formItem {
     gender = Gender.men
     address = []
 }
-const i = new FormItem()
-console.log(i.gender)
-
 class Form {
     private defaultData = new FormItem()
     private data = Object.assign({}, this.defaultData)
+    rules: FormRules = {}
     constructor(
         private ref: FormInstance | undefined
     ) { }
@@ -26,7 +24,7 @@ class Form {
     }
     validate() {
         let res = true
-        this.ref?.validate(vali => {
+        this.ref?.validate((vali: boolean) => {
             if (vali) {
                 res = true
             } else {
