@@ -6,15 +6,25 @@ declare module '*.vue' {
   export default component
 }
 /**
- * 手动的给没有定义类型的模块指定类型
+ * 给模块指定类型
+ * 给全局变量指定类型
+ * 给全局方法指定类型
+ * 给全局对象的属性指定类型
  */
 declare module "testMod" {
   const aaa: number
   export default aaa
 }
-/**
- * 
- */
-declare namespace el {
-  enum Gender { unknown = 0, men = 1, women = 2 }
+declare var Infinity: number
+declare const Infinity: number
+declare let Infinity: number
+
+declare function alert(params: string): void
+
+declare namespace window {
+  function prompt(params: string): string
+}
+
+interface Array {
+  fun(params: number): number
 }
