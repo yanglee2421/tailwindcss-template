@@ -1,0 +1,11 @@
+interface tableItem {
+
+}
+class Table {
+    get data(): Record<string, unknown>[] {
+        return []
+    }
+    set data(value) {
+        this.data = [{}]
+    }
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    

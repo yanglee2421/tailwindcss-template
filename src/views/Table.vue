@@ -1,5 +1,5 @@
 <template>
-    <div class="h-100 b flex-column">
+    <div class="h-100 b flex-column p-1">
         <el-form class="flex-row" inline>
             <div>
                 <el-form-item label="姓名">
@@ -16,8 +16,10 @@
                 </el-form-item>
             </div>
             <div>
-                <el-button @click="state.initTable(true)">重置</el-button>
-                <el-button type="primary" @click="state.initTable(true)">查询</el-button>
+                <el-form-item class="mr-0">
+                    <el-button @click="state.initTable(true)">重置</el-button>
+                    <el-button type="primary" @click="state.initTable(true)">查询</el-button>
+                </el-form-item>
             </div>
         </el-form>
         <div class="flex-1-hidden">
@@ -32,11 +34,14 @@
         </div>
         <el-pagination layout="total,sizes,prev,pager,next,jumper" :total="state.Total"
             v-model:currentPage="state.CurrentPage" v-model:pageSize="state.PageSize" :PageSizes="[10, 20, 30]"
-            class="my-1" />
+            class="mt-1" />
     </div>
 </template>
 <script lang='ts' setup>
 import { onMounted, reactive } from 'vue';
+import arr from "@/hooks/Jmod"
+console.log(arr)
+
 class Form {
     name = ""
     age = 0

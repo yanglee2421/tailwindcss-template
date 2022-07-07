@@ -6,7 +6,4 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
-declare module "abc" {
-  import abc from "@/hooks/Jmod.js"
-  export default abc
-}
+// declare module "@/hooks/Jmod.js"
