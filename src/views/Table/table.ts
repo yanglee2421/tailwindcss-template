@@ -1,11 +1,14 @@
 interface tableItem {
-
+    name: string
+    age: number
+    gender: Gender
 }
 class Table {
-    get data(): Record<string, unknown>[] {
-        return []
+    private data: tableItem[] = []
+    get rows() {
+        return this.data
     }
-    set data(value) {
-        this.data = [{}]
+    set rows(value) {
+        this.data = value
     }
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+}

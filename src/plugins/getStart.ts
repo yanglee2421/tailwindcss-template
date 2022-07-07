@@ -3,12 +3,9 @@ import "element-plus/dist/index.css"
 import locale from 'element-plus/es/locale/lang/zh-cn'
 import * as icons from "@element-plus/icons-vue"
 import router from "@/plugins/router"
-interface App {
-    use(plugin: unknown, options?: unknown): void
-    component(key: unknown, value: unknown): void
-}
+import type { DefineComponent } from 'vue'
 export default {
-    install(app: App) {
+    install(app: DefineComponent) {
         app.use(ElementPlus, {
             locale
         })
