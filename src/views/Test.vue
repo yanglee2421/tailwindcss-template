@@ -1,32 +1,19 @@
 <template>
-  <div class="table">
-    <div class="grid m-center thead">
+  <div class="table m-center mt-3">
+    <div class="thead">
       <div>111</div>
       <div>2222</div>
       <div>3333</div>
     </div>
-    <div class="grid m-center tbody overflow-overlay">
-      <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam necessitatibus repellat exercitationem, laboriosam quo unde reprehenderit eum minima repellendus non cumque atque ullam quidem, voluptate facilis pariatur. Temporibus, maxime perferendis!</div>
-      <div>2</div>
-      <div>3</div>
-      <div>4</div>
-      <div>5</div>
-      <div>6</div>
-      <div>7</div>
-      <div>8</div>
-      <div>9</div>
-      <div>10</div>
-      <div>11</div>
-      <div>12</div>
-      <div>13</div>
-      <div>14</div>
-      <div>15</div>
-      <div>16</div>
-      <div>17</div>
-      <div>18</div>
-      <div>19</div>
-      <div>20</div>
-      <div>21</div>
+    <div class="tbody">
+      <template
+        v-for="(item,index) in 100"
+        :key="index"
+      >
+        <div>{{index+"-1"}}</div>
+        <div>{{index+"-2"}}</div>
+        <div>{{index+"-3"}}</div>
+      </template>
     </div>
   </div>
 </template>
@@ -46,23 +33,43 @@
       background-color: rgba(0, 0, 0, 0.3);
     }
   }
+  @mixin grid {
+    display: grid;
+    grid-template: auto/repeat(3, 1fr);
+  }
   .thead {
-    height: 100px;
+    @include grid;
+    $height: 38px;
+    width: 500px;
+    height: $height;
+    border: gray solid;
+    border-width: 0 0 1px 1px;
+    div {
+      border: gray solid;
+      border-width: 1px 1px 0 0;
+      text-align: center;
+      line-height: $height;
+    }
   }
   .tbody {
+    @include grid;
+    width: 500px;
     height: 300px;
     border: gray solid;
     border-width: 0 0 1px 1px;
-  }
-}
-.grid {
-  display: grid;
-  grid-template: auto/repeat(3, 1fr);
-  width: 500px;
-  div {
-    border: gray solid;
-    border-width: 1px 1px 0 0;
-    text-align: center;
+    overflow: auto;
+    overflow: overlay;
+    div {
+      padding: 10px;
+      border: gray solid;
+      border-width: 1px 1px 0 0;
+      text-align: center;
+      @for $item from 1 through 3 {
+        &:nth-of-type(#{$item}) {
+          border-top: 0;
+        }
+      }
+    }
   }
 }
 </style>
