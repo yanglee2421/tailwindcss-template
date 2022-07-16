@@ -10,17 +10,32 @@
         v-for="(item,index) in 100"
         :key="index"
       >
-        <div>{{index+"-1"}}</div>
-        <div>{{index+"-2"}}</div>
-        <div>{{index+"-3"}}</div>
+        <div>{{item+"-1"}}</div>
+        <div>{{item+"-2"}}</div>
+        <div>{{item+"-3"}}</div>
       </template>
     </div>
   </div>
 </template>
 <script lang='ts' setup>
+import { reactive } from "vue";
+
+class Person {
+  name = "";
+  age = 0;
+  callName() {
+    console.log(this.name);
+  }
+}
+const per = reactive(new Person());
 </script>
 <style lang='scss' scoped>
 .table {
+  $table-width: 500px;
+  $th-height: 38px;
+  $tbody-height: 400px;
+  $column-num: 3;
+  $border-color: gray;
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -35,36 +50,35 @@
   }
   @mixin grid {
     display: grid;
-    grid-template: auto/repeat(3, 1fr);
+    grid-template: auto/repeat($column-num, 1fr);
   }
   .thead {
     @include grid;
-    $height: 38px;
-    width: 500px;
-    height: $height;
-    border: gray solid;
+    width: $table-width;
+    height: $th-height;
+    border: $border-color solid;
     border-width: 0 0 1px 1px;
     div {
-      border: gray solid;
+      border: $border-color solid;
       border-width: 1px 1px 0 0;
       text-align: center;
-      line-height: $height;
+      line-height: $th-height;
     }
   }
   .tbody {
     @include grid;
-    width: 500px;
-    height: 300px;
-    border: gray solid;
+    width: $table-width;
+    height: $tbody-height;
+    border: $border-color solid;
     border-width: 0 0 1px 1px;
     overflow: auto;
     overflow: overlay;
     div {
       padding: 10px;
-      border: gray solid;
+      border: $border-color solid;
       border-width: 1px 1px 0 0;
       text-align: center;
-      @for $item from 1 through 3 {
+      @for $item from 1 through $column-num {
         &:nth-of-type(#{$item}) {
           border-top: 0;
         }
