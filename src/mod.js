@@ -7,9 +7,9 @@ export default {
         {
             ProcessNodeId: 0,
             Type: 10,
-            WarningTime: 1,//预警时间
+            WarningTime: 0,//预警时间
             WarningNum: 2,//预警次数
-            UserList: [1],//选择员工
+            UserList: [],//选择员工
             UserMesInStation: true,//使用站内信
             UserPublicAccount: true,//使用公众号
             NotifyCarrier: false,//通知承运商
