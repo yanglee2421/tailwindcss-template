@@ -1,7 +1,7 @@
 <template>
-  <div class="table m-center mt-3">
+  <div class="table">
     <div class="thead">
-      <div>111</div>
+      <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta illo numquam optio debitis perspiciatis! Inventore necessitatibus, officiis id voluptas praesentium illo nemo. Reiciendis unde dolorem fuga repellat sint vel nemo?</div>
       <div>2222</div>
       <div>3333</div>
     </div>
@@ -31,11 +31,13 @@ const per = reactive(new Person());
 </script>
 <style lang='scss' scoped>
 .table {
-  $table-width: 500px;
   $th-height: 38px;
-  $tbody-height: 400px;
   $column-num: 3;
-  $border-color: gray;
+  $border-color: #eee;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -54,21 +56,24 @@ const per = reactive(new Person());
   }
   .thead {
     @include grid;
-    width: $table-width;
-    height: $th-height;
     border: $border-color solid;
     border-width: 0 0 1px 1px;
     div {
+      height: $th-height;
+      padding: 10px;
       border: $border-color solid;
       border-width: 1px 1px 0 0;
       text-align: center;
-      line-height: $th-height;
+      font-weight: bolder;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      line-height: $th-height - 20px;
     }
   }
   .tbody {
     @include grid;
-    width: $table-width;
-    height: $tbody-height;
+    flex: 1;
     border: $border-color solid;
     border-width: 0 0 1px 1px;
     overflow: auto;
@@ -78,6 +83,7 @@ const per = reactive(new Person());
       border: $border-color solid;
       border-width: 1px 1px 0 0;
       text-align: center;
+      text-overflow: ellipsis;
       @for $item from 1 through $column-num {
         &:nth-of-type(#{$item}) {
           border-top: 0;
