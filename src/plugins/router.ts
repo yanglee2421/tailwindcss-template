@@ -3,7 +3,7 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes: [
         { path: "/", redirect: { name: "table" } },
-        { path: '/table', name: "table", component: () => import("@/views/Table.vue") },
+        { path: '/work', name: "table", component: () => import("@/views/WorkSpace.vue") },
         { path: '/test', name: "test", component: () => import("@/views/Test.vue") },
     ]
 })
