@@ -83,14 +83,14 @@
   </div>
 </template>
 <script lang='ts' setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 
 interface itemInter {
-  ProcessNodeId: 0;
-  Type: 10;
-  WarningTime: 0; //预警时间
-  WarningNum: 0; //预警次数
-  UserList: []; //选择员工
+  ProcessNodeId: number;
+  Type: number;
+  WarningTime: number; //预警时间
+  WarningNum: number; //预警次数
+  UserList: number[]; //选择员工
   UserMesInStation: boolean; //使用站内信
   UserPublicAccount: boolean; //使用公众号
   NotifyCarrier: boolean; //通知承运商
@@ -100,14 +100,29 @@ interface itemInter {
   DriverTextMessage: boolean; //短信
   DriverPublicAccount: boolean; //公众号
 }
-interface formIter {
+interface formInter {
   WarningConfigId: number;
   BusinessProcessType: number;
   UseScopeType: number;
   CustomerId: number;
   ProcessNodeNotifyInfoList: itemInter[];
 }
-class Form implements formIter {
+class ListItem implements itemInter {
+  ProcessNodeId = 0;
+  Type = 10;
+  WarningTime = 0; //预警时间
+  WarningNum = 0; //预警次数
+  UserList = []; //选择员工
+  UserMesInStation = false; //使用站内信
+  UserPublicAccount = false; //使用公众号
+  NotifyCarrier = false; //通知承运商
+  CarrierMesInStation = false; //承运商站内信
+  CarrierPublicAccount = false; //承运商公众号
+  NotifyDriver = false; //通知司机
+  DriverTextMessage = false; //短信
+  DriverPublicAccount = false; //公众号
+}
+class Form implements formInter {
   WarningConfigId = 0;
   BusinessProcessType = 0;
   UseScopeType = 0;
@@ -115,6 +130,7 @@ class Form implements formIter {
   ProcessNodeNotifyInfoList = [];
 }
 const form = reactive(new Form());
+const i = ref<number>();
 </script>
 <style lang='scss' scoped>
 .el-col {
