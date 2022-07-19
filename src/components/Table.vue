@@ -1,113 +1,109 @@
 <template>
-  <div class="table">
+  <div class="table h-100 flex-column">
     <div class="thead">
-      <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta illo numquam optio debitis perspiciatis! Inventore necessitatibus, officiis id voluptas praesentium illo nemo. Reiciendis unde dolorem fuga repellat sint vel nemo?</div>
-      <div>2222</div>
-      <div>3333</div>
+      <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nam rerum consequatur dignissimos qui recusandae, quibusdam soluta in nisi, perspiciatis officiis rem similique magni cum deleniti facilis impedit. Officiis, cum.</div>
+      <div>2</div>
+      <div>3</div>
     </div>
-    <div class="tbody">
+    <div class="tbody overflow-overlay">
       <template
-        v-for="(item,index) in 100"
-        :key="index"
+        v-for="item in 10"
+        :key="item"
       >
-        <div>{{item+"-1"}}</div>
-        <div>{{item+"-2"}}</div>
-        <div>{{item+"-3"}}</div>
+        <div>
+          <el-select>
+            <el-option
+              v-for="item in 5"
+              :key="item"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
+        </div>
+        <div>
+          <el-input />
+        </div>
+        <div>
+          <el-row>
+            <el-col :span="12">
+              <el-select></el-select>
+            </el-col>
+            <el-col :span="6">
+              <el-checkbox>123</el-checkbox>
+            </el-col>
+            <el-col :span="6">
+              <el-checkbox>123</el-checkbox>
+            </el-col>
+          </el-row>
+        </div>
       </template>
     </div>
-    <div class="tfooter">
-      <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta illo numquam optio debitis perspiciatis! Inventore necessitatibus, officiis id voluptas praesentium illo nemo. Reiciendis unde dolorem fuga repellat sint vel nemo?</div>
-      <div>2222</div>
-      <div>3333</div>
+    <div class="tfoot">
+      <template
+        v-for="item in 1"
+        :key="item"
+      >
+        <div>{{`${item}-1`}}</div>
+        <div>{{`${item}-2`}}</div>
+        <div>{{`${item}-3`}}</div>
+      </template>
     </div>
   </div>
 </template>
 <script lang='ts' setup>
-console.log(navigator.userAgent);
 </script>
 <style lang='scss' scoped>
+@mixin grid {
+  display: grid;
+  grid-template: auto/6fr 6fr 12fr;
+}
+@mixin cell {
+  padding: 10px;
+  border: solid #eee;
+  border-width: 1px 1px 0 0;
+  text-align: center;
+}
 .table {
-  $th-height: 38px;
-  $column-num: 3;
-  $border-color: #eee;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    background-color: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.2);
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.3);
-    }
-  }
-  @mixin grid {
-    display: grid;
-    grid-template: auto/repeat($column-num, 1fr);
-  }
-  @mixin cell {
-    padding: 10px;
-    border: $border-color solid;
-    text-align: center;
-    text-overflow: ellipsis;
-  }
   .thead,
   .tbody,
-  .tfooter {
+  .tfoot {
     @include grid;
-    border: $border-color solid;
-  }
-  .thead {
+    border: solid #eee;
     border-width: 0 0 1px 1px;
-    @-moz-document url-prefix() {
-      width: calc(100% - 8px);
-    }
-    div {
+    > div {
       @include cell;
-      height: $th-height;
-      border-width: 1px 1px 0 0;
-      font-weight: bolder;
-      overflow: hidden;
-      white-space: nowrap;
-      line-height: $th-height - 20px;
     }
   }
   .tbody {
-    flex: 1;
-    border-width: 0 0 1px 1px;
     overflow: auto;
-    overflow: overlay;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
-    div {
-      @include cell;
-      border-width: 1px 1px 0 0;
-      text-overflow: ellipsis;
-      @for $item from 1 through $column-num {
-        &:nth-of-type(#{$item}) {
+  }
+  .tbody,
+  .tfoot {
+    > div {
+      @for $i from 1 through 3 {
+        &:nth-of-type(#{$i}) {
           border-top: 0;
         }
       }
     }
   }
-  .tfooter {
-    border-width: 0 0 1px 1px;
-    @-moz-document url-prefix() {
-      width: calc(100% - 8px);
+  .thead,
+  .tfoot {
+    > div {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
-    div {
-      @include cell;
-      border-width: 1px 1px 0 0;
-      @for $item from 1 through $column-num {
-        &:nth-of-type(#{$item}) {
-          border-top: 0;
-        }
-      }
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.2);
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.3);
     }
   }
 }
