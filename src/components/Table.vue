@@ -24,7 +24,25 @@
           <el-input />
         </div>
         <div>
-          <el-row>
+          <el-row :gutter="10">
+            <el-col :span="12">
+              <el-select></el-select>
+            </el-col>
+            <el-col :span="6">
+              <el-checkbox>123</el-checkbox>
+            </el-col>
+            <el-col :span="6">
+              <el-checkbox>123</el-checkbox>
+            </el-col>
+            <el-col :span="12">
+              <el-select></el-select>
+            </el-col>
+            <el-col :span="6">
+              <el-checkbox>123</el-checkbox>
+            </el-col>
+            <el-col :span="6">
+              <el-checkbox>123</el-checkbox>
+            </el-col>
             <el-col :span="12">
               <el-select></el-select>
             </el-col>

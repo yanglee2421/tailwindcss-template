@@ -14,11 +14,6 @@
 
 #app {
   height: 100vh;
-  &::before,
-  &::after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+  @extend .clearfix;
 }
 </style>
