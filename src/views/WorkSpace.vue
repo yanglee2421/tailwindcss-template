@@ -1,20 +1,19 @@
 <template>
   <div>
-    23143
     <div class="box m-center mt-2">
-      <SlotAAA>
-        <template #default="{one,two}">
-          <div>{{7777+one-two}}</div>
-        </template>
-        <template #slot1="{three}">
-          <div>{{7777+three}}</div>
-        </template>
-      </SlotAAA>
+      <span>{{a}}</span>
+      <el-button @click="fun('vuex中的值（1变）')">变一下</el-button>
     </div>
   </div>
 </template>
 <script lang='ts' setup>
-import SlotAAA from "@/views/Slot/Slot.vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
+const store = useStore();
+const a = computed(() => store.state.mod1.a);
+const fun = (value: unknown) => {
+  store.dispatch("mod1/b", value);
+};
 </script>
 <style lang='scss' scoped>
 .box {
