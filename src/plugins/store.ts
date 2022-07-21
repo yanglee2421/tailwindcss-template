@@ -1,4 +1,4 @@
-import { createStore, Store } from "vuex"
+import { createStore } from "vuex"
 export const store = createStore({
     strict: true,
     state() {
@@ -26,7 +26,6 @@ export const store = createStore({
             },
             actions: {
                 b(content, value) {
-                    console.log(content)
                     content.commit("a", value)
                 },
                 a: {
