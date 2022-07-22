@@ -17,6 +17,7 @@ const router = createRouter({
     {
       path: "/", component: Index, children: [
         { path: 'drag', component: Drag, name: "drag" },
+        { path: 'work', component: () => import("@/views/Work.vue"), name: "work" },
         { path: 'lunbo', component: Lunbo, name: "lunbo" },
         { path: 'table', component: EsTable, name: "table" },
         { path: 'detail', component: Detail, name: "detail" },
