@@ -42,6 +42,8 @@
               <span>F运营：</span>
               <el-select
                 v-model="row.UserList"
+                collapse-tags-tooltip
+                collapse-tags
                 multiple
               >
                 <el-option
