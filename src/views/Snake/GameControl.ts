@@ -51,7 +51,7 @@ class GameControl {
             this.snake.top = y
         } catch (err) {
             this.isLive = false
-            alert(err)
+            console.log(err)
         }
 
         this.isLive && setTimeout(this.run.bind(this), 300 - (this.scorePanel.level - 1) * 30);

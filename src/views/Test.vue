@@ -1,95 +1,139 @@
 <template>
-  <div class="table">
-    <div class="thead">
-      <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta illo numquam optio debitis perspiciatis! Inventore necessitatibus, officiis id voluptas praesentium illo nemo. Reiciendis unde dolorem fuga repellat sint vel nemo?</div>
-      <div>2222</div>
-      <div>3333</div>
-    </div>
-    <div class="tbody">
-      <template
-        v-for="(item,index) in 100"
-        :key="index"
+  <div>
+    <el-table
+      :data="[{},{}]"
+      stripe
+      border
+    >
+      <el-table-column
+        align="center"
+        label="流程节点"
+        width="180px"
       >
-        <div>{{item+"-1"}}</div>
-        <div>{{item+"-2"}}</div>
-        <div>{{item+"-3"}}</div>
-      </template>
-    </div>
+        <template #default="{row}">
+          <span>{{row.ProcessNodeId}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        label="触发预警（分钟）"
+        width="180px"
+      >
+        <template #default="{row}">
+          <el-input v-model="row.WarningTime" />
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        label="预警次数"
+        width="180px"
+      >
+        <template #default="{row}">
+          <el-input v-model="row.WarningNum" />
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        label="接收预警"
+      >
+        <template #default="{row}">
+          <el-row>
+            <el-col :span="12">
+              <span>F运营：</span>
+              <el-select
+                v-model="row.UserList"
+                multiple
+              >
+                <el-option
+                  v-for="(item,index) in 5"
+                  :key="index"
+                  :label="item"
+                  :value="item"
+                />
+              </el-select>
+            </el-col>
+            <el-col :span="6">
+              <el-checkbox>站内信</el-checkbox>
+            </el-col>
+            <el-col :span="6">
+              <el-checkbox>公众号</el-checkbox>
+            </el-col>
+            <el-col :span="12">
+              <el-checkbox>通知承运商</el-checkbox>
+            </el-col>
+            <el-col :span="6">
+              <el-checkbox>站内信</el-checkbox>
+            </el-col>
+            <el-col :span="6">
+              <el-checkbox>公众号</el-checkbox>
+            </el-col>
+            <el-col :span="12">
+              <el-checkbox>通知司机</el-checkbox>
+            </el-col>
+            <el-col :span="6">
+              <el-checkbox>站内信</el-checkbox>
+            </el-col>
+            <el-col :span="6">
+              <el-checkbox>公众号</el-checkbox>
+            </el-col>
+          </el-row>
+        </template>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 <script lang='ts' setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 
-class Person {
-  name = "";
-  age = 0;
-  callName() {
-    console.log(this.name);
-  }
+interface itemInter {
+  ProcessNodeId: number;
+  Type: number;
+  WarningTime: number; //预警时间
+  WarningNum: number; //预警次数
+  UserList: number[]; //选择员工
+  UserMesInStation: boolean; //使用站内信
+  UserPublicAccount: boolean; //使用公众号
+  NotifyCarrier: boolean; //通知承运商
+  CarrierMesInStation: boolean; //承运商站内信
+  CarrierPublicAccount: boolean; //承运商公众号
+  NotifyDriver: boolean; //通知司机
+  DriverTextMessage: boolean; //短信
+  DriverPublicAccount: boolean; //公众号
 }
-const per = reactive(new Person());
+interface formInter {
+  WarningConfigId: number;
+  BusinessProcessType: number;
+  UseScopeType: number;
+  CustomerId: number;
+  ProcessNodeNotifyInfoList: itemInter[];
+}
+class ListItem implements itemInter {
+  ProcessNodeId = 0;
+  Type = 10;
+  WarningTime = 0; //预警时间
+  WarningNum = 0; //预警次数
+  UserList = []; //选择员工
+  UserMesInStation = false; //使用站内信
+  UserPublicAccount = false; //使用公众号
+  NotifyCarrier = false; //通知承运商
+  CarrierMesInStation = false; //承运商站内信
+  CarrierPublicAccount = false; //承运商公众号
+  NotifyDriver = false; //通知司机
+  DriverTextMessage = false; //短信
+  DriverPublicAccount = false; //公众号
+}
+class Form implements formInter {
+  WarningConfigId = 0;
+  BusinessProcessType = 0;
+  UseScopeType = 0;
+  CustomerId = 0;
+  ProcessNodeNotifyInfoList = [];
+}
+const form = reactive(new Form());
+const i = ref<number>();
 </script>
 <style lang='scss' scoped>
-.table {
-  $th-height: 38px;
-  $column-num: 3;
-  $border-color: #eee;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    background-color: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.2);
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.3);
-    }
-  }
-  @mixin grid {
-    display: grid;
-    grid-template: auto/repeat($column-num, 1fr);
-  }
-  .thead {
-    @include grid;
-    border: $border-color solid;
-    border-width: 0 0 1px 1px;
-    div {
-      height: $th-height;
-      padding: 10px;
-      border: $border-color solid;
-      border-width: 1px 1px 0 0;
-      text-align: center;
-      font-weight: bolder;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      line-height: $th-height - 20px;
-    }
-  }
-  .tbody {
-    @include grid;
-    flex: 1;
-    border: $border-color solid;
-    border-width: 0 0 1px 1px;
-    overflow: auto;
-    overflow: overlay;
-    div {
-      padding: 10px;
-      border: $border-color solid;
-      border-width: 1px 1px 0 0;
-      text-align: center;
-      text-overflow: ellipsis;
-      @for $item from 1 through $column-num {
-        &:nth-of-type(#{$item}) {
-          border-top: 0;
-        }
-      }
-    }
-  }
+.el-col {
+  text-align: start;
 }
 </style>
