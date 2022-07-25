@@ -4,9 +4,3 @@ interface tablePage {
     table: unknown
     pagination: unknown
 }
-class Page implements tablePage {
-    constructor(
-        public form: Form
-    ) { }
-
-}
