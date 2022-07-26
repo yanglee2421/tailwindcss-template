@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h2>父向子：子</h2>
-    <span>{{value}}</span>
+    <h3>父向子：子</h3>
+    <span>儿子收到的：{{value}}</span>
   </div>
 </template>
 <script lang='ts' setup>

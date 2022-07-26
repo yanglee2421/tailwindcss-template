@@ -1,12 +1,14 @@
 <template>
   <div>
     <div>
-      <h1>父亲中</h1>
-      <span>{{param}}</span>
-      <Son
-        :value="param"
-        @update="param=$event"
-      ></Son>
+      <h3>父亲中</h3>
+      <span>父亲收到的：{{param}}</span>
+      <div class="p-1 mt-1 b">
+        <Son
+          :value="param"
+          @update="param=$event"
+        ></Son>
+      </div>
     </div>
   </div>
 </template>

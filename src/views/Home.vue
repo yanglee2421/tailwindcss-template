@@ -12,7 +12,7 @@
       <el-menu-item index="3">123</el-menu-item>
       <el-menu-item index="4">123</el-menu-item>
     </el-menu>
-    <main class="flex-1-hidden b">
+    <main class="flex-1-hidden p-1">
       <router-view />
     </main>
   </div>

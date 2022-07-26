@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>儿子中</h1>
+    <h3>儿子中</h3>
     <el-input v-model="state.value" />
   </div>
 </template>
