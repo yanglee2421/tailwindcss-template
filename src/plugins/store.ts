@@ -1,9 +1,12 @@
 import { createStore } from "vuex"
-export default createStore({
+interface RooStaInter {
+    aaa: string,
+}
+export default createStore<RooStaInter>({
     strict: true,
     state() {
         return {
-            a: "123"
+            aaa: "123"
         }
     },
     modules: {
