@@ -14,9 +14,9 @@ export default createStore<RooStaInter>({
             namespaced: true,
             state() {
                 return {
-                    a: "vuex中的值（默认）",
+                    a: "vuex中的值\（默认）",
                     b: 0,
-                    value: "vuex中的值（默认）",
+                    value: "vuex中的值\（默认）",
                 }
             },
             mutations: {
