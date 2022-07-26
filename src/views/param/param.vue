@@ -1,6 +1,7 @@
 <template>
   <div>
-    5641651
+    <FtS></FtS>
+    <el-divider>华丽的分隔线</el-divider>
   </div>
 </template>
 <script lang='ts' setup>
