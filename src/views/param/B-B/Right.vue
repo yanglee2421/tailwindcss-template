@@ -5,9 +5,22 @@
   </div>
 </template>
 <script lang='ts' setup>
-import { computed } from "vue";
-import { useStore } from "vuex";
+import { computed, reactive } from "vue";
+import { useStore, mapState } from "vuex";
 const store = useStore();
+console.log(store.state);
+const target = mapState({ mes: "aaa" });
+
+const state = reactive<Record<string, unknown>>({});
+Object.keys(target).forEach((key) => {
+  state[key] = computed(
+    target[key as keyof typeof target].bind({
+      $store: store,
+    })
+  );
+});
+console.log(state);
+
 const value = computed<string>({
   get() {
     return store.state.mod1.value;
