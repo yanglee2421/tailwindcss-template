@@ -41,3 +41,8 @@ interface Array {
 }
 
 type num_str = number | string
+
+interface ResInter {
+  Result: number
+  Data: unknown
+}
