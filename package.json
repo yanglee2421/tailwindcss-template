@@ -1,9 +1,9 @@
 {
-  "name": "snake",
+  "name": "viteApp",
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port=5174",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "4399": "vite --port=4399"
