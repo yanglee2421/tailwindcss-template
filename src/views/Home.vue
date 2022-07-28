@@ -8,7 +8,10 @@
         index="1"
         :route="{name:'param'}"
       >传参</el-menu-item>
-      <el-menu-item index="2">123</el-menu-item>
+      <el-menu-item
+        index="2"
+        :route="{name:'table'}"
+      >表格</el-menu-item>
       <el-menu-item index="3">123</el-menu-item>
       <el-menu-item index="4">123</el-menu-item>
     </el-menu>
