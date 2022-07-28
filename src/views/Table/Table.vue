@@ -7,7 +7,7 @@
     >
       <div>
         <el-form-item label="输入：">
-          <el-input v-model="formData.input" />
+          <el-input v-model.trim="formData.input" />
         </el-form-item>
         <el-form-item label="下拉：">
           <el-select
