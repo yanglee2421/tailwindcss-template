@@ -1,2 +1,1 @@
-let a: num_str = 123
-a = "123"
+const reg = /[^A-z\d\p{sc=Han}]/ug
