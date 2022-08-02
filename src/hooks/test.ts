@@ -1,3 +1,19 @@
-const reg = /[^A-z.\d\n\p{sc=Han}]/ug
-const regg = /[^u4e00-u9fa5]/g
-console.log(`龍`.match(reg))
+import { reactive, ref, computed, toRaw } from "vue"
+import type { WritableComputedRef } from "vue"
+export default <T extends Record<string, unknown>>(params: T[]) => {
+    interface _T extends T {
+        chk?: WritableComputedRef<boolean>
+    }
+    const res = computed(() => {
+        const target: _T[] = toRaw(params)
+        target.forEach(item => {
+            item.chk = computed({
+                get() {
+                    return [].includes(item)
+                },
+                set() { }
+            })
+        })
+    })
+    return res
+}
