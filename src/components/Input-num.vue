@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Father></Father>
     <el-input
       v-model="state.value"
       @input="state.value=$event.replace(/[^.\d]/g,'')"
@@ -9,7 +8,6 @@
   </div>
 </template>
 <script lang='ts' setup>
-import Father from "@/views/param/S-F/Father.vue";
 import { reactive } from "vue";
 const state = reactive({
   value: "",

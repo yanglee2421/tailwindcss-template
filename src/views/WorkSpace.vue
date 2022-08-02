@@ -1,26 +1,20 @@
 <template>
   <div>
-    <ol>
-      <li
-        v-for="(item,index) in arr"
-        :key="index"
-      >{{item}}</li>
-    </ol>
+    <el-input
+      v-model="state.value"
+      @input="state.value=$event.replace(/[^a-z\u4e00-\u9fa5w\d]/ig,'')"
+    />
   </div>
 </template>
 <script lang='ts' setup>
-import request from "@/api/request";
-import { ref } from "vue";
-const arr = ref<string[]>([]);
-request<string[]>({
-  method: "get",
-  url: "https://autumnfish.cn/api/joke/list",
-  params: {
-    num: 3,
-  },
-}).then((res) => {
-  arr.value = res;
+import { reactive } from "vue";
+const state = reactive({
+  value: "",
 });
+const fun = ($event: string, state: Record<string, unknown>, key: string) => {
+  const res = Number.parseFloat($event).toFixed(2);
+  state[key] = res === "NaN" ? "0" : res;
+};
 </script>
 <style lang='scss' scoped>
 </style>
