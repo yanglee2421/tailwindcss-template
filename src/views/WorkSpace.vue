@@ -1,20 +1,26 @@
 <template>
   <div>
-    <el-input
-      v-model="state.value"
-      @input="state.value=$event.replace(/[^a-z\u4e00-\u9fa5w\d]/ig,'')"
-    />
+    <el-switch v-model="state.switch" />
+    <el-button @click="state.visible=!state.visible">toggle</el-button>
+    <template v-if="state.switch">
+      <el-dialog v-model="state.visible">
+        <hello-world></hello-world>
+      </el-dialog>
+    </template>
+    <template v-else>
+      <template v-if="state.visible">
+        <hello-world></hello-world>
+      </template>
+    </template>
   </div>
 </template>
 <script lang='ts' setup>
 import { reactive } from "vue";
+import HelloWorld from "@/components/HelloWorld.vue";
 const state = reactive({
-  value: "",
+  visible: false,
+  switch: false,
 });
-const fun = ($event: string, state: Record<string, unknown>, key: string) => {
-  const res = Number.parseFloat($event).toFixed(2);
-  state[key] = res === "NaN" ? "0" : res;
-};
 </script>
 <style lang='scss' scoped>
 </style>
