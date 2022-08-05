@@ -1,26 +1,19 @@
 <template>
   <div>
-    <el-switch v-model="state.switch" />
-    <el-button @click="state.visible=!state.visible">toggle</el-button>
-    <template v-if="state.switch">
-      <el-dialog v-model="state.visible">
-        <hello-world></hello-world>
-      </el-dialog>
-    </template>
-    <template v-else>
-      <template v-if="state.visible">
-        <hello-world></hello-world>
-      </template>
-    </template>
+    <details class="b">
+      <summary>标题</summary>
+      <p>内容</p>
+      <p>内容一</p>
+    </details>
   </div>
 </template>
 <script lang='ts' setup>
 import { reactive } from "vue";
-import HelloWorld from "@/components/HelloWorld.vue";
-const state = reactive({
-  visible: false,
-  switch: false,
-});
+
+const state = reactive({});
 </script>
 <style lang='scss' scoped>
+.b {
+  transition: all;
+}
 </style>
