@@ -96,7 +96,6 @@
 </template>
 <script lang='ts' setup>
 import { reactive, ref, watchEffect } from "vue";
-import { Post } from "@/api/Table";
 import Dia from "./Dia.vue";
 import { FormData } from "./formData";
 import response from "./mod";
