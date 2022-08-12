@@ -32,8 +32,7 @@
   </div>
 </template>
 <script lang='ts' setup>
-import { ref, reactive, watch, watchEffect } from "vue";
-import { FormData } from "./formData";
+import { ref, reactive, watchEffect } from "vue";
 const props = defineProps({
   modelValue: {
     type: [Object, Boolean],
@@ -41,14 +40,22 @@ const props = defineProps({
   },
 });
 const emit = defineEmits(["update:modelValue", "confirm"]);
+//弹窗
 const dialog = reactive({
   visible: false,
 });
-const formData = ref<FormData>({
+//表单项
+interface _formData {
+  input: string;
+  select: string;
+  cascader: string;
+}
+const formData = ref<_formData>({
   input: "",
   select: "",
   cascader: "",
 });
+//modelValue变动时
 watchEffect(() => {
   switch (props.modelValue) {
     case false:
@@ -62,9 +69,9 @@ watchEffect(() => {
       dialog.visible = true;
   }
 });
+// 弹窗关闭时
 watchEffect(() => {
   if (!dialog.visible) {
-    formData.value = new FormData();
     emit("update:modelValue", false);
   }
 });
