@@ -1,6 +1,9 @@
 <template>
   <div>
-    <el-dialog v-model="dialog.visible">
+    <el-dialog
+      v-model="dialog.visible"
+      :title="formData.id?'编辑':'新增'"
+    >
       <el-form :model="formData">
         <el-form-item label="输入：">
           <el-input v-model.trim="formData.input" />
@@ -15,7 +18,7 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item>
+        <el-form-item label="级联：">
           <el-cascader v-model="formData.cascader" />
         </el-form-item>
       </el-form>
@@ -32,7 +35,7 @@
   </div>
 </template>
 <script lang='ts' setup>
-import { ref, reactive, watchEffect } from "vue";
+import { computed, reactive, watchEffect } from "vue";
 const props = defineProps({
   modelValue: {
     type: [Object, Boolean],
@@ -45,16 +48,13 @@ const dialog = reactive({
   visible: false,
 });
 //表单项
-interface _formData {
-  input: string;
-  select: string;
-  cascader: string;
-}
-const formData = ref<_formData>({
+const defaultFormData = {
+  id: "",
   input: "",
   select: "",
   cascader: "",
-});
+};
+const formData = reactive({ ...defaultFormData });
 //modelValue变动时
 watchEffect(() => {
   switch (props.modelValue) {
@@ -65,13 +65,14 @@ watchEffect(() => {
       dialog.visible = true;
       break;
     default:
-      Object.assign(formData.value, props.modelValue);
+      Object.assign(formData, props.modelValue);
       dialog.visible = true;
   }
 });
 // 弹窗关闭时
 watchEffect(() => {
   if (!dialog.visible) {
+    Object.assign(formData, defaultFormData);
     emit("update:modelValue", false);
   }
 });
