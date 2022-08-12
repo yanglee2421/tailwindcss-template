@@ -28,6 +28,7 @@
 .flex-column {
   @extend.flex;
   @extend.flex-direction-column;
+  height: 100%;
 }
 
 .flex-row {

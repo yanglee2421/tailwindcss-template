@@ -12,7 +12,7 @@ interface App {
 export default {
     install(app: App) {
         app.use(ElementPlus, {
-            locale
+            locale,
         })
         Object.keys(icons).forEach((key) => {
             Reflect.has(icons, key) && app.component(key, icons[<keyof typeof icons>key])

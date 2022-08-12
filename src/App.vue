@@ -18,4 +18,7 @@
   height: 100vh;
   @extend .clearfix;
 }
+.el-pagination {
+  padding-top: 10px !important;
+}
 </style>
