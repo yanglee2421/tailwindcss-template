@@ -1,5 +1,5 @@
-import axios, { AxiosInstance } from "axios"
-const request = axios.create({
+import axios, { AxiosInstance, AxiosResponse } from "axios"
+const request: AxiosInstance = axios.create({
     baseURL: "",
     timeout: 6000,
 })
@@ -25,7 +25,7 @@ interface _data {
     msg: string
 }
 request.interceptors.response.use(
-    (res: any) => {
+    (res: AxiosResponse) => {
         const { data }: { data: _data } = res
         // const { Result, Data, Message } = data
         // if (Result === 1) {
