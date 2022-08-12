@@ -48,8 +48,8 @@ const router = createRouter({
             path: "/404", name: "404",
             component: () => import("@/views/404.vue"),
             meta: { title: "找不到你要的页面了！" },
-            props(route) {
-                console.log(route)
+            props(to) {
+                console.log(to)
                 return {}
             }
         }
