@@ -4,6 +4,7 @@ import locale from 'element-plus/es/locale/lang/zh-cn'
 import * as icons from "@element-plus/icons-vue"
 import router from "@/router/router"
 import store from "@/plugins/store"
+import HelloWorld from "@/components/HelloWorld.vue"
 interface App {
     use(plugin: unknown, option?: unknown): void
     component(name: string, component: unknown): void
@@ -18,5 +19,6 @@ export default {
         })
         app.use(router)
         app.use(store)
+        app.component("HelloWorld", HelloWorld)
     }
 }

@@ -10,6 +10,10 @@ const router = createRouter({
                 { path: 'param', name: "param", component: () => import("@/views/param/param.vue") },
             ]
         },
+        { path: "/:else", redirect: "/404" },
+        { path: "/404", name: "404", component: () => import("@/views/404.vue") }
     ]
+})
+router.beforeEach((to, from) => {
 })
 export default router
