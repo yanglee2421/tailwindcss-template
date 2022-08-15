@@ -4,11 +4,13 @@ import path from "path"
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  // 路径别名
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
+  // css预处理器
   css: {
     preprocessorOptions: {
       scss: {
@@ -16,9 +18,15 @@ export default defineConfig({
       }
     }
   },
-  /* server: {
+  // 开发服务器代理
+  server: {
     proxy: {
-
+      "/api": {
+        target: "http://jsonplaceholder.typicode.com",
+        rewrite: path => path.replace(/^\/api/, ""),
+        changeOrigin: true,
+        ws: true,
+      }
     },
-  }, */
+  },
 })
