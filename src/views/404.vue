@@ -1,5 +1,7 @@
 <template>
   <div>
+    <p ref="ppp">字符串形的ref</p>
+    <hello-world ref="hhh"></hello-world>
     <div
       :ref="pushRef"
       v-show="state.visible"
@@ -8,7 +10,14 @@
   </div>
 </template>
 <script lang='ts' setup>
-import { onBeforeUpdate, onUpdated, reactive, watchEffect } from "vue";
+import {
+  ref,
+  onBeforeUpdate,
+  onUpdated,
+  reactive,
+  watchEffect,
+  onMounted,
+} from "vue";
 import { useRoute, onBeforeRouteLeave, onBeforeRouteUpdate } from "vue-router";
 import SlotDemo from "@/components/SlotDemo.vue";
 import HelloWorld from "@/components/HelloWorld.vue";
@@ -30,6 +39,13 @@ onBeforeUpdate(() => {
 watchEffect(() => {
   const visible = state.visible;
   console.log(state.arr);
+});
+// ref获取dom和组件实例
+const ppp = ref<HTMLElement>();
+const hhh = ref<typeof HelloWorld>();
+onMounted(() => {
+  ppp.value && (ppp.value.innerHTML = "");
+  hhh.value && hhh.value.fun();
 });
 onBeforeRouteUpdate((to, from) => {});
 onBeforeRouteLeave((to, from) => {});

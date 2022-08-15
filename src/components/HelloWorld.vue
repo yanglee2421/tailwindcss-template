@@ -11,6 +11,10 @@ onMounted(() => {
 onUnmounted(() => {
   console.log("卸载");
 });
+const fun = () => {
+  console.log("Hello World!");
+};
+defineExpose({ fun });
 </script>
 <style lang='scss' scoped>
 </style>
