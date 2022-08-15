@@ -6,7 +6,6 @@
 /// <reference types="vite/client" />
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
   const component: DefineComponent<{}, {}, any>
   export default component
 }
@@ -17,15 +16,12 @@ declare module '*.vue' {
  * 给全局方法指定类型
  * 给全局对象的属性指定类型
  */
-declare module "testMod" {
-  const aaa: number
-  export default aaa
+declare module "@element-plus/icons-vue" {
+  const mod: Record<string, unknown>
+  export default mod
 }
-declare var globalVar: number
 declare const globalConst: number
-
 declare function fun(params: string): void
-
 declare namespace globalObj {
   let property: number
   function fun(params: number): string
@@ -38,11 +34,4 @@ declare namespace globalObj {
  */
 interface Array {
   fun(params: number): number
-}
-
-type num_str = number | string
-
-interface ResInter {
-  Result: number
-  Data: unknown
 }
