@@ -1,5 +1,5 @@
 {
-  "name": "viteApp",
+  "name": "vite-app",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -17,11 +17,11 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "@types/node": "^18.7.2",
+    "@types/node": "^18.7.5",
     "@vitejs/plugin-vue": "^3.0.3",
     "sass": "^1.54.4",
     "typescript": "^4.5.4",
-    "vite": "^3.0.7",
+    "vite": "^3.0.8",
     "vue-tsc": "^0.40.1"
   }
 }
