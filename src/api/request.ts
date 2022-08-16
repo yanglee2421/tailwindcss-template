@@ -1,13 +1,13 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios"
 const request: AxiosInstance = axios.create({
-    baseURL: "",
+    baseURL: import.meta.env.VITE_BASE_URL,
     timeout: 6000,
 })
 request.interceptors.request.use(
     (config: any) => {
         config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`
         config.headers["Content-Type"] = "application/json;charest:utf-8"
-        config.params.appCode = "lms"
+        // config.params.appCode = "lms"
         return config
     },
     (err) => {
