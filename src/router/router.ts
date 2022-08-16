@@ -4,6 +4,12 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes: [
         {
+            path: "/login",
+            name: "login",
+            component: () => import("@/components/HelloWorld.vue"),
+            meta: { title: "登录" },
+        },
+        {
             path: "/",
             component: () => import("@/views/Home.vue"),
             meta: { title: "首页" },
@@ -48,14 +54,19 @@ const router = createRouter({
             path: "/404", name: "404",
             component: () => import("@/views/404.vue"),
             meta: { title: "找不到你要的页面了！" },
-            props(to) {
-                console.log(to)
-                return {}
-            }
+            props(to) { return {} },
         }
     ]
 })
-router.beforeEach((to, from) => { })
+router.beforeEach((to, from) => {
+    if (to.path === "/login") {
+        return
+    }
+    if (localStorage.getItem("token")) {
+        return
+    }
+    return "/login"
+})
 router.afterEach((to, from) => {
     to.meta.title && (document.title = <string>to.meta.title)
 })

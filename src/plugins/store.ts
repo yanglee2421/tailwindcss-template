@@ -1,12 +1,10 @@
 import { createStore } from "vuex"
-interface RooStaInter {
-    aaa: string,
-}
-export default createStore<RooStaInter>({
+export default createStore({
     strict: true,
     state() {
         return {
-            aaa: "123"
+            aaa: "123",
+            auth: false,
         }
     },
     modules: {
@@ -20,7 +18,7 @@ export default createStore<RooStaInter>({
                 }
             },
             mutations: {
-                a(state, value: string) {
+                a(state, value) {
                     state.a = value
                 },
                 b(state, payload) {

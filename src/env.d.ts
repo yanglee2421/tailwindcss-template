@@ -16,10 +16,6 @@ declare module '*.vue' {
  * 给全局方法指定类型
  * 给全局对象的属性指定类型
  */
-declare module "@element-plus/icons-vue" {
-  const mod: Record<string, unknown>
-  export default mod
-}
 declare const globalConst: number
 declare function fun(params: string): void
 declare namespace globalObj {
