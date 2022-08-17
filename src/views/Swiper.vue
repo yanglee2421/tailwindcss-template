@@ -12,7 +12,7 @@
             v-show="index===currentIndex"
             class="absolute"
           >
-            <img :src="getUrl(item.src)" />
+            <img :src="item.src" />
           </li>
         </transition-group>
       </ul>
@@ -25,6 +25,11 @@
   </div>
 </template>
 <script lang='ts' setup>
+import jpg1 from "../assets/picList/1.jpg";
+import jpg2 from "../assets/picList/2.jpg";
+import jpg3 from "../assets/picList/3.jpg";
+import jpg4 from "../assets/picList/4.jpg";
+import jpg5 from "../assets/picList/5.jpg";
 import { computed, onMounted, reactive } from "vue";
 const getUrl = (param: string) => {
   return new URL(param, import.meta.url).href;
@@ -33,13 +38,11 @@ const state = reactive({
   arrow: "toRight",
   currentIndex: 0,
   arr: [
-    {
-      src: "../assets/picList/1.jpg",
-    },
-    { src: "../assets/picList/2.jpg" },
-    { src: "../assets/picList/3.jpg" },
-    { src: "../assets/picList/4.jpg" },
-    { src: "../assets/picList/5.jpg" },
+    { src: jpg1 },
+    { src: jpg2 },
+    { src: jpg3 },
+    { src: jpg4 },
+    { src: jpg5 },
   ],
 });
 const currentIndex = computed({
