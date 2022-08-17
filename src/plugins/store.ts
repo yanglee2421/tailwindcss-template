@@ -4,9 +4,11 @@ export default createStore({
     state() {
         return {
             aaa: "123",
-            auth: false,
         }
     },
+    getters: {},
+    mutations: {},
+    actions: {},
     modules: {
         mod1: {
             namespaced: true,

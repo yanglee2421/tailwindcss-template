@@ -8,7 +8,6 @@
 import { computed, reactive } from "vue";
 import { useStore, mapState } from "vuex";
 const store = useStore();
-console.log(store.state);
 const target = mapState({ mes: "aaa" });
 
 const state = reactive<Record<string, unknown>>({});
@@ -19,7 +18,6 @@ Object.keys(target).forEach((key) => {
     })
   );
 });
-console.log(state);
 
 const value = computed<string>({
   get() {

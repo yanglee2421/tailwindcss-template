@@ -58,6 +58,7 @@ const router = createRouter({
         }
     ]
 })
+// 登录校验
 router.beforeEach((to, from) => {
     if (to.path === "/login") {
         return
@@ -67,6 +68,7 @@ router.beforeEach((to, from) => {
     }
     return "/login"
 })
+// 网页标题
 router.afterEach((to, from) => {
     to.meta.title && (document.title = <string>to.meta.title)
 })
