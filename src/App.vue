@@ -13,7 +13,12 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+ul {
+  list-style: none;
+}
+img {
+  vertical-align: bottom;
+}
 #app {
   height: 100vh;
   @extend .clearfix;

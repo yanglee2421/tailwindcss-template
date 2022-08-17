@@ -27,6 +27,12 @@ const router = createRouter({
                     meta: { title: "表格示例" },
                 },
                 {
+                    path: 'swiper',
+                    name: "swiper",
+                    component: () => import("@/views/Swiper.vue"),
+                    meta: { title: "轮播图" },
+                },
+                {
                     path: 'test',
                     name: "test",
                     component: () => import("@/views/Test.vue"),

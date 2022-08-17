@@ -13,7 +13,10 @@
         index="table"
         :route="{name:'table'}"
       >表格</el-menu-item>
-      <el-menu-item index="3">123</el-menu-item>
+      <el-menu-item
+        index="swiper"
+        :route="{name:'swiper'}"
+      >轮播图</el-menu-item>
       <el-menu-item index="4">123</el-menu-item>
     </el-menu>
     <main
