@@ -1,24 +1,24 @@
 <template>
-  <div>
-    <el-card class="m-center mt-3">
+  <div class="div-bg h-100 flex center-center clearfix">
+    <el-card class="m-center">
       <el-form
         :model="formData"
         :ref="el=>formRef=el"
         :rules="rules"
       >
-        <el-form-item
-          label="用户名："
-          prop="userName"
-        >
-          <el-input v-model.trim="formData.userName" />
+        <el-form-item prop="userName">
+          <el-input
+            v-model.trim="formData.userName"
+            maxlength="20"
+            prefix-icon="User"
+          />
         </el-form-item>
-        <el-form-item
-          label="密码："
-          prop="pwd"
-        >
+        <el-form-item prop="pwd">
           <el-input
             v-model.trim="formData.pwd"
+            maxlength="20"
             type="password"
+            prefix-icon="Lock"
           />
         </el-form-item>
         <el-form-item>
@@ -35,6 +35,7 @@
   </div>
 </template>
 <script lang='ts' setup>
+import bg from "@/assets/bg.jpg";
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -60,4 +61,15 @@ const login = () => {
 };
 </script>
 <style lang='scss' scoped>
+.div-bg {
+  background-image: url("@/assets/bg.jpg");
+  // 相对于视口固定
+  background-attachment: fixed;
+  background-size: cover;
+}
+.el-card {
+  border: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
+}
 </style>
