@@ -11,6 +11,7 @@
             v-model.trim="formData.userName"
             maxlength="20"
             prefix-icon="User"
+            placeholder="用户名"
           />
         </el-form-item>
         <el-form-item prop="pwd">
@@ -19,6 +20,7 @@
             maxlength="20"
             type="password"
             prefix-icon="Lock"
+            placeholder="密码"
           />
         </el-form-item>
         <el-form-item>
@@ -35,7 +37,6 @@
   </div>
 </template>
 <script lang='ts' setup>
-import bg from "@/assets/bg.jpg";
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
