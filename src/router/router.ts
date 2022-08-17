@@ -60,18 +60,11 @@ const router = createRouter({
 })
 // 登录校验
 router.beforeEach((to, from) => {
-    switch (to.name) {
-        case "login":
-            if (localStorage.getItem("token")) {
-                return "/"
-            }
-            return
-        default:
-            if (localStorage.getItem("token")) {
-                return
-            }
-            return "/login"
+    const auth = localStorage.getItem("token")
+    if (to.name === "login") {
+        return auth ? "/" : undefined
     }
+    return auth ? undefined : "/login"
 })
 // 网页标题
 router.afterEach((to, from) => {
