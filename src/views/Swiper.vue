@@ -56,6 +56,7 @@ onMounted(() => {
   document.querySelectorAll<HTMLElement>("li>img").forEach((item) => {
     item.draggable = false;
   });
+  console.log(import.meta);
 });
 </script>
 <style lang='scss' scoped>
