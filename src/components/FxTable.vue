@@ -752,39 +752,39 @@ onBeforeMount(() => {
 <style lang="scss" scoped>
 .dialog-custom {
   .el-dialog__header {
-    background-color: #f5f5f5
+    background-color: #f5f5f5;
   }
   .el-dialog__body {
-    padding: 20px
+    padding: 20px;
   }
 }
 .card-field {
   .el-card__header,
   .el-card__body {
-    padding: unset
+    padding: unset;
   }
   .el-card__header {
-    background: #f5f5f5
+    background: #f5f5f5;
   }
   .el-checkbox {
-    display: block
+    display: block;
     padding: {
-      left: 15px
-      right: 15px
+      left: 15px;
+      right: 15px;
     }
     span {
-      vertical-align: middle
+      vertical-align: middle;
     }
   }
   .el-card__body {
     .el-checkbox {
       margin: {
-        top: 2px
-        bottom: 2px
-        right: initial
+        top: 2px;
+        bottom: 2px;
+        right: initial;
       }
       &:hover {
-        background: #f5f7fa
+        background: #f5f7fa;
       }
     }
   }
@@ -792,15 +792,15 @@ onBeforeMount(() => {
 .w-100 {
   .el-upload,
   .el-upload-dragger {
-    width: 100%
+    width: 100%;
   }
 }
 .tool-bar {
   .el-button {
-    margin-right: 10px
+    margin-right: 10px;
   }
   .el-dropdown-menu__item {
-    cursor: default
+    cursor: default;
   }
 }
 </style>
