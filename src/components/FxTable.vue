@@ -54,9 +54,9 @@
       >
         <el-icon
           @click="
-            dialogType = 'exportFile'
-            dialogFormVisible = true
-            outputUnit.title = 'Excel导出配置'
+            dialogType = 'exportFile';
+            dialogFormVisible = true;
+            outputUnit.title = 'Excel导出配置';
           "
           :size="20"
           class="mx-1"
@@ -90,9 +90,9 @@
       >
         <el-icon
           @click="
-            dialogType = 'print'
-            dialogFormVisible = true
-            outputUnit.title = '打印配置'
+            dialogType = 'print';
+            dialogFormVisible = true;
+            outputUnit.title = '打印配置';
           "
           :size="20"
           class="mx-1"
@@ -288,8 +288,8 @@
     v-model:currentPage="param.PageIndex"
     v-model:pageSize="param.PageSize"
     @size-change="
-      param.PageIndex = 1
-      initTable(param)
+      param.PageIndex = 1;
+      initTable(param);
     "
     @current-change="initTable(param)"
   >
