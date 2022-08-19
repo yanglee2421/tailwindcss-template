@@ -8,11 +8,13 @@
   </div>
 </template>
 <script lang='ts' setup>
-import { reactive } from "vue";
+import { reactive, useAttrs } from "vue";
 
 const state = reactive({
   msg: "要传给插槽内容的数据",
 });
+const attr = useAttrs();
+console.log(attr);
 </script>
 <style lang='scss' scoped>
 </style>
