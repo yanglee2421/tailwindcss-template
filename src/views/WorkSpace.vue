@@ -4,6 +4,7 @@
       v-model:show="state.show"
       @swzChange="fun($event)"
       @swzInput="state.show=true"
+      @swzClick="null"
       :name="{aa:'张三'}"
     >
       <template #default="{msg}">
