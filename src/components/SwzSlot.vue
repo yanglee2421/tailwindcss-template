@@ -1,6 +1,10 @@
 <template>
   <div>
     <h2>以下是插槽接收到的内容：</h2>
+    <el-input
+      v-model="state.msg"
+      @input="onSwzChange($event)"
+    />
     <slot
       :msg="state.msg"
       show="777"
@@ -14,6 +18,7 @@ const state = reactive({
   msg: "要传给插槽内容的数据",
 });
 const attr = useAttrs();
+const { onSwzChange } = attr as { onSwzChange: Function };
 console.log(attr);
 </script>
 <style lang='scss' scoped>

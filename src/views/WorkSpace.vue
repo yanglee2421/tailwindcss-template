@@ -1,14 +1,25 @@
 <template>
   <div>
     <swz-slot
-      @swzChange="null"
+      v-model:show="state.show"
+      @swzChange="fun($event)"
+      @swzInput="state.show=true"
       :name="{aa:'张三'}"
-    ></swz-slot>
+    >
+      <template #default="{msg}">
+        <p>{{msg}}</p>
+      </template>
+    </swz-slot>
   </div>
 </template>
 <script lang='ts' setup>
-const fun = () => {
-  console.log(777);
+import { reactive } from "vue";
+
+const state = reactive({
+  show: false,
+});
+const fun = (param?: unknown) => {
+  console.log(param);
 };
 </script>
 <style lang='scss' scoped>
