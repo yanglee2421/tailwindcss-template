@@ -3,7 +3,7 @@
     <swz-slot
       v-model:show="state.show"
       @swzChange="fun($event)"
-      @swzInput="state.show=true"
+      @swzInput="state.show=true;state.show=false"
       @swzClick="null"
       :name="{aa:'张三'}"
     >
