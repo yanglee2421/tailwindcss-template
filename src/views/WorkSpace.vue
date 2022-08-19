@@ -1,11 +1,10 @@
 <template>
   <div>
     <swz-slot
-      v-model:show="state.show"
-      @swzChange="fun($event)"
-      @swzInput="state.show=true;state.show=false"
-      @swzClick="null"
+      v-model="state.show"
       :name="{aa:'张三'}"
+      :ref="el=>state.el=el"
+      @input="fun($event)"
     >
       <template #default="{msg}">
         <p>{{msg}}</p>
@@ -16,8 +15,9 @@
 <script lang='ts' setup>
 import { reactive } from "vue";
 
-const state = reactive({
-  show: false,
+const state = reactive<Record<string, unknown>>({
+  show: "传",
+  el: null,
 });
 const fun = (param?: unknown) => {
   console.log(param);
