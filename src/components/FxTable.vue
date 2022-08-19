@@ -54,9 +54,9 @@
       >
         <el-icon
           @click="
-            dialogType = 'exportFile';
-            dialogFormVisible = true;
-            outputUnit.title = 'Excel导出配置';
+            dialogType = 'exportFile'
+            dialogFormVisible = true
+            outputUnit.title = 'Excel导出配置'
           "
           :size="20"
           class="mx-1"
@@ -90,9 +90,9 @@
       >
         <el-icon
           @click="
-            dialogType = 'print';
-            dialogFormVisible = true;
-            outputUnit.title = '打印配置';
+            dialogType = 'print'
+            dialogFormVisible = true
+            outputUnit.title = '打印配置'
           "
           :size="20"
           class="mx-1"
@@ -288,8 +288,8 @@
     v-model:currentPage="param.PageIndex"
     v-model:pageSize="param.PageSize"
     @size-change="
-      param.PageIndex = 1;
-      initTable(param);
+      param.PageIndex = 1
+      initTable(param)
     "
     @current-change="initTable(param)"
   >
@@ -465,9 +465,16 @@
 </template>
 <!-- #endregion -->
 <script setup>
-import { parseTime } from "@/utils";
-import printJS from "print-js";
-import { reactive, nextTick, inject, onBeforeMount, computed, toRefs } from 'vue';
+import { parseTime } from "@/utils"
+import printJS from "print-js"
+import {
+  reactive,
+  nextTick,
+  inject,
+  onBeforeMount,
+  computed,
+  toRefs,
+} from "vue"
 import { ElMessage } from "element-plus"
 import {
   FullScreen,
@@ -476,7 +483,7 @@ import {
   Printer,
   Download,
   Upload,
-} from "@element-plus/icons";
+} from "@element-plus/icons"
 const props = defineProps({
   columns: {
     type: Array,
@@ -513,7 +520,7 @@ const props = defineProps({
   handleConfig: {
     type: Array,
     default: () => {
-      return [];
+      return []
     },
   },
   showMore: {
@@ -558,80 +565,86 @@ const state = reactive({
   isIndeterminate: true,
 })
 const {
+  multipleSelection,
+  uniterming,
   param,
   outputUnit,
-  multipleSelection,
-  dialogImport,
   dialogType,
-  dialogFormVisible, } = toRefs(state)
+  dialogImport,
+  downloadLoading,
+  range,
+  dialogFormVisible,
+  checkAll,
+  multipleFields,
+  defaultFields,
+  fieldsLabel,
+  isIndeterminate,
+} = toRefs(state)
 const cachecolumns = computed(() => {
-  const arr = [];
+  const arr = []
   props.columns.forEach((item) => {
     if (item.checked) {
-      arr.push(item);
+      arr.push(item)
     }
-  });
-  return arr;
+  })
+  return arr
 })
 const batch = computed(() => {
-  let flag = false;
+  let flag = false
   props.handleConfig.forEach(function (item) {
     if (item.type === "batch") {
-      flag = true;
+      flag = true
     }
-  });
-  return flag;
+  })
+  return flag
 })
 const filterFieldsLabel = computed(() => {
-  const filterFieldsLabel = [];
+  const filterFieldsLabel = []
   this.multipleFields.forEach((item) => {
-    filterFieldsLabel.push(item.label);
-  });
-  return filterFieldsLabel;
+    filterFieldsLabel.push(item.label)
+  })
+  return filterFieldsLabel
 })
 const filterFieldsProp = computed(() => {
-  const filterFieldsProp = [];
+  const filterFieldsProp = []
   this.multipleFields.forEach((item) => {
-    filterFieldsProp.push(item.prop);
-  });
-  return filterFieldsProp;
+    filterFieldsProp.push(item.prop)
+  })
+  return filterFieldsProp
 })
 const filterPrinFieds = computed(() => {
-  const filterPrinFieds = [];
+  const filterPrinFieds = []
   this.multipleFields.forEach((item) => {
     filterPrinFieds.push({
       field: item.prop,
       displayName: item.label,
-    });
-  });
-  return filterPrinFieds;
+    })
+  })
+  return filterPrinFieds
 })
 const ImportRes = (res) => {
   if (res.Code === 1) {
     ElMessage({
       type: "success",
       message: "导入成功",
-    });
-    state.dialogImport = false;
-    emit("current-change", state.param);
+    })
+    state.dialogImport = false
+    emit("current-change", state.param)
   } else {
     ElMessage({
       type: "error",
       message: res.Message,
-    });
+    })
   }
 }
 const handleDownload = () => {
   if (state.range === "multipleSelection" && !state.multipleSelection.length) {
-    ElMessage.warning("你还没有选取需要导出的数据");
-    return;
+    ElMessage.warning("你还没有选取需要导出的数据")
+    return
   }
-  state.downloadLoading = !state.downloadLoading;
+  state.downloadLoading = !state.downloadLoading
   import("@/vendor/Export2Excel").then((excel) => {
-    const data = formatJson(
-      state.filterFieldsProp,
-      state.outputUnit.dataList
-    )
+    const data = formatJson(state.filterFieldsProp, state.outputUnit.dataList)
     excel.export_json_to_excel({
       header: state.filterFieldsLabel,
       data,
@@ -639,76 +652,76 @@ const handleDownload = () => {
       autoWidth: state.outputUnit.autoWidth,
       bookType: state.outputUnit.bookType,
     })
-    state.downloadLoading = !state.downloadLoading;
-    state.dialogFormVisible = !state.dialogFormVisible;
+    state.downloadLoading = !state.downloadLoading
+    state.dialogFormVisible = !state.dialogFormVisible
   })
 }
 const formatJson = (filterVal, jsonData) => {
   return jsonData.map((v) =>
     filterVal.map((j) => {
       if (j === "timestamp") {
-        return parseTime(v[j]);
+        return parseTime(v[j])
       } else {
-        return v[j];
+        return v[j]
       }
     })
-  );
+  )
 }
 const handleCheckAllChange = (val) => {
-  state.multipleFields = val ? props.columns : state.defaultFields;
-  state.isIndeterminate = !val;
-  state.fieldsLabel = state.filterFieldsLabel;
+  state.multipleFields = val ? props.columns : state.defaultFields
+  state.isIndeterminate = !val
+  state.fieldsLabel = state.filterFieldsLabel
 }
 const handleCheckedChange = (val) => {
-  const arr = [];
+  const arr = []
   val.forEach((x) => {
     props.columns.forEach((y) => {
       if (x === y.label) {
-        arr.push(y);
+        arr.push(y)
       }
-    });
-  });
-  state.multipleFields = arr;
-  const checkedCount = val.length;
-  state.checkAll = checkedCount === props.columns.length;
+    })
+  })
+  state.multipleFields = arr
+  const checkedCount = val.length
+  state.checkAll = checkedCount === props.columns.length
   state.isIndeterminate =
-    checkedCount > 0 && checkedCount < props.columns.length;
+    checkedCount > 0 && checkedCount < props.columns.length
 }
 const changeRangeFn = (val) => {
   switch (val) {
     case "multipleSelection":
-      state.outputUnit.dataList = state.multipleSelection;
-      break;
+      state.outputUnit.dataList = state.multipleSelection
+      break
     case "singlePage":
-      state.outputUnit.dataList = props.data;
-      break;
+      state.outputUnit.dataList = props.data
+      break
     case "all":
-      break;
+      break
   }
 }
 const selectionChange = (selection) => {
-  state.multipleSelection = selection;
+  state.multipleSelection = selection
 }
 const sortChange = (column) => {
   if (column.prop != null && column.order != null) {
-    state.param.SortName = column.prop;
-    state.param.SortOrder = column.order;
+    state.param.SortName = column.prop
+    state.param.SortOrder = column.order
   }
   nexTick(() => {
-    initTable();
+    initTable()
   })
 }
 const commandBatch = (command) => {
-  emit("command-handle", command, state.multipleSelection);
+  emit("command-handle", command, state.multipleSelection)
 }
 const commandSingle = (command) => {
-  emit("command-handle", command, state.uniterming);
+  emit("command-handle", command, state.uniterming)
 }
 const commandHandle = (command, scope) => {
-  emit("command-handle", command, scope);
+  emit("command-handle", command, scope)
 }
 const initTable = () => {
-  emit("current-change", state.param);
+  emit("current-change", state.param)
 }
 const printFn = () => {
   printJS({
@@ -716,22 +729,22 @@ const printFn = () => {
     properties: state.filterPrinFieds,
     type: "json",
     gridHeaderStyle:
-      "padding:5px 0;font-size:14px;border: 1px solid lightgray;line-height:18px;vertical-align: middle;",
+      "padding:5px 0font-size:14pxborder: 1px solid lightgrayline-height:18pxvertical-align: middle",
     gridStyle:
-      "text-align: center;font-size:12px;border: 1px solid lightgray;margin-bottom: -1px;",
+      "text-align: centerfont-size:12pxborder: 1px solid lightgraymargin-bottom: -1px",
     repeatTableHeader: false,
     documentTitle: state.outputUnit.filename,
-  });
+  })
 }
 const exportAllData = () => {
-  emit("export", "");
+  emit("export", "")
 }
 onBeforeMount(() => {
   props.columns.forEach((item) => {
     if (item.checked === true) {
-      state.defaultFields.push(item);
-      state.multipleFields.push(item);
-      state.fieldsLabel.push(item.label);
+      state.defaultFields.push(item)
+      state.multipleFields.push(item)
+      state.fieldsLabel.push(item.label)
     }
   })
 })
@@ -739,39 +752,39 @@ onBeforeMount(() => {
 <style lang="scss" scoped>
 .dialog-custom {
   .el-dialog__header {
-    background-color: #f5f5f5;
+    background-color: #f5f5f5
   }
   .el-dialog__body {
-    padding: 20px;
+    padding: 20px
   }
 }
 .card-field {
   .el-card__header,
   .el-card__body {
-    padding: unset;
+    padding: unset
   }
   .el-card__header {
-    background: #f5f5f5;
+    background: #f5f5f5
   }
   .el-checkbox {
-    display: block;
+    display: block
     padding: {
-      left: 15px;
-      right: 15px;
+      left: 15px
+      right: 15px
     }
     span {
-      vertical-align: middle;
+      vertical-align: middle
     }
   }
   .el-card__body {
     .el-checkbox {
       margin: {
-        top: 2px;
-        bottom: 2px;
-        right: initial;
+        top: 2px
+        bottom: 2px
+        right: initial
       }
       &:hover {
-        background: #f5f7fa;
+        background: #f5f7fa
       }
     }
   }
@@ -779,15 +792,15 @@ onBeforeMount(() => {
 .w-100 {
   .el-upload,
   .el-upload-dragger {
-    width: 100%;
+    width: 100%
   }
 }
 .tool-bar {
   .el-button {
-    margin-right: 10px;
+    margin-right: 10px
   }
   .el-dropdown-menu__item {
-    cursor: default;
+    cursor: default
   }
 }
 </style>
