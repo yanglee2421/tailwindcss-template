@@ -484,6 +484,8 @@ import {
   Download,
   Upload,
 } from "@element-plus/icons"
+import { useRoute } from "vue-router"
+const $route = useRoute()
 const props = defineProps({
   columns: {
     type: Array,
@@ -600,21 +602,21 @@ const batch = computed(() => {
 })
 const filterFieldsLabel = computed(() => {
   const filterFieldsLabel = []
-  this.multipleFields.forEach((item) => {
+  state.multipleFields.forEach((item) => {
     filterFieldsLabel.push(item.label)
   })
   return filterFieldsLabel
 })
 const filterFieldsProp = computed(() => {
   const filterFieldsProp = []
-  this.multipleFields.forEach((item) => {
+  state.multipleFields.forEach((item) => {
     filterFieldsProp.push(item.prop)
   })
   return filterFieldsProp
 })
 const filterPrinFieds = computed(() => {
   const filterPrinFieds = []
-  this.multipleFields.forEach((item) => {
+  state.multipleFields.forEach((item) => {
     filterPrinFieds.push({
       field: item.prop,
       displayName: item.label,
