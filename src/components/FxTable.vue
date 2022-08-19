@@ -226,7 +226,7 @@
             <slot
               :scope="scope"
               :name="el.slot"
-            />
+            ></slot>
           </template>
         </el-table-column>
       </template>
