@@ -4,7 +4,7 @@ import locale from 'element-plus/es/locale/lang/zh-cn'
 import * as icons from "@element-plus/icons-vue"
 import store from "@/plugins/store"
 import router from "@/router/router"
-import HelloWorld from "@/components/HelloWorld.vue"
+import FxTable from "@/components/FxTable.vue"
 interface App {
     use(plugin: unknown, option?: unknown): void
     component(name: string, component: unknown): void
@@ -19,6 +19,6 @@ export default {
         })
         app.use(store)
         app.use(router)
-        app.component("HelloWorld", HelloWorld)
+        app.component("FxTable", FxTable)
     }
 }
