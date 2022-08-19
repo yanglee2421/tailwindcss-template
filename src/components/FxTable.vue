@@ -176,17 +176,18 @@
   </div>
   <el-main class="p-0 flex-fill">
     <el-table
-      style="width: 100%"
-      height="100%"
-      :header-cell-style="{ 'text-align': 'center' }"
-      ref="multipleTable"
+      v-bind="$attrs"
       :data="data"
-      border
+      style="width: 100%"
+      @sort-change="sortChange"
+      @selection-change="selectionChange"
+      ref="multipleTable"
+      height="100%"
       v-loading="loading"
+      :header-cell-style="{ 'text-align': 'center' }"
       element-loading-spinner="el-icon-loading"
       element-loading-text="正在加载中..."
-      @selection-change="selectionChange"
-      @sort-change="sortChange"
+      border
     >
       <el-table-column
         v-if="index"
@@ -423,11 +424,11 @@
   <!-- 导出、打印数据筛选 S -->
   <!-- 导入 S -->
   <el-dialog
-    width="25%"
-    title="文件导入"
     v-model="dialogImport"
-    :destroy-on-close="true"
     custom-class="dialog-custom"
+    title="文件导入"
+    width="25%"
+    destroy-on-close
   >
     <el-upload
       drag
@@ -464,6 +465,11 @@
   <!-- 导入 E -->
 </template>
 <!-- #endregion -->
+<script>
+export default {
+  inheritAttrs: false,
+}
+</script>
 <script setup>
 import { parseTime } from "@/utils"
 import printJS from "print-js"
@@ -474,6 +480,7 @@ import {
   onBeforeMount,
   computed,
   toRefs,
+  ref,
 } from "vue"
 import { ElMessage } from "element-plus"
 import {
@@ -750,6 +757,9 @@ onBeforeMount(() => {
     }
   })
 })
+// 新增内容
+const multipleTable = ref()
+defineExpose({ multipleTable })
 </script>
 <style lang="scss" scoped>
 .dialog-custom {
