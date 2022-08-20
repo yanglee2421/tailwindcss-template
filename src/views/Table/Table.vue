@@ -32,6 +32,7 @@
     </div>
     <div class="flex-1-hidden pt-1">
       <el-table
+        v-bind="$attrs"
         :data="[{},{}]"
         height="100%"
         stripe
@@ -61,7 +62,7 @@
         >
           <template #default="{row}">
             <el-link
-              @click="null"
+              @click="row"
               type="primary"
               class="pr-1"
             >编辑</el-link>
@@ -79,7 +80,22 @@
     />
   </div>
 </template>
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+};
+</script>
 <script lang='ts' setup>
+interface _props {
+  column: [];
+}
+const props = withDefaults(defineProps<_props>(), {
+  column: () => [],
+});
+interface _emits {
+  (event: "input", $event: string): void;
+}
+const emit = defineEmits<_emits>();
 </script>
 <style lang='scss' scoped>
 </style>
