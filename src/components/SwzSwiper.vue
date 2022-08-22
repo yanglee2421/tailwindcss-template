@@ -45,16 +45,14 @@ const currentIndex = computed({
   get() {
     return state.index;
   },
+  /**
+   * 防抖
+   */
   set(value) {
     if (state.enable) {
       state.enable = false;
-      setTimeout(() => {
-        state.enable = true;
-      }, 500);
       const lastIndex = props.arr.length - 1;
-      if (value < 0) {
-        value = lastIndex;
-      }
+      if (value < 0) value = lastIndex;
       state.trans = true;
       state.index = value % props.arr.length;
       if (state.index === 0 || state.index === lastIndex) {
@@ -63,6 +61,9 @@ const currentIndex = computed({
           state.index = state.index === 0 ? lastIndex : 0;
         }, 500);
       }
+      setTimeout(() => {
+        state.enable = true;
+      }, 500);
     }
   },
 });
