@@ -29,9 +29,9 @@
 <script lang='ts' setup>
 import { computed, reactive, ref } from "vue";
 interface _props {
-  arr?: string[];
+  arr: string[];
 }
-const props = withDefaults(defineProps<_props>(), {
+const props = withDefaults(defineProps<Partial<_props>>(), {
   arr: () => [],
 });
 const state = reactive({
