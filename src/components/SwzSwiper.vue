@@ -27,11 +27,11 @@
   <el-button @click="currentIndex=3">第3张</el-button>
 </template>
 <script lang='ts' setup>
-import { computed, reactive, ref } from "vue";
+import { computed, reactive, ref, watchEffect } from "vue";
 interface _props {
   arr: string[];
 }
-const props = withDefaults(defineProps<Partial<_props>>(), {
+const props = withDefaults(defineProps<_props>(), {
   arr: () => [],
 });
 const state = reactive({
@@ -46,23 +46,23 @@ const currentIndex = computed({
     return state.index;
   },
   set(value) {
+    console.log(value);
     if (state.enable) {
+      debugger;
       state.enable = false;
-      setTimeout(() => {
-        state.enable = true;
-      }, 500);
       const lastIndex = props.arr.length - 1;
-      if (value < 0) {
-        value = lastIndex;
-      }
+      if (value < 0) value = lastIndex;
       state.trans = true;
       state.index = value % props.arr.length;
       if (state.index === 0 || state.index === lastIndex) {
         setTimeout(() => {
           state.trans = false;
           state.index = state.index === 0 ? lastIndex : 0;
-        }, 500);
+        }, 300);
       }
+      setTimeout(() => {
+        state.enable = true;
+      }, 310);
     }
   },
 });
@@ -71,8 +71,11 @@ const loaded = () => {
   state.width = imgRef.value?.clientWidth!;
   props.arr.unshift(state.img!);
   state.trans = false;
-  state.index = 1;
+  state.index = 5;
 };
+watchEffect(() => {
+  // console.log(state.index);
+});
 </script>
 <style lang='scss' scoped>
 ul {
@@ -80,6 +83,6 @@ ul {
   top: 0;
 }
 .ul-transition {
-  transition: 0.5s;
+  transition: 0.3s;
 }
 </style>
