@@ -12,7 +12,7 @@
       :class='{"absolute":true,"ul-transition":state.trans,"flex":true}'
     >
       <li
-        v-for="(item,index) in props.arr"
+        v-for="(item,index) in picList"
         :key="index"
       >
         <img
@@ -27,7 +27,7 @@
   <el-button @click="currentIndex=3">第3张</el-button>
 </template>
 <script lang='ts' setup>
-import { computed, reactive, ref, watchEffect } from "vue";
+import { computed, reactive, ref } from "vue";
 interface _props {
   arr: string[];
 }
@@ -46,36 +46,44 @@ const currentIndex = computed({
     return state.index;
   },
   set(value) {
-    console.log(value);
     if (state.enable) {
-      debugger;
       state.enable = false;
-      const lastIndex = props.arr.length - 1;
-      if (value < 0) value = lastIndex;
-      state.trans = true;
-      state.index = value % props.arr.length;
-      if (state.index === 0 || state.index === lastIndex) {
+      const lastIndex = picList.value.length - 1;
+      if (value < 0) {
+        state.trans = false;
+        state.index = lastIndex;
         setTimeout(() => {
-          state.trans = false;
-          state.index = state.index === 0 ? lastIndex : 0;
-        }, 300);
+          state.trans = true;
+          state.index = lastIndex - 1;
+        }, 0);
+      } else if (value > lastIndex) {
+        state.trans = false;
+        state.index = 0;
+        setTimeout(() => {
+          state.trans = true;
+          state.index = 1;
+        }, 0);
+      } else {
+        state.trans = true;
+        state.index = value;
       }
       setTimeout(() => {
         state.enable = true;
-      }, 310);
+      }, 300);
     }
   },
+});
+const picList = computed(() => {
+  const arr = [...props.arr];
+  arr.unshift(state.img!);
+  return arr;
 });
 const imgRef = ref<HTMLElement>();
 const loaded = () => {
   state.width = imgRef.value?.clientWidth!;
-  props.arr.unshift(state.img!);
   state.trans = false;
-  state.index = 5;
+  state.index = 1;
 };
-watchEffect(() => {
-  // console.log(state.index);
-});
 </script>
 <style lang='scss' scoped>
 ul {
