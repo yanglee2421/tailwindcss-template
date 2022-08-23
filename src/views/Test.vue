@@ -38,7 +38,10 @@
         <el-button>新增</el-button>
       </template>
       <!-- 表格 -->
-      <el-table-column label="标题" />
+      <el-table-column
+        label="标题"
+        prop="title"
+      />
     </fw-table>
   </div>
 </template>
