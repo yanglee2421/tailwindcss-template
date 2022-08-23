@@ -45,31 +45,27 @@ const currentIndex = computed({
   get() {
     return state.index;
   },
+  /**
+   * 防抖
+   */
   set(value) {
     if (state.enable) {
       state.enable = false;
-      const lastIndex = picList.value.length - 1;
-      if (value < 0) {
-        state.trans = false;
-        state.index = lastIndex;
-        setTimeout(() => {
-          state.trans = true;
-          state.index = lastIndex - 1;
-        }, 0);
-      } else if (value > lastIndex) {
-        state.trans = false;
-        state.index = 0;
-        setTimeout(() => {
-          state.trans = true;
-          state.index = 1;
-        }, 0);
-      } else {
-        state.trans = true;
-        state.index = value;
-      }
       setTimeout(() => {
         state.enable = true;
-      }, 300);
+      }, 500);
+      const lastIndex = props.arr.length - 1;
+      if (value < 0) {
+        value = lastIndex;
+      }
+      state.trans = true;
+      state.index = value % props.arr.length;
+      if (state.index === 0 || state.index === lastIndex) {
+        setTimeout(() => {
+          state.trans = false;
+          state.index = state.index === 0 ? lastIndex : 0;
+        }, 500);
+      }
     }
   },
 });
