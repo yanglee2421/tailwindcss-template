@@ -1,10 +1,10 @@
 <template>
   <div>
-    <swz-swiper :arr="arr"></swz-swiper>
+    <swz-swiper-v2 :arr="arr"></swz-swiper-v2>
   </div>
 </template>
 <script lang='ts' setup>
-import SwzSwiper from "@/components/SwzSwiper.vue";
+import SwzSwiperV2 from "@/components/Swiper/SwzSwiperV2.vue";
 import img01 from "@/assets/picList/1.jpg";
 import img02 from "@/assets/picList/2.jpg";
 import img03 from "@/assets/picList/3.jpg";

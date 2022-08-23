@@ -12,7 +12,10 @@
             v-show="index===currentIndex"
             class="absolute"
           >
-            <img :src="item.src" />
+            <img
+              :src="item.src"
+              draggable="false"
+            />
           </li>
         </transition-group>
       </ul>
@@ -25,12 +28,12 @@
   </div>
 </template>
 <script lang='ts' setup>
-import jpg1 from "../assets/picList/1.jpg";
-import jpg2 from "../assets/picList/2.jpg";
-import jpg3 from "../assets/picList/3.jpg";
-import jpg4 from "../assets/picList/4.jpg";
-import jpg5 from "../assets/picList/5.jpg";
-import { computed, onMounted, reactive } from "vue";
+import img01 from "@/assets/picList/1.jpg";
+import img02 from "@/assets/picList/2.jpg";
+import img03 from "@/assets/picList/3.jpg";
+import img04 from "@/assets/picList/4.jpg";
+import img05 from "@/assets/picList/5.jpg";
+import { computed, reactive } from "vue";
 const getUrl = (param: string) => {
   return new URL(param, import.meta.url).href;
 };
@@ -38,11 +41,11 @@ const state = reactive({
   arrow: "toRight",
   currentIndex: 0,
   arr: [
-    { src: jpg1 },
-    { src: jpg2 },
-    { src: jpg3 },
-    { src: jpg4 },
-    { src: jpg5 },
+    { src: img01 },
+    { src: img02 },
+    { src: img03 },
+    { src: img04 },
+    { src: img05 },
   ],
 });
 const currentIndex = computed({
@@ -55,17 +58,8 @@ const currentIndex = computed({
     Reflect.set(state, "currentIndex", value % state.arr.length);
   },
 });
-onMounted(() => {
-  document.querySelectorAll<HTMLElement>("li>img").forEach((item) => {
-    item.draggable = false;
-  });
-  console.log(import.meta);
-});
 </script>
 <style lang='scss' scoped>
-li {
-  top: 0;
-}
 .toLeft-enter-active,
 .toLeft-leave-active,
 .toRight-enter-active,

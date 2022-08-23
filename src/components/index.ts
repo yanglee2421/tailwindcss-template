@@ -1,3 +1,5 @@
 export { default as FwTable } from "@/components/Table/FwTable.vue"
 export { default as SwzAttrs } from "@/components/Attrs/SwzAttrs.vue"
 export { default as SwzTable } from "@/components/Table/SwzTable.vue"
+export { default as SwzSwiper } from "@/components/Swiper/SwzSwiper.vue"
+export { default as SwzSwiperV2 } from "@/components/Swiper/SwzSwiperV2.vue"
