@@ -34,16 +34,7 @@
 .flex-row {
   @extend.flex;
   @extend.between-center;
-}
-
-.between-center {
-  @extend.justify-between;
-  @extend.align-center;
-}
-
-.center-center {
-  @extend.justify-center;
-  @extend.align-center;
+  @extend.align-start;
 }
 
 $align: start, center, end, between, around, evenly;
@@ -62,16 +53,41 @@ $align: start, center, end, between, around, evenly;
 
   .align-#{$item} {
 
-    @if $item ==center {
-      align-items: #{$item};
-    }
-
-    @else if $item ==between or $item ==evenly or $item ==around {
+    @if $item ==between or $item ==evenly or $item ==around {
       align-items: #{'space-'+$item};
     }
 
     @else {
-      align-items: #{'flex-'+$item};
+      align-items: #{$item};
+    }
+  }
+}
+
+@each $item in $align {
+  $item-copy: null;
+
+  @if($item ==between or $item ==evenly or $item ==around) {
+    $item-copy: "space-#{$item}"
+  }
+
+  @else {
+    $item-copy: $item;
+  }
+
+  @each $i in $align {
+    $i-copy: null;
+
+    @if($i ==between or $i ==evenly or $i ==around) {
+      $i-copy: "space-#{$i}"
+    }
+
+    @else {
+      $i-copy: $i;
+    }
+
+    .#{$item}-#{$i} {
+      justify-content: #{$item-copy};
+      align-items: #{$i-copy};
     }
   }
 }

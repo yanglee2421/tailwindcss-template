@@ -23,7 +23,7 @@ const router = createRouter({
                 {
                     path: 'table',
                     name: "table",
-                    component: () => import("@/views/Table/Table.vue"),
+                    component: () => import("@/components/Table/FwTable.vue"),
                     meta: { title: "表格示例" },
                 },
                 {
