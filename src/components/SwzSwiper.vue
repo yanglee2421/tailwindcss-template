@@ -1,5 +1,5 @@
 <template>
-  <div class="b m-1 relative overflow-hidden m-center">
+  <div class="b my-1 relative overflow-hidden m-center">
     <div class="vis-hidden ">
       <img
         ref="imgRef"
@@ -31,15 +31,18 @@ import { computed, reactive, ref } from "vue";
 interface _props {
   arr: string[];
 }
-const props = withDefaults(defineProps<_props>(), {
-  arr: () => [],
-});
+const props = withDefaults(defineProps<_props>(), {});
 const state = reactive({
   width: 0,
   index: 0,
   trans: true,
   enable: true,
   img: props.arr.at(-1),
+});
+const picList = computed(() => {
+  const arr = [...props.arr];
+  arr.unshift(state.img!);
+  return arr;
 });
 const currentIndex = computed({
   get() {
@@ -51,28 +54,30 @@ const currentIndex = computed({
   set(value) {
     if (state.enable) {
       state.enable = false;
+      const lastIndex = picList.value.length - 1;
+      if (value < 0) {
+        state.trans = false;
+        state.index = lastIndex;
+        setTimeout(() => {
+          state.trans = true;
+          state.index = lastIndex - 1;
+        }, 0);
+      } else if (value > lastIndex) {
+        state.trans = false;
+        state.index = 0;
+        setTimeout(() => {
+          state.trans = true;
+          state.index = 1;
+        }, 0);
+      } else {
+        state.trans = true;
+        state.index = value;
+      }
       setTimeout(() => {
         state.enable = true;
-      }, 500);
-      const lastIndex = props.arr.length - 1;
-      if (value < 0) {
-        value = lastIndex;
-      }
-      state.trans = true;
-      state.index = value % props.arr.length;
-      if (state.index === 0 || state.index === lastIndex) {
-        setTimeout(() => {
-          state.trans = false;
-          state.index = state.index === 0 ? lastIndex : 0;
-        }, 500);
-      }
+      }, 300);
     }
   },
-});
-const picList = computed(() => {
-  const arr = [...props.arr];
-  arr.unshift(state.img!);
-  return arr;
 });
 const imgRef = ref<HTMLElement>();
 const loaded = () => {
