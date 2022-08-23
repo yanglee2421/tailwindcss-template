@@ -3,7 +3,7 @@ import "element-plus/dist/index.css"
 import locale from 'element-plus/es/locale/lang/zh-cn'
 import * as icons from "@element-plus/icons-vue"
 import store from "@/plugins/store"
-import router from "@/router/router"
+import router from "@/router"
 import * as SwzCom from "@/components"
 interface App {
     use(plugin: unknown, option?: unknown): void
