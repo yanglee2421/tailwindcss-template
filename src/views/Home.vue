@@ -28,7 +28,7 @@
   </div>
 </template>
 <script lang='ts' setup>
-import { nextTick, onBeforeMount, onMounted, reactive } from "vue";
+import { nextTick, onBeforeMount, reactive } from "vue";
 import { onBeforeRouteUpdate, useRoute } from "vue-router";
 const route = useRoute();
 const state = reactive({

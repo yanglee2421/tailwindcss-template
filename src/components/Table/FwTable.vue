@@ -156,6 +156,10 @@ const submitForm = () => {
     }
   });
 };
+/**
+ * Watch
+ * 分页变动时刷新表格
+ */
 watch(
   [() => props.PageIndex, () => props.PageSize],
   ([PageIndex, PageSize], [oldPageIndex, oldPageSize]) => {
@@ -169,7 +173,7 @@ watch(
   }
 );
 /**
- * 曝露Ref以向外提供el-组件原有的方法
+ * 曝露Ref，以向外提供el-组件原有的方法
  */
 const tableRef = ref();
 defineExpose({ formRef, tableRef });
