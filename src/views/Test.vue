@@ -15,21 +15,9 @@
       <template #form-item>
         <el-form-item
           label="通常五个字："
-          prop="input"
-        >
-          <el-input v-model.trim="formData.input" />
-        </el-form-item>
-        <el-form-item
-          label="通常五个字："
-          v-for="item in 10"
+          v-for="item in 1"
           :key="item"
         >
-          <el-input />
-        </el-form-item>
-        <el-form-item label="通常五个字：">
-          <el-input />
-        </el-form-item>
-        <el-form-item label="通常五个字：">
           <el-input />
         </el-form-item>
       </template>

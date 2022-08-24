@@ -224,6 +224,12 @@ defineExpose({ formRef, tableRef });
   overflow: hidden;
   display: grid;
   grid-template: auto / repeat(4, 1fr);
+  @media (min-width: 1400px) and (max-width: 1799px) {
+    grid-template: auto / repeat(5, 1fr);
+  }
+  @media (min-width: 1800px) {
+    grid-template: auto / repeat(6, 1fr);
+  }
 }
 .form-btn {
   position: sticky;

@@ -6,17 +6,17 @@
       router
     >
       <el-menu-item
+        index="work"
+        :route="{name:'work'}"
+      >工作区</el-menu-item>
+      <el-menu-item
+        index="test"
+        :route="{name:'test'}"
+      >测试</el-menu-item>
+      <el-menu-item
         index="param"
         :route="{name:'param'}"
       >传参</el-menu-item>
-      <el-menu-item
-        index="table"
-        :route="{name:'table'}"
-      >表格</el-menu-item>
-      <el-menu-item
-        index="swiper"
-        :route="{name:'swiper'}"
-      >轮播图</el-menu-item>
       <el-menu-item index="4">123</el-menu-item>
     </el-menu>
     <main
