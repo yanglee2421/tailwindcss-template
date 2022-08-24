@@ -1,14 +1,9 @@
 <template>
   <div
-    ref="visRef"
-    class="swz-vis"
+    ref="root"
+    class="trans overflow-hidden"
   >
-    <div
-      ref="boxRef"
-      class="clearfix"
-    >
-      <slot></slot>
-    </div>
+    <slot></slot>
   </div>
 </template>
 <script lang='ts'>
@@ -17,8 +12,7 @@ export default {
 };
 </script>
 <script lang='ts' setup>
-import { onMounted, ref, watch } from "vue";
-
+import { onMounted, ref, watch, watchPostEffect } from "vue";
 interface _props {
   modelValue?: boolean;
 }
@@ -26,33 +20,21 @@ const props = withDefaults(defineProps<_props>(), {
   modelValue: true,
 });
 interface _emits {
-  (evnet: "update:modelValue", $event?: boolean): void;
+  (event: "update:modelValue", $event: boolean): void;
 }
 const emit = defineEmits<_emits>();
-/**
- * 获取dom
- */
-const visRef = ref<HTMLElement>();
-const boxRef = ref<HTMLElement>();
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    const dom = visRef.value!;
-    const box = boxRef.value!;
-    dom.style.height = dom.offsetHeight + "px";
-    setTimeout(() => {
-      dom.style.height = newVal ? getComputedStyle(box).height : "0";
-    }, 0);
-  }
-);
-onMounted(() => {
-  const dom = visRef.value!;
-  if (!props.modelValue) dom.style.height = "0";
+const root = ref<HTMLElement>();
+const switchShow = () => {
+  const dom = root.value!;
+  const height = dom.scrollHeight + "px";
+  dom.style.height = props.modelValue ? height : "0";
+};
+watchPostEffect(() => {
+  switchShow();
 });
 </script>
 <style lang='scss' scoped>
-.swz-vis {
-  overflow: hidden;
+.trans {
   transition: 0.3s;
 }
 </style>

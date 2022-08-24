@@ -3,13 +3,15 @@
     <el-form
       v-bind="$attrs"
       ref="formRef"
-      id="swz-form"
       class="form-item"
-      :style="{height:state.height}"
+      :class="state.formClass"
       inline
     >
       <slot name="form-item"></slot>
-      <el-form-item class="form-btn">
+      <el-form-item
+        class="form-btn relative mr-1"
+        :class="state.btnClass"
+      >
         <el-button
           @click="submitForm()"
           type="primary"
@@ -21,7 +23,30 @@
           icon="Refresh"
           auto-insert-space
         >重置</el-button>
-        <el-checkbox v-model="state.cla"></el-checkbox>
+        <label class="flex center-center ml-1">
+          <input
+            v-model="state.isShow"
+            type="checkbox"
+            class="none"
+          />
+          <el-icon
+            class="text-primary trans"
+            :class="{'rotate-180':!state.isShow}"
+          >
+            <ArrowUp />
+          </el-icon>
+          <span
+            v-if="state.isShow"
+            class="text-primary"
+          >折叠
+          </span>
+          <span
+            v-else
+            class="text-primary"
+          >
+            展开
+          </span>
+        </label>
       </el-form-item>
     </el-form>
     <div>
@@ -60,10 +85,10 @@
     </div>
     <el-pagination
       layout="total,sizes,prev,pager,next,jumper"
+      :pageSizes="pageSizes"
       v-bind="$attrs"
       v-model:currentPage="currentPage"
       v-model:pageSize="pageSize"
-      :pageSizes="pageSizes"
     >
       <slot name="pagi"></slot>
     </el-pagination>
@@ -75,7 +100,7 @@ export default {
 };
 </script>
 <script lang='ts' setup>
-import { computed, onMounted, reactive, ref, useSlots, watch } from "vue";
+import { computed, reactive, ref, watch, watchPostEffect } from "vue";
 /**
  * Props
  * 分页：条数/页的可选项
@@ -90,11 +115,13 @@ interface _props {
   PageSize: number;
   Index?: boolean;
   Selection?: boolean;
+  defaultIsColl?: boolean;
 }
 const props = withDefaults(defineProps<_props>(), {
   pageSizes: () => [10, 20, 30],
   PageIndex: 0,
   PageSize: 0,
+  defaultIsColl: false,
 });
 /**
  * Emits
@@ -111,15 +138,34 @@ const emit = defineEmits<_emit>();
 /**
  * Data
  * 是否展开表单
- * 表单高度
- * 表单展开时的高度
- * 表单不展开时的高度
  */
+const randomClass = () => {
+  const arr: string[] = [];
+  for (let i = 0; i < 8; i++) {
+    const num = Math.floor(Math.random() * 16);
+    arr.push(num.toString(16));
+  }
+  return `data-swz-${arr.join("")}`;
+};
 const state = reactive({
-  cla: false,
-  height: "auto",
-  showHeight: "",
-  defHeight: "",
+  isShow: props.defaultIsColl,
+  formClass: randomClass(),
+  btnClass: randomClass(),
+});
+const switchHeight = () => {
+  const formDom = document.querySelector<HTMLElement>(`.${state.formClass}`)!;
+  const btnDom = document.querySelector<HTMLElement>(`.${state.btnClass}`)!;
+  const showHeight = formDom.scrollHeight + "px";
+  const { marginTop, marginBottom } = getComputedStyle(btnDom);
+  const hiddenHeight =
+    btnDom.offsetHeight +
+    parseFloat(marginTop) +
+    parseFloat(marginBottom) +
+    "px";
+  formDom.style.height = state.isShow ? showHeight : hiddenHeight;
+};
+watchPostEffect(() => {
+  switchHeight();
 });
 /**
  * Computed
@@ -166,34 +212,11 @@ watch(
     emit("submit", false);
   }
 );
-watch(
-  () => state.cla,
-  (newValue) => {
-    state.height = newValue ? state.showHeight : state.defHeight;
-  }
-);
 /**
  * 曝露Ref，以向外提供el-组件原有的方法
  */
 const tableRef = ref();
 defineExpose({ formRef, tableRef });
-/**
- * Mounted
- * 获取表单应展示的两个高度
- */
-onMounted(() => {
-  const forDom = document.querySelector("#swz-form");
-  const trDom = document.querySelector("#swz-form .form-btn");
-  const forSty = getComputedStyle(forDom!);
-  const trSty = getComputedStyle(trDom!);
-  state.showHeight = forSty.height;
-  let { height, marginBottom, marginTop } = trSty;
-  height = parseInt(height) as any;
-  marginBottom = parseInt(marginBottom) as any;
-  marginTop = parseInt(marginTop) as any;
-  state.defHeight = height + marginBottom + marginTop + "px";
-  state.height = state.defHeight;
-});
 </script>
 <style lang='scss' scoped>
 .form-item {
@@ -201,12 +224,6 @@ onMounted(() => {
   overflow: hidden;
   display: grid;
   grid-template: auto / repeat(4, 1fr);
-  // grid-auto-rows: 0;
-}
-.show {
-  overflow: auto;
-  overflow: overlay;
-  // grid-auto-rows: auto;
 }
 .form-btn {
   position: sticky;
@@ -214,5 +231,11 @@ onMounted(() => {
   justify-self: end;
   grid-row: 1 / span 1;
   grid-column: span 1 / -1;
+}
+.trans {
+  transition: 0.3s;
+}
+.rotate-180 {
+  transform: rotate(180deg);
 }
 </style>
