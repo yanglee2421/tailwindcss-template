@@ -212,6 +212,8 @@ const submitForm = () => {
  */
 watchEffect(() => {
   const { PageIndex, PageSize } = props;
+  let i = PageIndex;
+  let j = PageSize;
   emit("submit", false);
 });
 /**

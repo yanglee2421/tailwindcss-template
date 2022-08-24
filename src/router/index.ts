@@ -25,6 +25,13 @@ const router = createRouter({
                     name: "test",
                     component: () => import("@/views/Test.vue"),
                     meta: { title: "测试用示例" },
+
+                },
+                {
+                    path: 'param',
+                    name: "param",
+                    component: () => import("@/views/param/param.vue"),
+                    meta: { title: "传参案例" },
                     beforeEnter(to, from) {
                         if (from.meta.title === "首页") {
                             ElMessage({
@@ -34,12 +41,6 @@ const router = createRouter({
                             return false
                         }
                     },
-                },
-                {
-                    path: 'param',
-                    name: "param",
-                    component: () => import("@/views/param/param.vue"),
-                    meta: { title: "传参案例" },
                 },
             ]
         },
