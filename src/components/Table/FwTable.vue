@@ -122,8 +122,8 @@ interface _props {
   DefaultIsColl?: boolean;
 }
 const props = withDefaults(defineProps<_props>(), {
-  PageIndex: 0,
-  PageSize: 0,
+  Index: false,
+  Selection: false,
   NoColl: false,
   DefaultIsColl: false,
 });
@@ -212,8 +212,7 @@ const submitForm = () => {
  */
 watchEffect(() => {
   const { PageIndex, PageSize } = props;
-  let i = PageIndex;
-  let j = PageSize;
+  PageIndex === PageSize;
   emit("submit", false);
 });
 /**
