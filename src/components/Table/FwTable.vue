@@ -4,7 +4,7 @@
       v-bind="$attrs"
       ref="formRef"
       class="form-item"
-      :class="state.formClass"
+      :class="[state.formClass,state.trans?'trans':'']"
       inline
     >
       <slot name="form-item"></slot>
@@ -19,7 +19,7 @@
           auto-insert-space
         >查询</el-button>
         <el-button
-          @click="formRef.resetFields()"
+          @click="formRef.resetFields();emit('submit',true)"
           icon="Refresh"
           auto-insert-space
         >重置</el-button>
@@ -103,7 +103,7 @@ export default {
 };
 </script>
 <script lang='ts' setup>
-import { computed, reactive, ref, watchEffect, watchPostEffect } from "vue";
+import { computed, reactive, ref, watchEffect, watch, onMounted } from "vue";
 /**
  * Props
  * 分页：当前页
@@ -140,8 +140,9 @@ interface _emit {
 }
 const emit = defineEmits<_emit>();
 /**
- * Data
- * 是否展开表单
+ * 展开按钮功能
+ * 生成随机class
+ * 过渡动画
  */
 const randomClass = () => {
   const arr: string[] = [];
@@ -155,10 +156,13 @@ const state = reactive({
   isShow: props.DefaultIsColl,
   formClass: randomClass(),
   btnClass: randomClass(),
+  trans: false,
 });
 const switchHeight = () => {
+  // 获取dom
   const formDom = document.querySelector<HTMLElement>(`.${state.formClass}`)!;
   const btnDom = document.querySelector<HTMLElement>(`.${state.btnClass}`)!;
+  // 展开的高度和关闭的高度
   const showHeight = formDom.scrollHeight + "px";
   const { marginTop, marginBottom } = getComputedStyle(btnDom);
   const hiddenHeight =
@@ -166,15 +170,46 @@ const switchHeight = () => {
     parseFloat(marginTop) +
     parseFloat(marginBottom) +
     "px";
-  formDom.style.height = state.isShow ? showHeight : hiddenHeight;
+  //播放前
+  formDom.style.height = formDom.offsetHeight + "px";
+  state.trans = true;
+  //播放
+  setTimeout(() => {
+    formDom.style.height = state.isShow ? showHeight : hiddenHeight;
+  }, 0);
+  //播放后
+  state.isShow &&
+    setTimeout(() => {
+      state.trans = false;
+      formDom.style.height = "auto";
+    }, 301);
 };
-watchPostEffect(() => {
-  switchHeight();
+watch(
+  () => state.isShow,
+  () => {
+    switchHeight();
+  }
+);
+onMounted(() => {
+  // 获取dom
+  const formDom = document.querySelector<HTMLElement>(`.${state.formClass}`)!;
+  const btnDom = document.querySelector<HTMLElement>(`.${state.btnClass}`)!;
+  // 展开的高度和关闭的高度
+  const showHeight = formDom.scrollHeight + "px";
+  const { marginTop, marginBottom } = getComputedStyle(btnDom);
+  const hiddenHeight =
+    btnDom.offsetHeight +
+    parseFloat(marginTop) +
+    parseFloat(marginBottom) +
+    "px";
+  // 初始状态
+  formDom.style.height = state.isShow ? showHeight : hiddenHeight;
 });
 /**
- * Computed
- * 覆写分页的当前页
- * 覆写分页的当前条目/页
+ * 分页功能
+ * 覆写分页的currentPage
+ * 覆写分页的pageSize
+ * 分页变动时自动刷新表格
  */
 const currentPage = computed({
   get() {
@@ -192,6 +227,11 @@ const pageSize = computed({
     emit("update:PageSize", value);
   },
 });
+watchEffect(() => {
+  const { PageIndex, PageSize } = props;
+  PageIndex === PageSize;
+  emit("submit", false);
+});
 /**
  * Methods
  * 提交表单
@@ -207,15 +247,6 @@ const submitForm = () => {
   });
 };
 /**
- * Watch
- * 分页变动时刷新表格
- */
-watchEffect(() => {
-  const { PageIndex, PageSize } = props;
-  PageIndex === PageSize;
-  emit("submit", false);
-});
-/**
  * 曝露Ref，以向外提供el-组件原有的方法
  */
 const tableRef = ref();
@@ -223,7 +254,6 @@ defineExpose({ formRef, tableRef });
 </script>
 <style lang='scss' scoped>
 .form-item {
-  transition: 0.3s;
   overflow: hidden;
   display: grid;
   grid-template: auto / repeat(4, 1fr);
@@ -235,11 +265,9 @@ defineExpose({ formRef, tableRef });
   }
 }
 .form-btn {
-  position: sticky;
-  top: 0;
-  justify-self: end;
   grid-row: 1 / span 1;
   grid-column: span 1 / -1;
+  justify-self: end;
 }
 .trans {
   transition: 0.3s;

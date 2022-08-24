@@ -2,7 +2,10 @@
   <div>
     <hello-world></hello-world>
     <swz-vis v-model="state.isVis">
-      <swz-swiper-v2 :arr="arr"></swz-swiper-v2>
+      <swz-swiper-v2
+        :arr="arr"
+        class="box"
+      ></swz-swiper-v2>
     </swz-vis>
     <el-checkbox v-model="state.isVis">显示</el-checkbox>
   </div>
@@ -21,4 +24,9 @@ const state = reactive({
 });
 </script>
 <style lang='scss' scoped>
+.box {
+  @media (min-width: 1800px) {
+    height: 1000px;
+  }
+}
 </style>
