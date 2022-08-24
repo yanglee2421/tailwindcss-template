@@ -1,5 +1,6 @@
 <template>
   <div>
+    <hello-world></hello-world>
     <swz-vis v-model="state.isVis">
       <swz-swiper-v2 :arr="arr"></swz-swiper-v2>
     </swz-vis>

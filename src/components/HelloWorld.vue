@@ -1,24 +1,56 @@
 <template>
-  <div>
-    <h1 @click="fun">hello World!</h1>
+  <div class="text-center">
+    <h1>hello World!</h1>
+    <p>{{state.count}}</p>
+    <el-button @click="state.count++;log(state.count)">加加</el-button>
   </div>
 </template>
 <script lang="ts" setup>
-import request from "@/api/request";
-import { onMounted, onUnmounted } from "vue";
+import {
+  onBeforeMount,
+  onBeforeUnmount,
+  onBeforeUpdate,
+  onMounted,
+  onUnmounted,
+  onUpdated,
+  reactive,
+  watchEffect,
+  watchPostEffect,
+  watchSyncEffect,
+} from "vue";
+const state = reactive({
+  count: 0,
+});
+const log = (i: unknown) => {
+  console.log("log", i);
+};
+watchEffect(() => {
+  console.log("watchEffect", state.count);
+});
+watchPostEffect(() => {
+  console.log("watchPostEffect", state.count);
+});
+watchSyncEffect(() => {
+  console.log("watchSyncEffect", state.count);
+});
+onBeforeMount(() => {
+  console.log("挂载前");
+});
 onMounted(() => {
   console.log("挂载");
 });
-onUnmounted(() => {
-  console.log("卸载");
+onBeforeUpdate(() => {
+  console.log("更新前");
 });
-const fun = () => {
-  request({
-    method: "get",
-    url: "/api/get",
-  });
-};
-defineExpose({ fun });
+onUpdated(() => {
+  console.log("更新完成");
+});
+onBeforeUnmount(() => {
+  console.log("卸载完成前");
+});
+onUnmounted(() => {
+  console.log("卸载完成");
+});
 </script>
 <style lang='scss' scoped>
 </style>
