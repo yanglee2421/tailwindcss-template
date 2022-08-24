@@ -21,7 +21,7 @@
         </el-form-item>
         <el-form-item
           label="通常五个字："
-          v-for="item in 100"
+          v-for="item in 200"
           :key="item"
         >
           <el-input />

@@ -203,10 +203,14 @@ onMounted(() => {
   grid-template: auto / repeat(4, 1fr);
   // grid-auto-rows: 0;
 }
-/* .show {
-  grid-auto-rows: auto;
-} */
+.show {
+  overflow: auto;
+  overflow: overlay;
+  // grid-auto-rows: auto;
+}
 .form-btn {
+  position: sticky;
+  top: 0;
   justify-self: end;
   grid-row: 1 / span 1;
   grid-column: span 1 / -1;

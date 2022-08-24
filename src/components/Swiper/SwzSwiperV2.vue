@@ -21,11 +21,16 @@
         />
       </li>
     </ul>
+    <el-button @click="currentIndex--">上一张</el-button>
+    <el-button @click="currentIndex++">下一张</el-button>
+    <el-button @click="currentIndex=3">第3张</el-button>
   </div>
-  <el-button @click="currentIndex--">上一张</el-button>
-  <el-button @click="currentIndex++">下一张</el-button>
-  <el-button @click="currentIndex=3">第3张</el-button>
 </template>
+<script lang="ts">
+export default {
+  inheritAttrs: true,
+};
+</script>
 <script lang='ts' setup>
 import { computed, reactive, ref } from "vue";
 interface _props {
