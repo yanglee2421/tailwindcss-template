@@ -13,13 +13,13 @@
         :class="state.btnClass"
       >
         <el-button
-          @click="submitForm()"
+          @click="emit('QueryBtn');submitForm()"
           type="primary"
           icon="Search"
           auto-insert-space
         >查询</el-button>
         <el-button
-          @click="formRef.resetFields();emit('submit',true)"
+          @click="emit('ResetBtn');formRef.resetFields();emit('Query',true)"
           icon="Refresh"
           auto-insert-space
         >重置</el-button>
@@ -129,20 +129,26 @@ const props = withDefaults(defineProps<_props>(), {
 });
 /**
  * Emits
- * 提交表单
+ * 点击查询按钮时
+ * 点击重置按钮时
+ * 展开状态发生变化时
+ * 点击查询、重置或分页数据发生变化时
  * 更新当前页
  * 更新当前条数/页
  */
 interface _emit {
-  (event: "submit", $event?: unknown): void;
+  (event: "QueryBtn", $event?: unknown): void;
+  (event: "ResetBtn", $event?: unknown): void;
+  (event: "CollChg", $event: boolean): void;
+  (event: "Query", $event?: unknown): void;
   (event: "update:PageIndex", $event: number): void;
   (event: "update:PageSize", $event: number): void;
 }
 const emit = defineEmits<_emit>();
 /**
- * 展开按钮功能
  * 生成随机class
  * 过渡动画
+ * 表单挂载时的状态
  */
 const randomClass = () => {
   const arr: string[] = [];
@@ -186,8 +192,9 @@ const switchHeight = () => {
 };
 watch(
   () => state.isShow,
-  () => {
+  (newVal) => {
     switchHeight();
+    emit("CollChg", newVal);
   }
 );
 onMounted(() => {
@@ -206,7 +213,7 @@ onMounted(() => {
   formDom.style.height = state.isShow ? showHeight : hiddenHeight;
 });
 /**
- * 分页功能
+ * 分页
  * 覆写分页的currentPage
  * 覆写分页的pageSize
  * 分页变动时自动刷新表格
@@ -230,25 +237,22 @@ const pageSize = computed({
 watchEffect(() => {
   const { PageIndex, PageSize } = props;
   (PageIndex && PageSize) || console.log();
-  emit("submit", false);
+  emit("Query", false);
 });
 /**
- * Methods
- * 提交表单
+ * 查询方法
+ * 向外曝露form和table的组件实例以提供方法
  */
 const formRef = ref();
 const submitForm = () => {
   formRef.value.validate((vali: boolean) => {
     if (vali) {
-      emit("submit", true);
+      emit("Query", true);
     } else {
       return false;
     }
   });
 };
-/**
- * 曝露Ref，以向外提供el-组件原有的方法
- */
 const tableRef = ref();
 defineExpose({ formRef, tableRef });
 </script>
