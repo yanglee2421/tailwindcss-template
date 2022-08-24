@@ -2,7 +2,6 @@
   <div
     ref="visRef"
     class="swz-vis"
-    :class="{show:modelValue}"
   >
     <div
       ref="boxRef"
@@ -18,7 +17,7 @@ export default {
 };
 </script>
 <script lang='ts' setup>
-import { onMounted, reactive, ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 interface _props {
   modelValue?: boolean;
@@ -30,10 +29,6 @@ interface _emits {
   (evnet: "update:modelValue", $event?: boolean): void;
 }
 const emit = defineEmits<_emits>();
-/**
- * State
- */
-const state = reactive({});
 /**
  * 获取dom
  */
