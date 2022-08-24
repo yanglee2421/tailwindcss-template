@@ -103,7 +103,7 @@ export default {
 };
 </script>
 <script lang='ts' setup>
-import { computed, reactive, ref, watch, watchPostEffect } from "vue";
+import { computed, reactive, ref, watchEffect, watchPostEffect } from "vue";
 /**
  * Props
  * 分页：当前页
@@ -210,12 +210,10 @@ const submitForm = () => {
  * Watch
  * 分页变动时刷新表格
  */
-watch(
-  [() => props.PageIndex, () => props.PageSize],
-  ([PageIndex, PageSize], [oldPageIndex, oldPageSize]) => {
-    emit("submit", false);
-  }
-);
+watchEffect(() => {
+  const { PageIndex, PageSize } = props;
+  emit("submit", false);
+});
 /**
  * 曝露Ref，以向外提供el-组件原有的方法
  */
