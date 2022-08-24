@@ -3,12 +3,13 @@
     <fw-table
       :model="formData"
       :data="[{title:'123'},{}]"
-      @submit="initTable"
+      @fw-query="initTable"
+      @fw-queryBtn="log(111)"
       v-model:PageIndex="pagination.PageIndex"
       v-model:PageSize="pagination.PageSize"
       :total="100"
-      Index
-      Selection
+      fw-index
+      fw-selection
       border
     >
       <!-- 表单 -->
@@ -50,6 +51,9 @@ const pagination = reactive({
 const initTable = (boolean: boolean) => {
   boolean && Object.assign(pagination, formData);
   console.log("发个请求", boolean, pagination);
+};
+const log = (i: unknown) => {
+  console.log(i);
 };
 </script>
 <style lang='scss' scoped>

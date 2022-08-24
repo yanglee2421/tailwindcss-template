@@ -13,18 +13,18 @@
         :class="state.btnClass"
       >
         <el-button
-          @click="emit('QueryBtn');submitForm()"
+          @click="emit('fw-queryBtn');submitForm()"
           type="primary"
           icon="Search"
           auto-insert-space
         >查询</el-button>
         <el-button
-          @click="emit('ResetBtn');formRef.resetFields();emit('Query',true)"
+          @click="emit('fw-resetBtn');formRef.resetFields();emit('fw-query',true)"
           icon="Refresh"
           auto-insert-space
         >重置</el-button>
         <label
-          v-if="!NoColl"
+          v-if="!fwNoSwitch"
           class="flex center-center ml-1"
         >
           <input
@@ -62,14 +62,14 @@
         ref="tableRef"
       >
         <el-table-column
-          v-if="Index"
+          v-if="fwIndex"
           align="center"
           type="index"
           label="序号"
           width="60"
         />
         <el-table-column
-          v-if="Selection"
+          v-if="fwSelection"
           align="center"
           type="selection"
         />
@@ -116,16 +116,16 @@ import { computed, reactive, ref, watchEffect, watch, onMounted } from "vue";
 interface _props {
   PageIndex: number;
   PageSize: number;
-  Index?: boolean;
-  Selection?: boolean;
-  NoColl?: boolean;
-  DefaultIsColl?: boolean;
+  fwIndex?: boolean;
+  fwSelection?: boolean;
+  fwNoSwitch?: boolean;
+  fwDefaultSwitch?: boolean;
 }
 const props = withDefaults(defineProps<_props>(), {
-  Index: false,
-  Selection: false,
-  NoColl: false,
-  DefaultIsColl: false,
+  fwIndex: false,
+  fwSelection: false,
+  fwNoSwitch: false,
+  fwDefaultSwitch: false,
 });
 /**
  * Emits
@@ -137,10 +137,10 @@ const props = withDefaults(defineProps<_props>(), {
  * 更新当前条数/页
  */
 interface _emit {
-  (event: "QueryBtn", $event?: unknown): void;
-  (event: "ResetBtn", $event?: unknown): void;
-  (event: "CollChg", $event: boolean): void;
-  (event: "Query", $event?: unknown): void;
+  (event: "fw-queryBtn", $event?: unknown): void;
+  (event: "fw-resetBtn", $event?: unknown): void;
+  (event: "fw-switch", $event: boolean): void;
+  (event: "fw-query", $event?: unknown): void;
   (event: "update:PageIndex", $event: number): void;
   (event: "update:PageSize", $event: number): void;
 }
@@ -159,7 +159,7 @@ const randomClass = () => {
   return `data-swz-${arr.join("")}`;
 };
 const state = reactive({
-  isShow: props.DefaultIsColl,
+  isShow: props.fwDefaultSwitch,
   formClass: randomClass(),
   btnClass: randomClass(),
   trans: false,
@@ -194,7 +194,7 @@ watch(
   () => state.isShow,
   (newVal) => {
     switchHeight();
-    emit("CollChg", newVal);
+    emit("fw-switch", newVal);
   }
 );
 onMounted(() => {
@@ -237,7 +237,7 @@ const pageSize = computed({
 watchEffect(() => {
   const { PageIndex, PageSize } = props;
   (PageIndex && PageSize) || console.log();
-  emit("Query", false);
+  emit("fw-query", false);
 });
 /**
  * 查询方法
@@ -247,7 +247,7 @@ const formRef = ref();
 const submitForm = () => {
   formRef.value.validate((vali: boolean) => {
     if (vali) {
-      emit("Query", true);
+      emit("fw-query", true);
     } else {
       return false;
     }
