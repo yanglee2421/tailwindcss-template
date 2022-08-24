@@ -23,7 +23,10 @@
           icon="Refresh"
           auto-insert-space
         >重置</el-button>
-        <label class="flex center-center ml-1">
+        <label
+          v-if="!NoColl"
+          class="flex center-center ml-1"
+        >
           <input
             v-model="state.isShow"
             type="checkbox"
@@ -31,7 +34,7 @@
           />
           <el-icon
             class="text-primary trans"
-            :class="{'rotate-180':!state.isShow}"
+            :class="{'rotate-180':!state.isShow,}"
           >
             <ArrowUp />
           </el-icon>
@@ -85,7 +88,7 @@
     </div>
     <el-pagination
       layout="total,sizes,prev,pager,next,jumper"
-      :pageSizes="pageSizes"
+      :pageSizes="[10,20,30]"
       v-bind="$attrs"
       v-model:currentPage="currentPage"
       v-model:pageSize="pageSize"
@@ -103,25 +106,26 @@ export default {
 import { computed, reactive, ref, watch, watchPostEffect } from "vue";
 /**
  * Props
- * 分页：条数/页的可选项
  * 分页：当前页
  * 分页：当前条数/页
  * 表格是否需要序号列
  * 表格是否需要复选框
+ * 是否需要展开按钮
+ * 表单是否默认展示全部
  */
 interface _props {
-  pageSizes?: number[];
   PageIndex: number;
   PageSize: number;
   Index?: boolean;
   Selection?: boolean;
-  defaultIsColl?: boolean;
+  NoColl?: boolean;
+  DefaultIsColl?: boolean;
 }
 const props = withDefaults(defineProps<_props>(), {
-  pageSizes: () => [10, 20, 30],
   PageIndex: 0,
   PageSize: 0,
-  defaultIsColl: false,
+  NoColl: false,
+  DefaultIsColl: false,
 });
 /**
  * Emits
@@ -148,7 +152,7 @@ const randomClass = () => {
   return `data-swz-${arr.join("")}`;
 };
 const state = reactive({
-  isShow: props.defaultIsColl,
+  isShow: props.DefaultIsColl,
   formClass: randomClass(),
   btnClass: randomClass(),
 });

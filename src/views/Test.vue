@@ -15,7 +15,7 @@
       <template #form-item>
         <el-form-item
           label="通常五个字："
-          v-for="item in 1"
+          v-for="item in 30"
           :key="item"
         >
           <el-input />
