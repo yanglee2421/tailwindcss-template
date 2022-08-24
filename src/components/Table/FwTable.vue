@@ -229,7 +229,7 @@ const pageSize = computed({
 });
 watchEffect(() => {
   const { PageIndex, PageSize } = props;
-  PageIndex === PageSize;
+  (PageIndex && PageSize) || console.log();
   emit("submit", false);
 });
 /**
