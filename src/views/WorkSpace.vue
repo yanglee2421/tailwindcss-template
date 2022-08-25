@@ -1,11 +1,14 @@
 <template>
   <div>
     <hello-world></hello-world>
+    <swz-swiper-v2
+      :arr="arr"
+      class="box"
+    ></swz-swiper-v2>
     <swz-vis v-model="state.isVis">
-      <swz-swiper-v2
-        :arr="arr"
-        class="box"
-      ></swz-swiper-v2>
+      <code>
+        <pre class="b m-center">{{state.text}}</pre>
+      </code>
     </swz-vis>
     <el-checkbox v-model="state.isVis">显示</el-checkbox>
   </div>
@@ -17,16 +20,21 @@ import img02 from "@/assets/picList/2.jpg";
 import img03 from "@/assets/picList/3.jpg";
 import img04 from "@/assets/picList/4.jpg";
 import img05 from "@/assets/picList/5.jpg";
+import request from "@/api/request";
 import { reactive } from "vue";
 const arr = [img01, img02, img03, img04, img05];
 const state = reactive({
   isVis: false,
+  text: "",
+});
+request<string>({
+  method: "post",
+  url: "http://10.32.16.160:1818/pic",
+  params: { name: 77 },
+  data: {
+    fileName: "test",
+  },
 });
 </script>
 <style lang='scss' scoped>
-.box {
-  @media (min-width: 1800px) {
-    height: 1000px;
-  }
-}
 </style>

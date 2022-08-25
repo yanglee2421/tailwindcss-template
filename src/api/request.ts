@@ -6,7 +6,7 @@ const request: AxiosInstance = axios.create({
 request.interceptors.request.use(
     (config: any) => {
         config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`
-        config.headers["Content-Type"] = "application/json;charest:utf-8"
+        config.headers["Content-Type"] = "application/json;charest=utf-8"
         // config.params.appCode = "lms"
         return config
     },
