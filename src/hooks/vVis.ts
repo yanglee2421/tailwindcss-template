@@ -6,23 +6,27 @@ interface _binding {
 }
 export default {
     mounted(dom: HTMLElement, binding: _binding) {
-        const { value } = binding
-        value || (dom.style.overflowY = 'hidden')
-        dom.style.height = value ? 'auto' : "0"
+        console.log(binding)
+        const { value, modifiers } = binding
+        const wh = modifiers.width ? 'width' : 'height'
+        value || (dom.style.overflow = 'hidden')
+        dom.style[wh] = value ? '' : "0"
     },
     updated(dom: HTMLElement, binding: _binding) {
-        const { value } = binding
-        const currentHeight = dom.offsetHeight + "px"
-        const showHeight = dom.scrollHeight + "px"
-        dom.style.height = currentHeight
-        dom.style.overflowY = 'hidden'
+        const { value, modifiers } = binding
+        const wh = modifiers.width ? 'width' : 'height'
+        const currentValue = (modifiers.width ? dom.offsetWidth : dom.offsetHeight) + "px"
+        const showValue = (modifiers.width ? dom.scrollWidth : dom.scrollHeight) + "px"
+        dom.style.overflow = 'hidden'
+        dom.style[wh] = currentValue
         dom.style.transition = '.3s'
         setTimeout(() => {
-            dom.style.height = value ? showHeight : "0"
+            dom.style[wh] = value ? showValue : "0"
         }, 0);
         value && setTimeout(() => {
             dom.style.transition = ''
-            dom.style.height = 'auto'
+            dom.style[wh] = ''
+            dom.style.overflow = ''
         }, 301);
     }
 }

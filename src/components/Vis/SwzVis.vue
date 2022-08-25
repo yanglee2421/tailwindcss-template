@@ -44,7 +44,7 @@ const switchShow = () => {
   props.modelValue &&
     setTimeout(() => {
       state.trans = false;
-      dom.style.height = "auto";
+      dom.style.height = "";
     }, 301);
 };
 watch(
@@ -56,7 +56,7 @@ watch(
 onMounted(() => {
   // 初始状态
   const dom = root.value!;
-  dom.style.height = props.modelValue ? "auto" : "0";
+  dom.style.height = props.modelValue ? "" : "0";
 });
 </script>
 <style lang='scss' scoped>
