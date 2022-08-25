@@ -14,6 +14,6 @@
   @extend .clearfix;
 }
 .el-pagination {
-  padding-top: 10px !important;
+  padding-top: 5px !important;
 }
 </style>

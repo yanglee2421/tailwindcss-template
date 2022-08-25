@@ -56,7 +56,7 @@ watch(
 onMounted(() => {
   // 初始状态
   const dom = root.value!;
-  dom.style.height = props.modelValue ? dom.offsetHeight + "px" : "0";
+  dom.style.height = props.modelValue ? "auto" : "0";
 });
 </script>
 <style lang='scss' scoped>
