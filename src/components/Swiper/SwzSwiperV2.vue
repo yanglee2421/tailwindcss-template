@@ -1,5 +1,5 @@
 <template>
-  <div class="b my-1 relative overflow-hidden m-center">
+  <div class="relative overflow-hidden m-center">
     <div class="vis-hidden ">
       <img
         ref="imgRef"

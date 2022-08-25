@@ -3,13 +3,21 @@
 }
 
 .text-primary {
-    color: #409EFF;
+    color: $primary;
 }
 
 .text-success {
-    color: #67C23A;
+    color: $success;
+}
+
+.text-warning {
+    color: $warning;
 }
 
 .text-danger {
-    color: #F56C6C;
+    color: $danger;
+}
+
+.text-info {
+    color: $info;
 }
