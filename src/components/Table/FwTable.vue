@@ -4,13 +4,13 @@
       v-bind="$attrs"
       ref="formRef"
       class="form-item"
-      :class="[state.formClass,state.trans?'trans':'']"
+      :class="[foldState.formClass,foldState.trans?'trans':'']"
       inline
     >
       <slot name="form-item"></slot>
       <el-form-item
         class="form-btn relative mr-1"
-        :class="state.btnClass"
+        :class="foldState.btnClass"
       >
         <el-button
           @click="emit('fw-queryBtn');submitForm()"
@@ -24,22 +24,22 @@
           auto-insert-space
         >重置</el-button>
         <label
-          v-if="!fwNoSwitch"
+          v-if="isShowFold"
           class="flex center-center ml-1"
         >
           <input
-            v-model="state.isShow"
+            v-model="foldState.isShow"
             type="checkbox"
             class="none"
           />
           <el-icon
             class="text-primary trans"
-            :class="{'rotate-180':!state.isShow,}"
+            :class="{'rotate-180':!foldState.isShow,}"
           >
             <ArrowUp />
           </el-icon>
           <span
-            v-if="state.isShow"
+            v-if="foldState.isShow"
             class="text-primary"
           >折叠
           </span>
@@ -103,14 +103,22 @@ export default {
 };
 </script>
 <script lang='ts' setup>
-import { computed, reactive, ref, watchEffect, watch, onMounted } from "vue";
+import {
+  computed,
+  reactive,
+  ref,
+  watchEffect,
+  watch,
+  onMounted,
+  useSlots,
+  onBeforeUnmount,
+} from "vue";
 /**
  * Props
  * 分页：当前页
  * 分页：当前条数/页
  * 表格是否需要序号列
  * 表格是否需要复选框
- * 是否需要展开按钮
  * 表单是否默认展示全部
  */
 interface _props {
@@ -118,13 +126,11 @@ interface _props {
   PageSize: number;
   fwIndex?: boolean;
   fwSelection?: boolean;
-  fwNoSwitch?: boolean;
   fwDefaultSwitch?: boolean;
 }
 const props = withDefaults(defineProps<_props>(), {
   fwIndex: false,
   fwSelection: false,
-  fwNoSwitch: false,
   fwDefaultSwitch: false,
 });
 /**
@@ -158,7 +164,7 @@ const randomClass = () => {
   }
   return `data-swz-${arr.join("")}`;
 };
-const state = reactive({
+const foldState = reactive({
   isShow: props.fwDefaultSwitch,
   formClass: randomClass(),
   btnClass: randomClass(),
@@ -166,8 +172,10 @@ const state = reactive({
 });
 const switchHeight = () => {
   // 获取dom
-  const formDom = document.querySelector<HTMLElement>(`.${state.formClass}`)!;
-  const btnDom = document.querySelector<HTMLElement>(`.${state.btnClass}`)!;
+  const formDom = document.querySelector<HTMLElement>(
+    `.${foldState.formClass}`
+  )!;
+  const btnDom = document.querySelector<HTMLElement>(`.${foldState.btnClass}`)!;
   // 展开的高度和关闭的高度
   const showHeight = formDom.scrollHeight + "px";
   const { marginTop, marginBottom } = getComputedStyle(btnDom);
@@ -178,20 +186,20 @@ const switchHeight = () => {
     "px";
   //播放前
   formDom.style.height = formDom.offsetHeight + "px";
-  state.trans = true;
+  foldState.trans = true;
   //播放
   setTimeout(() => {
-    formDom.style.height = state.isShow ? showHeight : hiddenHeight;
+    formDom.style.height = foldState.isShow ? showHeight : hiddenHeight;
   }, 0);
   //播放后
-  state.isShow &&
+  foldState.isShow &&
     setTimeout(() => {
-      state.trans = false;
+      foldState.trans = false;
       formDom.style.height = "auto";
     }, 301);
 };
 watch(
-  () => state.isShow,
+  () => foldState.isShow,
   (newVal) => {
     switchHeight();
     emit("fw-switch", newVal);
@@ -199,8 +207,10 @@ watch(
 );
 onMounted(() => {
   // 获取dom
-  const formDom = document.querySelector<HTMLElement>(`.${state.formClass}`)!;
-  const btnDom = document.querySelector<HTMLElement>(`.${state.btnClass}`)!;
+  const formDom = document.querySelector<HTMLElement>(
+    `.${foldState.formClass}`
+  )!;
+  const btnDom = document.querySelector<HTMLElement>(`.${foldState.btnClass}`)!;
   // 展开的高度和关闭的高度
   const showHeight = formDom.scrollHeight + "px";
   const { marginTop, marginBottom } = getComputedStyle(btnDom);
@@ -210,7 +220,7 @@ onMounted(() => {
     parseFloat(marginBottom) +
     "px";
   // 初始状态
-  formDom.style.height = state.isShow ? showHeight : hiddenHeight;
+  formDom.style.height = foldState.isShow ? showHeight : hiddenHeight;
 });
 /**
  * 分页
@@ -238,6 +248,50 @@ watchEffect(() => {
   const { PageIndex, PageSize } = props;
   (PageIndex && PageSize) || console.log();
   emit("fw-query", false);
+});
+/**
+ * 自动选择是否显示展开按钮
+ * 监听视口宽存入viewWidth
+ * 根据rootArr得出count（有效节点数）
+ * 根据viewWidth和count计算出结果
+ * window的resize事件处理viewWidth
+ */
+const slots = useSlots();
+const isFoldState = reactive({
+  viewWidth: 0,
+});
+const isShowFold = computed(() => {
+  const rootArr = slots["form-item"]?.();
+  console.log(rootArr);
+  let count = 0;
+  rootArr?.forEach((item) => {
+    if (typeof item.type !== "symbol") {
+      item.type !== "template" && count++;
+    } else {
+      const isFragment = item.type.description === "Fragment";
+      const isArray = Array.isArray(item.children);
+      isFragment && isArray && (count += (item.children as unknown[]).length);
+      const isText = item.type.description === "Text";
+      isText && count++;
+    }
+  });
+  console.log(count);
+  if (isFoldState.viewWidth > 1799) {
+    return count > 5;
+  } else if (isFoldState.viewWidth > 1399) {
+    return count > 4;
+  } else {
+    return count > 3;
+  }
+});
+const resizeFn = () => {
+  isFoldState.viewWidth = window.innerWidth;
+};
+onMounted(() => {
+  window.addEventListener("resize", resizeFn);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", resizeFn);
 });
 /**
  * 查询方法

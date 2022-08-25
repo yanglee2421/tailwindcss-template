@@ -14,9 +14,14 @@
     >
       <!-- 表单 -->
       <template #form-item>
+        <template></template>
+        <!--  -->
+        <div></div>
+        <el-row></el-row>
+        12345
         <el-form-item
           label="通常五个字："
-          v-for="item in 30"
+          v-for="item in 4"
           :key="item"
         >
           <el-input />
