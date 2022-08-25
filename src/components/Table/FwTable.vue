@@ -4,7 +4,7 @@
       v-bind="$attrs"
       ref="formRef"
       class="form-item"
-      :class="[foldState.formClass,foldState.trans?'trans':'']"
+      :class="[foldState.formClass,{'trans':foldState.trans}]"
       inline
     >
       <slot name="form-item"></slot>
@@ -24,7 +24,7 @@
           auto-insert-space
         >重置</el-button>
         <label
-          v-if="isShowFold"
+          v-show="isShowFold"
           class="flex center-center ml-1"
         >
           <input
@@ -33,21 +33,16 @@
             class="none"
           />
           <el-icon
-            class="text-primary trans"
-            :class="{'rotate-180':!foldState.isShow,}"
+            class="trans"
+            :class="[{'rotate-180':!foldState.isShow},foldState.isShow?'text-danger':'text-primary']"
           >
             <ArrowUp />
           </el-icon>
           <span
-            v-if="foldState.isShow"
-            class="text-primary"
-          >折叠
-          </span>
-          <span
-            v-else
-            class="text-primary"
+            class="trans"
+            :class="[foldState.isShow?'text-danger':'text-primary']"
           >
-            展开
+            {{foldState.isShow?"折叠":"展开"}}
           </span>
         </label>
       </el-form-item>
