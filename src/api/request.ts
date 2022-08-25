@@ -6,7 +6,7 @@ const request: AxiosInstance = axios.create({
 request.interceptors.request.use(
     (config: any) => {
         config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`
-        config.headers["Content-Type"] = "application/json;charest=utf-8"
+        config.headers["Content-Type"] = "application/json;charset=utf-8"
         // config.params.appCode = "lms"
         return config
     },
@@ -14,27 +14,14 @@ request.interceptors.request.use(
         console.log(err)
     }
 )
-interface _data {
-    Result: number
-    Data: unknown
-    Message: string
-}
-interface _data {
-    code: number
-    data: unknown
-    msg: string
-}
 request.interceptors.response.use(
     (res: AxiosResponse) => {
-        const { data }: { data: _data } = res
-        // const { Result, Data, Message } = data
-        // if (Result === 1) {
-        const { code, data: Data, msg } = data
-        if (code === 200) {
-            return Data
+        const { data, status, statusText } = res
+        if (status === 200) {
+            return data
         }
         else {
-            console.log(msg)
+            console.log(statusText)
         }
     },
     (err) => {

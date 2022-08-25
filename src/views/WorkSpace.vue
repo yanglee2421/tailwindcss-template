@@ -34,6 +34,8 @@ request<string>({
   data: {
     fileName: "test",
   },
+}).then((res) => {
+  state.text = res;
 });
 </script>
 <style lang='scss' scoped>
