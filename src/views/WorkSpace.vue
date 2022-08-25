@@ -4,7 +4,7 @@
     <h4>轮播图</h4>
     <swz-code
       class="m-center"
-      v-vis.width="state.vis"
+      v-vis="state.vis"
     >
       <swz-swiper
         :picArr="arr"
