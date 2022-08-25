@@ -4,13 +4,11 @@
       :model="formData"
       :data="[{title:'123'},{}]"
       @fw-query="initTable"
-      @fw-queryBtn="log(111)"
       v-model:PageIndex="pagination.PageIndex"
       v-model:PageSize="pagination.PageSize"
       :total="100"
-      fw-index
-      fw-selection
       border
+      index
     >
       <!-- 表单 -->
       <template #form-item>
@@ -21,7 +19,7 @@
         </el-form-item>
         <el-form-item
           label="通常五个字："
-          v-for="item in 4"
+          v-for="item in 1"
           :key="item"
         >
           <el-input />

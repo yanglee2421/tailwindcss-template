@@ -1,11 +1,13 @@
 <template>
   <div>
+    <h4>轮播图</h4>
     <swz-code class="m-center">
-      <swz-swiper-v2
-        :arr="arr"
+      <swz-swiper
+        :picArr="arr"
         class="box"
-      ></swz-swiper-v2>
+      ></swz-swiper>
     </swz-code>
+    <h4>轮播图V2</h4>
     <swz-code class="m-center">
       <swz-swiper-v2
         :arr="arr"

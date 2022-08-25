@@ -19,7 +19,7 @@
           auto-insert-space
         >查询</el-button>
         <el-button
-          @click="emit('fw-resetBtn');formRef.resetFields();emit('fw-query',true)"
+          @click="resetFn()"
           icon="Refresh"
           auto-insert-space
         >重置</el-button>
@@ -257,7 +257,6 @@ const switchState = reactive({
 });
 const showSwitch = computed(() => {
   const rootArr = slots["form-item"]?.();
-  console.log(rootArr);
   let count = 0;
   rootArr?.forEach((item) => {
     if (typeof item.type !== "symbol") {
@@ -270,7 +269,6 @@ const showSwitch = computed(() => {
       isText && count++;
     }
   });
-  console.log(count);
   if (switchState.viewWidth > 1799) {
     return count > 5;
   } else if (switchState.viewWidth > 1399) {
@@ -289,7 +287,8 @@ onBeforeUnmount(() => {
   window.removeEventListener("resize", resizeFn);
 });
 /**
- * 查询方法
+ * 查询按钮
+ * 重置按钮
  * 向外曝露form和table的组件实例以提供方法
  */
 const formRef = ref();
@@ -301,6 +300,12 @@ const submitForm = () => {
       return false;
     }
   });
+};
+const resetFn = () => {
+  emit("fw-resetBtn");
+  formRef.value.resetFields();
+  emit("update:PageIndex", 1);
+  emit("fw-query", true);
 };
 const tableRef = ref();
 defineExpose({ formRef, tableRef });
