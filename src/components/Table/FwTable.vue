@@ -4,13 +4,13 @@
       v-bind="$attrs"
       ref="formRef"
       class="form-item"
-      :class="[foldState.formClass,{'trans':foldState.trans}]"
+      :class="[formState.formClass,{'trans':formState.trans}]"
       inline
     >
       <slot name="form-item"></slot>
       <el-form-item
         class="form-btn relative mr-1"
-        :class="foldState.btnClass"
+        :class="formState.btnClass"
       >
         <el-button
           @click="emit('fw-queryBtn');submitForm()"
@@ -24,25 +24,25 @@
           auto-insert-space
         >重置</el-button>
         <label
-          v-show="isShowFold"
+          v-show="showSwitch"
           class="flex center-center ml-1"
         >
           <input
-            v-model="foldState.isShow"
+            v-model="formState.isShow"
             type="checkbox"
             class="none"
           />
           <el-icon
             class="trans"
-            :class="[{'rotate-180':!foldState.isShow},foldState.isShow?'text-danger':'text-primary']"
+            :class="[{'rotate-180':!formState.isShow},formState.isShow?'text-danger':'text-primary']"
           >
             <ArrowUp />
           </el-icon>
           <span
             class="trans"
-            :class="[foldState.isShow?'text-danger':'text-primary']"
+            :class="[formState.isShow?'text-danger':'text-primary']"
           >
-            {{foldState.isShow?"折叠":"展开"}}
+            {{formState.isShow?"折叠":"展开"}}
           </span>
         </label>
       </el-form-item>
@@ -126,7 +126,7 @@ interface _props {
 const props = withDefaults(defineProps<_props>(), {
   fwIndex: false,
   fwSelection: false,
-  fwDefaultSwitch: false,
+  fwDefaultSwitch: true,
 });
 /**
  * Emits
@@ -159,7 +159,7 @@ const randomClass = () => {
   }
   return `data-swz-${arr.join("")}`;
 };
-const foldState = reactive({
+const formState = reactive({
   isShow: props.fwDefaultSwitch,
   formClass: randomClass(),
   btnClass: randomClass(),
@@ -168,9 +168,9 @@ const foldState = reactive({
 const switchHeight = () => {
   // 获取dom
   const formDom = document.querySelector<HTMLElement>(
-    `.${foldState.formClass}`
+    `.${formState.formClass}`
   )!;
-  const btnDom = document.querySelector<HTMLElement>(`.${foldState.btnClass}`)!;
+  const btnDom = document.querySelector<HTMLElement>(`.${formState.btnClass}`)!;
   // 展开的高度和关闭的高度
   const showHeight = formDom.scrollHeight + "px";
   const { marginTop, marginBottom } = getComputedStyle(btnDom);
@@ -181,20 +181,20 @@ const switchHeight = () => {
     "px";
   //播放前
   formDom.style.height = formDom.offsetHeight + "px";
-  foldState.trans = true;
+  formState.trans = true;
   //播放
   setTimeout(() => {
-    formDom.style.height = foldState.isShow ? showHeight : hiddenHeight;
+    formDom.style.height = formState.isShow ? showHeight : hiddenHeight;
   }, 0);
   //播放后
-  foldState.isShow &&
+  formState.isShow &&
     setTimeout(() => {
-      foldState.trans = false;
+      formState.trans = false;
       formDom.style.height = "auto";
     }, 301);
 };
 watch(
-  () => foldState.isShow,
+  () => formState.isShow,
   (newVal) => {
     switchHeight();
     emit("fw-switch", newVal);
@@ -203,9 +203,9 @@ watch(
 onMounted(() => {
   // 获取dom
   const formDom = document.querySelector<HTMLElement>(
-    `.${foldState.formClass}`
+    `.${formState.formClass}`
   )!;
-  const btnDom = document.querySelector<HTMLElement>(`.${foldState.btnClass}`)!;
+  const btnDom = document.querySelector<HTMLElement>(`.${formState.btnClass}`)!;
   // 展开的高度和关闭的高度
   const showHeight = formDom.scrollHeight + "px";
   const { marginTop, marginBottom } = getComputedStyle(btnDom);
@@ -215,7 +215,7 @@ onMounted(() => {
     parseFloat(marginBottom) +
     "px";
   // 初始状态
-  formDom.style.height = foldState.isShow ? showHeight : hiddenHeight;
+  formDom.style.height = formState.isShow ? showHeight : hiddenHeight;
 });
 /**
  * 分页
@@ -252,10 +252,10 @@ watchEffect(() => {
  * window的resize事件处理viewWidth
  */
 const slots = useSlots();
-const isFoldState = reactive({
+const switchState = reactive({
   viewWidth: 0,
 });
-const isShowFold = computed(() => {
+const showSwitch = computed(() => {
   const rootArr = slots["form-item"]?.();
   console.log(rootArr);
   let count = 0;
@@ -271,16 +271,16 @@ const isShowFold = computed(() => {
     }
   });
   console.log(count);
-  if (isFoldState.viewWidth > 1799) {
+  if (switchState.viewWidth > 1799) {
     return count > 5;
-  } else if (isFoldState.viewWidth > 1399) {
+  } else if (switchState.viewWidth > 1399) {
     return count > 4;
   } else {
     return count > 3;
   }
 });
 const resizeFn = () => {
-  isFoldState.viewWidth = window.innerWidth;
+  switchState.viewWidth = window.innerWidth;
 };
 onMounted(() => {
   window.addEventListener("resize", resizeFn);
