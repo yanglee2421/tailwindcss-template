@@ -16,9 +16,9 @@
       <template #form-item>
         <template></template>
         <!--  -->
-        <div></div>
-        <el-row></el-row>
-        12345
+        <el-form-item label="日期：">
+          <el-date-picker type="daterange"></el-date-picker>
+        </el-form-item>
         <el-form-item
           label="通常五个字："
           v-for="item in 4"
