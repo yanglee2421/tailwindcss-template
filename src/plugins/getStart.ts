@@ -5,7 +5,7 @@ import * as icons from "@element-plus/icons-vue"
 import store from "@/plugins/store"
 import router from "@/router"
 import * as SwzCom from "@/components"
-import vVis from "@/hooks/vVis"
+import vVis from "@/hooks/v-vis"
 interface App {
     use(plugin: unknown, option?: unknown): void
     component(name: string, component: unknown): void
