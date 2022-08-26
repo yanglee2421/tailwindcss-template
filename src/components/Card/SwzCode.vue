@@ -54,19 +54,24 @@ request<string>({
 });
 const copyFn = () => {
   navigator.clipboard
-    .writeText(state.code)
-    .then((res) => {
-      ElMessage({
-        type: "success",
-        message: "复制成功",
-      });
-    })
-    .catch((err) => {
-      ElMessage({
+    ? navigator.clipboard
+        .writeText(state.code)
+        .then((res) => {
+          ElMessage({
+            type: "success",
+            message: "复制成功",
+          });
+        })
+        .catch((err) => {
+          ElMessage({
+            type: "error",
+            message: "复制失败",
+          });
+        })
+    : ElMessage({
         type: "error",
-        message: "复制失败",
+        message: "剪贴板被禁用！",
       });
-    });
 };
 </script>
 <style lang='scss' scoped>
