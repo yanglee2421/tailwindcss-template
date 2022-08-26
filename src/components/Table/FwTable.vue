@@ -4,14 +4,11 @@
       v-bind="$attrs"
       ref="formRef"
       class="form-item"
-      :class="[formState.formClass,{'trans':formState.trans}]"
+      v-trans="formState.isShow"
       inline
     >
       <slot name="form-item"></slot>
-      <el-form-item
-        class="form-btn relative mr-1"
-        :class="formState.btnClass"
-      >
+      <el-form-item class="form-btn relative mr-1">
         <el-button
           @click="emit('fw-queryBtn');submitForm()"
           type="primary"
@@ -141,82 +138,76 @@ interface _emit {
   (event: "fw-queryBtn", $event?: unknown): void;
   (event: "fw-resetBtn", $event?: unknown): void;
   (event: "fw-switch", $event: boolean): void;
-  (event: "fw-query", $event?: unknown): void;
+  (event: "fw-query", $event: boolean): void;
   (event: "update:PageIndex", $event: number): void;
   (event: "update:PageSize", $event: number): void;
 }
 const emit = defineEmits<_emit>();
 /**
- * 生成随机class
- * 过渡动画
+ * 自定义指令实现展开的过渡动画
  * 表单挂载时的状态
  */
-const randomClass = () => {
-  const arr: string[] = [];
-  for (let i = 0; i < 8; i++) {
-    const num = Math.floor(Math.random() * 16);
-    arr.push(num.toString(16));
-  }
-  return `data-swz-${arr.join("")}`;
-};
 const formState = reactive({
   isShow: props.fwDefaultSwitch,
-  formClass: randomClass(),
-  btnClass: randomClass(),
   trans: false,
 });
-const switchHeight = () => {
-  // 获取dom
-  const formDom = document.querySelector<HTMLElement>(
-    `.${formState.formClass}`
-  )!;
-  const btnDom = document.querySelector<HTMLElement>(`.${formState.btnClass}`)!;
-  // 展开的高度和关闭的高度
-  const showHeight = formDom.scrollHeight + "px";
-  const { marginTop, marginBottom } = getComputedStyle(btnDom);
-  const hiddenHeight =
-    btnDom.offsetHeight +
-    parseFloat(marginTop) +
-    parseFloat(marginBottom) +
-    "px";
-  //播放前
-  formDom.style.height = formDom.offsetHeight + "px";
-  formState.trans = true;
-  //播放
-  setTimeout(() => {
-    formDom.style.height = formState.isShow ? showHeight : hiddenHeight;
-  }, 0);
-  //播放后
-  formState.isShow &&
+interface _binding {
+  value: boolean;
+  arg: string;
+  modifiers: Record<string, boolean>;
+}
+const vTrans = {
+  mounted(formDom: HTMLElement, binding: _binding) {
+    const { value } = binding;
+    // 获取dom
+    const btnDom = formDom.querySelector<HTMLElement>(
+      ":scope>.el-form-item:last-child"
+    )!;
+    // 关闭的高度
+    const { marginTop, marginBottom } = getComputedStyle(btnDom);
+    const hiddenHeight =
+      btnDom.offsetHeight +
+      parseFloat(marginTop) +
+      parseFloat(marginBottom) +
+      "px";
+    // 初始状态
+    formDom.style.height = value ? "" : hiddenHeight;
+  },
+  updated(formDom: HTMLElement, binding: _binding) {
+    const { value } = binding;
+    // 获取dom
+    const btnDom = formDom.querySelector<HTMLElement>(
+      ":scope>.el-form-item:last-child"
+    )!;
+    // 展开的高度和关闭的高度
+    const showHeight = formDom.scrollHeight + "px";
+    const { marginTop, marginBottom } = getComputedStyle(btnDom);
+    const hiddenHeight =
+      btnDom.offsetHeight +
+      parseFloat(marginTop) +
+      parseFloat(marginBottom) +
+      "px";
+    //播放前
+    formDom.style.height = formDom.offsetHeight + "px";
+    formDom.classList.add("trans");
+    //播放
     setTimeout(() => {
-      formState.trans = false;
-      formDom.style.height = "auto";
-    }, 301);
+      formDom.style.height = value ? showHeight : hiddenHeight;
+    }, 0);
+    //播放后
+    value &&
+      setTimeout(() => {
+        formDom.classList.remove("trans");
+        formDom.style.height = "";
+      }, 301);
+  },
 };
 watch(
   () => formState.isShow,
   (newVal) => {
-    switchHeight();
     emit("fw-switch", newVal);
   }
 );
-onMounted(() => {
-  // 获取dom
-  const formDom = document.querySelector<HTMLElement>(
-    `.${formState.formClass}`
-  )!;
-  const btnDom = document.querySelector<HTMLElement>(`.${formState.btnClass}`)!;
-  // 展开的高度和关闭的高度
-  const showHeight = formDom.scrollHeight + "px";
-  const { marginTop, marginBottom } = getComputedStyle(btnDom);
-  const hiddenHeight =
-    btnDom.offsetHeight +
-    parseFloat(marginTop) +
-    parseFloat(marginBottom) +
-    "px";
-  // 初始状态
-  formDom.style.height = formState.isShow ? showHeight : hiddenHeight;
-});
 /**
  * 分页
  * 覆写分页的currentPage
@@ -246,9 +237,9 @@ watchEffect(() => {
 });
 /**
  * 自动选择是否显示展开按钮
- * 监听视口宽存入viewWidth
+ * viewWidth：视口宽
  * 根据rootArr得出count（有效节点数）
- * 根据viewWidth和count计算出结果
+ * 根据viewWidth和count计算出是否展示按钮
  * window的resize事件处理viewWidth
  */
 const slots = useSlots();
@@ -277,6 +268,7 @@ const showSwitch = computed(() => {
     return count > 3;
   }
 });
+// 视口变动时，viewWidth变动
 const resizeFn = () => {
   switchState.viewWidth = window.innerWidth;
 };
@@ -304,15 +296,15 @@ const submitForm = () => {
 const resetFn = () => {
   emit("fw-resetBtn");
   formRef.value.resetFields();
+  const oldPageIndex = props.PageIndex;
   emit("update:PageIndex", 1);
-  emit("fw-query", true);
+  oldPageIndex === 1 && emit("fw-query", true);
 };
 const tableRef = ref();
 defineExpose({ formRef, tableRef });
 </script>
 <style lang='scss' scoped>
 .form-item {
-  overflow: hidden;
   display: grid;
   grid-template: auto / repeat(4, 1fr);
   @media (min-width: 1400px) and (max-width: 1799px) {
@@ -329,6 +321,7 @@ defineExpose({ formRef, tableRef });
 }
 .trans {
   transition: 0.3s;
+  overflow: hidden;
 }
 .rotate-180 {
   transform: rotate(180deg);
