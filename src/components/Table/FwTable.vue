@@ -184,6 +184,7 @@ const vTrans = {
       "px";
     // 初始状态
     formDom.style.height = value ? "" : hiddenHeight;
+    value || formDom.classList.add("trans");
   },
   updated(formDom: HTMLElement, binding: _binding) {
     const { value, oldValue } = binding;
@@ -343,6 +344,7 @@ defineExpose({ formRef, tableRef });
 }
 .trans {
   transition: 0.3s;
+  overflow: hidden;
 }
 .rotate-180 {
   transform: rotate(180deg);

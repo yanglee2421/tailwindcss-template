@@ -1,11 +1,7 @@
 <template>
   <div>
-    <el-checkbox v-model="state.vis">显示</el-checkbox>
-    <h4>轮播图</h4>
-    <swz-code
-      class="w-75"
-      style="margin:0 auto"
-    >
+    <h4>fw-table</h4>
+    <swz-code>
       <fw-table
         :data="[{title:111},{title:222},{title:333}]"
         :total="100"
@@ -32,6 +28,8 @@
         />
       </fw-table>
     </swz-code>
+    <h4>轮播图</h4>
+    <el-checkbox v-model="state.vis">显示</el-checkbox>
     <swz-code
       class="m-center"
       v-vis='state.vis'

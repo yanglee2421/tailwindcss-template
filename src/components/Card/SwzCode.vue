@@ -1,6 +1,9 @@
 <template>
   <div class="box">
-    <slot></slot>
+
+    <div class="slot-box">
+      <slot></slot>
+    </div>
     <div class="flex start-center">
       <el-checkbox v-model="state.showCode">显示源代码</el-checkbox>
       <el-link
@@ -67,15 +70,22 @@ const copyFn = () => {
 };
 </script>
 <style lang='scss' scoped>
+.slot-box {
+  overflow: auto;
+  overflow: overlay;
+}
 .box {
-  max-height: 100%;
-  border: 1px gray solid;
+  max-width: 896px;
+  border: 1px solid $dark-fill;
+  margin: 0 auto;
   margin-bottom: 10px;
 }
 .sticky {
   bottom: 0;
-  border-top: 1px gray solid;
+  border-top: solid $dark-fill;
+  border-width: 1px 0;
   background-color: #fff;
+  cursor: pointer;
   &:hover {
     color: $primary;
   }
@@ -84,17 +94,5 @@ pre {
   font-family: Consolas, "Courier New", monospace;
   font-size: 20px;
   line-height: 24px;
-}
-.p-enter-active,
-.p-leave-active {
-  transition: 0.3s;
-}
-.p-enter-from,
-.p-leave-to {
-  opacity: 0;
-}
-.p-enter-to,
-.p-leave-from {
-  opacity: 1;
 }
 </style>

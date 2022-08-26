@@ -10,19 +10,19 @@ interface _binding {
 import "./v-vis.scss";
 export default {
     mounted(dom: HTMLElement, binding: _binding) {
-        dom.classList.add('swz-vis-clearfix')
         const { value, modifiers } = binding
         const wh = modifiers.width ? 'width' : 'height'
-        value || (dom.classList.add('swz-vis-trans'))
+        dom.classList.add('swz-vis-clearfix')
         dom.style[wh] = value ? '' : "0"
+        value || (dom.classList.add('swz-vis-trans'))
     },
     updated(dom: HTMLElement, binding: _binding) {
         const { value, oldValue, modifiers } = binding
+        const wh = modifiers.width ? 'width' : 'height'
+        const currentValue = (modifiers.width ? dom.offsetWidth : dom.offsetHeight) + "px"
+        const showValue = (modifiers.width ? dom.scrollWidth : dom.scrollHeight) + "px"
         if (value !== oldValue) {
             // value发生变动才执行以下代码
-            const wh = modifiers.width ? 'width' : 'height'
-            const currentValue = (modifiers.width ? dom.offsetWidth : dom.offsetHeight) + "px"
-            const showValue = (modifiers.width ? dom.scrollWidth : dom.scrollHeight) + "px"
             dom.style[wh] = currentValue
             dom.classList.add('swz-vis-trans')
             setTimeout(() => {
