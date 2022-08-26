@@ -39,7 +39,7 @@ const state = reactive({
   code: "",
   showCode: false,
 });
-/* request<string>({
+request<string>({
   method: "post",
   url: "/vueFile",
   params: { name: 77 },
@@ -48,7 +48,7 @@ const state = reactive({
   },
 }).then((res) => {
   state.code = res;
-}); */
+});
 const copyFn = () => {
   navigator.clipboard
     .readText()
@@ -92,5 +92,17 @@ pre {
   font-family: Consolas, "Courier New", monospace;
   font-size: 20px;
   line-height: 24px;
+}
+.p-enter-active,
+.p-leave-active {
+  transition: 0.3s;
+}
+.p-enter-from,
+.p-leave-to {
+  opacity: 0;
+}
+.p-enter-to,
+.p-leave-from {
+  opacity: 1;
 }
 </style>

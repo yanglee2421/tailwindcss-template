@@ -153,6 +153,7 @@ const formState = reactive({
 });
 interface _binding {
   value: boolean;
+  oldValue: boolean;
   arg: string;
   modifiers: Record<string, boolean>;
 }
@@ -173,31 +174,33 @@ const vTrans = {
     formDom.style.height = value ? "" : hiddenHeight;
   },
   updated(formDom: HTMLElement, binding: _binding) {
-    const { value } = binding;
-    const btnDom = formDom.querySelector<HTMLElement>(
-      ":scope>.el-form-item:last-child"
-    )!;
-    // 展开的高度和关闭的高度
-    const showHeight = formDom.scrollHeight + "px";
-    const { marginTop, marginBottom } = getComputedStyle(btnDom);
-    const hiddenHeight =
-      btnDom.offsetHeight +
-      parseFloat(marginTop) +
-      parseFloat(marginBottom) +
-      "px";
-    //播放前
-    formDom.style.height = formDom.offsetHeight + "px";
-    formDom.classList.add("trans");
-    //播放
-    setTimeout(() => {
-      formDom.style.height = value ? showHeight : hiddenHeight;
-    }, 0);
-    //播放后
-    value &&
+    const { value, oldValue } = binding;
+    if (value !== oldValue) {
+      const btnDom = formDom.querySelector<HTMLElement>(
+        ":scope>.el-form-item:last-child"
+      )!;
+      // 展开的高度和关闭的高度
+      const showHeight = formDom.scrollHeight + "px";
+      const { marginTop, marginBottom } = getComputedStyle(btnDom);
+      const hiddenHeight =
+        btnDom.offsetHeight +
+        parseFloat(marginTop) +
+        parseFloat(marginBottom) +
+        "px";
+      //播放前
+      formDom.style.height = formDom.offsetHeight + "px";
+      formDom.classList.add("trans");
+      //播放
       setTimeout(() => {
-        formDom.classList.remove("trans");
-        formDom.style.height = "";
-      }, 301);
+        formDom.style.height = value ? showHeight : hiddenHeight;
+      }, 0);
+      //播放后
+      value &&
+        setTimeout(() => {
+          formDom.classList.remove("trans");
+          formDom.style.height = "";
+        }, 301);
+    }
   },
 };
 watch(
@@ -305,6 +308,7 @@ defineExpose({ formRef, tableRef });
 .form-item {
   display: grid;
   grid-template: auto / repeat(4, 1fr);
+  overflow: hidden;
   @media (min-width: 1400px) and (max-width: 1799px) {
     grid-template: auto / repeat(5, 1fr);
   }
@@ -319,7 +323,6 @@ defineExpose({ formRef, tableRef });
 }
 .trans {
   transition: 0.3s;
-  overflow: hidden;
 }
 .rotate-180 {
   transform: rotate(180deg);

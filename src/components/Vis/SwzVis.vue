@@ -9,7 +9,7 @@ export default {
 };
 </script>
 <script lang='ts' setup>
-import { onMounted, reactive, ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 interface _props {
   modelValue?: boolean;
 }
@@ -49,6 +49,7 @@ watch(
 onMounted(() => {
   // 初始状态
   const dom = root.value!;
+  props.modelValue || dom.classList.add("trans");
   dom.style.height = props.modelValue ? "" : "0";
 });
 </script>

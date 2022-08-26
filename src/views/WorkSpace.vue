@@ -2,9 +2,10 @@
   <div>
     <el-checkbox v-model="state.vis">显示</el-checkbox>
     <h4>轮播图</h4>
+    <!-- v-vis="state.vis" -->
     <swz-code
       class="m-center"
-      v-vis="state.vis"
+      v-vis='state.vis'
     >
       <swz-swiper
         :picArr="arr"
