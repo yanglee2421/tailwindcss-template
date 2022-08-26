@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex-column root"
+    class="flex-column fw-table-root"
     ref="root"
   >
     <el-form
@@ -348,7 +348,7 @@ defineExpose({ formRef, tableRef });
 .rotate-180 {
   transform: rotate(180deg);
 }
-.root {
+.fw-table-root {
   min-width: 1280px;
 }
 </style>

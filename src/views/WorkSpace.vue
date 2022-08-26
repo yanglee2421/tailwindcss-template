@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="work-root">
     <h4>fw-table</h4>
     <swz-code>
       <fw-table
@@ -63,8 +63,4 @@ const state = reactive({
 });
 </script>
 <style lang='scss' scoped>
-.hidden-code {
-  position: sticky;
-  bottom: 0;
-}
 </style>
