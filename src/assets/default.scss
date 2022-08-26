@@ -1,17 +1,26 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+// ======================================type=number的上下按钮
+@mixin num-no-btn {
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
 }
 
-ul {
-    list-style: none;
+.num-no-btn {
+
+    input[type=number] {
+        @include num-no-btn;
+    }
 }
 
-img {
-    vertical-align: bottom;
+input[type=number].num-no-btn {
+    @include num-no-btn;
 }
 
+// =======================================滚动条
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -47,4 +56,25 @@ img {
     @media (any-pointer:fine) {
         scrollbar-width: thin;
     }
+}
+
+// ==================================================全局
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    vertical-align: bottom;
+}
+
+// ==============================================根元素
+#app {
+    height: 100vh;
+    @extend .clearfix;
 }

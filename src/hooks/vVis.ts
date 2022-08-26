@@ -13,8 +13,8 @@ export default {
     },
     updated(dom: HTMLElement, binding: _binding) {
         const { value, oldValue, modifiers } = binding
-        // value发生变动才执行以下代码
         if (value !== oldValue) {
+            // value发生变动才执行以下代码
             const wh = modifiers.width ? 'width' : 'height'
             const currentValue = (modifiers.width ? dom.offsetWidth : dom.offsetHeight) + "px"
             const showValue = (modifiers.width ? dom.scrollWidth : dom.scrollHeight) + "px"
@@ -28,7 +28,7 @@ export default {
                 dom.style.transition = ''
                 dom.style[wh] = ''
                 dom.style.overflow = ''
-            }, 301);
+            }, 301)
         }
     }
 }

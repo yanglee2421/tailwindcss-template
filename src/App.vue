@@ -9,10 +9,6 @@
 
 <style lang="scss">
 @import "@/assets/default.scss";
-#app {
-  height: 100vh;
-  @extend .clearfix;
-}
 .el-pagination {
   padding-top: 5px !important;
 }

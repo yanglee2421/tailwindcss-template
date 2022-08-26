@@ -8,7 +8,7 @@
       @node-collapse="collFn"
     >
       <template #default="{data}">
-        <div class="flex-row flex-1">
+        <div class="flex between-center flex-1">
           <p>{{data.label}}</p>
           <div>
             <el-link
