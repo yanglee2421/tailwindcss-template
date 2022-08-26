@@ -1,9 +1,5 @@
 <template>
-  <div
-    ref="root"
-    class="overflow-hidden"
-    :class="{trans:state.trans}"
-  >
+  <div ref="root">
     <slot></slot>
   </div>
 </template>
@@ -24,9 +20,6 @@ interface _emits {
   (event: "update:modelValue", $event: boolean): void;
 }
 const emit = defineEmits<_emits>();
-const state = reactive({
-  trans: false,
-});
 const root = ref<HTMLElement>();
 const switchShow = () => {
   // 获取dom
@@ -35,7 +28,7 @@ const switchShow = () => {
   const height = dom.scrollHeight + "px";
   // 播放前
   dom.style.height = dom.offsetHeight + "px";
-  state.trans = true;
+  dom.classList.add("trans");
   // 播放
   setTimeout(() => {
     dom.style.height = props.modelValue ? height : "0";
@@ -43,7 +36,7 @@ const switchShow = () => {
   // 播放后
   props.modelValue &&
     setTimeout(() => {
-      state.trans = false;
+      dom.classList.remove("trans");
       dom.style.height = "";
     }, 301);
 };
@@ -62,5 +55,6 @@ onMounted(() => {
 <style lang='scss' scoped>
 .trans {
   transition: 0.3s;
+  overflow: hidden;
 }
 </style>

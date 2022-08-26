@@ -159,7 +159,6 @@ interface _binding {
 const vTrans = {
   mounted(formDom: HTMLElement, binding: _binding) {
     const { value } = binding;
-    // 获取dom
     const btnDom = formDom.querySelector<HTMLElement>(
       ":scope>.el-form-item:last-child"
     )!;
@@ -175,7 +174,6 @@ const vTrans = {
   },
   updated(formDom: HTMLElement, binding: _binding) {
     const { value } = binding;
-    // 获取dom
     const btnDom = formDom.querySelector<HTMLElement>(
       ":scope>.el-form-item:last-child"
     )!;
