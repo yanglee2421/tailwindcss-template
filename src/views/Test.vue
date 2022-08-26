@@ -3,7 +3,7 @@
     <fw-table
       :model="formData"
       :data="[{title:'123'},{}]"
-      @fw-query="initTable"
+      @fw-query="initTable($event)"
       v-model:PageIndex="pagination.PageIndex"
       v-model:PageSize="pagination.PageSize"
       :total="100"
@@ -11,7 +11,13 @@
       index
     >
       <template #form>
+
+        <!--  -->
+        1234
         <template></template>
+        123456
+        <div></div>
+        45646
         <el-form-item label="跟进日期：">
           <el-date-picker
             v-model="formData.data"
@@ -54,9 +60,6 @@ const pagination = reactive({
 const initTable = (boolean: boolean) => {
   boolean && Object.assign(pagination, formData);
   console.log("发个请求", boolean, pagination);
-};
-const log = (i: unknown) => {
-  console.log(i);
 };
 </script>
 <style lang='scss' scoped>

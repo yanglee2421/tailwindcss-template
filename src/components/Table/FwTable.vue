@@ -268,11 +268,10 @@ const showSwitch = computed(() => {
     if (typeof item.type !== "symbol") {
       item.type !== "template" && count++;
     } else {
-      const isFragment = item.type.description === "Fragment";
-      const isArray = Array.isArray(item.children);
-      isFragment && isArray && (count += (item.children as unknown[]).length);
-      const isText = item.type.description === "Text";
-      isText && count++;
+      const target = item.children;
+      const isArray = Array.isArray(target);
+      isArray && (count += (target as unknown[]).length);
+      typeof target === "string" && target.trim() && count++;
     }
   });
   if (switchState.viewWidth >= 1920) {
