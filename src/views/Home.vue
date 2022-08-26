@@ -20,7 +20,7 @@
       <el-menu-item index="4">123</el-menu-item>
     </el-menu>
     <main
-      class="flex-1-auto pt-1 px-1"
+      class="flex-1-auto"
       style="overflow:overlay"
     >
       <router-view />

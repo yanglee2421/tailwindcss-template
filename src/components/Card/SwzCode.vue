@@ -51,14 +51,6 @@ request<string>({
 });
 const copyFn = () => {
   navigator.clipboard
-    .readText()
-    .then((res) => {
-      console.log(res, "11");
-    })
-    .catch((err) => {
-      console.log(err, "err");
-    });
-  navigator.clipboard
     .writeText(state.code)
     .then((res) => {
       ElMessage({

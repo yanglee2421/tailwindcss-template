@@ -10,26 +10,25 @@
       border
       index
     >
-      <!-- 表单 -->
-      <template #form-item>
+      <template #form>
         <template></template>
-        <!--  -->
-        <el-form-item label="日期：">
-          <el-date-picker type="daterange"></el-date-picker>
+        <el-form-item label="跟进日期：">
+          <el-date-picker
+            v-model="formData.data"
+            type="daterange"
+          />
         </el-form-item>
         <el-form-item
           label="通常五个字："
-          v-for="item in 1"
+          v-for="item in 4"
           :key="item"
         >
           <el-input />
         </el-form-item>
       </template>
-      <!-- 工具栏 -->
       <template #tool-bar>
         <el-button>新增</el-button>
       </template>
-      <!-- 表格 -->
       <el-table-column
         label="标题"
         prop="title"
@@ -46,6 +45,7 @@ export default {
 import { reactive } from "vue";
 const formData = reactive({
   input: "",
+  data: [],
 });
 const pagination = reactive({
   PageIndex: 1,

@@ -1,5 +1,8 @@
 <template>
-  <div class="flex-column">
+  <div
+    class="flex-column root"
+    ref="root"
+  >
     <el-form
       v-bind="$attrs"
       ref="formRef"
@@ -7,7 +10,7 @@
       v-trans="formState.isShow"
       inline
     >
-      <slot name="form-item"></slot>
+      <slot name="form"></slot>
       <el-form-item class="form-btn relative mr-1">
         <el-button
           @click="emit('fw-queryBtn');submitForm()"
@@ -101,9 +104,10 @@ import {
   ref,
   watchEffect,
   watch,
-  onMounted,
   useSlots,
-  onBeforeUnmount,
+  onMounted,
+  onBeforeMount,
+  watchPostEffect,
 } from "vue";
 /**
  * Props
@@ -143,6 +147,14 @@ interface _emit {
   (event: "update:PageSize", $event: number): void;
 }
 const emit = defineEmits<_emit>();
+/**
+ * 根标签
+ * 表单的组件实例
+ * 表格的组件实例
+ */
+const root = ref<HTMLElement>();
+const formRef = ref();
+const tableRef = ref();
 /**
  * 自定义指令实现展开的过渡动画
  * 表单挂载时的状态
@@ -241,6 +253,7 @@ watchEffect(() => {
  * viewWidth：视口宽
  * 根据rootArr得出count（有效节点数）
  * 根据viewWidth和count计算出是否展示按钮
+ * 根据viewWidth改变form的列数
  * window的resize事件处理viewWidth
  */
 const slots = useSlots();
@@ -248,7 +261,7 @@ const switchState = reactive({
   viewWidth: 0,
 });
 const showSwitch = computed(() => {
-  const rootArr = slots["form-item"]?.();
+  const rootArr = slots.form?.();
   let count = 0;
   rootArr?.forEach((item) => {
     if (typeof item.type !== "symbol") {
@@ -261,22 +274,37 @@ const showSwitch = computed(() => {
       isText && count++;
     }
   });
-  if (switchState.viewWidth > 1799) {
+  if (switchState.viewWidth >= 1920) {
     return count > 5;
-  } else if (switchState.viewWidth > 1399) {
+  } else if (switchState.viewWidth >= 1600) {
     return count > 4;
   } else {
     return count > 3;
   }
 });
+watchPostEffect(() => {
+  const { viewWidth } = switchState;
+  const rootDom = root.value!;
+  const dom = rootDom.querySelector<HTMLElement>(":scope>form:first-child")!;
+  if (viewWidth >= 1920) {
+    dom.style.gridTemplate = "auto / repeat(6, minmax(320px, 1fr))";
+  } else if (switchState.viewWidth >= 1600) {
+    dom.style.gridTemplate = "auto / repeat(5, minmax(320px, 1fr))";
+  } else {
+    dom.style.gridTemplate = "";
+  }
+});
 // 视口变动时，viewWidth变动
 const resizeFn = () => {
-  switchState.viewWidth = window.innerWidth;
+  const rootDom = root.value!;
+  const dom = rootDom.querySelector<HTMLElement>(":scope>form:first-child")!;
+  switchState.viewWidth = dom.clientWidth;
 };
 onMounted(() => {
+  resizeFn();
   window.addEventListener("resize", resizeFn);
 });
-onBeforeUnmount(() => {
+onBeforeMount(() => {
   window.removeEventListener("resize", resizeFn);
 });
 /**
@@ -284,7 +312,6 @@ onBeforeUnmount(() => {
  * 重置按钮
  * 向外曝露form和table的组件实例以提供方法
  */
-const formRef = ref();
 const submitForm = () => {
   formRef.value.validate((vali: boolean) => {
     if (vali) {
@@ -301,20 +328,13 @@ const resetFn = () => {
   emit("update:PageIndex", 1);
   oldPageIndex === 1 && emit("fw-query", true);
 };
-const tableRef = ref();
 defineExpose({ formRef, tableRef });
 </script>
 <style lang='scss' scoped>
 .form-item {
   display: grid;
-  grid-template: auto / repeat(4, 1fr);
+  grid-template: auto / repeat(4, minmax(320px, 1fr));
   overflow: hidden;
-  @media (min-width: 1400px) and (max-width: 1799px) {
-    grid-template: auto / repeat(5, 1fr);
-  }
-  @media (min-width: 1800px) {
-    grid-template: auto / repeat(6, 1fr);
-  }
 }
 .form-btn {
   grid-row: 1 / span 1;
@@ -326,5 +346,8 @@ defineExpose({ formRef, tableRef });
 }
 .rotate-180 {
   transform: rotate(180deg);
+}
+.root {
+  min-width: 1280px;
 }
 </style>
