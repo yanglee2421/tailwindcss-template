@@ -1,5 +1,13 @@
 <template>
   <div class="work-root">
+    <h4>v-drag</h4>
+    <ul>
+      <li
+        v-for="(item,index) in arr"
+        :key="item"
+        v-drag="{index,arr}"
+      >{{item}}</li>
+    </ul>
     <h4>fw-table</h4>
     <swz-code>
       <fw-table
@@ -55,7 +63,7 @@ import img03 from "@/assets/picList/3.jpg";
 import img04 from "@/assets/picList/4.jpg";
 import img05 from "@/assets/picList/5.jpg";
 import { reactive } from "vue";
-const arr = [img01, img02, img03, img04, img05];
+const arr = reactive([img01, img02, img03, img04, img05]);
 const state = reactive({
   vis: false,
   PageIndex: 1,
