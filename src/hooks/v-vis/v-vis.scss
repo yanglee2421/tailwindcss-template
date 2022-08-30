@@ -12,4 +12,5 @@
 .swz-vis-trans {
     overflow: hidden;
     transition: .3s;
+    will-change: width, height;
 }
