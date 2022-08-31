@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="m-center b">
+    <div>
       <ul class="m-1 overflow-hidden relative">
         <li class="vis-hidden">
           <img :src="props.picArr[0]" />
@@ -39,18 +39,28 @@ const state = reactive({
   arrow: "toRight",
   currentIndex: 0,
 });
+let timer = true;
 const currentIndex = computed({
   get() {
     return state.currentIndex;
   },
   set(value) {
-    state.arrow = value - state.currentIndex > 0 ? "toLeft" : "toRight";
-    value < 0 && (value = props.picArr.length - 1);
-    Reflect.set(state, "currentIndex", value % props.picArr.length);
+    if (timer) {
+      timer = false;
+      state.arrow = value - state.currentIndex > 0 ? "toLeft" : "toRight";
+      value < 0 && (value = props.picArr.length - 1);
+      Reflect.set(state, "currentIndex", value % props.picArr.length);
+      setTimeout(() => {
+        timer = true;
+      }, 501);
+    }
   },
 });
 </script>
 <style lang='scss' scoped>
+img {
+  max-width: 100%;
+}
 li.absolute {
   top: 0;
 }
@@ -58,7 +68,8 @@ li.absolute {
 .toLeft-leave-active,
 .toRight-enter-active,
 .toRight-leave-active {
-  transition: 0.5s;
+  transition: 0.5s linear;
+  will-change: transform;
 }
 .toLeft-enter-from,
 .toRight-leave-to {
