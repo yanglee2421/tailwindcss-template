@@ -23,12 +23,12 @@ declare module "qrcode" {
     errorCorrectionLevel: "H" | "Q" | "M" | "L",
     maskPattern: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7,
   }
-  type _params = [string, Partial<_option>, Function?]
+  type _params = [string | string[], Partial<_option>?, Function?]
   interface _qrcode {
-    toString(...params: _params): string
-    toCanvas(...params: _params): HTMLCanvasElement
-    declare toCanvas(dom: HTMLCanvasElement, ...params: _params): HTMLCanvasElement
-    toDataURL(...params: _params): string
+    toString(...params: _params): Promise<string>
+    toDataURL(...params: _params): Promise<string>
+    toCanvas(...params: _params): Promise<HTMLCanvasElement>
+    declare toCanvas(dom: HTMLCanvasElement, ...params: _params): Promise<HTMLCanvasElement>
   }
   const qrcode: _qrcode
   export default qrcode
