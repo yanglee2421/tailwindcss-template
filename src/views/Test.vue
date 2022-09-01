@@ -1,19 +1,13 @@
 <template>
   <div>
-    <div
-      class="h-100"
-      v-vis="false"
-    >
-      <img
-        :src="state.src"
-        id="qrcodeImg"
-      />
-      <canvas
-        :src="state.src"
-        id="qrcodeCanvas"
-      ></canvas>
-    </div>
-    <swz-swiper :picArr="state.arr"></swz-swiper>
+    <img
+      :src="state.src"
+      id="qrcodeImg"
+    />
+    <canvas
+      :src="state.src"
+      id="qrcodeCanvas"
+    ></canvas>
   </div>
 </template>
 <script lang="ts">
@@ -23,7 +17,7 @@ export default {
 </script>
 <script lang='ts' setup>
 import { onMounted, reactive } from "vue";
-import Qrcode from "qrcode";
+import qrcode from "qrcode";
 const state = reactive({
   src: "",
   arr: [
@@ -37,8 +31,7 @@ const state = reactive({
 onMounted(() => {
   const img = document.querySelector<HTMLImageElement>("#qrcodeImg")!;
   const canvas = document.querySelector<HTMLCanvasElement>("#qrcodeCanvas")!;
-  const res = Qrcode.toCanvas(canvas, "汉字", {
-    // width: 81,
+  const res = qrcode.toCanvas("汉字", {
     margin: 1,
     color: {
       light: "#ffff",
@@ -46,23 +39,9 @@ onMounted(() => {
     },
     scale: 5,
     small: true,
-    /**
-     * 二维码版本
-     * 纠错级别
-     * 屏蔽符号
-     * 转日本格式
-     */
     version: 4,
     errorCorrectionLevel: "H",
     maskPattern: 7,
-  });
-  res.then((res) => {
-    console.dir(img);
-    canvas.toBlob((blob) => {
-      console.log(blob);
-      const file = new File([blob] as any, "文件名");
-      console.dir(file);
-    });
   });
 });
 </script>

@@ -5,9 +5,33 @@
  */
 /// <reference types="vite/client" />
 declare module '*.vue' {
-  import type { DefineComponent } from 'vue'
+  import type { DefineComponent, HtmlHTMLAttributes } from 'vue'
   const component: DefineComponent<{}, {}, any>
   export default component
+}
+declare module "qrcode" {
+  interface _option {
+    width: number
+    margin: number
+    color: {
+      light?: string
+      dark?: string
+    },
+    scale: number
+    small: boolean
+    version: number
+    errorCorrectionLevel: "H" | "Q" | "M" | "L",
+    maskPattern: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7,
+  }
+  type _params = [string, Partial<_option>, Function?]
+  interface _qrcode {
+    toString(...params: _params): string
+    toCanvas(...params: _params): HTMLCanvasElement
+    declare toCanvas(dom: HTMLCanvasElement, ...params: _params): HTMLCanvasElement
+    toDataURL(...params: _params): string
+  }
+  const qrcode: _qrcode
+  export default qrcode
 }
 /**
  * declare，宣言一个变量必定存在，并为其指定类型
