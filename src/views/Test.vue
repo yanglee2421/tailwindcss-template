@@ -3,6 +3,7 @@
     <div
       v-if="state.isShow"
       @mousemove="pointerMoveFn"
+      @wheel="wheelFn"
       class="mask"
     >
       <div class="btn-close"></div>
@@ -58,6 +59,9 @@ const pointerMoveFn = (event: MouseEvent) => {
   const poiRef = poiRigRef.value!;
   poiLef.style.transform = `translate(${clientX}px,${clientY}px) rotate(-135deg)`;
   poiRef.style.transform = `translate(${clientX}px,${clientY}px) rotate(45deg)`;
+};
+const wheelFn = (event: WheelEvent) => {
+  console.log(event);
 };
 onMounted(() => {
   // mas;
@@ -119,7 +123,7 @@ onMounted(() => {
     display: block;
     width: calc($wh * 0.8);
     height: $h;
-    border-radius: $h/2;
+    border-radius: calc($h / 2);
     background-color: $danger;
   }
   &::before {
