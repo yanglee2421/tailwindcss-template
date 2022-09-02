@@ -1,11 +1,19 @@
 <template>
-  <div>
-    <input
-      type="file"
-      @change="fun"
+  <div class="b">
+    <el-upload
+      :show-file-list="true"
+      v-model:file-list="state.fileList"
+      :on-preview="previewFn"
+      :before-upload="chkUpd"
+      :http-request="uploadFn"
+      :on-remove="removeFn"
+      :limit="3"
+      :on-exceed="overLimitFn"
+      multiple
     >
-    <div id="qrcode"></div>
-    <canvas id="dom_canvas"></canvas>
+      <el-button>上传</el-button>
+    </el-upload>
+    <el-link @click="log(state.fileList)">log</el-link>
   </div>
 </template>
 <script lang='ts'>
@@ -14,37 +22,43 @@ export default {
 };
 </script>
 <script lang='ts' setup>
-import { onMounted } from "vue";
-import qrcode from "qrcode";
-import request from "@/api/request";
-const fun = (event: any) => {
-  console.log(event.currentTarget?.files);
+import { ElMessage } from "element-plus";
+import { reactive, watchEffect } from "vue";
+import type { UploadFile } from "element-plus";
+interface _state {
+  fileList: File[];
+}
+const state = reactive<_state>({
+  fileList: [],
+});
+const log = (...i: unknown[]) => {
+  console.log(...i);
 };
-onMounted(() => {
-  const dom = document.querySelector("#qrcode");
-  const canvas = document.querySelector<HTMLCanvasElement>("#dom_canvas")!;
-  qrcode
-    .toCanvas(["要", "生"], {
-      width: 81,
-      margin: 1,
-      errorCorrectionLevel: "H",
-    })
-    .then((canvas) => {
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const file = new File([blob], "文件名.png", { type: blob.type });
-          console.log(file);
-          const form = new FormData();
-          form.append("file", file);
-          const url = URL.createObjectURL(blob);
-          window.open(url);
-          /* request({
-          data: form,
-        }); */
-        }
-      });
-    });
+const chkUpd = (file: File) => {
+  // return false;
+};
+const uploadFn = (file: File) => {
+  // console.log("上传", file);
+};
+const previewFn = (uploadFile: UploadFile) => {
+  console.log(uploadFile);
+};
+const removeFn = (uploadFile: UploadFile) => {
+  console.log(state.fileList);
+  const file = uploadFile.raw!;
+  console.log(state.fileList.includes(file));
+};
+const overLimitFn = (files: File[]) => {
+  ElMessage.warning("超了超了");
+};
+watchEffect(() => {
+  console.log(state.fileList);
 });
 </script>
 <style lang='scss' scoped>
+.b {
+  div:first-child {
+    width: 400px;
+  }
+}
 </style>
