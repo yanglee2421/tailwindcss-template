@@ -1,20 +1,34 @@
 <template>
-  <div class="b">
-    <el-upload
-      :show-file-list="true"
-      v-model:file-list="state.fileList"
-      :on-preview="previewFn"
-      :before-upload="chkUpd"
-      :http-request="uploadFn"
-      :on-remove="removeFn"
-      :limit="3"
-      :on-exceed="overLimitFn"
-      multiple
+  <teleport to="body">
+    <div
+      v-if="state.isShow"
+      @mousemove="pointerMoveFn"
+      class="mask"
     >
-      <el-button>上传</el-button>
-    </el-upload>
-    <el-link @click="log(state.fileList)">log</el-link>
-  </div>
+      <div class="btn-close"></div>
+      <div class="left">
+        <div
+          ref="poiLefRef"
+          class="pointer"
+        ></div>
+      </div>
+      <div class="center">
+        <el-image :src="arr[index]">
+          <template #error>
+            <el-icon :size="100">
+              <Picture />
+            </el-icon>
+          </template>
+        </el-image>
+      </div>
+      <div class="right">
+        <div
+          ref="poiRigRef"
+          class="pointer"
+        ></div>
+      </div>
+    </div>
+  </teleport>
 </template>
 <script lang='ts'>
 export default {
@@ -22,43 +36,100 @@ export default {
 };
 </script>
 <script lang='ts' setup>
-import { ElMessage } from "element-plus";
-import { reactive, watchEffect } from "vue";
-import type { UploadFile } from "element-plus";
-interface _state {
-  fileList: File[];
+// import img from "@/assets/bg.jpg";
+import img from "@/assets/picList/1.jpg";
+import { onMounted, reactive, ref } from "vue";
+interface _props {
+  arr?: string[];
+  index?: number;
 }
-const state = reactive<_state>({
-  fileList: [],
+const props = withDefaults(defineProps<_props>(), {
+  arr: () => [],
+  index: 0,
 });
-const log = (...i: unknown[]) => {
-  console.log(...i);
+const state = reactive({
+  isShow: true,
+});
+const poiLefRef = ref<HTMLElement>();
+const poiRigRef = ref<HTMLElement>();
+const pointerMoveFn = (event: MouseEvent) => {
+  const { clientX, clientY } = event;
+  const poiLef = poiLefRef.value!;
+  const poiRef = poiRigRef.value!;
+  poiLef.style.transform = `translate(${clientX}px,${clientY}px) rotate(-135deg)`;
+  poiRef.style.transform = `translate(${clientX}px,${clientY}px) rotate(45deg)`;
 };
-const chkUpd = (file: File) => {
-  // return false;
-};
-const uploadFn = (file: File) => {
-  // console.log("上传", file);
-};
-const previewFn = (uploadFile: UploadFile) => {
-  console.log(uploadFile);
-};
-const removeFn = (uploadFile: UploadFile) => {
-  console.log(state.fileList);
-  const file = uploadFile.raw!;
-  console.log(state.fileList.includes(file));
-};
-const overLimitFn = (files: File[]) => {
-  ElMessage.warning("超了超了");
-};
-watchEffect(() => {
-  console.log(state.fileList);
+onMounted(() => {
+  // mas;
 });
 </script>
 <style lang='scss' scoped>
-.b {
-  div:first-child {
-    width: 400px;
+// 遮罩层
+.mask {
+  @include pos-center(fixed);
+  display: grid;
+  grid-template: auto/1fr auto 1fr;
+  background-color: rgba(0, 0, 0, 0.5);
+  // 中间
+  .center {
+    @include flex-center;
+    color: #fff;
+    .el-image {
+      min-width: 100px;
+      min-height: 100px;
+    }
+  }
+  // 两边
+  .left,
+  .right {
+    cursor: none;
+    .pointer {
+      @include abs-left-top;
+      display: none;
+      width: 30px;
+      height: 30px;
+      border: #fff solid;
+      border-radius: 5px;
+      border-width: 3px 3px 0 0;
+      will-change: transform;
+    }
+    // 进入左右时显示
+    &:hover {
+      .pointer {
+        display: block;
+      }
+    }
+  }
+}
+.btn-close {
+  $wh: 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 9;
+  width: $wh;
+  height: $wh;
+  transition: 0.5s;
+  transform: rotate(0);
+  &::before,
+  &::after {
+    content: "";
+    $h: 4px;
+    @include pos-center;
+    display: block;
+    width: calc($wh * 0.8);
+    height: $h;
+    border-radius: $h/2;
+    background-color: $danger;
+  }
+  &::before {
+    transform: rotate(45deg);
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+  &:hover {
+    transform: rotate(180deg);
   }
 }
 </style>

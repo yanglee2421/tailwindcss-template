@@ -8,11 +8,13 @@ const router = createRouter({
             name: "login",
             component: () => import("@/views/Login.vue"),
             meta: { title: "登录" },
+            props: true,
         },
         {
             path: "/",
             component: () => import("@/views/Home.vue"),
             meta: { title: "首页" },
+            props: {},
             children: [
                 {
                     path: 'work',

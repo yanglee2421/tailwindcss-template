@@ -1,0 +1,37 @@
+@mixin pos-center($position: absolute) {
+    position: $position;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+@mixin abs-left-top {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+@mixin m-center {
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@mixin flex-center($xy: null) {
+    display: flex;
+
+    @if($xy=="x") {
+        justify-content: center;
+    }
+
+    @else if($xy=="y") {
+        align-items: center;
+    }
+
+    @else {
+        justify-content: center;
+        align-items: center;
+    }
+}
