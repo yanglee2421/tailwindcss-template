@@ -2,11 +2,15 @@
   <teleport to="body">
     <div
       v-if="state.isShow"
+      v-track="{}"
       @mousemove="pointerMoveFn"
       @wheel="wheelFn"
       class="mask"
     >
-      <div class="btn-close"></div>
+      <div
+        @click="state.isShow=false"
+        class="btn-close"
+      ></div>
       <div class="left">
         <div
           ref="poiLefRef"
@@ -30,6 +34,7 @@
       </div>
     </div>
   </teleport>
+  <el-button @click="state.isShow=true">打开</el-button>
 </template>
 <script lang='ts'>
 export default {
@@ -60,7 +65,7 @@ const pointerMoveFn = (event: MouseEvent) => {
   poiLef.style.transform = `translate(${clientX}px,${clientY}px) rotate(-135deg)`;
   poiRef.style.transform = `translate(${clientX}px,${clientY}px) rotate(45deg)`;
 };
-const wheelFn = (event: WheelEvent) => {
+const wheelFn = (event: Event) => {
   console.log(event);
 };
 onMounted(() => {
