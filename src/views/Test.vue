@@ -2,7 +2,7 @@
   <teleport to="body">
     <div
       v-if="state.isShow"
-      v-track="{}"
+      v-track:arg.modifiers01.modifiers02="{}"
       @mousemove="pointerMoveFn"
       @wheel="wheelFn"
       class="mask"
@@ -37,8 +37,11 @@
   <el-button @click="state.isShow=true">打开</el-button>
 </template>
 <script lang='ts'>
+import HelloWorldVue from "@/components/HelloWorld.vue";
 export default {
   inheritAttrs: true,
+  // extends: HelloWorldVue,
+  mixins: [HelloWorldVue],
 };
 </script>
 <script lang='ts' setup>
@@ -54,7 +57,7 @@ const props = withDefaults(defineProps<_props>(), {
   index: 0,
 });
 const state = reactive({
-  isShow: true,
+  isShow: false,
 });
 const poiLefRef = ref<HTMLElement>();
 const poiRigRef = ref<HTMLElement>();

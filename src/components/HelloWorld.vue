@@ -5,6 +5,13 @@
     <el-button @click="state.count++;log(state.count)">加加</el-button>
   </div>
 </template>
+<script lang="ts">
+export default {
+  mounted() {
+    console.log(`hello World!`);
+  },
+};
+</script>
 <script lang="ts" setup>
 import {
   onBeforeMount,

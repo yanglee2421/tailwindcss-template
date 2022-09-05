@@ -12,6 +12,7 @@ interface _binding {
 let begTime = 0
 export default {
     mounted(el: HTMLElement, binding: _binding) {
+        console.log(binding)
         const { value } = binding
         begTime = Date.now()//本次浏览的开始时间
         const localTimes = localStorage.getItem("track-times")
