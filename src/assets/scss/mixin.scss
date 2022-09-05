@@ -1,5 +1,5 @@
 @mixin pos-center($position: absolute) {
-    position: $position;
+    position: #{$position};
     top: 0;
     right: 0;
     bottom: 0;

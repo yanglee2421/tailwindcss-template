@@ -21,7 +21,7 @@ export default {
             value.count || (value.count = 0)
             value.count++
             Array.isArray(value.eventArr) || (value.eventArr = [])
-            value.eventArr?.push(event.target)
+            value.eventArr?.push((event.target as HTMLElement).innerText)
         })
     },
     beforeUnmount(el: HTMLElement, binding: _binding) {
