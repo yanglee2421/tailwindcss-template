@@ -55,7 +55,7 @@ label {
   display: inline-flex;
   align-items: center;
   vertical-align: bottom;
-  padding: 3px 7px 3px 23px;
+  padding: 5px 7px 5px 23px;
   border-radius: 20px;
   background-color: $danger;
   transition: 0.5s;
@@ -63,7 +63,7 @@ label {
   @include ball;
 }
 .checked {
-  padding: 3px 23px 3px 7px;
+  padding: 5px 23px 5px 7px;
   background-color: $primary;
   &::before {
     @include ball;
