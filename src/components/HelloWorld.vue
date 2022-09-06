@@ -4,6 +4,7 @@
     <p>{{state.count}}</p>
     <el-button @click="state.count++;log(state.count)">加加</el-button>
   </div>
+  <div></div>
 </template>
 <script lang="ts">
 export default {
