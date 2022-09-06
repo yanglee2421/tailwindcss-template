@@ -4,7 +4,7 @@
       v-model="inputValue"
       type="checkbox"
     />
-    <span>{{inputValue?"上架":"下架"}}</span>
+    <span>{{inputValue?"上架了":"下架了"}}</span>
   </label>
 </template>
 <script lang='ts'>
@@ -56,7 +56,7 @@ label {
   align-items: center;
   vertical-align: bottom;
   padding: 3px 7px 3px 23px;
-  border-radius: 12px;
+  border-radius: 20px;
   background-color: $danger;
   transition: 0.5s;
   color: #fff;
