@@ -96,7 +96,8 @@ onMounted(() => {
   .right {
     cursor: none;
     .pointer {
-      @include abs-left-top;
+      position: absolute;
+      @include pos-list(0, auto, auto, 0);
       display: none;
       width: 30px;
       height: 30px;

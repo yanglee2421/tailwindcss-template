@@ -17,7 +17,14 @@
         index="param"
         :route="{name:'param'}"
       >传参</el-menu-item>
-      <el-menu-item index="4">123</el-menu-item>
+      <el-menu-item
+        index="test02"
+        :route="{name:'test02'}"
+      >测试02</el-menu-item>
+      <el-menu-item
+        index="test03"
+        :route="{name:'test03'}"
+      >测试03</el-menu-item>
     </el-menu>
     <main
       class="flex-1-auto"

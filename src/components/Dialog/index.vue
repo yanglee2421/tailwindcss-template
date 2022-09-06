@@ -14,7 +14,7 @@
         <el-button>按钮六</el-button>
         <el-button>按钮七</el-button>
         <el-button
-          @click="emit('update:modelValue',false)"
+          @click="$emit('update:modelValue',false)"
           type="danger"
         >关闭</el-button>
       </div>
@@ -24,10 +24,16 @@
 <script lang='ts'>
 export default {
   inheritAttrs: true,
+  props: {
+    modelValue: {
+      type: [Boolean, Object],
+    },
+  },
+  emits: ["update:modelValue"],
 };
 </script>
 <script lang='ts' setup>
-import { reactive } from "vue";
+/* import { reactive } from "vue";
 interface _props {
   modelValue: boolean;
 }
@@ -37,7 +43,7 @@ const props = withDefaults(defineProps<_props>(), {
 interface _emit {
   (event: "update:modelValue", $event: boolean): void;
 }
-const emit = defineEmits<_emit>();
+const emit = defineEmits<_emit>(); */
 </script>
 <style lang='scss' scoped>
 .swz-dialog {
