@@ -1,17 +1,17 @@
 <template>
   <div>
-    <el-checkbox v-model="state.vis">打开</el-checkbox>
-    <el-button @click="state.vis={inp:'4399'}">edit</el-button>
-    <swz-dialog
-      v-model="state.vis"
-      v-model:model="state.model"
-    >
-      <el-form :model="state.model">
-        <el-form-item>
-          <el-input v-model="state.model.inp"></el-input>
-        </el-form-item>
-      </el-form>
-    </swz-dialog>
+    <el-switch
+      v-model="state.mes"
+      :active-value="1"
+      :inactive-value="0"
+      active-text="上架"
+      inactive-text="下架"
+      inline-prompt
+      size="large"
+    />
+    <fw-switch v-model="state.mes"></fw-switch>
+    <el-button @click="state.mes=1">01</el-button>
+    <el-button @click="state.mes=0">00</el-button>
   </div>
 </template>
 <script lang='ts'>
@@ -21,11 +21,9 @@ export default {
 </script>
 <script lang='ts' setup>
 import { reactive } from "vue";
-const state = reactive<any>({
-  vis: false,
-  model: {
-    inp: "",
-  },
+
+const state = reactive({
+  mes: 0,
 });
 </script>
 <style lang='scss' scoped>
