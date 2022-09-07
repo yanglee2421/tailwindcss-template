@@ -17,11 +17,13 @@
           type="primary"
           icon="Search"
           auto-insert-space
+          v-track:click="{action:'击点了查询',time:Date.now()}"
         >查询</el-button>
         <el-button
           @click="resetFn()"
           icon="Refresh"
           auto-insert-space
+          v-track:click="{action:'击点了重置',time:Date.now()}"
         >重置</el-button>
         <label
           v-show="showSwitch"

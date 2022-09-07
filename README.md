@@ -1,20 +1,25 @@
 # 埋点
-## 收集用户行为
-- 在页面上点击了哪些元素
-- 在页面上停留了多长时间
-- 浏览了页面多少次
-## DOM事件
-- 使用`addEventListener`监听事件
-- 事件委托给根元素
-- 事件的回调收集信息
-## 生命周期
-- `mounted`
-    - 收集浏览开始的时间
-    - 给根元素绑定事件
-- `beforeUnmount`
-    - 收集浏览结束的时间
-    - 把收集到的数据发送出去
-- `window.onclose`
-    - 直接关闭标签不会触发组件卸载
-    - 收集浏览结束的时间
-    - 把收集到的数据发送出去
+## 用法
+~~~tsx
+/**
+ * 参数为事件名，值非函数
+ * 给标记元素绑定该事件，事件触发时将值push到meta的actions中
+ */
+<fw-div v-track:click="{}"></fw-div>
+/**
+ * 参数为事件名，值为函数
+ * 给标记元素绑定该事件，事件触发时将函数的返回值push到meta的actions中
+ */
+<fw-div v-track:input="(event)=>event"></fw-div>
+/**
+ * 无参数，值为函数
+ * 挂载和卸载前，以meta和track方法作为实参调用该函数
+ */
+<fw-div v-track="(meta,track)=>{}"></fw-div>
+/**
+ * 参数为root
+ * 挂载时，将值push到actions中
+ * 卸载时或页面关闭时，调用track
+ */
+<fw-div v-track:root="(meta,callback)=>{}"></fw-div>
+~~~

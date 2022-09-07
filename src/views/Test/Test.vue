@@ -1,5 +1,6 @@
 <template>
   <div v-track:root="{title:'这是测试页一'}">
+    <div v-track></div>
     <el-button
       v-for="item in 10"
       :key="item"

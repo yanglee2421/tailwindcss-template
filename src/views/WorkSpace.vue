@@ -1,6 +1,6 @@
 <template>
   <div
-    v-track:root
+    v-track:root="{title:'这是表格页面'}"
     class="h-100"
   >
     <fw-table
@@ -13,7 +13,10 @@
     >
       <template #form>
         <el-form-item label="姓名：">
-          <el-input></el-input>
+          <el-input
+            v-model.trim="formData.input"
+            v-track="(event)=>event.target.value"
+          />
         </el-form-item>
         <el-form-item label="年龄：">
           <el-input></el-input>
@@ -29,6 +32,7 @@
         <el-button
           type="success"
           data-value="新增按钮"
+          v-track:click="{action:'点击了新增'}"
         >新增</el-button>
       </template>
       <el-table-column
@@ -72,10 +76,12 @@
             v-track:btn
             data-btn="编辑"
             type="primary"
+            v-track:click="{action:'点击了编辑'}"
           >编辑</el-link>
           <el-link
             type="danger"
             class="ml-1"
+            v-track:click="{action:'点击了删除'}"
           >删除</el-link>
         </template>
       </el-table-column>
@@ -93,6 +99,7 @@ import request from "@/api/request";
 const formData = reactive({
   PageIndex: 1,
   PageSize: 10,
+  input: "",
 });
 interface _table {
   data: unknown[];
