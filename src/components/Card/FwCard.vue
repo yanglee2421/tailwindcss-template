@@ -44,7 +44,7 @@ export default {
 import logo from "@/assets/logo.png";
 import icon from "@/assets/icon.png";
 interface _props {
-  firstIcon: boolean;
+  firstIcon?: boolean;
 }
 const props = withDefaults(defineProps<_props>(), {
   firstIcon: true,

@@ -1,54 +1,54 @@
 import request from "@/api/request"
-interface _value {
-    count: number//被点击的次数
-    time: number//用户停留的时长
+import dateFormat from "@/tool/dateFormat"
+interface _meta {
+    beginTime: string//开始浏览的时间
+    endTime: string//结束浏览的时间
+    root: unknown//根元素的信息
+    metaArr: unknown[]//触发事件的元素
     times: number//用户浏览的次数
-    eventArr: unknown[]//被点击的元素
 }
 interface _binding {
-    value: _value
+    value: unknown
     arg: string
     modifier: Record<string, boolean>
 }
 // 要收集的数据
-let res: Partial<_value> = {}
-let begTime = 0
+let meta: Partial<_meta> = {}
 // 收集事件的方法
 const track = () => {
-    res.time = Date.now() - begTime
-    res.eventArr = res.eventArr?.filter(item => item)
-    request({ url: "/track", data: res })
-    res = {} as any
+    meta.endTime = dateFormat(Date.now(), true)
+    meta.metaArr = meta.metaArr?.filter(item => item)
+    request({ url: "http://10.32.18.46:8080/log/add", data: meta })
+    meta = {} as any
 }
 // 事件控制器
 const controller = new AbortController()
 const signal = controller.signal
+// 自定义指令
 export default {
     mounted(el: HTMLElement, binding: _binding) {
         const { arg, value } = binding
         switch (arg) {
             case "root":
-                //获取本次浏览的开始时间
-                begTime = Date.now()
+                //抓取开始时间和根信息
+                meta.root = value
+                meta.beginTime = dateFormat(Date.now(), true)
                 // 获取浏览次数
                 const localTimes = localStorage.getItem("track-times")
-                res.times = 1 + (localTimes ? Number(localTimes) : 0)
-                localStorage.setItem("track-times", res.times.toString())
+                meta.times = 1 + (localTimes ? Number(localTimes) : 0)
+                localStorage.setItem("track-times", meta.times.toString())
                 // beforeunload事件
                 window.addEventListener("beforeunload", () => {
                     track()
                 }, { signal })
                 break
-            case "click":
+            default:
                 // 绑定点击事件
-                el.addEventListener("click", (event: Event) => {
-                    res.count || (res.count = 0)
-                    res.count++
-                    Array.isArray(res.eventArr) || (res.eventArr = [])
-                    const item = value
-                    res.eventArr?.push(item)
+                el.addEventListener(arg, (event: Event) => {
+                    Array.isArray(meta.metaArr) || (meta.metaArr = [])
+                    const item = typeof value === "function" ? value(event) : value
+                    meta.metaArr?.push(item)
                 })
-                break
         }
     },
     // 组件卸载时

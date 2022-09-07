@@ -1,12 +1,14 @@
 <template>
-  <div v-track>
-    <el-button>按钮一</el-button>
-    <el-button>按钮二</el-button>
-    <el-button>按钮三</el-button>
-    <el-button>按钮四</el-button>
-    <el-button>按钮五</el-button>
-    <el-button>按钮六</el-button>
-    <el-button>按钮七</el-button>
+  <div v-track:root="{title:'这是测试页一'}">
+    <el-button
+      v-for="item in 10"
+      :key="item"
+      v-track:click="{becon:`点击了按钮${item}`}"
+    >按钮{{item}}</el-button>
+    <el-link
+      @click="goBack()"
+      v-track:click="{action:'跳转到其它tab'}"
+    >走人</el-link>
   </div>
 </template>
 <script lang='ts'>
@@ -15,6 +17,12 @@ export default {
 };
 </script>
 <script lang='ts' setup>
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const goBack = () => {
+  router.push("/");
+};
 </script>
 <style lang='scss' scoped>
 </style>
