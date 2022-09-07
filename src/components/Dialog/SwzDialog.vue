@@ -18,7 +18,7 @@ export default {
 import { onMounted, reactive, watch } from "vue";
 interface _props {
   modelValue: boolean | Record<string, unknown>;
-  model: Record<string, unknown>;
+  model?: Record<string, unknown>;
 }
 const props = withDefaults(defineProps<_props>(), {
   modelValue: false,

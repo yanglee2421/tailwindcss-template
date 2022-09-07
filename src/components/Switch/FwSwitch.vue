@@ -4,7 +4,7 @@
       v-model="inputValue"
       type="checkbox"
     />
-    <span>{{inputValue?"上架了":"下架了"}}</span>
+    <span>{{inputValue?trueText:falseText}}</span>
   </label>
 </template>
 <script lang='ts'>
@@ -16,8 +16,13 @@ export default {
 import { computed } from "vue";
 interface _props {
   modelValue: number;
+  trueText: string;
+  falseText: string;
 }
-const props = defineProps<_props>();
+const props = withDefaults(defineProps<_props>(), {
+  trueText: "启用",
+  falseText: "禁用",
+});
 interface _emit {
   (event: "update:modelValue", $event: number): void;
 }
