@@ -1,8 +1,2 @@
-const test = () => {
-    (async () => {
-        const res = await Promise.resolve(888)
-        console.log(res)
-    })()
-    console.log(123)
-}
-test()
+const reg = /^(http)(s{0,1})(:\/\/)(.+)(\.)([A-z]+)(\/{0,1})(.*)/i
+console.log(reg.test("http://developer.mozilla.org/zh-CN/docs/Web/CSS/filter"))
