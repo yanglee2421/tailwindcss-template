@@ -1,22 +1,12 @@
 <template>
-  <div>
-    <div id="test-event"></div>
-    <el-button @click="fun">触发xxx</el-button>
-    <div
-      v-if="state.isShow"
-      class="winner b"
-    >
-      <iframe
-        src="http://127.0.0.1:5174/#/test"
-        class="w-100 h-100"
-        frameborder="0"
-      ></iframe>
-      <!--   <test-vue
-        v-if="state.isShow"
-        v-track="'test-vue'"
-      ></test-vue> -->
-    </div>
+  <div
+    v-if="state.isShow"
+    v-directive
+  >
+    {{state.isUpdate?5566:4399}}
   </div>
+  <el-button @click="state.isShow=!state.isShow">卸载</el-button>
+  <el-button @click="state.isUpdate=!state.isUpdate">更新</el-button>
 </template>
 <script lang='ts'>
 export default {
@@ -24,16 +14,33 @@ export default {
 };
 </script>
 <script lang='ts' setup>
-import TestVue from "./Test.vue";
 import { reactive } from "vue";
 const state = reactive({
+  isUpdate: true,
   isShow: true,
+  obj: {
+    show: 123,
+  },
 });
-const fun = () => {
-  const dom = document.querySelector("iframe")!;
-  const win = dom?.contentWindow;
-  // state.isShow && win?.dispatchEvent(new Event("beforeunload"));
-  state.isShow = !state.isShow;
+console.log(state);
+const window = {
+  el: null,
+  vnode: null,
+};
+const vDirective = {
+  mounted(el: any, binding: any, vnode: any) {
+    window.el = el;
+    window.vnode = vnode;
+  },
+  updated(el: any, binding: any, vnode: any, prevnode: any) {
+    console.log("update-el", el === window.el);
+    console.log("update-vnode", vnode === window.vnode);
+    console.log("update-prevnode", prevnode === window.vnode);
+  },
+  beforeUnmount(el: any, binding: any, vnode: any) {
+    console.log("beforeUnmount-el", el === window.el);
+    console.log("beforeUnmount-vnode", vnode === window.vnode);
+  },
 };
 </script>
 <style lang='scss' scoped>

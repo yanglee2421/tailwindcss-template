@@ -1,5 +1,11 @@
 <template>
-  <div v-track="`root`">
+  <div v-track="`测试页一`">
+    <el-dialog
+      v-model="te"
+      destroy-on-close
+    >
+      <div v-track="`弹窗绑的是${te}`"></div>
+    </el-dialog>
     <el-button
       v-for="item in 10"
       :key="item"
@@ -19,10 +25,10 @@
 import mixins from "@/hooks/track-mixins";
 export default {
   inheritAttrs: true,
-  mixins: [mixins],
+  /*  mixins: [mixins],
   mounted() {
     this.$track__mes("这是测");
-  },
+  }, */
 };
 </script>
 <script lang='ts' setup>

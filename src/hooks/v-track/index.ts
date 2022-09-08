@@ -15,7 +15,7 @@ export let meta = localMeta ? JSON.parse(localMeta) as unknown as Meta : new Met
 // 收集事件的方法
 const track = (data = meta) => {
     meta.actions = meta.actions?.filter(item => item)
-    request({ url: "/track", data })
+    meta.actions.length && request({ url: "/track", data })
     meta = new Meta()
 }
 setInterval(track, 10000)
@@ -26,19 +26,19 @@ window.addEventListener("unload", () => {
 // 自定义指令
 export default {
     // 组件挂载时
-    mounted(el: any, binding: _binding) {
+    mounted(el: HTMLElement, binding: _binding) {
         const { arg, value } = binding
         switch (arg) {
             case undefined:
-                el.$track__item = {
+                Reflect.set(el, '$track__item', {
                     beginTime: Date.now(),
                     mes: value,
-                }
-                el.$track__controller = new AbortController()
-                const signal = el.$track__controller.signal
+                })
+                Reflect.set(el, "$track__controller", new AbortController())
+                const signal = ((el as any).$track__controller).signal
                 window.addEventListener("unload", () => {
-                    el.$track__item.endTime = Date.now()
-                    meta.actions.push(el.$track__item)
+                    (el as any).$track__item.endTime = Date.now()
+                    meta.actions.push((el as any).$track__item)
                     localStorage.setItem("$track__meta", JSON.stringify(meta))
                 }, { signal })
                 break
@@ -54,14 +54,13 @@ export default {
                 })
         }
     },
-    beforeUnmount(el: any, binding: _binding) {
+    beforeUnmount(el: HTMLElement, binding: _binding) {
         const { arg } = binding
         switch (arg) {
             case undefined:
-                console.log(0)
-                el.$track__controller.abort()
-                el.$track__item.endTime = Date.now()
-                meta.actions.push(el.$track__item)
+                (el as any).$track__controller.abort()
+                Reflect.set((el as any).$track__item, "endTime", Date.now())
+                meta.actions.push((el as any).$track__item)
                 break
             default:
         }
