@@ -1,5 +1,5 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios"
-const request: AxiosInstance = axios.create({
+import axios, { AxiosError, AxiosResponse } from "axios"
+const request = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL,
     timeout: 6000,
 })
@@ -11,7 +11,7 @@ request.interceptors.request.use(
         return config
     },
     (err) => {
-        console.log(err)
+        console.error(err)
     }
 )
 request.interceptors.response.use(
@@ -21,11 +21,11 @@ request.interceptors.response.use(
             return data
         }
         else {
-            console.log(statusText)
+            console.warn(statusText)
         }
     },
-    (err) => {
-        console.log(err)
+    (err: AxiosError) => {
+        console.error(err.message)
     }
 )
 export default async<T = unknown>({ method = "post", url = "", data = {}, params = {} }) => {
