@@ -15,11 +15,5 @@
  * 无参数，值为函数
  * 挂载和卸载前，以meta和track方法作为实参调用该函数
  */
-<fw-div v-track="(meta,track)=>{}"></fw-div>
-/**
- * 参数为root
- * 挂载时，将值push到actions中
- * 卸载时或页面关闭时，调用track
- */
-<fw-div v-track:root="(meta,callback)=>{}"></fw-div>
+<fw-div v-track="{}"></fw-div>
 ~~~

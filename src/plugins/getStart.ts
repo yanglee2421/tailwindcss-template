@@ -10,6 +10,7 @@ interface App {
     use(plugin: unknown, option?: unknown): void
     component(name: string, component: unknown): void
     directive(name: string, directive: Function | Record<string, unknown>): void
+    mixin(ComponentOptions: unknown): void
 }
 export default {
     install(app: App) {

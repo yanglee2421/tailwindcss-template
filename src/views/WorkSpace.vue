@@ -1,6 +1,6 @@
 <template>
   <div
-    v-track:root="{title:'这是表格页面'}"
+    v-track="'这是表格页面'"
     class="h-100"
   >
     <fw-table
@@ -13,10 +13,7 @@
     >
       <template #form>
         <el-form-item label="姓名：">
-          <el-input
-            v-model.trim="formData.input"
-            v-track="(event)=>event.target.value"
-          />
+          <el-input v-model.trim="formData.input" />
         </el-form-item>
         <el-form-item label="年龄：">
           <el-input></el-input>
@@ -31,8 +28,7 @@
       <template #tool-bar>
         <el-button
           type="success"
-          data-value="新增按钮"
-          v-track:click="{action:'点击了新增'}"
+          v-track:click="'点击新增'"
         >新增</el-button>
       </template>
       <el-table-column
@@ -76,12 +72,12 @@
             v-track:btn
             data-btn="编辑"
             type="primary"
-            v-track:click="{action:'点击了编辑'}"
+            v-track:click="'点击编辑'"
           >编辑</el-link>
           <el-link
             type="danger"
             class="ml-1"
-            v-track:click="{action:'点击了删除'}"
+            v-track:click="'点击删除'"
           >删除</el-link>
         </template>
       </el-table-column>
@@ -89,8 +85,10 @@
   </div>
 </template>
 <script lang='ts'>
+import mixins from "@/hooks/track-mixins";
 export default {
   inheritAttrs: true,
+  // mixins: [mixins],
 };
 </script>
 <script lang='ts' setup>

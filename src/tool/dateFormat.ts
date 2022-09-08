@@ -1,4 +1,4 @@
-const dateFormat = (date: Date | number | string, needSecond = false) => {
+const dateFormat = (date: Date | number | string = Date.now(), needSecond = true) => {
     const fun = (num: number) => {
         return num > 10 ? num : `0${num}`
     }

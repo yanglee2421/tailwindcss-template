@@ -1,71 +1,67 @@
 import request from "@/api/request"
-import dateFormat from "@/tool/dateFormat"
-interface _meta {
-    beginTime: string//开始浏览的时间
-    endTime: string//结束浏览的时间
-    root: unknown//根元素的信息
-    actions: unknown[]//触发的动作
-    times: number//用户浏览的次数
+class Meta {
+    id = Date.now()
+    actions: unknown[] = []
 }
 interface _binding {
     value: unknown
     arg?: string
     modifier: Record<string, boolean>
+    instance: Record<string, any>
 }
 // 要收集的数据
-let meta: Partial<_meta> = {}
+const localMeta = localStorage.getItem("$track__meta")
+export let meta = localMeta ? JSON.parse(localMeta) as unknown as Meta : new Meta()
 // 收集事件的方法
 const track = (data = meta) => {
-    meta.endTime = dateFormat(Date.now(), true)
     meta.actions = meta.actions?.filter(item => item)
     request({ url: "http://10.32.18.46:8080/log/add", data })
-    meta = {} as any
+    meta = new Meta()
 }
-// 事件控制器
-const controller = new AbortController()
-const signal = controller.signal
+setInterval(track, 10000)
+// 浏览器关闭时缓存数据
+window.addEventListener("unload", () => {
+    localStorage.setItem("$track__meta", JSON.stringify(meta))
+})
 // 自定义指令
 export default {
+    // 组件挂载时
     mounted(el: HTMLElement, binding: _binding) {
-        const { arg, value } = binding
-        console.log(arg)
+        const { arg, value, instance } = binding
         switch (arg) {
-            case "root":
-                //抓取开始时间和根信息
-                meta.root = typeof value === "function" ? value() : value
-                meta.beginTime = dateFormat(Date.now(), true)
-                // 获取浏览次数
-                const localTimes = localStorage.getItem("track-times")
-                meta.times = 1 + (localTimes ? Number(localTimes) : 0)
-                localStorage.setItem("track-times", meta.times.toString())
-                // beforeunload事件
-                window.addEventListener("beforeunload", () => {
-                    track()
-                }, { signal })
-                break
             case undefined:
-                typeof value === "function" && value(meta, track)
+                instance.$track__item = {
+                    beginTime: Date.now(),
+                    mes: value,
+                }
+                instance.$track__controller = new AbortController()
+                const signal = instance.$track__controller.signal
+                window.addEventListener("beforeunload", () => {
+                    instance.$track__item.endTime = Date.now()
+                    meta.actions.push(instance.$track__item)
+                }, { signal })
                 break
             default:
                 // 绑定点击事件
                 el.addEventListener(arg, (event: Event) => {
-                    Array.isArray(meta.actions) || (meta.actions = [])
-                    const item = typeof value === "function" ? value(event) : value
-                    meta.actions?.push(item)
+                    const item = {
+                        time: Date.now(),
+                        mes: "",
+                    }
+                    item.mes = typeof value === "function" ? value(event) : value
+                    meta.actions.push(item)
                 })
         }
     },
-    // 组件卸载时
     beforeUnmount(el: HTMLElement, binding: _binding) {
-        const { arg, value } = binding
+        const { arg, instance } = binding
         switch (arg) {
-            case "root":
-                controller.abort()
-                track()
-                break
             case undefined:
-                typeof value === "function" && value(meta, track)
+                instance.$track__controller.abort()
+                instance.$track__item.endTime = Date.now()
+                meta.actions.push(instance.$track__item)
                 break
+            default:
         }
-    }
+    },
 }
