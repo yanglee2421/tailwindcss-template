@@ -26,19 +26,19 @@ window.addEventListener("unload", () => {
 // 自定义指令
 export default {
     // 组件挂载时
-    mounted(el: HTMLElement, binding: _binding, vnode: any) {
+    mounted(el: any, binding: _binding) {
         const { arg, value } = binding
         switch (arg) {
             case undefined:
-                vnode.$track__item = {
+                el.$track__item = {
                     beginTime: Date.now(),
                     mes: value,
                 }
-                vnode.$track__controller = new AbortController()
-                const signal = vnode.$track__controller.signal
+                el.$track__controller = new AbortController()
+                const signal = el.$track__controller.signal
                 window.addEventListener("unload", () => {
-                    vnode.$track__item.endTime = Date.now()
-                    meta.actions.push(vnode.$track__item)
+                    el.$track__item.endTime = Date.now()
+                    meta.actions.push(el.$track__item)
                     localStorage.setItem("$track__meta", JSON.stringify(meta))
                 }, { signal })
                 break
@@ -54,14 +54,14 @@ export default {
                 })
         }
     },
-    beforeUnmount(el: HTMLElement, binding: _binding, vnode: any) {
+    beforeUnmount(el: any, binding: _binding) {
         const { arg } = binding
         switch (arg) {
             case undefined:
                 console.log(0)
-                vnode.$track__controller.abort()
-                vnode.$track__item.endTime = Date.now()
-                meta.actions.push(vnode.$track__item)
+                el.$track__controller.abort()
+                el.$track__item.endTime = Date.now()
+                meta.actions.push(el.$track__item)
                 break
             default:
         }

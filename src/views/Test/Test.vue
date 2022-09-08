@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-track="`root`">
     <el-button
       v-for="item in 10"
       :key="item"
@@ -9,6 +9,10 @@
       @click="goBack()"
       v-track:click="'跳转到其它tab'"
     >走人</el-link>
+    <el-link
+      v-track="'7788'"
+      @click="te='8899'"
+    >{{te}}</el-link>
   </div>
 </template>
 <script lang='ts'>
@@ -22,9 +26,10 @@ export default {
 };
 </script>
 <script lang='ts' setup>
-import { onBeforeUnmount } from "vue";
+import { onBeforeUnmount, ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
+const te = ref("0001");
 const goBack = () => {
   router.push("/");
 };
