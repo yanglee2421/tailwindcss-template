@@ -1,5 +1,5 @@
 <template>
-  <div v-track="'这是测试页一'">
+  <div>
     <el-button
       v-for="item in 10"
       :key="item"
@@ -12,17 +12,25 @@
   </div>
 </template>
 <script lang='ts'>
+import mixins from "@/hooks/track-mixins";
 export default {
   inheritAttrs: true,
+  mixins: [mixins],
+  mounted() {
+    this.$track__mes("这是测");
+  },
 };
 </script>
 <script lang='ts' setup>
+import { onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
-
 const router = useRouter();
 const goBack = () => {
   router.push("/");
 };
+onBeforeUnmount(() => {
+  // console.log(111);
+});
 </script>
 <style lang='scss' scoped>
 </style>

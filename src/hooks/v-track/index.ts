@@ -26,19 +26,20 @@ window.addEventListener("unload", () => {
 // 自定义指令
 export default {
     // 组件挂载时
-    mounted(el: HTMLElement, binding: _binding) {
-        const { arg, value, instance } = binding
+    mounted(el: HTMLElement, binding: _binding, vnode: any) {
+        const { arg, value } = binding
         switch (arg) {
             case undefined:
-                instance.$track__item = {
+                vnode.$track__item = {
                     beginTime: Date.now(),
                     mes: value,
                 }
-                instance.$track__controller = new AbortController()
-                const signal = instance.$track__controller.signal
-                window.addEventListener("beforeunload", () => {
-                    instance.$track__item.endTime = Date.now()
-                    meta.actions.push(instance.$track__item)
+                vnode.$track__controller = new AbortController()
+                const signal = vnode.$track__controller.signal
+                window.addEventListener("unload", () => {
+                    vnode.$track__item.endTime = Date.now()
+                    meta.actions.push(vnode.$track__item)
+                    localStorage.setItem("$track__meta", JSON.stringify(meta))
                 }, { signal })
                 break
             default:
@@ -53,13 +54,14 @@ export default {
                 })
         }
     },
-    beforeUnmount(el: HTMLElement, binding: _binding) {
-        const { arg, instance } = binding
+    beforeUnmount(el: HTMLElement, binding: _binding, vnode: any) {
+        const { arg } = binding
         switch (arg) {
             case undefined:
-                instance.$track__controller.abort()
-                instance.$track__item.endTime = Date.now()
-                meta.actions.push(instance.$track__item)
+                console.log(0)
+                vnode.$track__controller.abort()
+                vnode.$track__item.endTime = Date.now()
+                meta.actions.push(vnode.$track__item)
                 break
             default:
         }

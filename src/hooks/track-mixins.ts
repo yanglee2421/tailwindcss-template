@@ -21,9 +21,10 @@ export default defineComponent({
         const { $track__item, $track__controller } = this.$data
         $track__item.beginTime = Date.now()
         const signal = $track__controller.signal
-        window.addEventListener("beforeunload", () => {
+        window.addEventListener("unload", () => {
             $track__item.endTime = Date.now()
             meta.actions.push($track__item)
+            localStorage.setItem("$track__meta", JSON.stringify(meta))
         }, { signal })
     },
     beforeUnmount() {

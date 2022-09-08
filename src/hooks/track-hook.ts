@@ -8,9 +8,10 @@ export default (mes: unknown) => {
     }
     const controller = new AbortController()
     const signal = controller.signal
-    window.addEventListener("beforeunload", () => {
+    window.addEventListener("unload", () => {
         item.endTime = Date.now()
         meta.actions.push(item)
+        localStorage.setItem("$track__meta", JSON.stringify(meta))
     }, { signal })
     onMounted(() => {
         item.beginTime = Date.now()

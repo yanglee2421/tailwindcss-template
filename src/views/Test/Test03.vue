@@ -1,24 +1,21 @@
 <template>
   <div>
-    <el-switch
-      v-model="state.mes"
-      :active-value="1"
-      :inactive-value="0"
-      active-text="上架"
-      inactive-text="下架"
-      inline-prompt
-      size="large"
-    />
-    <fw-switch
-      v-model="state.mes"
-      :active-value="1"
-      :inactive-value="0"
-      active-text="上架"
-      inactive-text="下架"
-      disabled
-    ></fw-switch>
-    <el-button @click="state.mes=1">01</el-button>
-    <el-button @click="state.mes=0">00</el-button>
+    <div id="test-event"></div>
+    <el-button @click="fun">触发xxx</el-button>
+    <div
+      v-if="state.isShow"
+      class="winner b"
+    >
+      <iframe
+        src="http://127.0.0.1:5174/#/test"
+        class="w-100 h-100"
+        frameborder="0"
+      ></iframe>
+      <!--   <test-vue
+        v-if="state.isShow"
+        v-track="'test-vue'"
+      ></test-vue> -->
+    </div>
   </div>
 </template>
 <script lang='ts'>
@@ -27,11 +24,22 @@ export default {
 };
 </script>
 <script lang='ts' setup>
+import TestVue from "./Test.vue";
 import { reactive } from "vue";
-
 const state = reactive({
-  mes: 0,
+  isShow: true,
 });
+const fun = () => {
+  const dom = document.querySelector("iframe")!;
+  const win = dom?.contentWindow;
+  // state.isShow && win?.dispatchEvent(new Event("beforeunload"));
+  state.isShow = !state.isShow;
+};
 </script>
 <style lang='scss' scoped>
+.winner {
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+}
 </style>
