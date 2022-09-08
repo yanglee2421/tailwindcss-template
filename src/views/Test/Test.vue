@@ -1,11 +1,5 @@
 <template>
   <div v-track="`测试页一`">
-    <el-dialog
-      v-model="te"
-      destroy-on-close
-    >
-      <div v-track="`弹窗绑的是${te}`"></div>
-    </el-dialog>
     <el-button
       v-for="item in 10"
       :key="item"
@@ -39,9 +33,6 @@ const te = ref("0001");
 const goBack = () => {
   router.push("/");
 };
-onBeforeUnmount(() => {
-  // console.log(111);
-});
 </script>
 <style lang='scss' scoped>
 </style>
