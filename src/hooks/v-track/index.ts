@@ -15,7 +15,7 @@ export let meta = localMeta ? JSON.parse(localMeta) as unknown as Meta : new Met
 // 收集事件的方法
 const track = (data = meta) => {
     meta.actions = meta.actions?.filter(item => item)
-    request({ url: "http://10.32.18.46:8080/log/add", data })
+    request({ url: "/track", data })
     meta = new Meta()
 }
 setInterval(track, 10000)

@@ -3,7 +3,7 @@
     <transition>
       <div
         v-if="modelValue"
-        v-track="{}"
+        v-track="'这是弹窗'"
         class="swz-dialog"
       >
         <el-button>按钮一</el-button>
