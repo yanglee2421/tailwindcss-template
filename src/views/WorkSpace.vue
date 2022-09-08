@@ -11,7 +11,10 @@
     >
       <template #form>
         <el-form-item label="姓名：">
-          <el-input v-model.trim="formData.input" />
+          <el-input
+            v-model.trim="formData.input"
+            v-track:change="(event)=>`你输入的是${event.target.value}`"
+          />
         </el-form-item>
         <el-form-item label="年龄：">
           <el-input></el-input>
