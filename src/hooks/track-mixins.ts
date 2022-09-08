@@ -14,6 +14,7 @@ export default defineComponent({
     methods: {
         $track__mes(mes: unknown) {
             this.$data.$track__item.mes = mes as any
+            return meta
         }
     },
     mounted() {

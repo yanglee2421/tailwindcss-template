@@ -20,4 +20,5 @@ export default (mes: unknown) => {
         item.endTime = Date.now()
         meta.actions.push(item)
     })
+    return meta
 }
