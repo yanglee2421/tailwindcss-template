@@ -5,6 +5,7 @@
   >
     <el-form
       v-bind="$attrs"
+      v-trans="formState.isShow"
       ref="formRef"
       class="form-item"
       inline
