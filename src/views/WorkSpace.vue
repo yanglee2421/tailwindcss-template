@@ -1,8 +1,6 @@
 <template>
-  <div
-    v-track="'这是表格页面'"
-    class="h-100"
-  >
+  <div class="h-100">
+    <!-- v-track="'这是表格页面'" -->
     <fw-table
       :model="formData"
       :data="table.data"
@@ -30,6 +28,10 @@
           type="success"
           v-track:click="'点击新增'"
         >新增</el-button>
+        <el-button
+          type="success"
+          v-track:click="'按钮02'"
+        >按钮02</el-button>
       </template>
       <el-table-column
         label="姓名"
@@ -88,12 +90,22 @@
 import mixins from "@/hooks/track-mixins";
 export default {
   inheritAttrs: true,
-  // mixins: [mixins],
+  /*  mixins: [mixins],
+  data() {
+    return {
+      $0000: "123",
+    };
+  },
+  mounted() {
+    this.$track__mes("这是工作区");
+  }, */
 };
 </script>
 <script lang='ts' setup>
 import { reactive, watchEffect } from "vue";
 import request from "@/api/request";
+import trackHook from "@/hooks/track-hook";
+trackHook("这是工作区hook");
 const formData = reactive({
   PageIndex: 1,
   PageSize: 10,

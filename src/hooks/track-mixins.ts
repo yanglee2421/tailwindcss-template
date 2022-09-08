@@ -6,8 +6,14 @@ export default defineComponent({
             $track__item: {
                 beginTime: 0,
                 endTime: 0,
+                mes: null,
             },
-            $track__controller: new AbortController()
+            $track__controller: new AbortController(),
+        }
+    },
+    methods: {
+        $track__mes(mes: unknown) {
+            this.$data.$track__item.mes = mes as any
         }
     },
     mounted() {
