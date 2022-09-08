@@ -10,8 +10,8 @@ interface _binding {
     instance: Record<string, any>
 }
 // 要收集的数据
-const localMeta = localStorage.getItem("$track__meta")
-export let meta = localMeta ? JSON.parse(localMeta) as unknown as Meta : new Meta()
+const localMeta = localStorage.getItem("$track__meta")!
+export let meta = Array.isArray(JSON.parse(localMeta).actions) ? JSON.parse(localMeta) as unknown as Meta : new Meta()
 // 收集事件的方法
 const track = (data = meta) => {
     meta.actions = meta.actions?.filter(item => item)

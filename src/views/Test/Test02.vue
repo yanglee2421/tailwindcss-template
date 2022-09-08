@@ -6,6 +6,7 @@
       v-model="state.isShow"
       title="测试弹窗"
       width="400px"
+      destroy-on-close
     >
       <div
         v-track="`el-dialog`"
