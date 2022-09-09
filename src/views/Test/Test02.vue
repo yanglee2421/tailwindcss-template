@@ -1,7 +1,11 @@
 <template>
   <div>
-    <el-switch v-model="state.isShow" />
-    <fw-card></fw-card>
+    <h2 class="m-1 mb-2">测试弹窗的收集</h2>
+    <el-switch
+      v-model="state.isShow"
+      class="m-3"
+    />
+    <!-- <fw-card></fw-card> -->
     <el-dialog
       v-model="state.isShow"
       title="测试弹窗"
@@ -9,7 +13,7 @@
       destroy-on-close
     >
       <div
-        v-track="`el-dialog`"
+        v-track="`测试页02的弹窗`"
         class="dialog-content"
       >
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsa eveniet eaque rem nostrum labore ratione laudantium odit accusantium cupiditate deserunt velit, obcaecati dolorum earum, nam rerum iusto accusamus alias.
@@ -23,12 +27,23 @@
         Pariatur maxime, dolorum sunt voluptate velit dolorem facilis. Dolor maiores non distinctio exercitationem at tenetur blanditiis sint nisi animi ut. Consequatur, illum facere quam nostrum expedita unde ex autem tempora.
         Et reiciendis illum nesciunt recusandae rem ducimus iure? Ratione rerum modi natus tenetur. Maxime culpa dolorem reprehenderit quas temporibus. Aspernatur quidem labore sunt soluta ut. Laborum suscipit atque quos delectus.
       </div>
+      <template #footer>
+        <el-button
+          @click="state.isShow=false"
+          type="danger"
+        >关闭</el-button>
+      </template>
     </el-dialog>
   </div>
 </template>
 <script lang='ts'>
+import trackMixins from "@/hooks/track-mixins";
 export default {
   inheritAttrs: true,
+  mixins: [trackMixins],
+  mounted() {
+    this.$track__setMeta("测试页02--mixins方案");
+  },
 };
 </script>
 <script lang='ts' setup>

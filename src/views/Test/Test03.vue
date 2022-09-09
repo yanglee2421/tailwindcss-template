@@ -1,12 +1,30 @@
 <template>
-  <div
-    v-if="state.isShow"
-    v-directive
-  >
-    {{state.isUpdate?5566:4399}}
+  <div>
+    <h2 class="m-1 mb-2">测试输入框的收集</h2>
+    <el-form class="b m-3">
+      <el-form-item label="输入框01">
+        <el-input
+          v-model.trim="state.input01"
+          maxlength="20"
+          v-track:change="`在输入框01输入了${state.input01}`"
+        />
+      </el-form-item>
+      <el-form-item label="输入框02">
+        <el-input
+          v-model.trim="state.input02"
+          maxlength="20"
+          v-track:change="`在输入框02输入了${state.input02}`"
+        />
+      </el-form-item>
+      <el-form-item label="输入框03">
+        <el-input
+          v-model.trim="state.input03"
+          maxlength="20"
+          v-track:change="`在输入框03输入了${state.input03}`"
+        />
+      </el-form-item>
+    </el-form>
   </div>
-  <el-button @click="state.isShow=!state.isShow">卸载</el-button>
-  <el-button @click="state.isUpdate=!state.isUpdate">更新</el-button>
 </template>
 <script lang='ts'>
 export default {
@@ -15,38 +33,16 @@ export default {
 </script>
 <script lang='ts' setup>
 import { reactive } from "vue";
+import trackHook from "@/hooks/track-hook";
+trackHook("测试页03--hook方案");
 const state = reactive({
-  isUpdate: true,
-  isShow: true,
-  obj: {
-    show: 123,
-  },
+  input01: "",
+  input02: "",
+  input03: "",
 });
-console.log(state);
-const window = {
-  el: null,
-  vnode: null,
-};
-const vDirective = {
-  mounted(el: any, binding: any, vnode: any) {
-    window.el = el;
-    window.vnode = vnode;
-  },
-  updated(el: any, binding: any, vnode: any, prevnode: any) {
-    console.log("update-el", el === window.el);
-    console.log("update-vnode", vnode === window.vnode);
-    console.log("update-prevnode", prevnode === window.vnode);
-  },
-  beforeUnmount(el: any, binding: any, vnode: any) {
-    console.log("beforeUnmount-el", el === window.el);
-    console.log("beforeUnmount-vnode", vnode === window.vnode);
-  },
-};
 </script>
 <style lang='scss' scoped>
-.winner {
-  width: 800px;
-  height: 600px;
-  margin: 0 auto;
+.el-form {
+  @include m-center;
 }
 </style>
