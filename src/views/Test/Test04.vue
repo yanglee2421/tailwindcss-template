@@ -29,28 +29,36 @@
       </el-form>
       <template #footer>
         <el-button
-          @click="state.meta=5566"
+          @click="state.meta='更新后'"
           v-track:click="`更新：${state.meta}`"
         >更新</el-button>
         <el-button
           v-track:click="`更新并关闭：${state.meta}`"
-          @click="state.meta=7788;state.isShow=false"
+          @click="state.meta='更新后';state.isShow=false"
         >更新并关闭</el-button>
       </template>
     </el-dialog>
   </div>
 </template>
 <script lang='ts'>
+import mixins from "@/hooks/track-mixins";
 export default {
   inheritAttrs: true,
+  /* mixins: [mixins],
+  mounted() {
+    this.$track__setMeta("这是测试页面4--mixins");
+  }, */
 };
 </script>
 <script lang='ts' setup>
-import vTrack from "@/hooks/v-track/v-track";
 import { reactive } from "vue";
+import trackHook from "@/hooks/track-hook";
+const setMeta = trackHook("这是测试页04--hook改前");
+const buryingPoint = setMeta("这是测试页04--hook改后");
+// console.log(buryingPoint);
 const state = reactive({
   isShow: false,
-  meta: 4399,
+  meta: "更新前",
 });
 const formState = reactive({
   data: {

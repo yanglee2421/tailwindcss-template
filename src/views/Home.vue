@@ -34,7 +34,11 @@
       class="flex-1-auto"
       style="overflow:overlay"
     >
-      <router-view />
+      <router-view #default="{Component}">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
     </main>
   </div>
 </template>

@@ -1,76 +1,112 @@
-import request from "@/api/request"
-class Meta {
+import requset from "@/api/request"
+/**
+ * 要收集的行为单条记录的类型
+ * 在HTMLElement扩展属性作为媒介
+ */
+export interface _action {
+    meta: unknown
+    id?: number
+    beginTime?: number
+    endTime?: number
+}
+interface html_e extends HTMLElement {
+    $track__action?: _action
+    $track__controller?: AbortController
+}
+/**
+ * BuryingPoint类
+ * id
+ * 动作队列
+ * 构造器
+ * 把一个动作推入动作队列中
+ * 清空动作队列
+ * 将动作队列存入localStorage中
+ * 数动作队列发送给后台
+ */
+class BuryingPoint {
     id = Date.now()
-    actions: unknown[] = []
+    #actionArr: _action[]
+    constructor() {
+        const lastActStr = localStorage.getItem('$track__actionArr')!
+        const lastAct = JSON.parse(lastActStr)
+        this.#actionArr = Array.isArray(lastAct) ? lastAct : []
+        window.addEventListener("unload", () => {
+            this.setItem()
+        })
+        setInterval(() => {
+            this.request()
+        }, 1000)
+    }
+    push(action: _action) {
+        action.id = Date.now()
+        this.#actionArr.push(action)
+    }
+    clear() {
+        this.#actionArr = []
+    }
+    setItem() {
+        localStorage.setItem('$track__actionArr', JSON.stringify(this.#actionArr))
+    }
+    request() {
+        const { id } = this
+        const actionArr = this.#actionArr.filter(item => item.meta)
+        const data = { id, actionArr }
+        actionArr.length && requset({ url: "/track", data }).then(res => {
+            this.clear()
+        })
+    }
 }
-interface _binding {
-    value: unknown
-    arg?: string
-    modifier: Record<string, boolean>
-    instance: Record<string, any>
-}
-// 要收集的数据
-const localMeta = localStorage.getItem("$track__meta")!
-export let meta = Array.isArray(JSON.parse(localMeta)?.actions) ? JSON.parse(localMeta) as unknown as Meta : new Meta()
-// 收集事件的方法
-const track = (data = meta) => {
-    meta.actions = meta.actions?.filter(item => item)
-    meta.actions.length && request({ url: "/track", data })
-    meta = new Meta()
-}
-setInterval(track, 10000)
-// 浏览器关闭时缓存数据
-window.addEventListener("unload", () => {
-    localStorage.setItem("$track__meta", JSON.stringify(meta))
-})
-// 自定义指令
-export default {
-    // 组件挂载时
-    mounted(el: HTMLElement, binding: _binding) {
+export const buryingPoint = new BuryingPoint()
+/**
+ * v-track指令
+ */
+import type { Directive } from "vue"
+const vTrack: Directive<html_e, unknown> = {
+    mounted(el, binding) {
         const { arg, value } = binding
         switch (arg) {
             case undefined:
-                Reflect.set(el, '$track__item', {
+                el.$track__action = {
                     beginTime: Date.now(),
-                    mes: value,
-                })
-                Reflect.set(el, "$track__controller", new AbortController())
-                const signal = ((el as any).$track__controller).signal
-                window.addEventListener("unload", () => {
-                    (el as any).$track__item.endTime = Date.now()
-                    meta.actions.push((el as any).$track__item)
-                    localStorage.setItem("$track__meta", JSON.stringify(meta))
+                    meta: value,
+                }
+                el.$track__controller = new AbortController()
+                const signal = el.$track__controller.signal
+                window.addEventListener('unload', () => {
+                    el.$track__action && buryingPoint.push(el.$track__action)
+                    buryingPoint.setItem()
                 }, { signal })
                 break
             default:
-                // 绑定点击事件
                 el.addEventListener(arg, (event: Event) => {
-                    const item = {
-                        time: Date.now(),
-                        mes: "",
-                    }
-                    item.mes = typeof value === "function" ? value(event) : value
-                    meta.actions.push(item)
+                    const item: _action = { meta: null }
+                    item.meta = typeof value === "function" ? value(event) : value
+                    buryingPoint.push(item)
                 })
         }
     },
-    updated(el: HTMLElement, binding: _binding) {
+    updated(el, binding) {
         const { arg, value } = binding
         switch (arg) {
             case undefined:
-                Reflect.set((el as any).$track__item, 'mes', value)
+                el.$track__action && (el.$track__action.meta = value)
+                break
             default:
         }
     },
-    beforeUnmount(el: HTMLElement, binding: _binding) {
-        const { arg } = binding
+    beforeUnmount(el, binding) {
+        const { arg, value } = binding
         switch (arg) {
             case undefined:
-                (el as any).$track__controller.abort()
-                Reflect.set((el as any).$track__item, "endTime", Date.now())
-                meta.actions.push((el as any).$track__item)
+                el.$track__controller?.abort()
+                if (el.$track__action) {
+                    el.$track__action.meta = value
+                    el.$track__action.endTime = Date.now()
+                    buryingPoint.push(el.$track__action)
+                }
                 break
             default:
         }
     },
 }
+export default vTrack

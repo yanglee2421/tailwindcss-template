@@ -1,13 +1,9 @@
+import { Directive } from "vue"
 interface _value {
     index: number
     arr: unknown[]
 }
-interface _binding {
-    value: _value
-    arg: string
-    modifiers: Record<string, boolean>
-}
-export default (dom: HTMLElement, binding: _binding) => {
+const vDrag: Directive<HTMLElement, _value> = (dom, binding) => {
     const { value: { index, arr } } = binding
     dom.draggable = true
     dom.ondragstart = (event: DragEvent) => {
@@ -24,3 +20,4 @@ export default (dom: HTMLElement, binding: _binding) => {
         console.log(arr)
     }
 }
+export default vDrag

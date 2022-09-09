@@ -1,22 +1,17 @@
-interface _binding {
-    oldValue?: boolean
-    value: boolean//值
-    arg: string//参数
-    modifiers: Record<string, boolean>//修饰符
-}
+import { Directive } from "vue";
 /**
  * width修饰符
  */
 import "./v-vis.scss";
-export default {
-    mounted(dom: HTMLElement, binding: _binding) {
+const vVis: Directive<HTMLElement, boolean> = {
+    mounted(dom, binding) {
         const { value, modifiers } = binding
         const wh = modifiers.width ? 'width' : 'height'
         dom.classList.add('swz-vis-clearfix')
         dom.style[wh] = value ? '' : "0"
         value || (dom.classList.add('swz-vis-trans'))
     },
-    updated(dom: HTMLElement, binding: _binding) {
+    updated(dom, binding) {
         const { value, oldValue, modifiers } = binding
         const wh = modifiers.width ? 'width' : 'height'
         const currentValue = (modifiers.width ? dom.offsetWidth : dom.offsetHeight) + "px"
@@ -35,3 +30,4 @@ export default {
         }
     }
 }
+export default vVis

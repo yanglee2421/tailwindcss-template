@@ -6,10 +6,11 @@ import "element-plus/dist/index.css"
 import * as icons from "@element-plus/icons-vue"
 import * as components from "@/components"
 import * as directives from "@/hooks"
+import type { Directive } from "vue"
 interface App {
     use(plugin: unknown, option?: unknown): void
     component(name: string, component: unknown): void
-    directive(name: string, directive: Function | Record<string, unknown>): void
+    directive(name: string, directive: Directive): void
     mixin(ComponentOptions: unknown): void
 }
 export default {
