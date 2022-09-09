@@ -55,7 +55,6 @@ import { reactive } from "vue";
 import trackHook from "@/hooks/track-hook";
 const setMeta = trackHook("这是测试页04--hook改前");
 const buryingPoint = setMeta("这是测试页04--hook改后");
-// console.log(buryingPoint);
 const state = reactive({
   isShow: false,
   meta: "更新前",

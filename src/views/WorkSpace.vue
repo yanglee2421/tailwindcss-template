@@ -1,6 +1,5 @@
 <template>
   <div class="h-100">
-    <!-- v-track="'这是表格页面'" -->
     <fw-table
       :model="formData"
       :data="table.data"
@@ -19,12 +18,6 @@
         <el-form-item label="年龄：">
           <el-input></el-input>
         </el-form-item>
-        <el-form-item label="姓名：">
-          <el-input></el-input>
-        </el-form-item>
-        <el-form-item label="姓名：">
-          <el-input></el-input>
-        </el-form-item>
       </template>
       <template #tool-bar>
         <el-button
@@ -41,31 +34,16 @@
         prop="name"
         align="center"
       />
-      <el-table-column
-        label="年龄"
-        prop="age"
-        align="center"
-      />
-      <el-table-column
-        label="年龄"
-        prop="age"
-        align="center"
-      />
-      <el-table-column
-        label="年龄"
-        prop="age"
-        align="center"
-      />
-      <el-table-column
-        label="年龄"
-        prop="age"
-        align="center"
-      />
-      <el-table-column
-        label="年龄"
-        prop="age"
-        align="center"
-      />
+      <template
+        v-for="item in 6"
+        :key="item"
+      >
+        <el-table-column
+          label="年龄"
+          prop="age"
+          align="center"
+        />
+      </template>
       <el-table-column
         label="操作"
         align="center"
@@ -93,22 +71,17 @@
 import mixins from "@/hooks/track-mixins";
 export default {
   inheritAttrs: true,
-  /*  mixins: [mixins],
-  data() {
-    return {
-      $0000: "123",
-    };
-  },
+  mixins: [mixins],
   mounted() {
-    this.$track__mes("这是工作区");
-  }, */
+    this.$track__setMeta("这是工作区");
+  },
 };
 </script>
 <script lang='ts' setup>
 import { reactive, watchEffect } from "vue";
 import request from "@/api/request";
 import trackHook from "@/hooks/track-hook";
-trackHook("这是工作区hook");
+// trackHook("这是工作区hook");
 const formData = reactive({
   PageIndex: 1,
   PageSize: 10,

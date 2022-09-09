@@ -49,7 +49,7 @@ class BuryingPoint {
     }
     request() {
         const { id } = this
-        const actionArr = this.#actionArr.filter(item => item.meta)
+        const actionArr = [...new Set(this.#actionArr.filter(item => item.meta))]
         const data = { id, actionArr }
         actionArr.length && requset({ url: "/track", data }).then(res => {
             this.clear()

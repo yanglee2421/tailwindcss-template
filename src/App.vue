@@ -1,8 +1,6 @@
 <template>
   <router-view #default="{Component}">
-    <keep-alive>
-      <component :is="Component" />
-    </keep-alive>
+    <component :is="Component" />
   </router-view>
 </template>
 

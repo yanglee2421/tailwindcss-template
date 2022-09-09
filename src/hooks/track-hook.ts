@@ -13,6 +13,13 @@ export default (meta: unknown) => {
     let signal: AbortSignal = null as unknown as AbortSignal
     const enter = () => {
         item.beginTime = Date.now()
+        /**
+         * 取消上一个事件
+         * 生成新控制器
+         * 新事件标记
+         * 重新绑定事件
+         */
+        controller?.abort()
         controller = new AbortController()
         signal = controller.signal
         window.addEventListener("unload", () => {
