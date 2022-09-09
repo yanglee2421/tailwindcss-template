@@ -35,7 +35,7 @@ class BuryingPoint {
         })
         setInterval(() => {
             this.request()
-        }, 1000)
+        }, 10000)
     }
     push(action: _action) {
         action.id = Date.now()
