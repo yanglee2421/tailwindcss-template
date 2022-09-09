@@ -7,7 +7,6 @@ const vDrag: Directive<HTMLElement, _value> = (dom, binding) => {
     const { value: { index, arr } } = binding
     dom.draggable = true
     dom.ondragstart = (event: DragEvent) => {
-        console.log(index)
         event.dataTransfer?.setData('index', index.toString())
     }
     dom.ondragover = (event: DragEvent) => {
@@ -17,7 +16,6 @@ const vDrag: Directive<HTMLElement, _value> = (dom, binding) => {
         // event.preventDefault()
         const targetIndex = event.dataTransfer?.getData('index')!
         arr.splice(index, 1, ...arr.splice(Number(targetIndex), 1, arr[index]))
-        console.log(arr)
     }
 }
 export default vDrag
