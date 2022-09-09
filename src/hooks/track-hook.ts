@@ -8,7 +8,7 @@ export default (meta: unknown) => {
      * 进入时执行
      * 离开时执行
      */
-    const item: _action = { meta }
+    const item: _action = { meta: typeof meta === 'function' ? meta() : meta }
     let controller: AbortController = null as unknown as AbortController
     let signal: AbortSignal = null as unknown as AbortSignal
     const enter = () => {
@@ -46,7 +46,7 @@ export default (meta: unknown) => {
         leave()
     })
     const setMeta = (meta: unknown) => {
-        item.meta = meta
+        item.meta = typeof meta === 'function' ? meta() : meta
         return buryingPoint
     }
     return setMeta

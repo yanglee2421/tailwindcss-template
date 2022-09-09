@@ -1,5 +1,5 @@
 <template>
-  <div class="h-100">
+  <div class="h-100 p-1">
     <fw-table
       :model="formData"
       :data="table.data"
@@ -7,16 +7,20 @@
       v-model:PageIndex="formData.PageIndex"
       v-model:PageSize="formData.PageSize"
       :total="table.total"
+      fw-index
     >
       <template #form>
         <el-form-item label="姓名：">
           <el-input
-            v-model.trim="formData.input"
-            v-track:change="(event:any)=>`你输入的是${event.target.value}`"
+            v-model.trim="formData.name"
+            v-track:change="(event:any)=>`姓名框输入了：${event.target.value}`"
           />
         </el-form-item>
         <el-form-item label="年龄：">
-          <el-input></el-input>
+          <el-input
+            v-model.trim="formData.age"
+            v-track:change="()=>`年龄框输入了：${formData.age}`"
+          />
         </el-form-item>
       </template>
       <template #tool-bar>
@@ -25,9 +29,10 @@
           v-track:click="'点击新增'"
         >新增</el-button>
         <el-button
-          type="success"
+          @click="loginOut"
+          type="danger"
           v-track:click="'按钮02'"
-        >按钮02</el-button>
+        >登出</el-button>
       </template>
       <el-table-column
         label="姓名"
@@ -50,17 +55,17 @@
         width="100"
         fixed="right"
       >
-        <template #default="{row}">
+        <template #default="{$index}">
           <el-link
             v-track:btn
             data-btn="编辑"
             type="primary"
-            v-track:click="'点击编辑'"
+            v-track:click="`点击第${$index+1}行的编辑`"
           >编辑</el-link>
           <el-link
             type="danger"
             class="ml-1"
-            v-track:click="'点击删除'"
+            v-track:click="`点击第${$index+1}行的删除`"
           >删除</el-link>
         </template>
       </el-table-column>
@@ -68,24 +73,25 @@
   </div>
 </template>
 <script lang='ts'>
-import mixins from "@/hooks/track-mixins";
 export default {
   inheritAttrs: true,
-  mixins: [mixins],
-  mounted() {
-    this.$track__setMeta("这是工作区");
-  },
 };
 </script>
 <script lang='ts' setup>
 import { reactive, watchEffect } from "vue";
 import request from "@/api/request";
-import trackHook from "@/hooks/track-hook";
-// trackHook("这是工作区hook");
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const loginOut = () => {
+  localStorage.removeItem("token");
+  router.replace("/login");
+};
 const formData = reactive({
   PageIndex: 1,
   PageSize: 10,
-  input: "",
+  name: "",
+  age: "",
 });
 interface _table {
   data: unknown[];

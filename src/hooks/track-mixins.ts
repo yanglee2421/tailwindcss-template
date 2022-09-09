@@ -15,7 +15,7 @@ export default defineComponent({
     },
     methods: {
         $track__setMeta(meta: unknown) {
-            this.$data.$track__item.meta = meta as any
+            this.$data.$track__item.meta = typeof meta === 'function' ? meta() : meta
             return buryingPoint
         },
         $track__enter() {

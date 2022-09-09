@@ -68,7 +68,7 @@ const vTrack: Directive<html_e, unknown> = {
             case undefined:
                 el.$track__action = {
                     beginTime: Date.now(),
-                    meta: value,
+                    meta: typeof value === "function" ? value() : value,
                 }
                 el.$track__controller = new AbortController()
                 const signal = el.$track__controller.signal
@@ -89,7 +89,7 @@ const vTrack: Directive<html_e, unknown> = {
         const { arg, value } = binding
         switch (arg) {
             case undefined:
-                el.$track__action && (el.$track__action.meta = value)
+                el.$track__action && (el.$track__action.meta = typeof value === "function" ? value() : value)
                 break
             default:
         }
@@ -100,7 +100,7 @@ const vTrack: Directive<html_e, unknown> = {
             case undefined:
                 el.$track__controller?.abort()
                 if (el.$track__action) {
-                    el.$track__action.meta = value
+                    el.$track__action.meta = typeof value === "function" ? value() : value
                     el.$track__action.endTime = Date.now()
                     buryingPoint.push(el.$track__action)
                 }
