@@ -22,6 +22,10 @@
         :route="{name:'test03'}"
       >测试03</el-menu-item>
       <el-menu-item
+        index="test04"
+        :route="{name:'test04'}"
+      >测试04</el-menu-item>
+      <el-menu-item
         index="param"
         :route="{name:'param'}"
       >传参</el-menu-item>

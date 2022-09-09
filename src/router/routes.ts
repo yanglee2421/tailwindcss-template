@@ -39,6 +39,12 @@ const routes: RouterOptions["routes"] = [
                 meta: { title: "测试03" },
             },
             {
+                path: 'test04',
+                name: "test04",
+                component: () => import("@/views/Test/Test04.vue"),
+                meta: { title: "测试04" },
+            },
+            {
                 path: 'param',
                 name: "param",
                 component: () => import("@/views/param/param.vue"),

@@ -11,7 +11,7 @@ interface _binding {
 }
 // 要收集的数据
 const localMeta = localStorage.getItem("$track__meta")!
-export let meta = Array.isArray(JSON.parse(localMeta).actions) ? JSON.parse(localMeta) as unknown as Meta : new Meta()
+export let meta = Array.isArray(JSON.parse(localMeta)?.actions) ? JSON.parse(localMeta) as unknown as Meta : new Meta()
 // 收集事件的方法
 const track = (data = meta) => {
     meta.actions = meta.actions?.filter(item => item)
@@ -52,6 +52,14 @@ export default {
                     item.mes = typeof value === "function" ? value(event) : value
                     meta.actions.push(item)
                 })
+        }
+    },
+    updated(el: HTMLElement, binding: _binding) {
+        const { arg, value } = binding
+        switch (arg) {
+            case undefined:
+                Reflect.set((el as any).$track__item, 'mes', value)
+            default:
         }
     },
     beforeUnmount(el: HTMLElement, binding: _binding) {
