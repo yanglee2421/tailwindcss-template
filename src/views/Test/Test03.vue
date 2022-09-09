@@ -6,21 +6,21 @@
         <el-input
           v-model.trim="state.input01"
           maxlength="20"
-          v-track:change="`在输入框01输入了${state.input01}`"
+          v-track:change="()=>`在输入框01输入了${state.input01}`"
         />
       </el-form-item>
       <el-form-item label="输入框02">
         <el-input
           v-model.trim="state.input02"
           maxlength="20"
-          v-track:change="`在输入框02输入了${state.input02}`"
+          v-track:change="()=>`在输入框02输入了${state.input02}`"
         />
       </el-form-item>
       <el-form-item label="输入框03">
         <el-input
           v-model.trim="state.input03"
           maxlength="20"
-          v-track:change="`在输入框03输入了${state.input03}`"
+          v-track:change="()=>`在输入框03输入了${state.input03}`"
         />
       </el-form-item>
     </el-form>
