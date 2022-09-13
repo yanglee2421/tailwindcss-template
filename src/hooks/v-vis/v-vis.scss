@@ -1,0 +1,16 @@
+.swz-vis-clearfix {
+    border: 0 !important;
+
+    &::before,
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+.swz-vis-trans {
+    overflow: hidden;
+    transition: .3s;
+    will-change: width, height;
+}

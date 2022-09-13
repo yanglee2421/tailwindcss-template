@@ -1,10 +1,9 @@
-.m-center {
-  width: fit-content;
-  margin: 0 auto;
-}
-
 .b {
   border: 1px dashed rgb(random(255), random(255), random(255));
+}
+
+.border {
+  border: 1px solid #eee;
 }
 
 $wh: 25, 50, 75, 100;
@@ -57,7 +56,7 @@ $spas: 'p', 'b', 'm';
     }
 
     .#{$spa}t-#{$i} {
-      #{$var}-top:#{$i}0px
+      #{$var}-top:#{$i}0px !important;
     }
 
     .#{$spa}r-#{$i} {

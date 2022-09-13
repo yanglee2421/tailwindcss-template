@@ -11,59 +11,47 @@
 }
 
 .flex-1-hidden {
-  @extend.flex-1;
-  @extend.overflow-hidden;
+  flex: 1;
+  overflow: hidden;
+}
+
+.flex-1-auto {
+  flex: 1;
+  overflow: auto;
+}
+
+.flex-1-overlay {
+  flex: 1;
+  overflow: overlay;
 }
 
 .flex-column {
-  @extend.flex;
-  @extend.flex-direction-column;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.flex-row {
-  @extend.flex;
-  @extend.between-center;
-}
-
-.between-center {
-  @extend.justify-between;
-  @extend.align-center;
-}
-
-.center-center {
-  @extend.justify-center;
-  @extend.align-center;
-}
-
-$align: start, center, end, between, around, evenly;
+$align: start, center, end, stretch, between, around, evenly;
 
 @each $item in $align {
+  // 作为属性值使用
+  $item-copy: if($item ==between or $item ==evenly or $item ==around, #{'space-'+$item}, $item);
+
   .justify-#{$item} {
-    @if$item ==center {
-      justify-content: #{$item};
-    }
-
-    @else if $item ==between or $item ==evenly or $item ==around {
-      justify-content: #{'space-'+$item};
-    }
-
-    @else {
-      justify-content: #{'flex-'+$item};
-    }
+    justify-content: #{$item-copy};
   }
 
   .align-#{$item} {
 
-    @if $item ==center {
-      align-items: #{$item};
-    }
+    align-items: #{$item-copy};
+  }
 
-    @else if $item ==between or $item ==evenly or $item ==around {
-      align-items: #{'space-'+$item};
-    }
+  @each $i in $align {
+    $i-copy: if($i ==between or $i ==evenly or $i ==around, #{'space-'+$i}, $i);
 
-    @else {
-      align-items: #{'flex-'+$item};
+    .#{$item}-#{$i} {
+      justify-content: #{$item-copy};
+      align-items: #{$i-copy};
     }
   }
 }

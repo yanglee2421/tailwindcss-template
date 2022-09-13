@@ -1,0 +1,81 @@
+// ======================================type=number的上下按钮
+@mixin num-no-btn {
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+}
+
+.num-no-btn {
+
+    input[type=number] {
+        @include num-no-btn;
+    }
+}
+
+input[type=number].num-no-btn {
+    @include num-no-btn;
+}
+
+// =======================================滚动条
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .2);
+
+    @media (any-hover:none) {
+        display: none;
+    }
+
+    @media (any-hover:hover) {
+        &:hover {
+            background-color: rgba(0, 0, 0, .3);
+        }
+    }
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, .3) transparent;
+
+    @media (any-pointer:none) {
+        scrollbar-width: auto;
+    }
+
+    @media (any-pointer:coarse) {
+        scrollbar-width: none;
+    }
+
+    @media (any-pointer:fine) {
+        scrollbar-width: thin;
+    }
+}
+
+// ==================================================全局
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    vertical-align: bottom;
+}
+
+// ==============================================根元素
+#app {
+    height: 100vh;
+    @extend .clearfix;
+}
