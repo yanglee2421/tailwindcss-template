@@ -15,24 +15,28 @@ export default {
 <script lang='ts' setup>
 import { computed } from "vue";
 interface _props {
-  modelValue: number;
-  trueText: string;
-  falseText: string;
+  modelValue: boolean | string | number;
+  trueText?: string;
+  falseText?: string;
+  trueValue?: boolean | string | number;
+  falseValue?: boolean | string | number;
 }
 const props = withDefaults(defineProps<_props>(), {
   trueText: "启用",
   falseText: "禁用",
+  trueValue: true,
+  falseValue: false,
 });
 interface _emit {
-  (event: "update:modelValue", $event: number): void;
+  (event: "update:modelValue", $event: boolean | string | number): void;
 }
 const emit = defineEmits<_emit>();
 const inputValue = computed({
   get() {
-    return props.modelValue === 1;
+    return props.modelValue === props.trueValue;
   },
   set(value) {
-    emit("update:modelValue", value ? 1 : 0);
+    emit("update:modelValue", value ? props.trueValue : props.falseValue);
   },
 });
 </script>
