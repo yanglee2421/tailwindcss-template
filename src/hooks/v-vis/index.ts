@@ -1,31 +1,52 @@
 import { Directive } from "vue";
 /**
- * width修饰符
+ * value可以是一个boolean，也可以是一个string
+ * true，高度为''
+ * false，高度为0
+ * string，高度为该string
+ * number，高度为该number+px
  */
 import "./v-vis.scss";
-const vVis: Directive<HTMLElement, boolean> = {
+const vVis: Directive<HTMLElement, string | number | boolean> = {
     mounted(dom, binding) {
-        const { value, modifiers } = binding
-        const wh = modifiers.width ? 'width' : 'height'
         dom.classList.add('swz-vis-clearfix')
-        dom.style[wh] = value ? '' : "0"
-        value || (dom.classList.add('swz-vis-trans'))
+        const { value } = binding
+        switch (value) {
+            case true:
+                dom.style.height = ""
+                break
+            case false:
+                dom.style.height = "0"
+                break
+            default:
+                dom.style.height = typeof value === "string" ? value : value + 'px'
+        }
+        value !== true && dom.classList.add('swz-vis-trans')
     },
     updated(dom, binding) {
-        const { value, oldValue, modifiers } = binding
-        const wh = modifiers.width ? 'width' : 'height'
-        const currentValue = (modifiers.width ? dom.offsetWidth : dom.offsetHeight) + "px"
-        const showValue = (modifiers.width ? dom.scrollWidth : dom.scrollHeight) + "px"
+        const { value, oldValue } = binding
+        // value变化才执行
         if (value !== oldValue) {
-            // value发生变动才执行以下代码
-            dom.style[wh] = currentValue
+            // 获取变化前后的高度
+            const currentValue = dom.offsetHeight + "px"
+            dom.style.height = currentValue
             dom.classList.add('swz-vis-trans')
             setTimeout(() => {
-                dom.style[wh] = value ? showValue : "0"
+                switch (value) {
+                    case true:
+                        dom.style.height = dom.scrollHeight + "px"
+                        break
+                    case false:
+                        dom.style.height = "0"
+                        break
+                    default:
+                        dom.style.height = typeof value === "string" ? value : value + 'px'
+                }
             }, 0);
-            value && setTimeout(() => {
+            // 若为true，则不需要trans类
+            value === true && setTimeout(() => {
                 dom.classList.remove('swz-vis-trans')
-                dom.style[wh] = ''
+                dom.style.height = ''
             }, 301)
         }
     }

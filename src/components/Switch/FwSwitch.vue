@@ -15,11 +15,11 @@ export default {
 <script lang='ts' setup>
 import { computed } from "vue";
 interface _props {
-  modelValue: boolean | string | number;
+  modelValue: string | number | boolean;
   trueText?: string;
   falseText?: string;
-  trueValue?: boolean | string | number;
-  falseValue?: boolean | string | number;
+  trueValue?: string | number | boolean;
+  falseValue?: string | number | boolean;
 }
 const props = withDefaults(defineProps<_props>(), {
   trueText: "启用",
@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<_props>(), {
   falseValue: false,
 });
 interface _emit {
-  (event: "update:modelValue", $event: boolean | string | number): void;
+  (event: "update:modelValue", $event: string | number | boolean): void;
 }
 const emit = defineEmits<_emit>();
 const inputValue = computed({
