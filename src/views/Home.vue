@@ -23,7 +23,7 @@
       >测试03</el-menu-item>
       <el-menu-item
         index="test04"
-        :route="{name:'test04'}"
+        :route="{name:'test04',state:{aaa:111},query:{aa:22},params:{text:'从菜单来的'}}"
       >测试04</el-menu-item>
       <el-menu-item
         index="param"

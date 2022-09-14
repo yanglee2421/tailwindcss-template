@@ -6,7 +6,6 @@ const routes: RouterOptions["routes"] = [
         name: "login",
         component: () => import("@/views/Login.vue"),
         meta: { title: "登录" },
-        props: true,
     },
     {
         path: "/",
@@ -43,6 +42,7 @@ const routes: RouterOptions["routes"] = [
                 name: "test04",
                 component: () => import("@/views/Test/Test04.vue"),
                 meta: { title: "测试04" },
+                props: { text: "写在routes里的" }
             },
             {
                 path: 'param',

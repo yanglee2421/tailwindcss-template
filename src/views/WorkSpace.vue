@@ -25,6 +25,7 @@
       </template>
       <template #tool-bar>
         <el-button
+          @click="go()"
           type="success"
           v-track:click="'点击新增'"
         >新增</el-button>
@@ -86,6 +87,9 @@ const router = useRouter();
 const loginOut = () => {
   localStorage.removeItem("token");
   router.replace("/login");
+};
+const go = () => {
+  router.push({ name: "test04", state: { bb: { aaa: 777 } } });
 };
 const formData = reactive({
   PageIndex: 1,
