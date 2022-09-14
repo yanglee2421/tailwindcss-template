@@ -9,12 +9,12 @@
     </template>
   </el-dialog>
 </template>
-<script lang='ts'>
+<script lang="ts">
 export default {
   inheritAttrs: true,
 };
 </script>
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { onMounted, reactive, watch } from "vue";
 interface _props {
   modelValue: boolean | Record<string, unknown>;
@@ -65,5 +65,4 @@ onMounted(() => {
   state.defaultModel = { ...props.model };
 });
 </script>
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>

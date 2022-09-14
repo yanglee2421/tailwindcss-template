@@ -3,12 +3,12 @@
     <slot></slot>
   </div>
 </template>
-<script lang='ts'>
+<script lang="ts">
 export default {
   inheritAttrs: true,
 };
 </script>
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { onMounted, ref, watch } from "vue";
 interface _props {
   modelValue?: boolean;
@@ -53,7 +53,7 @@ onMounted(() => {
   dom.style.height = props.modelValue ? "" : "0";
 });
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .trans {
   transition: 0.3s;
   overflow: hidden;

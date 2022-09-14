@@ -7,26 +7,28 @@
       @node-expand="expFn"
       @node-collapse="collFn"
     >
-      <template #default="{data}">
+      <template #default="{ data }">
         <div class="flex between-center flex-1">
-          <p>{{data.label}}</p>
+          <p>{{ data.label }}</p>
           <div>
             <el-link
               @click="add(data)"
               type="primary"
               class="mr-1"
-            >Add</el-link>
+              >Add</el-link
+            >
             <el-link
               @click="del(data)"
               type="danger"
-            >Delete</el-link>
+              >Delete</el-link
+            >
           </div>
         </div>
       </template>
     </el-tree>
   </div>
 </template>
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { computed, reactive, toRaw } from "vue";
 // #region
 const treeData = reactive([
@@ -109,5 +111,4 @@ const collFn = (data: Record<string, unknown>) => {
   state.defExpKey.splice(index, 1);
 };
 </script>
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>
