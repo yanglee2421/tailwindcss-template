@@ -8,47 +8,48 @@ import { Directive } from "vue";
  */
 import "./v-vis.scss";
 const vVis: Directive<HTMLElement, string | number | boolean> = {
-    mounted(dom, binding) {
-        dom.classList.add('swz-vis-clearfix')
-        const { value } = binding
-        switch (value) {
-            case true:
-                dom.style.height = ""
-                break
-            case false:
-                dom.style.height = "0"
-                break
-            default:
-                dom.style.height = typeof value === "string" ? value : value + 'px'
-        }
-        value !== true && dom.classList.add('swz-vis-trans')
-    },
-    updated(dom, binding) {
-        const { value, oldValue } = binding
-        // value变化才执行
-        if (value !== oldValue) {
-            // 获取变化前后的高度
-            const currentValue = dom.offsetHeight + "px"
-            dom.style.height = currentValue
-            dom.classList.add('swz-vis-trans')
-            setTimeout(() => {
-                switch (value) {
-                    case true:
-                        dom.style.height = dom.scrollHeight + "px"
-                        break
-                    case false:
-                        dom.style.height = "0"
-                        break
-                    default:
-                        dom.style.height = typeof value === "string" ? value : value + 'px'
-                }
-            }, 0);
-            // 若为true，则不需要trans类
-            value === true && setTimeout(() => {
-                dom.classList.remove('swz-vis-trans')
-                dom.style.height = ''
-            }, 301)
-        }
+  mounted(dom, binding) {
+    dom.classList.add("swz-vis-clearfix");
+    const { value } = binding;
+    switch (value) {
+      case true:
+        dom.style.height = "";
+        break;
+      case false:
+        dom.style.height = "0";
+        break;
+      default:
+        dom.style.height = typeof value === "string" ? value : value + "px";
     }
-}
-export default vVis
+    value !== true && dom.classList.add("swz-vis-trans");
+  },
+  updated(dom, binding) {
+    const { value, oldValue } = binding;
+    // value变化才执行
+    if (value !== oldValue) {
+      // 获取变化前后的高度
+      const currentValue = dom.offsetHeight + "px";
+      dom.style.height = currentValue;
+      dom.classList.add("swz-vis-trans");
+      setTimeout(() => {
+        switch (value) {
+          case true:
+            dom.style.height = dom.scrollHeight + "px";
+            break;
+          case false:
+            dom.style.height = "0";
+            break;
+          default:
+            dom.style.height = typeof value === "string" ? value : value + "px";
+        }
+      }, 0);
+      // 若为true，则不需要trans类
+      value === true &&
+        setTimeout(() => {
+          dom.classList.remove("swz-vis-trans");
+          dom.style.height = "";
+        }, 301);
+    }
+  },
+};
+export default vVis;
