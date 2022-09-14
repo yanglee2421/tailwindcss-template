@@ -9,16 +9,17 @@
         @click="copyFn"
         type="success"
         class="ml-1"
-      >复制源代码</el-link>
+        >复制源代码</el-link
+      >
     </div>
     <swz-vis v-model="state.showCode">
       <code>
-        <pre class="bgc-dark-fill p-1">{{state.code}}</pre>
+        <pre class="bgc-dark-fill p-1">{{ state.code }}</pre>
       </code>
     </swz-vis>
     <p
       v-show="state.showCode"
-      @click="state.showCode=false"
+      @click="state.showCode = false"
       class="p-1 sticky flex center-center text-info"
     >
       <el-icon>
@@ -28,12 +29,12 @@
     </p>
   </div>
 </template>
-<script lang='ts'>
+<script lang="ts">
 export default {
   inheritAttrs: true,
 };
 </script>
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { reactive } from "vue";
 import request from "@/api/request";
 import { ElMessage } from "element-plus";
@@ -73,7 +74,7 @@ const copyFn = () => {
       });
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .slot-box {
   overflow: auto;
   overflow: overlay;
