@@ -13,16 +13,21 @@
       <slot name="form"></slot>
       <el-form-item class="form-btn relative mr-1">
         <el-button
-          @click="emit('fw-queryBtn');submitForm()"
+          @click="
+            emit('fw-queryBtn');
+            submitForm();
+          "
           type="primary"
           icon="Search"
           auto-insert-space
-        >查询</el-button>
+          >查询</el-button
+        >
         <el-button
           @click="resetFn()"
           icon="Refresh"
           auto-insert-space
-        >重置</el-button>
+          >重置</el-button
+        >
         <label
           v-show="showSwitch"
           class="flex center-center ml-1"
@@ -34,15 +39,18 @@
           />
           <el-icon
             class="trans"
-            :class="[{'rotate-180':!formState.isShow},formState.isShow?'text-danger':'text-primary']"
+            :class="[
+              { 'rotate-180': !formState.isShow },
+              formState.isShow ? 'text-danger' : 'text-primary',
+            ]"
           >
             <ArrowUp />
           </el-icon>
           <span
             class="trans"
-            :class="[formState.isShow?'text-danger':'text-primary']"
+            :class="[formState.isShow ? 'text-danger' : 'text-primary']"
           >
-            {{formState.isShow?"折叠":"展开"}}
+            {{ formState.isShow ? "折叠" : "展开" }}
           </span>
         </label>
       </el-form-item>
@@ -83,7 +91,7 @@
     </div>
     <el-pagination
       layout="total,sizes,prev,pager,next,jumper"
-      :pageSizes="[10,20,30]"
+      :pageSizes="[10, 20, 30]"
       v-bind="$attrs"
       v-model:currentPage="currentPage"
       v-model:pageSize="pageSize"
@@ -97,7 +105,7 @@ export default {
   inheritAttrs: false,
 };
 </script>
-<script lang='ts' setup>
+<script lang="ts" setup>
 import {
   computed,
   reactive,
@@ -330,7 +338,7 @@ const resetFn = () => {
 };
 defineExpose({ formRef, tableRef });
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .form-item {
   display: grid;
   grid-template: auto / repeat(4, minmax(320px, 1fr));

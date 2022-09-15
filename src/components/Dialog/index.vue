@@ -14,14 +14,15 @@
         <el-button>按钮六</el-button>
         <el-button>按钮七</el-button>
         <el-button
-          @click="$emit('update:modelValue',false)"
+          @click="$emit('update:modelValue', false)"
           type="danger"
-        >关闭</el-button>
+          >关闭</el-button
+        >
       </div>
     </transition>
   </teleport>
 </template>
-<script lang='ts'>
+<script lang="ts">
 export default {
   inheritAttrs: true,
   props: {
@@ -32,7 +33,7 @@ export default {
   emits: ["update:modelValue"],
 };
 </script>
-<script lang='ts' setup>
+<script lang="ts" setup>
 /* import { reactive } from "vue";
 interface _props {
   modelValue: boolean;
@@ -45,7 +46,7 @@ interface _emit {
 }
 const emit = defineEmits<_emit>(); */
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .swz-dialog {
   @include pos-center;
   background-color: rgba(0, 0, 0, 0.5);

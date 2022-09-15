@@ -7,9 +7,9 @@
         </li>
         <transition-group :name="state.arrow">
           <li
-            v-for="(item,index) in props.picArr"
+            v-for="(item, index) in props.picArr"
             :key="index"
-            v-show="index===currentIndex"
+            v-show="index === currentIndex"
             class="absolute"
           >
             <img
@@ -23,11 +23,11 @@
     <div class="flex center-center">
       <el-button @click="currentIndex--">上一张</el-button>
       <el-button @click="currentIndex++">下一张</el-button>
-      <el-button @click="currentIndex=2">第3张</el-button>
+      <el-button @click="currentIndex = 2">第3张</el-button>
     </div>
   </div>
 </template>
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { computed, reactive } from "vue";
 interface _props {
   picArr?: string[];
@@ -57,7 +57,7 @@ const currentIndex = computed({
   },
 });
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 img {
   max-width: 100%;
 }

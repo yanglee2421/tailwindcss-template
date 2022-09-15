@@ -1,6 +1,6 @@
 <template>
   <div class="relative overflow-hidden m-center">
-    <div class="vis-hidden ">
+    <div class="vis-hidden">
       <img
         ref="imgRef"
         :src="state.img"
@@ -8,11 +8,11 @@
       />
     </div>
     <ul
-      :style="{transform:`translate(-${state.width * currentIndex}px)`}"
-      :class='{"absolute":true,"ul-transition":state.trans,"flex":true}'
+      :style="{ transform: `translate(-${state.width * currentIndex}px)` }"
+      :class="{ absolute: true, 'ul-transition': state.trans, flex: true }"
     >
       <li
-        v-for="(item,index) in picList"
+        v-for="(item, index) in picList"
         :key="index"
       >
         <img
@@ -23,7 +23,7 @@
     </ul>
     <el-button @click="currentIndex--">上一张</el-button>
     <el-button @click="currentIndex++">下一张</el-button>
-    <el-button @click="currentIndex=3">第3张</el-button>
+    <el-button @click="currentIndex = 3">第3张</el-button>
   </div>
 </template>
 <script lang="ts">
@@ -31,7 +31,7 @@ export default {
   inheritAttrs: true,
 };
 </script>
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { computed, reactive, ref } from "vue";
 interface _props {
   arr: string[];
@@ -91,7 +91,7 @@ const loaded = () => {
   state.index = 1;
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 ul {
   left: 0;
   top: 0;

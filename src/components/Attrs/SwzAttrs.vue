@@ -11,11 +11,10 @@ export default {
   inheritAttrs: false,
 };
 </script>
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { reactive } from "vue";
 const state = reactive({
   msg: "要传给插槽内容的数据",
 });
 </script>
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>

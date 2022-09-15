@@ -1,18 +1,18 @@
 <template>
-  <label :class="[{checked:inputValue}]">
+  <label :class="[{ checked: inputValue }]">
     <input
       v-model="inputValue"
       type="checkbox"
     />
-    <span>{{inputValue?trueText:falseText}}</span>
+    <span>{{ inputValue ? trueText : falseText }}</span>
   </label>
 </template>
-<script lang='ts'>
+<script lang="ts">
 export default {
   inheritAttrs: true,
 };
 </script>
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { computed } from "vue";
 interface _props {
   modelValue: string | number | boolean;
@@ -40,7 +40,7 @@ const inputValue = computed({
   },
 });
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @mixin ball {
   &::before {
     content: "";

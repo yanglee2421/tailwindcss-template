@@ -1,8 +1,14 @@
 <template>
   <div class="text-center">
     <h1>hello World!</h1>
-    <p>{{state.count}}</p>
-    <el-button @click="state.count++;log(state.count)">加加</el-button>
+    <p>{{ state.count }}</p>
+    <el-button
+      @click="
+        state.count++;
+        log(state.count);
+      "
+      >加加</el-button
+    >
   </div>
   <div></div>
 </template>
@@ -60,5 +66,4 @@ onUnmounted(() => {
   console.log("卸载完成");
 });
 </script>
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>

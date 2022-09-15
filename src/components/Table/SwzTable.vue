@@ -1,7 +1,12 @@
 <template>
   <div class="table h-100 flex-column">
     <div class="thead">
-      <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nam rerum consequatur dignissimos qui recusandae, quibusdam soluta in nisi, perspiciatis officiis rem similique magni cum deleniti facilis impedit. Officiis, cum.</div>
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nam
+        rerum consequatur dignissimos qui recusandae, quibusdam soluta in nisi,
+        perspiciatis officiis rem similique magni cum deleniti facilis impedit.
+        Officiis, cum.
+      </div>
       <div>2</div>
       <div>3</div>
     </div>
@@ -61,16 +66,15 @@
         v-for="item in 1"
         :key="item"
       >
-        <div>{{`${item}-1`}}</div>
-        <div>{{`${item}-2`}}</div>
-        <div>{{`${item}-3`}}</div>
+        <div>{{ `${item}-1` }}</div>
+        <div>{{ `${item}-2` }}</div>
+        <div>{{ `${item}-3` }}</div>
       </template>
     </div>
   </div>
 </template>
-<script lang='ts' setup>
-</script>
-<style lang='scss' scoped>
+<script lang="ts" setup></script>
+<style lang="scss" scoped>
 @mixin grid {
   display: grid;
   grid-template: auto/6fr 6fr 12fr;

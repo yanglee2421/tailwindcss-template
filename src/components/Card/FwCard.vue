@@ -16,7 +16,9 @@
     </div>
     <div class="card-text">
       <h2 class="pb-2">发网云采购</h2>
-      <p>发网云平台客户端，是集成于打印机、电子称、视频录制、网络设备、自动扫描设备等功能的终端工具。发网云平台客户端，是集成于打印机、电子称、视频录制、网络设备、自动扫描设备等功能的终端工具。发网云平台客户端，是集成于打印机、电子称、视频录制、网络设备、自动扫描设备等功能的终端工具。</p>
+      <p>
+        发网云平台客户端，是集成于打印机、电子称、视频录制、网络设备、自动扫描设备等功能的终端工具。发网云平台客户端，是集成于打印机、电子称、视频录制、网络设备、自动扫描设备等功能的终端工具。发网云平台客户端，是集成于打印机、电子称、视频录制、网络设备、自动扫描设备等功能的终端工具。
+      </p>
     </div>
     <div
       class="soft-item"
@@ -25,22 +27,22 @@
     >
       <div
         class="img-list"
-        :class="[item%2===0?'qrcode':'link']"
+        :class="[item % 2 === 0 ? 'qrcode' : 'link']"
       >
-        <img :src="icon">
-        <img :src="logo">
+        <img :src="icon" />
+        <img :src="logo" />
       </div>
       <div class="img-qrcode border"><img :src="logo" /></div>
       <p class="text-info">软件名称ta ta ta 工工工式工工工工工工工工工工</p>
     </div>
   </el-card>
 </template>
-  <script lang='ts'>
+<script lang="ts">
 export default {
   inheritAttrs: true,
 };
 </script>
-  <script lang='ts' setup>
+<script lang="ts" setup>
 import logo from "@/assets/logo.png";
 import icon from "@/assets/icon.png";
 interface _props {
@@ -50,7 +52,7 @@ const props = withDefaults(defineProps<_props>(), {
   firstIcon: true,
 });
 </script>
-  <style lang='scss' scoped>
+<style lang="scss" scoped>
 .el-card {
   @include m-center;
   overflow: visible;
