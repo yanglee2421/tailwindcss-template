@@ -1,8 +1,4 @@
-<template>
-  <template v-if="true">
-    <slot></slot>
-  </template>
-</template>
+<template><slot></slot>></template>
 <script lang="ts">
 export default {
   inheritAttrs: true,
