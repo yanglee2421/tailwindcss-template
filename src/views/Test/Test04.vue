@@ -1,33 +1,12 @@
 <template>
-  <div>
-    <fw-switch v-model="state.val"></fw-switch>
-    <el-button @click="state.val = '50px'">50px</el-button>
-    <el-button @click="state.val = '10vh'"> 10vh </el-button>
-    <el-button @click="state.val = ''">空串</el-button>
-    <el-button @click="state.val = 0">0</el-button>
-    <p>
-      {{ text }}
-    </p>
-    <div
-      v-vis="state.val"
-      class="w-25 m-3"
+  <el-dialog v-model="dialogSta.isShow">
+    <el-form
+      v-bind="$attrs"
+      :ref="(ref) => (formSta.ref = ref)"
     >
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum delectus
-      ipsam nihil perferendis ea quidem similique, maxime iste, laboriosam dicta
-      at. Fuga excepturi quam ex hic voluptatibus provident mollitia tempore?
-    </div>
-    <ul>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <!-- prettier-ignore -->
-      <swz-fragment>
-        <li key="123" @click="null">456</li>
-        <li key="123" @click="null">456</li>
-        <li key="123" @click="null">456</li>
-      </swz-fragment>
-    </ul>
-  </div>
+      <slot></slot>
+    </el-form>
+  </el-dialog>
 </template>
 <script lang="ts">
 export default {
@@ -35,23 +14,50 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { reactive, watchEffect } from "vue";
-import { useRoute } from "vue-router";
-const route = useRoute();
-console.log("query", route.query);
-console.log("history", history.state);
+import { reactive, watch } from "vue";
 interface _props {
-  text: string;
+  modelValue: boolean | Record<string, unknown>;
 }
-const props = withDefaults(defineProps<_props>(), {
-  text: "",
+const props = withDefaults(defineProps<_props>(), {});
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    switch (newVal) {
+      case false:
+        dialogSta.isShow = false;
+        break;
+      case true:
+        dialogSta.isShow = true;
+        break;
+      default:
+        Object.assign(formSta.model, props.modelValue);
+        dialogSta.isShow = true;
+    }
+  }
+);
+interface _emit {
+  (event: "update:modelValue", $event: boolean): void;
+}
+const emit = defineEmits<_emit>();
+const dialogSta = reactive({
+  isShow: false,
 });
-const state = reactive<any>({
-  val: false,
+watch(
+  () => dialogSta.isShow,
+  (newVal) => {
+    if (!newVal) {
+      formSta.ref.resetFields();
+      emit("update:modelValue", false);
+    }
+  }
+);
+interface _formSta {
+  model: Record<string, unknown>;
+  ref: any;
+}
+const formSta = reactive<_formSta>({
+  model: {},
+  ref: null,
 });
-watchEffect(() => {
-  console.log(props.text);
-});
-const aa = 123;
 </script>
 <style lang="scss" scoped></style>
