@@ -7,34 +7,40 @@
     >
       <el-menu-item
         index="work"
-        :route="{name:'work'}"
-      >工作区</el-menu-item>
+        :route="{ name: 'work' }"
+        >工作区</el-menu-item
+      >
       <el-menu-item
         index="test"
-        :route="{name:'test'}"
-      >测试</el-menu-item>
+        :route="{ name: 'test' }"
+        >测试</el-menu-item
+      >
       <el-menu-item
         index="test02"
-        :route="{name:'test02'}"
-      >测试02</el-menu-item>
+        :route="{ name: 'test02' }"
+        >测试02</el-menu-item
+      >
       <el-menu-item
         index="test03"
-        :route="{name:'test03'}"
-      >测试03</el-menu-item>
+        :route="{ name: 'test03' }"
+        >测试03</el-menu-item
+      >
       <el-menu-item
         index="test04"
-        :route="{name:'test04',state:{aaa:111},query:{aa:22},params:{text:'从菜单来的'}}"
-      >测试04</el-menu-item>
+        :route="{ name: 'test04', state: { aaa: 111 } }"
+        >测试04</el-menu-item
+      >
       <el-menu-item
         index="param"
-        :route="{name:'param'}"
-      >传参</el-menu-item>
+        :route="{ name: 'param' }"
+        >传参</el-menu-item
+      >
     </el-menu>
     <main
       class="flex-1-auto"
-      style="overflow:overlay"
+      style="overflow: overlay"
     >
-      <router-view #default="{Component}">
+      <router-view #default="{ Component }">
         <keep-alive>
           <component :is="Component" />
         </keep-alive>
@@ -42,7 +48,7 @@
     </main>
   </div>
 </template>
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { nextTick, onBeforeMount, reactive } from "vue";
 import { onBeforeRouteUpdate, useRoute } from "vue-router";
 const route = useRoute();
@@ -62,5 +68,4 @@ onBeforeRouteUpdate((to, from) => {
   });
 });
 </script>
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -41,7 +41,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { computed, reactive, watch } from "vue";
+import { computed, nextTick, reactive, watch } from "vue";
 import type { ComputedRef } from "vue";
 /**
  * v-model
@@ -63,7 +63,9 @@ watch(
         dialogSta.isShow = true;
         break;
       default:
-        Object.assign(props.model, props.modelValue);
+        nextTick(() => {
+          Object.assign(props.model, props.modelValue);
+        });
         dialogSta.isShow = true;
     }
   }

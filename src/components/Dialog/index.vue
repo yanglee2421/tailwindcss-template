@@ -3,7 +3,6 @@
     <transition>
       <div
         v-if="modelValue"
-        v-track="'这是弹窗'"
         class="swz-dialog"
       >
         <el-button>按钮一</el-button>
@@ -14,7 +13,7 @@
         <el-button>按钮六</el-button>
         <el-button>按钮七</el-button>
         <el-button
-          @click="$emit('update:modelValue', false)"
+          @click="emit('update:modelValue', false)"
           type="danger"
           >关闭</el-button
         >
@@ -25,26 +24,25 @@
 <script lang="ts">
 export default {
   inheritAttrs: true,
-  props: {
-    modelValue: {
-      type: [Boolean, Object],
-    },
-  },
-  emits: ["update:modelValue"],
 };
 </script>
 <script lang="ts" setup>
-/* import { reactive } from "vue";
+/**
+ * v-model
+ */
 interface _props {
   modelValue: boolean;
 }
 const props = withDefaults(defineProps<_props>(), {
   modelValue: true,
 });
+/**
+ * 更新v-model
+ */
 interface _emit {
   (event: "update:modelValue", $event: boolean): void;
 }
-const emit = defineEmits<_emit>(); */
+const emit = defineEmits<_emit>();
 </script>
 <style lang="scss" scoped>
 .swz-dialog {
