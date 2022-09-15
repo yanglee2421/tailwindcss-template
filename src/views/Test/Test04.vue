@@ -5,6 +5,7 @@
     <swz-dialog
       v-model="dialogSta.model"
       :model="state"
+      @save="fun"
     >
       <el-form-item prop="isShow">
         <swz-input-num v-model="state.isShow"></swz-input-num>
@@ -29,5 +30,10 @@ interface _dialogSta {
 const dialogSta = reactive<_dialogSta>({
   model: false,
 });
+const fun = (close: Function) => {
+  setTimeout(() => {
+    close();
+  }, 3000);
+};
 </script>
 <style lang="scss" scoped></style>
