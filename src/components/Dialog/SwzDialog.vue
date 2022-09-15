@@ -22,11 +22,12 @@
       <slot
         name="footer"
         :isAdd="dialogSta.isAdd"
-        :submit="submit"
+        :submitFn="submitFn"
+        :closeFn="closeFn"
       >
-        <el-button @click="dialogSta.isShow = false">取消</el-button>
+        <el-button @click="closeFn">取消</el-button>
         <el-button
-          @click="submit"
+          @click="submitFn"
           type="primary"
           >保存</el-button
         >
@@ -102,6 +103,9 @@ watch(
     }
   }
 );
+const closeFn = () => {
+  dialogSta.isShow = false;
+};
 /**
  * 组件实例
  */
@@ -111,12 +115,10 @@ interface _formSta {
 const formSta = reactive<_formSta>({
   ref: null,
 });
-const submit = () => {
+const submitFn = () => {
   formSta.ref.validate((vali: boolean) => {
     if (vali) {
-      emit("save", () => {
-        dialogSta.isShow = false;
-      });
+      emit("save", closeFn);
     } else {
       return false;
     }
