@@ -1,12 +1,16 @@
 <template>
-  <el-dialog v-model="dialogSta.isShow">
-    <el-form
-      v-bind="$attrs"
-      :ref="(ref) => (formSta.ref = ref)"
+  <div>
+    <el-link @click="dialogSta.model = true">新增</el-link>
+    <el-button @click="dialogSta.model = { isShow: 'edit' }">edit</el-button>
+    <swz-dialog
+      v-model="dialogSta.model"
+      :model="state"
     >
-      <slot></slot>
-    </el-form>
-  </el-dialog>
+      <el-form-item prop="isShow">
+        <swz-input-num v-model="state.isShow"></swz-input-num>
+      </el-form-item>
+    </swz-dialog>
+  </div>
 </template>
 <script lang="ts">
 export default {
@@ -14,50 +18,16 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { reactive, watch } from "vue";
-interface _props {
-  modelValue: boolean | Record<string, unknown>;
-}
-const props = withDefaults(defineProps<_props>(), {});
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    switch (newVal) {
-      case false:
-        dialogSta.isShow = false;
-        break;
-      case true:
-        dialogSta.isShow = true;
-        break;
-      default:
-        Object.assign(formSta.model, props.modelValue);
-        dialogSta.isShow = true;
-    }
-  }
-);
-interface _emit {
-  (event: "update:modelValue", $event: boolean): void;
-}
-const emit = defineEmits<_emit>();
-const dialogSta = reactive({
-  isShow: false,
+import { reactive } from "vue";
+
+const state = reactive({
+  isShow: "",
 });
-watch(
-  () => dialogSta.isShow,
-  (newVal) => {
-    if (!newVal) {
-      formSta.ref.resetFields();
-      emit("update:modelValue", false);
-    }
-  }
-);
-interface _formSta {
-  model: Record<string, unknown>;
-  ref: any;
+interface _dialogSta {
+  model: boolean | Record<string, unknown>;
 }
-const formSta = reactive<_formSta>({
-  model: {},
-  ref: null,
+const dialogSta = reactive<_dialogSta>({
+  model: false,
 });
 </script>
 <style lang="scss" scoped></style>

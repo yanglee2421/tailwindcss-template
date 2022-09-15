@@ -1,20 +1,22 @@
 <template>
-  <div>
-    <el-input
-      v-model="state.value"
-      @input="state.value = $event.replace(/[^.\d]/g, '')"
-      @change="fun($event, state, 'value')"
-    />
-  </div>
+  <el-input
+    v-model="modelValue"
+    @input="emit('update:modelValue', $event.replace(/[^.\d]/g, ''))"
+    @change="fun($event)"
+  ></el-input>
 </template>
 <script lang="ts" setup>
-import { reactive } from "vue";
-const state = reactive({
-  value: "",
-});
-const fun = ($event: string, state: Record<string, unknown>, key: string) => {
+interface _props {
+  modelValue: string;
+}
+const props = withDefaults(defineProps<_props>(), {});
+interface _emit {
+  (event: "update:modelValue", $event: string): void;
+}
+const emit = defineEmits<_emit>();
+const fun = ($event: string) => {
   const res = Number.parseFloat($event).toFixed(2);
-  state[key] = res === "NaN" ? "0" : res;
+  emit("update:modelValue", res === "NaN" ? "0" : res);
 };
 </script>
 <style lang="scss" scoped></style>

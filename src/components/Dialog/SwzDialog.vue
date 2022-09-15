@@ -1,68 +1,99 @@
 <template>
-  <el-dialog v-model="state.isShow">
+  <el-dialog
+    v-bind="$attrs"
+    v-model="dialogSta.isShow"
+    :ref="(ref) => (dialogSta.ref = ref)"
+  >
     <template #header>
       <slot name="header"></slot>
     </template>
-    <slot></slot>
+    <el-form
+      v-bind="$attrs"
+      :model="model"
+      :ref="(ref) => (formSta.ref = ref)"
+    >
+      <slot></slot>
+    </el-form>
     <template #footer>
-      <slot name="footer"></slot>
+      <slot
+        name="footer"
+        :submit="submit"
+      >
+        <el-button @click="dialogSta.isShow = false">取消</el-button>
+        <el-button
+          @click="submit"
+          type="primary"
+          >保存</el-button
+        >
+      </slot>
     </template>
   </el-dialog>
 </template>
 <script lang="ts">
 export default {
-  inheritAttrs: true,
+  inheritAttrs: false,
 };
 </script>
 <script lang="ts" setup>
-import { onMounted, reactive, watch } from "vue";
+import { reactive, watch } from "vue";
 interface _props {
   modelValue: boolean | Record<string, unknown>;
-  model?: Record<string, unknown>;
+  model: Record<string, unknown>;
 }
-const props = withDefaults(defineProps<_props>(), {
-  modelValue: false,
-});
-interface _emit {
-  (event: "update:modelValue", $event: boolean): void;
-  (event: "update:model", $event: Record<string, unknown>): void;
-}
-const emit = defineEmits<_emit>();
-const state = reactive({
-  isShow: false,
-  defaultModel: {},
-});
+const props = withDefaults(defineProps<_props>(), {});
 watch(
   () => props.modelValue,
   (newVal) => {
     switch (newVal) {
       case false:
-        // 关闭
-        state.isShow = false;
+        dialogSta.isShow = false;
         break;
       case true:
-        // 新增模式
-        state.isShow = true;
+        dialogSta.isShow = true;
         break;
       default:
-        // 编辑模式
-        emit("update:model", props.modelValue as any);
-        state.isShow = true;
+        Object.assign(props.model, props.modelValue);
+        dialogSta.isShow = true;
     }
   }
 );
-// 关闭时清空弹窗
+interface _emit {
+  (event: "update:modelValue", $event: boolean): void;
+  (event: "save"): void;
+}
+const emit = defineEmits<_emit>();
+interface _dialogSta {
+  isShow: boolean;
+  ref: any;
+}
+const dialogSta = reactive<_dialogSta>({
+  isShow: false,
+  ref: null,
+});
 watch(
-  () => state.isShow,
+  () => dialogSta.isShow,
   (newVal) => {
     if (!newVal) {
+      formSta.ref.resetFields();
       emit("update:modelValue", false);
-      emit("update:model", state.defaultModel);
     }
   }
 );
-onMounted(() => {
-  state.defaultModel = { ...props.model };
+interface _formSta {
+  ref: any;
+}
+const formSta = reactive<_formSta>({
+  ref: null,
 });
+const submit = () => {
+  formSta.ref.validate((vali: boolean) => {
+    if (vali) {
+      emit("save");
+    } else {
+      return false;
+    }
+  });
+};
+defineExpose({ dialogRef: dialogSta.ref, formRef: formSta.ref });
 </script>
 <style lang="scss" scoped></style>

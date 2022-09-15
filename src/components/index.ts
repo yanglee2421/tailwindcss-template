@@ -6,9 +6,9 @@ export { default as SwzVis } from "./Vis/SwzVis.vue";
 export { default as SwzDialog } from "./Dialog/SwzDialog.vue";
 export { default as SwzCode } from "./Card/SwzCode.vue";
 export { default as SwzFragment } from "./Fragment/index.vue";
+export { default as SwzInputNum } from "./Input/Input-num.vue";
 // else
 export { default as HelloWorld } from "./HelloWorld.vue";
-export { default as InputNum } from "./Input/Input-num.vue";
 // Fw
 export { default as FwSwitch } from "./Switch/FwSwitch.vue";
 export { default as FwTable } from "./Table/FwTable.vue";
