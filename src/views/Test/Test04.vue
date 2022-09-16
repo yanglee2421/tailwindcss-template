@@ -19,10 +19,11 @@
         />
       </div>
       <el-pagination
-        layout="total,sizes,prev,pager,next,jumper"
+        v-if="selectSta.opt.length > 10"
+        layout="total,prev,pager,next"
         v-model:currentPage="pagiSta.currentPage"
         v-model:pageSize="pagiSta.pageSize"
-        :pageSizes="[10, 20, 30]"
+        :pageSizes="[10]"
         :total="pagiSta.total"
         small
       ></el-pagination>
@@ -42,29 +43,36 @@ const state = reactive({
 const selectSta = reactive({
   opt: [],
   loading: false,
+  filterText: "",
 });
 const remoteFn = (str: string) => {
-  initOpt();
+  selectSta.filterText = str;
 };
+watch(
+  () => selectSta.filterText,
+  () => {
+    initOpt();
+  }
+);
 const initOpt = () => {
   selectSta.loading = true;
   setTimeout(() => {
-    selectSta.opt = [1, 2, 3];
-    // pagiSta.total = selectSta.opt.length;
+    selectSta.opt = [];
+    pagiSta.total = selectSta.opt.length;
     selectSta.loading = false;
   }, 1000);
 };
 const visChgFn = (isShow: boolean) => {
-  // isShow || (selectSta.opt = []);
+  isShow || (selectSta.opt = []);
 };
 const pagiSta = reactive({
   currentPage: 1,
-  pageSize: 20,
-  total: 100,
+  pageSize: 10,
+  total: 0,
 });
 watch(
-  [() => pagiSta.currentPage, () => pagiSta.total],
-  (currentPage, pageSize) => {
+  () => pagiSta.currentPage,
+  (currentPage) => {
     initOpt();
   }
 );
