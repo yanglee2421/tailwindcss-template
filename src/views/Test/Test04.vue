@@ -1,20 +1,32 @@
 <template>
-  <div>
-    <el-link @click="dialogSta.model = true">新增</el-link>
-    <el-button @click="dialogSta.model = { isShow: 'edit' }">edit</el-button>
-    <swz-dialog
-      v-model="dialogSta.model"
-      :model="state"
-      @swz-save="fun"
-      label-width="100px"
+  <div class="h-100 b flex center-start">
+    <el-select
+      v-model="state.model"
+      placeholder="输入以搜索"
+      :remote-method="remoteFn"
+      :loading="selectSta.loading"
+      @visible-change="visChgFn"
+      clearable
+      filterable
+      remote
     >
-      <el-form-item
-        label="输入框"
-        prop="isShow"
-      >
-        <swz-input-num v-model="state.isShow"></swz-input-num>
-      </el-form-item>
-    </swz-dialog>
+      <div class="opt-list">
+        <el-option
+          v-for="(item, index) in selectSta.opt"
+          :key="index"
+          :label="`选项${index}`"
+          :value="item"
+        />
+      </div>
+      <el-pagination
+        layout="total,sizes,prev,pager,next,jumper"
+        v-model:currentPage="pagiSta.currentPage"
+        v-model:pageSize="pagiSta.pageSize"
+        :pageSizes="[10, 20, 30]"
+        :total="pagiSta.total"
+        small
+      ></el-pagination>
+    </el-select>
   </div>
 </template>
 <script lang="ts">
@@ -23,21 +35,46 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { reactive } from "vue";
-
+import { reactive, watch } from "vue";
 const state = reactive({
-  isShow: "",
+  model: "",
 });
-interface _dialogSta {
-  model: boolean | Record<string, unknown>;
-}
-const dialogSta = reactive<_dialogSta>({
-  model: false,
+const selectSta = reactive({
+  opt: [],
+  loading: false,
 });
-const fun = (close: Function) => {
-  setTimeout(() => {
-    close();
-  }, 3000);
+const remoteFn = (str: string) => {
+  initOpt();
 };
+const initOpt = () => {
+  selectSta.loading = true;
+  setTimeout(() => {
+    selectSta.opt = [1, 2, 3];
+    // pagiSta.total = selectSta.opt.length;
+    selectSta.loading = false;
+  }, 1000);
+};
+const visChgFn = (isShow: boolean) => {
+  // isShow || (selectSta.opt = []);
+};
+const pagiSta = reactive({
+  currentPage: 1,
+  pageSize: 20,
+  total: 100,
+});
+watch(
+  [() => pagiSta.currentPage, () => pagiSta.total],
+  (currentPage, pageSize) => {
+    initOpt();
+  }
+);
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.el-select {
+  @include m-center;
+}
+.opt-list {
+  max-height: 200px;
+  overflow: overlay;
+}
+</style>
