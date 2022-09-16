@@ -5,9 +5,13 @@
     <swz-dialog
       v-model="dialogSta.model"
       :model="state"
-      @save="fun"
+      @swz-save="fun"
+      label-width="100px"
     >
-      <el-form-item prop="isShow">
+      <el-form-item
+        label="输入框"
+        prop="isShow"
+      >
         <swz-input-num v-model="state.isShow"></swz-input-num>
       </el-form-item>
     </swz-dialog>

@@ -76,7 +76,7 @@ watch(
  */
 interface _emit {
   (event: "update:modelValue", $event: boolean): void;
-  (event: "save", $event: Function): void;
+  (event: "swz-save", $event: Function): void;
 }
 const emit = defineEmits<_emit>();
 /**
@@ -120,7 +120,7 @@ const formSta = reactive<_formSta>({
 const submitFn = () => {
   formSta.ref.validate((vali: boolean) => {
     if (vali) {
-      emit("save", closeFn);
+      emit("swz-save", closeFn);
     } else {
       return false;
     }
