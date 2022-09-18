@@ -8,6 +8,7 @@ export interface _action {
   id?: number;
   beginTime?: number;
   endTime?: number;
+  toPath?: string;
 }
 interface html_e extends HTMLElement {
   $track__action?: _action;

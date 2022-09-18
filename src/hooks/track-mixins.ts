@@ -9,6 +9,7 @@ export default defineComponent({
         beginTime: 0,
         endTime: 0,
         way: "",
+        toPath: "",
       },
       $track__controller: new AbortController(),
     };
@@ -60,6 +61,9 @@ export default defineComponent({
   },
   activated() {
     this.$track__enter();
+  },
+  beforeRouteLeave(to, from) {
+    this.$data.$track__item.toPath = to.fullPath;
   },
   deactivated() {
     this.$track__leave();
