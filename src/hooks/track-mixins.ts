@@ -8,7 +8,6 @@ export default defineComponent({
         meta: null,
         beginTime: 0,
         endTime: 0,
-        way: "",
         toPath: "",
       },
       $track__controller: new AbortController(),
@@ -38,7 +37,6 @@ export default defineComponent({
         "unload",
         () => {
           this.$data.$track__item.endTime = Date.now();
-          this.$data.$track__item.way = "unload";
           buryingPoint.push(this.$data.$track__item);
           buryingPoint.setItem();
         },
@@ -61,9 +59,6 @@ export default defineComponent({
   },
   activated() {
     this.$track__enter();
-  },
-  beforeRouteLeave(to, from) {
-    this.$data.$track__item.toPath = to.fullPath;
   },
   deactivated() {
     this.$track__leave();

@@ -30,13 +30,20 @@
   </div>
 </template>
 <script lang="ts">
+import trackMixins from "@/hooks/track-mixins";
 export default {
   inheritAttrs: true,
+  /*  extends: trackMixins,
+  mounted() {
+    this.$track__setMeta("test04");
+  }, */
 };
 </script>
 <script lang="ts" setup>
 import request from "@/api/request";
 import { reactive, watch } from "vue";
+import trackHook from "@/hooks/track-hook";
+window.setMeta = trackHook("test04--hook");
 const state = reactive({
   model: "",
 });
