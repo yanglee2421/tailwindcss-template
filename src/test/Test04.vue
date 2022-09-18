@@ -10,20 +10,19 @@
       filterable
       remote
     >
-      <div class="opt-list">
+      <el-scrollbar max-height="200px">
         <el-option
           v-for="(item, index) in selectSta.opt"
           :key="index"
           :label="`选项${index}`"
           :value="item"
         />
-      </div>
+      </el-scrollbar>
       <el-pagination
-        v-if="selectSta.opt.length > 10"
+        v-if="selectSta.opt.length > pagiSta.pageSize"
         layout="total,prev,pager,next"
         v-model:currentPage="pagiSta.currentPage"
         v-model:pageSize="pagiSta.pageSize"
-        :pageSizes="[10]"
         :total="pagiSta.total"
         small
       ></el-pagination>
@@ -36,6 +35,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
+import request from "@/api/request";
 import { reactive, watch } from "vue";
 const state = reactive({
   model: "",
@@ -56,18 +56,25 @@ watch(
 );
 const initOpt = () => {
   selectSta.loading = true;
-  setTimeout(() => {
-    selectSta.opt = [];
-    pagiSta.total = selectSta.opt.length;
+  request<unknown[]>({
+    url: "/opt",
+    data: {
+      text: selectSta.filterText,
+      PageIndex: pagiSta.currentPage,
+      PageSize: pagiSta.pageSize,
+    },
+  }).then((res) => {
+    pagiSta.total = res.Data.length;
+    selectSta.opt = res.Data;
     selectSta.loading = false;
-  }, 1000);
+  });
 };
 const visChgFn = (isShow: boolean) => {
   isShow || (selectSta.opt = []);
 };
 const pagiSta = reactive({
   currentPage: 1,
-  pageSize: 10,
+  pageSize: 30,
   total: 0,
 });
 watch(
@@ -80,9 +87,5 @@ watch(
 <style lang="scss" scoped>
 .el-select {
   @include m-center;
-}
-.opt-list {
-  max-height: 200px;
-  overflow: overlay;
 }
 </style>
