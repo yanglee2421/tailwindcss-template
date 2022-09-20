@@ -1,5 +1,6 @@
 <template>
   <el-dialog
+    :title="(dialogSta.isAdd ? `新增` : `编辑`) + fwTitle"
     v-bind="$attrs"
     v-model="dialogSta.isShow"
     :ref="(ref) => (dialogSta.ref = ref)"
@@ -8,8 +9,7 @@
       <slot
         name="header"
         :isAdd="dialogSta.isAdd"
-        >{{ dialogSta.isAdd ? "新增" : "编辑" }}</slot
-      >
+      ></slot>
     </template>
     <el-form
       v-bind="$attrs"
@@ -50,8 +50,11 @@ import type { ComputedRef } from "vue";
 interface _props {
   modelValue: boolean | Record<string, unknown>;
   model: Record<string, unknown>;
+  fwTitle?: string;
 }
-const props = withDefaults(defineProps<_props>(), {});
+const props = withDefaults(defineProps<_props>(), {
+  fwTitle: "",
+});
 watch(
   () => props.modelValue,
   (newVal) => {
