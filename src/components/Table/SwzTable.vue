@@ -1,132 +1,201 @@
 <template>
-  <div class="table h-100 flex-column">
-    <div class="thead">
-      <div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nam
-        rerum consequatur dignissimos qui recusandae, quibusdam soluta in nisi,
-        perspiciatis officiis rem similique magni cum deleniti facilis impedit.
-        Officiis, cum.
-      </div>
-      <div>2</div>
-      <div>3</div>
+  <div
+    ref="root"
+    class="flex-column"
+  >
+    <el-form
+      v-vis="formSta.vis"
+      v-resize
+      v-bind="$attrs"
+      :ref="(ref) => (formSta.ref = ref)"
+      class="form-top"
+    >
+      <slot name="form">这个插槽中只应该是多个el-form-item</slot>
+      <el-form-item class="form-item-btn">
+        <el-button @click="resetFn">重置</el-button>
+        <el-button
+          @click="submitFn"
+          type="primary"
+          >查询</el-button
+        >
+        <coll-tag
+          v-if="formSta.showTag"
+          v-model="formSta.vis"
+          false-value="50px"
+        ></coll-tag>
+      </el-form-item>
+    </el-form>
+    <div class="pb-1">
+      <slot name="btn-bar"></slot>
     </div>
-    <div class="tbody overflow-overlay">
-      <template
-        v-for="item in 10"
-        :key="item"
+    <div class="flex-1-hidden">
+      <el-table
+        v-bind="$attrs"
+        :ref="(ref) => (tableSta.ref = ref)"
+        height="100%"
       >
-        <div>
-          <el-select>
-            <el-option
-              v-for="item in 5"
-              :key="item"
-              :label="item"
-              :value="item"
-            />
-          </el-select>
-        </div>
-        <div>
-          <el-input />
-        </div>
-        <div>
-          <el-row :gutter="10">
-            <el-col :span="12">
-              <el-select></el-select>
-            </el-col>
-            <el-col :span="6">
-              <el-checkbox>123</el-checkbox>
-            </el-col>
-            <el-col :span="6">
-              <el-checkbox>123</el-checkbox>
-            </el-col>
-            <el-col :span="12">
-              <el-select></el-select>
-            </el-col>
-            <el-col :span="6">
-              <el-checkbox>123</el-checkbox>
-            </el-col>
-            <el-col :span="6">
-              <el-checkbox>123</el-checkbox>
-            </el-col>
-            <el-col :span="12">
-              <el-select></el-select>
-            </el-col>
-            <el-col :span="6">
-              <el-checkbox>123</el-checkbox>
-            </el-col>
-            <el-col :span="6">
-              <el-checkbox>123</el-checkbox>
-            </el-col>
-          </el-row>
-        </div>
-      </template>
+        <slot></slot>
+        <template #empty>
+          <slot name="empty">
+            <el-empty></el-empty>
+          </slot>
+        </template>
+      </el-table>
     </div>
-    <div class="tfoot">
-      <template
-        v-for="item in 1"
-        :key="item"
-      >
-        <div>{{ `${item}-1` }}</div>
-        <div>{{ `${item}-2` }}</div>
-        <div>{{ `${item}-3` }}</div>
-      </template>
-    </div>
+    <el-pagination
+      layout="total,sizes,prev,pager,next,jumper"
+      :total="100"
+      :page-sizes="[20, 30, 50]"
+      v-bind="$attrs"
+      v-model:currentPage="pagiSta.currentPage"
+      v-model:pageSize="pagiSta.pageSize"
+    ></el-pagination>
   </div>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+};
+</script>
+<script lang="ts" setup>
+import { computed, Directive, ref, reactive, watch, ComputedRef } from "vue";
+import { CollTag } from "./component";
+// #region ----------------------------------------------------------------Props
+interface _props {
+  PageIndex: number;
+  PageSize: number;
+}
+const props = withDefaults(defineProps<_props>(), {
+  PageIndex: 1,
+});
+// #endregion
+// #region ----------------------------------------------------Emit
+interface _emit {
+  (event: "update:PageIndex", $event: number): void;
+  (event: "update:PageSize", $event: number): void;
+  (event: "fw-initTable", $event: boolean): void;
+}
+const emit = defineEmits<_emit>();
+// #endregion
+// #region --------------------------------------------------------表单状态
+interface _formSta {
+  ref: any;
+  vis: string | true;
+  width: number;
+  controller: AbortController;
+  showTag: ComputedRef<boolean>;
+}
+const root = ref<HTMLElement>();
+const getItemNum = () => {
+  const rootDom = root.value;
+  const formDom = rootDom?.querySelector(".el-form");
+  const length = formDom?.querySelectorAll(":scope>div").length;
+  return length ?? 0;
+};
+const formSta = reactive<_formSta>({
+  ref: null,
+  vis: true,
+  width: 0,
+  controller: new AbortController(),
+  showTag: computed(() => {
+    const width = formSta.width;
+    const length = getItemNum();
+    if (width > 1500) {
+      return length > 5;
+    } else if (width > 1000) {
+      return length > 4;
+    } else {
+      return length > 4;
+    }
+  }),
+});
+const resetFn = () => {
+  formSta.ref?.resetFields();
+  emit("fw-initTable", true);
+};
+const submitFn = () => {
+  formSta.ref?.validate((vali: boolean) => {
+    if (vali) {
+      emit("fw-initTable", true);
+    } else {
+      return false;
+    }
+  });
+};
+watch(
+  () => formSta.width,
+  (width) => {
+    const length = getItemNum();
+    if (width > 1500) {
+      return length > 5;
+    } else if (width > 1000) {
+      return length > 4;
+    } else {
+      return length > 4;
+    }
+  }
+);
+const vResize: Directive<HTMLElement> = {
+  mounted(el) {
+    const signal = formSta.controller.signal;
+    window.addEventListener(
+      "resize",
+      () => {
+        formSta.width = el.clientWidth;
+      },
+      { signal }
+    );
+  },
+  beforeUnmount(el) {
+    formSta.controller.abort();
+  },
+};
+// #endregion
+// #region -------------------------------------------------------------表格状态
+interface _tableSta {
+  ref: any;
+}
+const tableSta = reactive<_tableSta>({
+  ref: null,
+});
+// #endregion
+// #region -------------------------------------------------------------分页状态
+const pagiSta = reactive({
+  currentPage: computed({
+    get() {
+      return props.PageIndex;
+    },
+    set(value) {
+      emit("update:PageIndex", value);
+    },
+  }),
+  pageSize: computed({
+    get() {
+      return props.PageSize;
+    },
+    set(value) {
+      emit("update:PageSize", value);
+    },
+  }),
+});
+watch([() => props.PageIndex, () => props.PageSize], () => {
+  emit("fw-initTable", false);
+});
+// #endregion
+defineExpose({
+  formRef: formSta.ref,
+  tableRef: tableSta.ref,
+});
+</script>
 <style lang="scss" scoped>
-@mixin grid {
+.form-top {
   display: grid;
-  grid-template: auto/6fr 6fr 12fr;
+  grid-template: auto/repeat(4, minmax(auto, 1fr));
+  gap: 10px;
 }
-@mixin cell {
-  padding: 10px;
-  border: solid #eee;
-  border-width: 1px 1px 0 0;
-  text-align: center;
-}
-.table {
-  .thead,
-  .tbody,
-  .tfoot {
-    @include grid;
-    border: solid #eee;
-    border-width: 0 0 1px 1px;
-    > div {
-      @include cell;
-    }
-  }
-  .tbody {
-    overflow: auto;
-  }
-  .tbody,
-  .tfoot {
-    > div {
-      @for $i from 1 through 3 {
-        &:nth-of-type(#{$i}) {
-          border-top: 0;
-        }
-      }
-    }
-  }
-  .thead,
-  .tfoot {
-    > div {
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
-  }
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  ::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, 0.2);
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.3);
-    }
-  }
+.form-item-btn {
+  grid-row: 1 / span 1;
+  grid-column: span 1/-1;
+  justify-self: end;
 }
 </style>

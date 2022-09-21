@@ -1,14 +1,36 @@
 <template>
-  <div ref="root">
-    <!-- <proto-options-vue
-      v-model="state.isShow"
-      @swz-switch="log('@事件')"
-    ></proto-options-vue> -->
-    <fw-switch
-      v-model="state.isShow"
-      :before-change="chgFn"
-    ></fw-switch>
-    <el-button @click="state.isShow = !state.isShow">yo</el-button>
+  <div
+    ref="root"
+    class="h-100"
+  >
+    <swz-table
+      :data="[{}, {}, {}, {}]"
+      @fw-initTable="log($event)"
+      :model="{}"
+      border
+      stripe
+      v-model:PageIndex="pagi.aaa"
+      v-model:PageSize="pagi.bbb"
+    >
+      <template #form>
+        <el-form-item
+          label="输入框"
+          v-for="item in 5"
+          :key="item"
+        >
+          <el-input></el-input>
+        </el-form-item>
+      </template>
+      <template #btn-bar>
+        <el-button>新增</el-button>
+      </template>
+      <el-table-column
+        v-for="item in 7"
+        :key="item"
+        :label="'' + 1"
+        align="center"
+      ></el-table-column>
+    </swz-table>
   </div>
 </template>
 <script lang="ts">
@@ -17,66 +39,14 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import {
-  ref,
-  reactive,
-  watch,
-  watchEffect,
-  watchPostEffect,
-  watchSyncEffect,
-  onBeforeMount,
-  onBeforeUpdate,
-  onMounted,
-  onUpdated,
-  nextTick,
-} from "vue";
-import ProtoOptionsVue from "./component/ProtoOptions.vue";
-const state = reactive<any>({
-  ref: null,
-  isShow: true,
-});
-const chgFn = () => {
-  return Promise.reject();
-};
-const root = ref();
+import { reactive } from "vue";
+
 const log = (i: unknown) => {
-  console.log("父", i);
+  console.log(i);
 };
-watch(
-  () => state.isShow,
-  (newVal) => {
-    console.log("父", "watch");
-  },
-  {
-    immediate: true,
-  }
-);
-watchSyncEffect(() => {
-  const a = state.isShow;
-  console.log("父", "watchSyncEffect");
-});
-watchEffect(() => {
-  const a = state.isShow;
-  console.log("父", "watchEffect");
-});
-watchPostEffect(() => {
-  const a = state.isShow;
-  console.log("父", "watchPostEffect");
-});
-nextTick(() => {
-  console.log("父", "nextTick");
-});
-onBeforeMount(() => {
-  console.log("父", "onBeforeMount");
-});
-onMounted(() => {
-  console.log("父", "onMounted");
-});
-onBeforeUpdate(() => {
-  console.log("父", "onBeforeUpdate");
-});
-onUpdated(() => {
-  console.log("父", "onUpdated");
+const pagi = reactive({
+  aaa: 1,
+  bbb: 20,
 });
 </script>
 <style lang="scss" scoped></style>

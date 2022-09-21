@@ -1,4 +1,4 @@
-<template><slot></slot>></template>
+<template><slot></slot></template>
 <script lang="ts">
 export default {
   inheritAttrs: true,
