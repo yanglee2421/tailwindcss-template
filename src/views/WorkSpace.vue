@@ -85,7 +85,7 @@ export default {
 import { reactive, watchEffect } from "vue";
 import request from "@/api/request";
 import { useRouter } from "vue-router";
-import trackHook from "@/hooks/track-hook";
+import trackHook from "@/tool/track-hook";
 trackHook("工作区");
 const router = useRouter();
 const loginOut = () => {

@@ -1,26 +1,31 @@
 <template>
   <div class="flex-column">
-    <el-form
-      v-vis="formSta.vis"
-      v-bind="$attrs"
-      :ref="(ref) => (formSta.ref = ref)"
-      class="form-top"
-      v-mount="formMount"
-    >
-      <slot name="form">这个插槽中只应该是多个el-form-item</slot>
-      <el-form-item class="form-item-btn">
-        <el-button @click="resetFn">重置</el-button>
-        <el-button
-          @click="submitFn"
-          type="primary"
-          >查询</el-button
-        >
-        <coll-tag
-          v-model="formSta.vis"
-          false-value="50px"
-        ></coll-tag>
-      </el-form-item>
-    </el-form>
+    <div v-vis="formSta.vis">
+      <el-form
+        v-bind="$attrs"
+        v-resize
+        :ref="(ref) => (formSta.ref = ref)"
+        :style="{
+          gridTemplateColumns: `repeat(${columns}, minmax(auto, 1fr))`,
+        }"
+        class="form-top"
+      >
+        <slot name="form">这个插槽中只应该是多个el-form-item</slot>
+        <el-form-item class="form-item-btn">
+          <el-button @click="resetFn">重置</el-button>
+          <el-button
+            @click="submitFn"
+            type="primary"
+            >查询</el-button
+          >
+          <coll-tag
+            v-if="needColl"
+            v-model="formSta.vis"
+            false-value="50px"
+          ></coll-tag>
+        </el-form-item>
+      </el-form>
+    </div>
     <div class="pb-1">
       <slot name="btn-bar"></slot>
     </div>
@@ -30,11 +35,26 @@
         :ref="(ref) => (tableSta.ref = ref)"
         height="100%"
       >
+        <el-table-column
+          v-if="fwIndex"
+          label="序号"
+          type="index"
+          align="center"
+          width="60px"
+        />
+        <el-table-column
+          v-if="fwSelection"
+          type="selection"
+          align="center"
+        />
         <slot></slot>
         <template #empty>
           <slot name="empty">
             <el-empty></el-empty>
           </slot>
+        </template>
+        <template #append>
+          <slot name="append"></slot>
         </template>
       </el-table>
     </div>
@@ -54,16 +74,21 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { computed, reactive, watch, onMounted } from "vue";
+import { computed, reactive, watch, ref, Directive } from "vue";
 import { CollTag } from "./component";
 import { useClientWidth } from "@/hooks";
 // #region ----------------------------------------------------------------Props
 interface _props {
   PageIndex: number;
   PageSize: number;
+  fwIndex?: boolean;
+  fwSelection?: boolean;
 }
 const props = withDefaults(defineProps<_props>(), {
   PageIndex: 1,
+  PageSize: 20,
+  fwIndex: true,
+  fwSelection: true,
 });
 // #endregion
 // #region ----------------------------------------------------Emit
@@ -77,15 +102,11 @@ const emit = defineEmits<_emit>();
 // #region --------------------------------------------------------表单状态
 interface _formSta {
   ref: any;
-  box: any;
-  vis: string | true;
-  controller: AbortController;
+  vis: string | boolean;
 }
 const formSta = reactive<_formSta>({
   ref: null,
-  box: null,
   vis: true,
-  controller: new AbortController(),
 });
 const resetFn = () => {
   formSta.ref?.resetFields();
@@ -100,13 +121,25 @@ const submitFn = () => {
     }
   });
 };
-onMounted(() => {
-  // const clientWidth = useClientWidth(el);
-});
-const formMount = (el: HTMLElement) => {
-  /*  watch(clientWidth, () => {
-    console.log("变变变");
-  }); */
+const itemCount = ref(0);
+const { needColl, state, columns } = useClientWidth(itemCount);
+const controller = new AbortController();
+const signal = controller.signal;
+const vResize: Directive<HTMLElement> = {
+  mounted(el) {
+    state.clientWidth = el.clientWidth;
+    itemCount.value = el.querySelectorAll(":scope > div").length;
+    window.addEventListener(
+      "resize",
+      () => {
+        state.clientWidth = el.clientWidth;
+      },
+      { signal }
+    );
+  },
+  beforeUnmount() {
+    controller.abort();
+  },
 };
 // #endregion
 // #region -------------------------------------------------------------表格状态

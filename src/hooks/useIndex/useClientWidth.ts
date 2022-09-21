@@ -1,19 +1,10 @@
-import { onBeforeUnmount, onMounted, ref } from "vue";
-const controller = new AbortController();
-const signal = controller.signal;
-export default (el: HTMLElement) => {
-  const clientWidth = ref(0);
-  onMounted(() => {
-    window.addEventListener(
-      "resize",
-      () => {
-        clientWidth.value = el.clientWidth;
-      },
-      { signal }
-    );
+import { computed, reactive } from "vue";
+import type { Ref } from "vue";
+export default (itemCount: Ref<number>) => {
+  const state = reactive({
+    clientWidth: 0,
   });
-  onBeforeUnmount(() => {
-    controller.abort();
-  });
-  return clientWidth;
+  const columns = computed(() => Math.floor(state.clientWidth / 320));
+  const needColl = computed(() => itemCount.value > columns.value);
+  return { state, columns, needColl };
 };
