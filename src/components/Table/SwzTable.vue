@@ -74,7 +74,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { computed, reactive, watch, ref, Directive } from "vue";
+import { computed, reactive, watch, ref, Directive, onMounted } from "vue";
 import { CollTag } from "./component";
 import { useClientWidth } from "@/hooks";
 // #region ----------------------------------------------------------------Props
@@ -87,8 +87,8 @@ interface _props {
 const props = withDefaults(defineProps<_props>(), {
   PageIndex: 1,
   PageSize: 20,
-  fwIndex: true,
-  fwSelection: true,
+  fwIndex: false,
+  fwSelection: false,
 });
 // #endregion
 // #region ----------------------------------------------------Emit
@@ -172,6 +172,9 @@ const pagiSta = reactive({
 watch([() => props.PageIndex, () => props.PageSize], () => {
   emit("fw-initTable", false);
 });
+onMounted(() => {
+  emit("fw-initTable", true);
+});
 // #endregion
 defineExpose({
   formRef: formSta.ref,
@@ -187,7 +190,7 @@ defineExpose({
 }
 .form-item-btn {
   grid-row: 1 / span 1;
-  grid-column: span 1/-1;
+  grid-column: span 1 / -1;
   justify-self: end;
 }
 </style>
