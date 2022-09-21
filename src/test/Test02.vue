@@ -16,28 +16,53 @@
         v-track="`测试页02的弹窗`"
         class="dialog-content"
       >
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsa eveniet eaque rem nostrum labore ratione laudantium odit accusantium cupiditate deserunt velit, obcaecati dolorum earum, nam rerum iusto accusamus alias.
-        Magnam, quam voluptatum? Dolorem, quos magni! Nihil, tempora? Voluptatem rerum sunt asperiores iusto recusandae! Ea necessitatibus nisi dolorem corrupti ipsam dolor aliquid, ex doloribus ad provident eos reiciendis quisquam veritatis.
-        Ratione tempora iusto voluptatem architecto impedit excepturi non! Sunt accusantium molestias quibusdam culpa ab sed iure aut optio quis, sequi ad explicabo quisquam enim quia saepe suscipit fugiat aliquid magnam?
-        Alias iste natus labore autem inventore explicabo delectus et ratione voluptatibus, temporibus, esse reprehenderit voluptates ut, soluta assumenda. Excepturi impedit aspernatur laudantium praesentium, officiis consequuntur iusto ab aliquid in officia!
-        Deserunt reprehenderit nemo voluptatem excepturi dolore veritatis quidem quisquam blanditiis iure animi quo tempore architecto dolorem distinctio eligendi ullam enim corporis officiis reiciendis tempora aperiam ipsam, doloribus cum? Impedit, blanditiis.
-        Officia beatae iusto expedita laboriosam, exercitationem temporibus ipsam, facere maiores nulla rerum a fugiat. Ut dolor dignissimos sint, facilis veritatis iste porro consectetur iusto illo vitae accusamus minima? Distinctio, esse.
-        Qui ipsa nulla sequi minus, at praesentium, consequatur molestiae magnam consectetur magni ab. A aperiam corporis sint possimus praesentium dicta minima, tenetur recusandae vel quo consequatur fugiat doloremque impedit odit?
-        Quisquam similique corrupti incidunt quidem quis odio minus quaerat, repellendus nobis molestiae praesentium illum est qui? Placeat possimus earum saepe, adipisci, labore officiis praesentium et, neque consectetur sed eaque. Officiis.
-        Pariatur maxime, dolorum sunt voluptate velit dolorem facilis. Dolor maiores non distinctio exercitationem at tenetur blanditiis sint nisi animi ut. Consequatur, illum facere quam nostrum expedita unde ex autem tempora.
-        Et reiciendis illum nesciunt recusandae rem ducimus iure? Ratione rerum modi natus tenetur. Maxime culpa dolorem reprehenderit quas temporibus. Aspernatur quidem labore sunt soluta ut. Laborum suscipit atque quos delectus.
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsa
+        eveniet eaque rem nostrum labore ratione laudantium odit accusantium
+        cupiditate deserunt velit, obcaecati dolorum earum, nam rerum iusto
+        accusamus alias. Magnam, quam voluptatum? Dolorem, quos magni! Nihil,
+        tempora? Voluptatem rerum sunt asperiores iusto recusandae! Ea
+        necessitatibus nisi dolorem corrupti ipsam dolor aliquid, ex doloribus
+        ad provident eos reiciendis quisquam veritatis. Ratione tempora iusto
+        voluptatem architecto impedit excepturi non! Sunt accusantium molestias
+        quibusdam culpa ab sed iure aut optio quis, sequi ad explicabo quisquam
+        enim quia saepe suscipit fugiat aliquid magnam? Alias iste natus labore
+        autem inventore explicabo delectus et ratione voluptatibus, temporibus,
+        esse reprehenderit voluptates ut, soluta assumenda. Excepturi impedit
+        aspernatur laudantium praesentium, officiis consequuntur iusto ab
+        aliquid in officia! Deserunt reprehenderit nemo voluptatem excepturi
+        dolore veritatis quidem quisquam blanditiis iure animi quo tempore
+        architecto dolorem distinctio eligendi ullam enim corporis officiis
+        reiciendis tempora aperiam ipsam, doloribus cum? Impedit, blanditiis.
+        Officia beatae iusto expedita laboriosam, exercitationem temporibus
+        ipsam, facere maiores nulla rerum a fugiat. Ut dolor dignissimos sint,
+        facilis veritatis iste porro consectetur iusto illo vitae accusamus
+        minima? Distinctio, esse. Qui ipsa nulla sequi minus, at praesentium,
+        consequatur molestiae magnam consectetur magni ab. A aperiam corporis
+        sint possimus praesentium dicta minima, tenetur recusandae vel quo
+        consequatur fugiat doloremque impedit odit? Quisquam similique corrupti
+        incidunt quidem quis odio minus quaerat, repellendus nobis molestiae
+        praesentium illum est qui? Placeat possimus earum saepe, adipisci,
+        labore officiis praesentium et, neque consectetur sed eaque. Officiis.
+        Pariatur maxime, dolorum sunt voluptate velit dolorem facilis. Dolor
+        maiores non distinctio exercitationem at tenetur blanditiis sint nisi
+        animi ut. Consequatur, illum facere quam nostrum expedita unde ex autem
+        tempora. Et reiciendis illum nesciunt recusandae rem ducimus iure?
+        Ratione rerum modi natus tenetur. Maxime culpa dolorem reprehenderit
+        quas temporibus. Aspernatur quidem labore sunt soluta ut. Laborum
+        suscipit atque quos delectus.
       </div>
       <template #footer>
         <el-button
-          @click="state.isShow=false"
+          @click="state.isShow = false"
           type="danger"
-        >关闭</el-button>
+          >关闭</el-button
+        >
       </template>
     </el-dialog>
   </div>
 </template>
-<script lang='ts'>
-import trackMixins from "@/hooks/track-mixins";
+<script lang="ts">
+import trackMixins from "@/tool/track-mixins";
 export default {
   inheritAttrs: true,
   mixins: [trackMixins],
@@ -46,14 +71,14 @@ export default {
   },
 };
 </script>
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { reactive } from "vue";
 
 const state = reactive({
   isShow: false,
 });
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .dialog-content {
   line-height: 1.5;
   font-size: 20px;
