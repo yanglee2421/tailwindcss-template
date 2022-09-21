@@ -1,10 +1,14 @@
 <template>
   <div ref="root">
-    <proto-options-vue
+    <!-- <proto-options-vue
       v-model="state.isShow"
       @swz-switch="log('@事件')"
-    ></proto-options-vue>
-    <fw-switch v-model="state.isShow"></fw-switch>
+    ></proto-options-vue> -->
+    <fw-switch
+      v-model="state.isShow"
+      :before-change="chgFn"
+    ></fw-switch>
+    <el-button @click="state.isShow = !state.isShow">yo</el-button>
   </div>
 </template>
 <script lang="ts">
@@ -29,8 +33,11 @@ import {
 import ProtoOptionsVue from "./component/ProtoOptions.vue";
 const state = reactive<any>({
   ref: null,
-  isShow: false,
+  isShow: true,
 });
+const chgFn = () => {
+  return Promise.reject();
+};
 const root = ref();
 const log = (i: unknown) => {
   console.log("父", i);

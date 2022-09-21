@@ -13,13 +13,14 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed, useAttrs } from "vue";
 interface _props {
   modelValue: string | number | boolean;
   trueText?: string;
   falseText?: string;
   trueValue?: string | number | boolean;
   falseValue?: string | number | boolean;
+  beforeChange?: Function;
 }
 const props = withDefaults(defineProps<_props>(), {
   trueText: "启用",
@@ -31,12 +32,27 @@ interface _emit {
   (event: "update:modelValue", $event: string | number | boolean): void;
 }
 const emit = defineEmits<_emit>();
+
+const attrs = useAttrs();
+console.log(attrs);
 const inputValue = computed({
   get() {
     return props.modelValue === props.trueValue;
   },
   set(value) {
-    emit("update:modelValue", value ? props.trueValue : props.falseValue);
+    const { beforeChange } = props;
+    const change = () => {
+      emit("update:modelValue", value ? props.trueValue : props.falseValue);
+    };
+    if (typeof beforeChange === "function") {
+      (async () => beforeChange())()
+        .then((res: boolean) => {
+          res !== false && change();
+        })
+        .catch(() => {});
+    } else {
+      change();
+    }
   },
 });
 </script>
