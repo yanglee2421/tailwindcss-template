@@ -55,6 +55,26 @@ interface _props {
 const props = withDefaults(defineProps<_props>(), {
   fwTitle: "",
 });
+/**
+ * 更新v-model
+ * add打开
+ * edit打开
+ * 关闭了
+ * el-form提交了
+ */
+interface _emit {
+  (event: "update:modelValue", $event: boolean): void;
+  (event: "fw-add"): void;
+  (event: "fw-edit"): void;
+  (event: "fw-close"): void;
+  (event: "fw-submit", $event: Function): void;
+}
+const emit = defineEmits<_emit>();
+/**
+ * 新增模式打开
+ * 编辑模式打开
+ * 关闭
+ */
 watch(
   () => props.modelValue,
   (newVal) => {
@@ -63,25 +83,18 @@ watch(
         dialogSta.isShow = false;
         break;
       case true:
+        emit("fw-add");
         dialogSta.isShow = true;
         break;
       default:
         nextTick(() => {
           Object.assign(props.model, props.modelValue);
+          emit("fw-edit");
+          dialogSta.isShow = true;
         });
-        dialogSta.isShow = true;
     }
   }
 );
-/**
- * 更新v-model
- * 表格验证通过的事件
- */
-interface _emit {
-  (event: "update:modelValue", $event: boolean): void;
-  (event: "swz-save", $event: Function): void;
-}
-const emit = defineEmits<_emit>();
 /**
  * 是否显示
  * 组件实例
@@ -99,18 +112,19 @@ const dialogSta = reactive<_dialogSta>({
     return props.modelValue === true;
   }),
 });
+/**
+ * 关闭时重置表单
+ */
 watch(
   () => dialogSta.isShow,
   (newVal) => {
     if (!newVal) {
       formSta.ref.resetFields();
       emit("update:modelValue", false);
+      emit("fw-close");
     }
   }
 );
-const closeFn = () => {
-  dialogSta.isShow = false;
-};
 /**
  * 组件实例
  */
@@ -120,10 +134,13 @@ interface _formSta {
 const formSta = reactive<_formSta>({
   ref: null,
 });
+const closeFn = () => {
+  dialogSta.isShow = false;
+};
 const submitFn = () => {
   formSta.ref.validate((vali: boolean) => {
     if (vali) {
-      emit("swz-save", closeFn);
+      emit("fw-submit", closeFn);
     } else {
       return false;
     }
