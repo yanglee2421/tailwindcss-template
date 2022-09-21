@@ -1,29 +1,30 @@
 <template>
-  <div
-    ref="root"
-    class="flex-column"
-  >
+  <div class="flex-column">
     <el-form
       v-vis="formSta.vis"
-      v-resize
       v-bind="$attrs"
       :ref="(ref) => (formSta.ref = ref)"
-      class="form-top"
     >
-      <slot name="form">这个插槽中只应该是多个el-form-item</slot>
-      <el-form-item class="form-item-btn">
-        <el-button @click="resetFn">重置</el-button>
-        <el-button
-          @click="submitFn"
-          type="primary"
-          >查询</el-button
-        >
-        <coll-tag
-          v-if="formSta.showTag"
-          v-model="formSta.vis"
-          false-value="50px"
-        ></coll-tag>
-      </el-form-item>
+      <div
+        :ref="(ref) => (formSta.box = ref)"
+        v-resize
+        class="form-top"
+      >
+        <slot name="form">这个插槽中只应该是多个el-form-item</slot>
+        <el-form-item class="form-item-btn">
+          <el-button @click="resetFn">重置</el-button>
+          <el-button
+            @click="submitFn"
+            type="primary"
+            >查询</el-button
+          >
+          <coll-tag
+            v-if="showCollTag"
+            v-model="formSta.vis"
+            false-value="50px"
+          ></coll-tag>
+        </el-form-item>
+      </div>
     </el-form>
     <div class="pb-1">
       <slot name="btn-bar"></slot>
@@ -58,8 +59,9 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { computed, Directive, ref, reactive, watch, ComputedRef } from "vue";
+import { computed, reactive, watch, onMounted } from "vue";
 import { CollTag } from "./component";
+import { useClientWidth } from "@/hooks";
 // #region ----------------------------------------------------------------Props
 interface _props {
   PageIndex: number;
@@ -80,34 +82,15 @@ const emit = defineEmits<_emit>();
 // #region --------------------------------------------------------表单状态
 interface _formSta {
   ref: any;
+  box: any;
   vis: string | true;
-  width: number;
   controller: AbortController;
-  showTag: ComputedRef<boolean>;
 }
-const root = ref<HTMLElement>();
-const getItemNum = () => {
-  const rootDom = root.value;
-  const formDom = rootDom?.querySelector(".el-form");
-  const length = formDom?.querySelectorAll(":scope>div").length;
-  return length ?? 0;
-};
 const formSta = reactive<_formSta>({
   ref: null,
+  box: null,
   vis: true,
-  width: 0,
   controller: new AbortController(),
-  showTag: computed(() => {
-    const width = formSta.width;
-    const length = getItemNum();
-    if (width > 1500) {
-      return length > 5;
-    } else if (width > 1000) {
-      return length > 4;
-    } else {
-      return length > 4;
-    }
-  }),
 });
 const resetFn = () => {
   formSta.ref?.resetFields();
@@ -122,34 +105,28 @@ const submitFn = () => {
     }
   });
 };
-watch(
-  () => formSta.width,
-  (width) => {
-    const length = getItemNum();
-    if (width > 1500) {
-      return length > 5;
-    } else if (width > 1000) {
-      return length > 4;
-    } else {
-      return length > 4;
-    }
-  }
-);
-const vResize: Directive<HTMLElement> = {
-  mounted(el) {
-    const signal = formSta.controller.signal;
-    window.addEventListener(
-      "resize",
-      () => {
-        formSta.width = el.clientWidth;
-      },
-      { signal }
-    );
-  },
-  beforeUnmount(el) {
-    formSta.controller.abort();
-  },
+const getItemNum = () => {
+  const formDom = formSta.box;
+  const length = formDom?.querySelectorAll(":scope > div").length ?? 0;
+  return { formDom, length };
 };
+const clientWidth = useClientWidth();
+const showCollTag = computed(() => {
+  const { length } = getItemNum();
+  return length > clientWidth.value / 320;
+});
+const columnsFn = (num: number) =>
+  `repeat(${Math.floor(num)}, minmax(auto, 1fr))`;
+watch(clientWidth, (width) => {
+  const { formDom } = getItemNum();
+  formDom &&
+    (formDom.style.gridTemplateColumns = columnsFn(
+      width > 1280 ? width / 320 : 4
+    ));
+});
+onMounted(() => {
+  clientWidth.value = formSta.box.clientWidth;
+});
 // #endregion
 // #region -------------------------------------------------------------表格状态
 interface _tableSta {
@@ -190,7 +167,8 @@ defineExpose({
 <style lang="scss" scoped>
 .form-top {
   display: grid;
-  grid-template: auto/repeat(4, minmax(auto, 1fr));
+  grid-template-rows: auto;
+  grid-template-columns: repeat(4, minmax(auto, 1fr));
   gap: 10px;
 }
 .form-item-btn {

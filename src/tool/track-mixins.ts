@@ -1,5 +1,5 @@
-import { buryingPoint } from "./v-track";
-import type { _action } from "./v-track";
+import { buryingPoint } from "../tool/v-track";
+import type { _action } from "../tool/v-track";
 import { defineComponent } from "vue";
 export default defineComponent({
   data() {

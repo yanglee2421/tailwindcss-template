@@ -1,11 +1,8 @@
 <template>
   <div>
-    <input
-      type="file"
-      ref="inpFil"
-    />
-    <el-button @click="log">输出</el-button>
-    <el-button @click="upload">上传</el-button>
+    <el-upload>
+      <el-button @click="upload">上传</el-button>
+    </el-upload>
   </div>
 </template>
 <script setup>

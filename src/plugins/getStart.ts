@@ -5,7 +5,7 @@ import locale from "element-plus/es/locale/lang/zh-cn";
 import "element-plus/dist/index.css";
 import * as icons from "@element-plus/icons-vue";
 import * as components from "@/components";
-import * as directives from "@/hooks";
+import * as directives from "@/tool";
 import type { Directive } from "vue";
 interface App {
   use(plugin: unknown, option?: unknown): void;

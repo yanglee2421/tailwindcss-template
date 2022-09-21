@@ -3,7 +3,7 @@
     ref="root"
     class="h-100"
   >
-    <swz-table
+    <!-- <swz-table
       :data="[{}, {}, {}, {}]"
       @fw-initTable="log($event)"
       :model="{}"
@@ -15,7 +15,7 @@
       <template #form>
         <el-form-item
           label="输入框"
-          v-for="item in 5"
+          v-for="item in 4"
           :key="item"
         >
           <el-input></el-input>
@@ -30,7 +30,7 @@
         :label="'' + 1"
         align="center"
       ></el-table-column>
-    </swz-table>
+    </swz-table> -->
   </div>
 </template>
 <script lang="ts">
