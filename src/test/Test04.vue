@@ -3,7 +3,7 @@
     ref="root"
     class="h-100"
   >
-    <!-- <swz-table
+    <swz-table
       :data="[{}, {}, {}, {}]"
       @fw-initTable="log($event)"
       :model="{}"
@@ -30,7 +30,7 @@
         :label="'' + 1"
         align="center"
       ></el-table-column>
-    </swz-table> -->
+    </swz-table>
   </div>
 </template>
 <script lang="ts">

@@ -4,27 +4,22 @@
       v-vis="formSta.vis"
       v-bind="$attrs"
       :ref="(ref) => (formSta.ref = ref)"
+      class="form-top"
+      v-mount="formMount"
     >
-      <div
-        :ref="(ref) => (formSta.box = ref)"
-        v-resize
-        class="form-top"
-      >
-        <slot name="form">这个插槽中只应该是多个el-form-item</slot>
-        <el-form-item class="form-item-btn">
-          <el-button @click="resetFn">重置</el-button>
-          <el-button
-            @click="submitFn"
-            type="primary"
-            >查询</el-button
-          >
-          <coll-tag
-            v-if="showCollTag"
-            v-model="formSta.vis"
-            false-value="50px"
-          ></coll-tag>
-        </el-form-item>
-      </div>
+      <slot name="form">这个插槽中只应该是多个el-form-item</slot>
+      <el-form-item class="form-item-btn">
+        <el-button @click="resetFn">重置</el-button>
+        <el-button
+          @click="submitFn"
+          type="primary"
+          >查询</el-button
+        >
+        <coll-tag
+          v-model="formSta.vis"
+          false-value="50px"
+        ></coll-tag>
+      </el-form-item>
     </el-form>
     <div class="pb-1">
       <slot name="btn-bar"></slot>
@@ -105,28 +100,14 @@ const submitFn = () => {
     }
   });
 };
-const getItemNum = () => {
-  const formDom = formSta.box;
-  const length = formDom?.querySelectorAll(":scope > div").length ?? 0;
-  return { formDom, length };
-};
-const clientWidth = useClientWidth();
-const showCollTag = computed(() => {
-  const { length } = getItemNum();
-  return length > clientWidth.value / 320;
-});
-const columnsFn = (num: number) =>
-  `repeat(${Math.floor(num)}, minmax(auto, 1fr))`;
-watch(clientWidth, (width) => {
-  const { formDom } = getItemNum();
-  formDom &&
-    (formDom.style.gridTemplateColumns = columnsFn(
-      width > 1280 ? width / 320 : 4
-    ));
-});
 onMounted(() => {
-  clientWidth.value = formSta.box.clientWidth;
+  // const clientWidth = useClientWidth(el);
 });
+const formMount = (el: HTMLElement) => {
+  /*  watch(clientWidth, () => {
+    console.log("变变变");
+  }); */
+};
 // #endregion
 // #region -------------------------------------------------------------表格状态
 interface _tableSta {
