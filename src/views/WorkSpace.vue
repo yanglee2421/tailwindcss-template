@@ -16,7 +16,11 @@
             v-track:change="(event:any)=>`姓名框输入了：${event.target.value}`"
           />
         </el-form-item>
-        <el-form-item label="年龄：">
+        <el-form-item
+          label="年龄："
+          v-for="item in 10"
+          :key="item"
+        >
           <el-input
             v-model.trim="formData.age"
             v-track:change="() => `年龄框输入了：${formData.age}`"

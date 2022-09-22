@@ -11,6 +11,6 @@
 
 .swz-vis-trans {
   overflow: hidden;
-  transition: height 0.3s;
-  will-change: height;
+  transition: max-height 0.3s;
+  will-change: max-height;
 }

@@ -13,13 +13,13 @@ const vVis: Directive<HTMLElement, string | number | boolean> = {
     const { value } = binding;
     switch (value) {
       case true:
-        dom.style.height = "";
+        dom.style.maxHeight = "";
         break;
       case false:
-        dom.style.height = "0";
+        dom.style.maxHeight = "0";
         break;
       default:
-        dom.style.height = typeof value === "string" ? value : value + "px";
+        dom.style.maxHeight = typeof value === "string" ? value : value + "px";
     }
     value !== true && dom.classList.add("swz-vis-trans");
   },
@@ -29,25 +29,26 @@ const vVis: Directive<HTMLElement, string | number | boolean> = {
     if (value !== oldValue) {
       // 获取变化前后的高度
       const currentValue = dom.offsetHeight + "px";
-      dom.style.height = currentValue;
+      dom.style.maxHeight = currentValue;
       dom.classList.add("swz-vis-trans");
       setTimeout(() => {
         switch (value) {
           case true:
-            dom.style.height = dom.scrollHeight + "px";
+            dom.style.maxHeight = dom.scrollHeight + "px";
             break;
           case false:
-            dom.style.height = "0";
+            dom.style.maxHeight = "0";
             break;
           default:
-            dom.style.height = typeof value === "string" ? value : value + "px";
+            dom.style.maxHeight =
+              typeof value === "string" ? value : value + "px";
         }
       }, 0);
       // 若为true，则不需要trans类
       value === true &&
         setTimeout(() => {
           dom.classList.remove("swz-vis-trans");
-          dom.style.height = "";
+          dom.style.maxHeight = "";
         }, 301);
     }
   },
