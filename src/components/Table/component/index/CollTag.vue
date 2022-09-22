@@ -7,13 +7,9 @@
     />
     <span
       :class="[state.isChk ? 'text-danger' : 'text-primary']"
-      class="flex center-center"
+      class="trans flex center-center"
     >
-      <el-icon
-        class="trans"
-        :class="{ 'rotate-180': !state.isChk }"
-        ><ArrowUp
-      /></el-icon>
+      <el-icon :class="{ 'rotate-180': !state.isChk }"><ArrowUp /></el-icon>
       {{ state.isChk ? "拆叠" : "展开" }}</span
     >
   </label>
@@ -53,8 +49,12 @@ const state = reactive({
 </script>
 <style lang="scss" scoped>
 .trans {
-  transition: transform 0.3s;
-  will-change: transform;
+  transition: color 0.3s;
+  will-change: color;
+  .el-icon {
+    transition: transform 0.3s;
+    will-change: transform;
+  }
 }
 .rotate-180 {
   transform: rotate(180deg);
