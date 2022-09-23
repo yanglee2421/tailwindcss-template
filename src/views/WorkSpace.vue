@@ -6,6 +6,7 @@
       border
       v-model:PageIndex="formData.PageIndex"
       v-model:PageSize="formData.PageSize"
+      @fw-initTable="initTable"
       :total="table.total"
       fw-index
     >
@@ -108,7 +109,7 @@ const go = () => {
 };
 const formData = reactive({
   PageIndex: 1,
-  PageSize: 10,
+  PageSize: 20,
   name: "",
   age: "",
 });
@@ -120,6 +121,10 @@ const table = reactive<_table>({
   data: [],
   total: 0,
 });
+const initTable = (i: unknown) => {
+  console.log(i);
+  console.log(formData);
+};
 const response = reactive({
   tableData: [],
 });
