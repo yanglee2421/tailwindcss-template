@@ -17,10 +17,10 @@
     <div class="card-area">
       <el-card header="销售金额达成">
         <div class="flex-column">
-          <div>
+          <div class="card-header">
             <p>实际销售金额（万元）</p>
             <p>2000</p>
-            <p>月环比 15.9%</p>
+            <p>月环比 <b>15.9%</b></p>
           </div>
           <div
             id="charts01"
@@ -28,11 +28,11 @@
           ></div>
           <div>
             <p class="flex-between">
-              <span>有 10条 合同状态为审核中，共 500元</span>
+              <span>有 <b>10条</b> 合同状态为审核中，共 <b>500元</b></span>
               <el-link type="primary">查看合同</el-link>
             </p>
             <p class="flex-between">
-              <span>有 5期 回款在近期要完成，共 500元</span>
+              <span>有 <b>5期</b> 回款在近期要完成，共 <b>500元</b></span>
               <el-link type="primary">查看回款</el-link>
             </p>
           </div>
@@ -40,10 +40,10 @@
       </el-card>
       <el-card header="客户数量达成">
         <div class="flex-column">
-          <div>
+          <div class="card-header">
             <p>实际客户数量（人）</p>
             <p>20</p>
-            <p>月环比 15.9%</p>
+            <p>月环比 <b>15.9%</b></p>
           </div>
           <div
             id="charts02"
@@ -51,7 +51,7 @@
           ></div>
           <div>
             <p class="flex-between">
-              <span>已连续10天未签订客户</span>
+              <span>已连续 <b>10天</b> 未签订客户</span>
               <el-link type="primary">查看详情</el-link>
             </p>
           </div>
@@ -59,10 +59,10 @@
       </el-card>
       <el-card header="销售产品达成">
         <div class="flex-column">
-          <div>
+          <div class="card-header">
             <p>实际销售金额（万元）</p>
             <p>2000</p>
-            <p>月环比 15.9%</p>
+            <p>月环比 <b>15.9%</b></p>
           </div>
           <div
             id="charts03"
@@ -70,24 +70,50 @@
           ></div>
           <div>
             <p class="flex-between">
-              <span>有 10条 合同状态为审核中，共 500元</span>
+              <span>有 <b>10条</b> 合同状态为审核中，共 <b>500元</b></span>
               <el-link type="primary">查看合同</el-link>
             </p>
             <p class="flex-between">
-              <span>有 5期 回款在近期要完成，共 500元</span>
+              <span>有 <b>5期</b> 回款在近期要完成，共 <b>500元</b></span>
               <el-link type="primary">查看回款</el-link>
             </p>
           </div>
         </div>
       </el-card>
       <el-card header="销售漏斗">
-        <div>图表四</div>
+        <div class="flex-column">
+          <div
+            id="charts04"
+            class="flex-1-hidden card-charts"
+          ></div>
+          <p class="flex-between">
+            <span>已连续 <b>10天</b> 未更新线索</span>
+            <el-link type="primary">查看详情</el-link>
+          </p>
+        </div>
       </el-card>
       <el-card
         header="业绩排名"
         class="card-5"
       >
-        <div>图表五</div>
+        <div class="flex h-100">
+          <div
+            id="charts05"
+            class="flex-1-hidden"
+          ></div>
+          <div style="width: 320px">
+            <b>团队排名</b>
+            <ul class="pt-1">
+              <li>1</li>
+              <li>2</li>
+              <li>3</li>
+              <li>4</li>
+              <li>5</li>
+              <li>6</li>
+              <li>7</li>
+            </ul>
+          </div>
+        </div>
       </el-card>
       <el-card
         header="日程"
@@ -121,6 +147,8 @@ onMounted(() => {
   const charts01 = echarts.init(document.querySelector("#charts01")!);
   const charts02 = echarts.init(document.querySelector("#charts02")!);
   const charts03 = echarts.init(document.querySelector("#charts03")!);
+  const charts04 = echarts.init(document.querySelector("#charts04")!);
+  const charts05 = echarts.init(document.querySelector("#charts05")!);
   var datas = [
     [
       { name: "圣彼得堡来客", value: 5.6 },
@@ -190,12 +218,16 @@ onMounted(() => {
   charts01.setOption(option);
   charts02.setOption(option);
   charts03.setOption(option);
+  charts04.setOption(option);
+  charts05.setOption(option);
   window.addEventListener(
     "resize",
     () => {
       charts01.resize();
       charts02.resize();
       charts03.resize();
+      charts04.resize();
+      charts05.resize();
     },
     { signal }
   );
@@ -229,5 +261,8 @@ onBeforeUnmount(() => {
 }
 :deep(.el-card__body) {
   @extend.flex-1-hidden;
+}
+p + p {
+  margin-top: 7px;
 }
 </style>
