@@ -80,16 +80,6 @@
             id="charts03"
             class="flex-1-hidden card-charts"
           ></div>
-          <div>
-            <p class="flex-between">
-              <span>有 <b>10条</b> 合同状态为审核中，共 <b>500元</b></span>
-              <el-link type="primary">查看合同</el-link>
-            </p>
-            <p class="flex-between">
-              <span>有 <b>5期</b> 回款在近期要完成，共 <b>500元</b></span>
-              <el-link type="primary">查看回款</el-link>
-            </p>
-          </div>
         </div>
       </el-card>
       <el-card header="业绩排名">
@@ -100,7 +90,7 @@
           ></div>
           <div class="team-rank">
             <b>团队排名</b>
-            <ul class="pt-1 rank-ul">
+            <ul class="rank-ul">
               <li
                 v-for="(item, index) in 10"
                 :key="index"
@@ -198,6 +188,10 @@ onMounted(() => {
         fontWeight: "normal",
         fontSize: 14,
       },
+    },
+    tooltip: {
+      trigger: "item",
+      formatter: "{b}：{c}元",
     },
     series: [
       {
@@ -468,7 +462,7 @@ onMounted(() => {
         name: "目标",
         type: "bar",
         tooltip: {
-          valueFormatter: (value) => value + " ml",
+          valueFormatter: (value) => value + "万元",
         },
         data: data05_target,
       },
@@ -476,9 +470,7 @@ onMounted(() => {
         name: "实际",
         type: "bar",
         tooltip: {
-          valueFormatter: function (value) {
-            return value + " ml";
-          },
+          valueFormatter: (value) => value + "万元",
         },
         data: data05,
       },
@@ -486,10 +478,8 @@ onMounted(() => {
         name: "实际",
         color: ["#1aa7e8"],
         type: "line",
+        tooltip: { show: false, valueFormatter: () => "" },
         yAxisIndex: 0,
-        tooltip: {
-          valueFormatter: (value) => value,
-        },
         data: data05,
       },
     ],
@@ -568,8 +558,18 @@ p + p {
 .team-rank {
   display: flex;
   flex-direction: column;
-  width: 320px;
+  width: 240px;
   margin-left: 50px;
+}
+.rank-ul {
+  flex: 1;
+  padding-right: 30px;
+  margin-top: 10px;
+  overflow: auto;
+  overflow: overlay;
+}
+li + li {
+  margin-top: 10px;
 }
 .index-ball {
   width: 36px;
@@ -581,21 +581,12 @@ p + p {
   font-size: 20px;
   background-color: #409eff;
 }
-.rank-ul {
-  flex: 1;
-  overflow: auto;
-  overflow: overlay;
-}
-li + li {
-  margin-top: 10px;
-}
 .el-calendar__body {
   padding: 0;
 }
 .calendar-ul {
   max-height: 520px;
-  padding: 10px;
-  margin-left: 80px;
+  padding: 10px 50px 10px 90px;
   overflow: auto;
   overflow: overlay;
 }
