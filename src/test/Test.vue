@@ -17,16 +17,34 @@
     <div class="card-grid">
       <el-card header="销售金额达成">
         <div class="flex-column">
-          <div class="card-header">
+          <div
+            v-if="false"
+            class="card-h-1"
+          >
             <p>实际销售金额（万元）</p>
             <p>2000</p>
             <p>月环比 <b>15.9%</b></p>
           </div>
           <div
+            v-else
+            class="card-h-2"
+          >
+            <div>
+              <p>目标销售金额（万元）</p>
+              <p>实际销售金额（万元）</p>
+              <p>达成率</p>
+              <span>50</span>
+              <span>20</span>
+              <span>50%</span>
+            </div>
+            <p>距离目标还差 <span>3000万元</span></p>
+            <p>月环比 <span>15.9%</span></p>
+          </div>
+          <div
             id="charts01"
-            class="flex-1-hidden card-charts"
+            class="card-charts"
           ></div>
-          <div>
+          <div class="card-f">
             <p class="flex-between">
               <span>有 <b>10条</b> 合同状态为审核中，共 <b>500元</b></span>
               <el-link type="primary">查看合同</el-link>
@@ -40,16 +58,34 @@
       </el-card>
       <el-card header="客户数量达成">
         <div class="flex-column">
-          <div class="card-header">
+          <div
+            v-if="false"
+            class="card-h-1"
+          >
             <p>实际客户数量（人）</p>
             <p>20</p>
             <p>月环比 <b>15.9%</b></p>
           </div>
           <div
+            v-else
+            class="card-h-2"
+          >
+            <div>
+              <p>目标客户数量（人）</p>
+              <p>实际客户数量（人）</p>
+              <p>达成率</p>
+              <span>50</span>
+              <span>20</span>
+              <span>50%</span>
+            </div>
+            <p>距离目标还差 <span>3000万元</span></p>
+            <p>月环比 <span>15.9%</span></p>
+          </div>
+          <div
             id="charts02"
-            class="flex-1-hidden card-charts"
+            class="card-charts"
           ></div>
-          <div>
+          <div class="card-f">
             <p class="flex-between">
               <span>已连续 <b>10天</b> 未签订客户</span>
               <el-link type="primary">查看详情</el-link>
@@ -61,24 +97,44 @@
         <div class="flex-column">
           <div
             id="charts04"
-            class="flex-1-hidden card-charts"
+            class="card-charts"
           ></div>
-          <p class="flex-between">
-            <span>已连续 <b>10天</b> 未更新线索</span>
-            <el-link type="primary">查看详情</el-link>
-          </p>
+          <div class="card-f">
+            <p class="flex-between">
+              <span>已连续 <b>10天</b> 未更新线索</span>
+              <el-link type="primary">查看详情</el-link>
+            </p>
+          </div>
         </div>
       </el-card>
       <el-card header="销售产品达成">
         <div class="flex-column">
-          <div class="card-header">
-            <p>实际销售金额（万元）</p>
-            <p>2000</p>
+          <div
+            v-if="false"
+            class="card-h-1"
+          >
+            <p>实际产品数量（套）</p>
+            <p>20</p>
             <p>月环比 <b>15.9%</b></p>
           </div>
           <div
+            v-else
+            class="card-h-2"
+          >
+            <div>
+              <p>目标产品数量（套）</p>
+              <p>实际产品数量（套）</p>
+              <p>达成率</p>
+              <span>50</span>
+              <span>20</span>
+              <span>50%</span>
+            </div>
+            <p>距离目标还差 <span>3000万元</span></p>
+            <p>月环比 <span>15.9%</span></p>
+          </div>
+          <div
             id="charts03"
-            class="flex-1-hidden card-charts"
+            class="card-charts"
           ></div>
         </div>
       </el-card>
@@ -86,7 +142,7 @@
         <div class="flex h-100">
           <div
             id="charts05"
-            class="flex-1-hidden"
+            class="card-charts"
           ></div>
           <div class="team-rank">
             <b>团队排名</b>
@@ -116,11 +172,11 @@
               <div></div>
               <div class="flex-column center-center">
                 <b>19:18</b>
-                <b class="pt-1">20:18</b>
+                <b>20:18</b>
               </div>
               <div class="flex-column center-start">
                 <h4>线索跟进</h4>
-                <p class="pt-1">测试线索0906|商务谈判</p>
+                <p>测试线索0906|商务谈判</p>
               </div>
             </li>
           </ul>
@@ -184,7 +240,6 @@ onMounted(() => {
     title: {
       text: "实际销售金额回款详图：",
       textStyle: {
-        color: "#999",
         fontWeight: "normal",
         fontSize: 14,
       },
@@ -240,7 +295,6 @@ onMounted(() => {
     title: {
       text: "实际销售金额回款详图：",
       textStyle: {
-        color: "#999",
         fontWeight: "normal",
         fontSize: 14,
       },
@@ -299,7 +353,6 @@ onMounted(() => {
     title: {
       text: "售出产品详图：",
       textStyle: {
-        color: "#999",
         fontWeight: "normal",
         fontSize: 14,
       },
@@ -533,8 +586,52 @@ onBeforeUnmount(() => {
 .card-grid > *:nth-child(6) {
   grid-column: 1/-1;
 }
+.card-h-1 {
+  padding-bottom: 10px;
+}
+.card-h-1 > p:first-child {
+  color: #999;
+  font-size: 14px;
+}
+.card-h-1 > p:nth-child(2) {
+  font-size: 24px;
+  font-weight: bold;
+}
+.card-h-1 > p:last-child {
+  color: #999;
+  font-size: 14px;
+}
+.card-h-2 {
+  padding-bottom: 10px;
+}
+.card-h-2 * {
+  line-height: 1.2;
+}
+.card-h-2 > div:first-child {
+  display: grid;
+  grid-template: repeat(2, auto) / 4fr 5fr 2fr;
+}
+.card-h-2 p {
+  margin: 0;
+}
+.card-h-2 p {
+  color: #999;
+  font-size: 14px;
+}
+.card-h-2 > div > span {
+  font-size: 30px;
+  font-weight: bold;
+}
+.card-h-2 > p {
+  margin-top: 5px;
+}
+.card-f {
+  color: #999;
+  font-size: 14px;
+}
 .card-charts {
-  padding: 10px;
+  flex: 1;
+  overflow: hidden;
 }
 .flex-between {
   display: flex;
@@ -547,8 +644,7 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
 }
-.el-card__body,
-.flex-1-hidden {
+.el-card__body {
   flex: 1;
   overflow: hidden;
 }
@@ -604,10 +700,17 @@ li + li {
   width: 100px;
   padding: 10px;
 }
+.calendar-li > div:nth-last-of-type(2) > *:last-child {
+  padding-top: 10px;
+  color: #999;
+}
 .calendar-li > div:last-of-type {
   width: 350px;
   padding: 10px;
   border-radius: 0 5px 5px 0;
   background-color: #ebedf0;
+}
+.calendar-li > div:last-of-type > *:last-child {
+  padding-top: 10px;
 }
 </style>
