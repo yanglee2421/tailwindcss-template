@@ -562,6 +562,11 @@ onBeforeUnmount(() => {
 });
 </script>
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .card-grid {
   display: grid;
   grid-template: repeat(2, 450px) auto/repeat(6, minmax(210px, 1fr));
