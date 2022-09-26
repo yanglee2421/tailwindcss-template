@@ -93,20 +93,6 @@
           </div>
         </div>
       </el-card>
-      <el-card header="销售漏斗">
-        <div class="flex-column">
-          <div
-            id="charts04"
-            class="card-charts"
-          ></div>
-          <div class="card-f">
-            <p class="flex-between">
-              <span>已连续 <b>10天</b> 未更新线索</span>
-              <el-link type="primary">查看详情</el-link>
-            </p>
-          </div>
-        </div>
-      </el-card>
       <el-card header="销售产品达成">
         <div class="flex-column">
           <div
@@ -136,6 +122,20 @@
             id="charts03"
             class="card-charts"
           ></div>
+        </div>
+      </el-card>
+      <el-card header="销售漏斗">
+        <div class="flex-column">
+          <div
+            id="charts04"
+            class="card-charts"
+          ></div>
+          <div class="card-f">
+            <p class="flex-between">
+              <span>已连续 <b>10天</b> 未更新线索</span>
+              <el-link type="primary">查看详情</el-link>
+            </p>
+          </div>
         </div>
       </el-card>
       <el-card header="业绩排名">
@@ -207,11 +207,11 @@ const data02 = [
 ];
 const data03_x = [
   "ERP电商版",
-  "ERP电商版",
+  "\nERP电商版",
   "ERP企业版",
-  "CMP仓库版",
+  "\nCMP仓库版",
   "CMP商家版",
-  "WMS标准版",
+  "\nWMS标准版",
   "WMS旗舰版",
 ];
 const data03 = [12, 20, 15, 8, 7, 11, 13];
@@ -569,11 +569,11 @@ onBeforeUnmount(() => {
 }
 .card-grid {
   display: grid;
-  grid-template: repeat(2, 450px) auto/repeat(6, minmax(210px, 1fr));
+  grid-template: repeat(2, 450px) auto/repeat(3, minmax(420px, 1fr));
   gap: 10px;
   padding-top: 10px;
 }
-.card-grid > *:nth-child(1) {
+/* .card-grid > *:nth-child(1) {
   grid-column: 1 / span 2;
 }
 .card-grid > *:nth-child(2) {
@@ -581,12 +581,13 @@ onBeforeUnmount(() => {
 }
 .card-grid > *:nth-child(3) {
   grid-column: 5 / span 2;
-}
+} 
 .card-grid > *:nth-child(4) {
-  grid-column: 1 / span 3;
+  grid-column: 1 / span 2;
 }
+*/
 .card-grid > *:nth-child(5) {
-  grid-column: 4 / span 3;
+  grid-column: 2 / span 2;
 }
 .card-grid > *:nth-child(6) {
   grid-column: 1/-1;
