@@ -27,7 +27,7 @@ useCharts(a as any, [0]);
 const chart: Record<string, unknown> = {
   rt: null,
 };
-const renderRt = (dom: HTMLElement, data = []) => {
+const renderRt = (dom: HTMLElement, data: unknown = []) => {
   const charts = echarts.getInstanceByDom(dom) || echarts.init(dom);
   const option = {};
   charts.setOption(option);
