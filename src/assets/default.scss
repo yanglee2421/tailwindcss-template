@@ -71,9 +71,3 @@ ul {
 img {
   vertical-align: bottom;
 }
-
-// ==============================================根元素
-#app {
-  height: 100vh;
-  @extend .clearfix;
-}

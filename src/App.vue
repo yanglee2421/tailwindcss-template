@@ -6,8 +6,11 @@
 
 <script lang="ts" setup></script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/assets/default.scss";
+#app {
+  height: 100vh;
+}
 .el-pagination {
   padding-top: 5px !important;
 }
