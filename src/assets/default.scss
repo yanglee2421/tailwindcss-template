@@ -18,56 +18,46 @@ input[type="number"].num-no-btn {
   @include num-no-btn;
 }
 
-// =======================================滚动条
+// =======================================清除浏览器用户代理样式表
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
-
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.2);
-
   @media (any-hover: none) {
     display: none;
   }
-
   @media (any-hover: hover) {
     &:hover {
       background-color: rgba(0, 0, 0, 0.3);
     }
   }
 }
-
 * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
   scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
-
+  // scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
   @media (any-pointer: none) {
     scrollbar-width: auto;
   }
-
   @media (any-pointer: coarse) {
     scrollbar-width: none;
   }
-
   @media (any-pointer: fine) {
     scrollbar-width: thin;
   }
 }
-
-// ==================================================全局
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  line-height: 1;
-}
-
 ul {
   list-style: none;
 }
-
+a {
+  text-decoration: none;
+}
 img {
   vertical-align: bottom;
 }
