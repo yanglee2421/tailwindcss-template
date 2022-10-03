@@ -2,7 +2,6 @@
   <div>
     <div style="height: 1000px"></div>
     <img v-lazy="img" />
-    <p>底部</p>
   </div>
 </template>
 <script lang="ts">
