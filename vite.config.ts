@@ -28,6 +28,11 @@ export default defineConfig(({ command, mode }) => {
           changeOrigin: true,
           ws: true,
         },
+        "/HPImageArchive.aspx": {
+          target: "http://cn.bing.com",
+          changeOrigin: true,
+          ws: true,
+        },
       },
     },
   };
