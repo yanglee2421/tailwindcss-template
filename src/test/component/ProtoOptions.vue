@@ -26,8 +26,10 @@ export default {
 import {
   nextTick,
   onBeforeMount,
+  onBeforeUnmount,
   onBeforeUpdate,
   onMounted,
+  onUnmounted,
   onUpdated,
   watch,
   watchEffect,
@@ -89,6 +91,12 @@ onBeforeUpdate(() => {
 onUpdated(() => {
   console.log("onUpdated");
 });
+onBeforeUnmount(() => {
+  console.log("onBeforeUnmount");
+});
+onUnmounted(() => {
+  console.log("onUnmounted");
+});
 </script>
 <style lang="scss" scoped>
 .swz-dialog {
@@ -103,7 +111,7 @@ onUpdated(() => {
   background-color: #fff;
   .el-button {
     position: absolute;
-    @include pos-list(0, 0, auto, auto);
+    @include position(0, 0, auto, auto);
   }
 }
 .v-enter-active,

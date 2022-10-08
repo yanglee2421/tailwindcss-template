@@ -37,7 +37,7 @@
       >
     </el-menu>
     <main
-      class="flex-1-auto"
+      class="flex-1-auto p-1"
       style="overflow: overlay"
     >
       <router-view #default="{ Component }">
