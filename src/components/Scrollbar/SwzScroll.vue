@@ -1,6 +1,6 @@
 <template>
   <div
-    class="scrollbar"
+    class="swz-scroll"
     v-scroll
   >
     <div
@@ -134,7 +134,7 @@ const vScroll: Directive<HTMLElement> = {
 };
 </script>
 <style lang="scss" scoped>
-.scrollbar {
+.swz-scroll {
   position: relative;
   height: 100%;
   overflow: hidden;

@@ -22,6 +22,7 @@ export default {
   height: 400px;
 }
 .h {
+  width: 1000px;
   height: 1000px;
 }
 </style>
