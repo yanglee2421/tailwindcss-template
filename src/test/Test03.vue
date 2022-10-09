@@ -5,7 +5,18 @@
   >
     <div class="scrollbar-x"></div>
     <div class="scrollbar-y"></div>
-    <div class="scrollbar__body"></div>
+    <div class="scrollbar__body">
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi vero
+      sequi dolorem quidem veniam sint consequatur error laborum tempore
+      voluptas quibusdam placeat excepturi, id unde ea alias minus eaque quod!
+      Nesciunt minus voluptatum non blanditiis consectetur, rerum et reiciendis
+      dolorem tempore commodi, inventore nihil incidunt, dolor culpa asperiores
+      ea a eius quas eos fugit ipsam iste sit sapiente. Ipsum, sequi! Maxime
+      laboriosam, in, repellendus amet laudantium illum necessitatibus tempore
+      dolore tempora accusamus cumque officia sequi, quisquam consequatur animi
+      commodi cum eaque voluptate consectetur ipsum sapiente veritatis. Ipsum
+      velit accusantium molestias!
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -26,20 +37,55 @@ const scrollSta = reactive<_scrollSta>({
 const vScroll: Directive<HTMLElement> = {
   mounted(dom) {
     const { top, left } = dom.getBoundingClientRect();
-    const thumbX = dom.querySelector(":scope > .scrollbar-x")!;
+    const { clientWidth, clientHeight } = dom;
+    const thumbX = dom.querySelector<HTMLElement>(":scope > .scrollbar-x")!;
+    const { width } = thumbX.getBoundingClientRect();
+    thumbX.addEventListener("mousedown", (event) => {
+      const { offsetX } = event;
+      const controller = new AbortController();
+      const signal = controller.signal;
+      document.addEventListener(
+        "mousemove",
+        (event) => {
+          event.preventDefault();
+          const { clientX } = event;
+          const maxX = clientWidth - width;
+          const x = clientX - left - offsetX;
+          thumbX.style.transform = `translateX(${
+            x < 0 ? 0 : x > maxX ? maxX : x
+          }px)`;
+        },
+        { signal }
+      );
+      document.addEventListener("mouseup", () => {
+        controller.abort();
+      });
+    });
     const thumbY = dom.querySelector<HTMLElement>(":scope > .scrollbar-y")!;
-    thumbY.addEventListener("mousedown", () => {
-      thumbY.addEventListener("mousemove", (event) => {
-        event.preventDefault();
-        const { clientY, offsetY } = event as MouseEvent;
-        thumbY.style.transform = `translateY(${clientY - top - offsetY}px)`;
+    const { height } = thumbY.getBoundingClientRect();
+    thumbY.addEventListener("mousedown", (event) => {
+      const { offsetY } = event;
+      const controller = new AbortController();
+      const signal = controller.signal;
+      document.addEventListener(
+        "mousemove",
+        (event) => {
+          event.preventDefault();
+          const { clientY } = event;
+          const maxY = clientHeight - height;
+          const y = clientY - top - offsetY;
+          thumbY.style.transform = `translateY(${
+            y < 0 ? 0 : y > maxY ? maxY : y
+          }px)`;
+        },
+        { signal }
+      );
+      document.addEventListener("mouseup", () => {
+        controller.abort();
       });
     });
   },
 };
-window.addEventListener("mousemove", () => {
-  console.log(111111);
-});
 onMounted(() => {});
 </script>
 <style lang="scss" scoped>
@@ -47,25 +93,28 @@ onMounted(() => {});
   position: relative;
   width: 500px;
   height: 300px;
-  overflow: hidden;
   border: 1px red solid;
+  @media (any-hover: hover) {
+    overflow: hidden;
+  }
+  @media (any-hover: none) {
+    overflow: auto;
+    overflow: overlay;
+  }
   @mixin scrollbar-thumb {
+    position: absolute;
+    z-index: 1000;
     border-radius: 4px;
     background-color: rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.3);
-    }
   }
   .scrollbar-x {
-    position: absolute;
     @include position(auto, auto, 0, 0);
     @include scrollbar-thumb;
     width: 30px;
     height: 8px;
   }
   .scrollbar-y {
-    position: absolute;
     @include position(0, 0, auto, auto);
     @include scrollbar-thumb;
     width: 8px;
