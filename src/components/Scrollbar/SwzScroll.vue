@@ -3,8 +3,14 @@
     class="scrollbar"
     v-scroll
   >
-    <aside class="thumb-x"></aside>
-    <aside class="thumb-y"></aside>
+    <div
+      draggable="false"
+      class="thumb-x"
+    ></div>
+    <div
+      draggable="false"
+      class="thumb-y"
+    ></div>
     <section class="client">
       <slot></slot>
     </section>
@@ -39,9 +45,11 @@ const vScroll: Directive<HTMLElement> = {
           const { clientX } = event;
           const x = clientX - offsetX - left;
           const maxX = clientWidth - thumbX.offsetWidth;
-          const translate = x < 0 ? 0 : x > maxX ? maxX : x;
+          const translate = Math.floor(x < 0 ? 0 : x > maxX ? maxX : x);
           thumbX.style.transform = `translateX(${translate}px)`;
-          client.scrollLeft = (translate * scrollWidth) / clientWidth;
+          client.scrollLeft = Math.floor(
+            (translate * scrollWidth) / clientWidth
+          );
         },
         { signal }
       );
@@ -67,9 +75,11 @@ const vScroll: Directive<HTMLElement> = {
           const { clientY } = event;
           const y = clientY - offsetY - top;
           const maxY = clientHeight - thumbY.offsetHeight;
-          const translate = y < 0 ? 0 : y > maxY ? maxY : y;
+          const translate = Math.floor(y < 0 ? 0 : y > maxY ? maxY : y);
           thumbY.style.transform = `translateY(${translate}px)`;
-          client.scrollTop = (translate * scrollHeight) / clientHeight;
+          client.scrollTop = Math.floor(
+            (translate * scrollHeight) / clientHeight
+          );
         },
         { signal }
       );
@@ -98,6 +108,8 @@ const vScroll: Directive<HTMLElement> = {
   display: none;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  will-change: transform;
   &:hover {
     background-color: rgba(0, 0, 0, 0.3);
   }
