@@ -5,10 +5,11 @@
       @click="loginOut()"
       type="danger"
       class="mt-3"
-    >注销</el-button>
+      >注销</el-button
+    >
   </div>
 </template>
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -17,5 +18,4 @@ const loginOut = () => {
   router.replace("/login");
 };
 </script>
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>

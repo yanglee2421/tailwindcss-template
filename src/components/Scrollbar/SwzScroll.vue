@@ -4,12 +4,14 @@
     v-scroll
   >
     <div
-      draggable="false"
+      v-show="state.showX"
       class="thumb-x"
+      :class="[{ 'thumb-focus': state.focusX }]"
     ></div>
     <div
-      draggable="false"
+      v-show="state.showY"
       class="thumb-y"
+      :class="[{ 'thumb-focus': state.focusY }]"
     ></div>
     <section class="client">
       <slot></slot>
@@ -23,18 +25,49 @@ export default {
 </script>
 <script lang="ts" setup>
 import type { Directive } from "vue";
+import { reactive } from "vue";
+const state = reactive({
+  showX: false,
+  focusX: false,
+  showY: false,
+  focusY: false,
+});
 const vScroll: Directive<HTMLElement> = {
   mounted(dom) {
-    const { top, left } = dom.getBoundingClientRect();
-    const client = dom.querySelector<HTMLElement>(":scope>.client")!;
-    const { clientWidth, clientHeight, scrollWidth, scrollHeight } = client;
     /**
-     * 横向滚动条
+     * 可视区
+     * 横滑块
+     * 纵滑块
      */
+    const client = dom.querySelector<HTMLElement>(":scope>.client")!;
     const thumbX = dom.querySelector<HTMLElement>(":scope>.thumb-x")!;
-    thumbX.style.width = `${Math.floor(clientWidth ** 2 / scrollWidth)}px`;
+    const thumbY = dom.querySelector<HTMLElement>(":scope>.thumb-y")!;
+    /**
+     * 移入组件时
+     * 计算滑块的宽高
+     * 计算是否展示滑块
+     */
+    dom.addEventListener("mouseover", () => {
+      const { clientWidth, clientHeight, scrollWidth, scrollHeight } = client;
+      thumbX.style.width = `${Math.floor(clientWidth ** 2 / scrollWidth)}px`;
+      thumbY.style.height = `${Math.floor(clientHeight ** 2 / scrollHeight)}px`;
+      scrollWidth > clientWidth && (state.showX = true);
+      scrollHeight > clientHeight && (state.showY = true);
+    });
+    /**
+     * 移出组件时
+     * 若不需要，则隐藏滑块
+     */
+    dom.addEventListener("mouseout", () => {
+      state.focusX || (state.showX = false);
+      state.focusY || (state.showY = false);
+    });
+    /**
+     * 鼠标选中滑块时
+     * 聚焦滑块
+     */
     thumbX.addEventListener("mousedown", (event) => {
-      thumbX.classList.add("thumb-focus");
+      state.focusX = true;
       const { offsetX } = event;
       const controller = new AbortController();
       const signal = controller.signal;
@@ -43,7 +76,9 @@ const vScroll: Directive<HTMLElement> = {
         (event) => {
           event.preventDefault();
           const { clientX } = event;
+          const { left } = dom.getBoundingClientRect();
           const x = clientX - offsetX - left;
+          const { clientWidth, scrollWidth } = client;
           const maxX = clientWidth - thumbX.offsetWidth;
           const translate = Math.floor(x < 0 ? 0 : x > maxX ? maxX : x);
           thumbX.style.transform = `translateX(${translate}px)`;
@@ -53,18 +88,22 @@ const vScroll: Directive<HTMLElement> = {
         },
         { signal }
       );
+      /**
+       * 鼠标放弃滑块时
+       * 滑块失焦
+       */
       document.addEventListener("mouseup", () => {
         controller.abort();
-        thumbX.classList.remove("thumb-focus");
+        state.showX = false;
+        state.focusX = false;
       });
     });
     /**
-     * 纵向滚动条
+     * 鼠标按下时
+     * 聚焦滑块
      */
-    const thumbY = dom.querySelector<HTMLElement>(":scope>.thumb-y")!;
-    thumbY.style.height = `${Math.floor(clientHeight ** 2 / scrollHeight)}px`;
     thumbY.addEventListener("mousedown", (event) => {
-      thumbY.classList.add("thumb-focus");
+      state.focusY = true;
       const { offsetY } = event;
       const controller = new AbortController();
       const signal = controller.signal;
@@ -73,7 +112,9 @@ const vScroll: Directive<HTMLElement> = {
         (event) => {
           event.preventDefault();
           const { clientY } = event;
+          const { top } = dom.getBoundingClientRect();
           const y = clientY - offsetY - top;
+          const { clientHeight, scrollHeight } = client;
           const maxY = clientHeight - thumbY.offsetHeight;
           const translate = Math.floor(y < 0 ? 0 : y > maxY ? maxY : y);
           thumbY.style.transform = `translateY(${translate}px)`;
@@ -85,7 +126,8 @@ const vScroll: Directive<HTMLElement> = {
       );
       document.addEventListener("mouseup", () => {
         controller.abort();
-        thumbY.classList.remove("thumb-focus");
+        state.showY = false;
+        state.focusY = false;
       });
     });
   },
@@ -96,16 +138,9 @@ const vScroll: Directive<HTMLElement> = {
   position: relative;
   height: 100%;
   overflow: hidden;
-  &:hover {
-    .thumb-x,
-    .thumb-y {
-      display: block;
-    }
-  }
 }
 @mixin thumb {
   position: absolute;
-  display: none;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.2);
   cursor: pointer;
@@ -120,7 +155,6 @@ const vScroll: Directive<HTMLElement> = {
 .thumb-x {
   @include thumb;
   @include position(auto, auto, 0, 0);
-  width: 30px;
   height: 8px;
 }
 .thumb-y {

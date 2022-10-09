@@ -3,7 +3,7 @@
     <el-card class="m-center">
       <el-form
         :model="formData"
-        :ref="el=>formRef=el"
+        :ref="(el:HTMLElement) => (formRef = el)"
         :rules="rules"
       >
         <el-form-item prop="userName">
@@ -17,6 +17,7 @@
         <el-form-item prop="pwd">
           <el-input
             v-model.trim="formData.pwd"
+            @keydown.enter="login()"
             maxlength="20"
             type="password"
             prefix-icon="Lock"
@@ -29,14 +30,15 @@
             <el-button
               @click="login()"
               type="primary"
-            >登录</el-button>
+              >登录</el-button
+            >
           </div>
         </el-form-item>
       </el-form>
     </el-card>
   </div>
 </template>
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -61,11 +63,12 @@ const login = () => {
   });
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .div-bg {
   background-image: url("@/assets/bg.jpg");
   // 相对于视口固定
   background-attachment: fixed;
+  background-position: center 100vh;
   background-size: cover;
 }
 .el-card {

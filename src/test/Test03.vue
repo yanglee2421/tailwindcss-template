@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="box b flex-column">
-      <h1>测试滚动组件</h1>
+      <h1 class="mb-1">测试滚动组件</h1>
       <div class="flex-1-hidden">
         <swz-scroll>
           <div class="h b mx-1"></div>
