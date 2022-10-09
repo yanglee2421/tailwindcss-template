@@ -1,24 +1,11 @@
 <template>
-  <div>
-    <div
-      :ref="(ref) => (scrollSta.box = ref)"
-      class="scrollbar"
-    >
-      <div
-        :ref="(ref) => (scrollSta.x = ref)"
-        class="scrollbar-x"
-      ></div>
-      <div
-        :ref="(ref) => (scrollSta.y = ref)"
-        @click="moveXFn"
-        @mousemove="moveFn"
-        class="scrollbar-y"
-      ></div>
-      <div
-        :ref="(ref) => (scrollSta.body = ref)"
-        class="scrollbar__body"
-      ></div>
-    </div>
+  <div
+    class="scrollbar"
+    v-scroll
+  >
+    <div class="scrollbar-x"></div>
+    <div class="scrollbar-y"></div>
+    <div class="scrollbar__body"></div>
   </div>
 </template>
 <script lang="ts">
@@ -27,35 +14,33 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { onMounted, reactive, ref } from "vue";
-const scrollSta = reactive<Record<string, any>>({
-  box: null,
-  x: null,
-  y: null,
-  body: null,
+import { Directive, onMounted, reactive } from "vue";
+interface _scrollSta {
+  x: number;
+  y: number;
+}
+const scrollSta = reactive<_scrollSta>({
+  x: 0,
+  y: 0,
 });
-const moveXFn = (event: MouseEvent) => {
-  console.log(event);
+const vScroll: Directive<HTMLElement> = {
+  mounted(dom) {
+    const { top, left } = dom.getBoundingClientRect();
+    const thumbX = dom.querySelector(":scope > .scrollbar-x")!;
+    const thumbY = dom.querySelector<HTMLElement>(":scope > .scrollbar-y")!;
+    thumbY.addEventListener("mousedown", () => {
+      thumbY.addEventListener("mousemove", (event) => {
+        event.preventDefault();
+        const { clientY, offsetY } = event as MouseEvent;
+        thumbY.style.transform = `translateY(${clientY - top - offsetY}px)`;
+      });
+    });
+  },
 };
-const h = ref(0);
-const moveFn = (event: MouseEvent) => {
-  event.preventDefault();
-  const { clientY, offsetY, movementY } = event;
-  console.log(offsetY);
-  const dom = event.currentTarget as HTMLElement;
-  h.value += movementY;
-  dom.style.transform = `translateY(${h.value}px)`;
-};
-onMounted(() => {
-  const scrollWidth = scrollSta.box.scrollWidth;
-  const scrollHeight = scrollSta.box.scrollHeight;
-  const clientWidth = scrollSta.box.clientWidth;
-  const clientHeight = scrollSta.box.clientHeight;
-  scrollSta.y.style.height =
-    scrollHeight > clientHeight ? clientHeight ** 2 / scrollHeight + "px" : 0;
-  scrollSta.x.style.width =
-    scrollWidth > clientWidth ? clientWidth ** 2 / scrollWidth + "px" : 0;
+window.addEventListener("mousemove", () => {
+  console.log(111111);
 });
+onMounted(() => {});
 </script>
 <style lang="scss" scoped>
 .scrollbar {
@@ -76,7 +61,7 @@ onMounted(() => {
     position: absolute;
     @include position(auto, auto, 0, 0);
     @include scrollbar-thumb;
-    width: 100px;
+    width: 30px;
     height: 8px;
   }
   .scrollbar-y {
