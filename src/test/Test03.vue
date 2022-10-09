@@ -1,22 +1,11 @@
 <template>
-  <div
-    class="scrollbar"
-    v-scroll
-  >
-    <div class="scrollbar-x"></div>
-    <div class="scrollbar-y"></div>
-    <div class="scrollbar__body">
-      <div>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi vero
-        sequi dolorem quidem veniam sint consequatur error laborum tempore
-        voluptas quibusdam placeat excepturi, id unde ea alias minus eaque quod!
-        Nesciunt minus voluptatum non blanditiis consectetur, rerum et
-        reiciendis dolorem tempore commodi, inventore nihil incidunt, dolor
-        culpa asperiores ea a eius quas eos fugit ipsam iste sit sapiente.
-        Ipsum, sequi! Maxime laboriosam, in, repellendus amet laudantium illum
-        necessitatibus tempore dolore tempora accusamus cumque officia sequi,
-        quisquam consequatur animi commodi cum eaque voluptate consectetur ipsum
-        sapiente veritatis. Ipsum velit accusantium molestias!
+  <div>
+    <div class="box b flex-column">
+      <h1>测试滚动组件</h1>
+      <div class="flex-1-hidden">
+        <swz-scroll>
+          <div class="h b mx-1"></div>
+        </swz-scroll>
       </div>
     </div>
   </div>
@@ -26,115 +15,13 @@ export default {
   inheritAttrs: true,
 };
 </script>
-<script lang="ts" setup>
-import { Directive, onMounted, reactive } from "vue";
-interface _scrollSta {
-  x: number;
-  y: number;
-}
-const scrollSta = reactive<_scrollSta>({
-  x: 0,
-  y: 0,
-});
-const vScroll: Directive<HTMLElement> = {
-  mounted(dom) {
-    const { top, left } = dom.getBoundingClientRect();
-    const { clientWidth, clientHeight, scrollWidth, scrollHeight } = dom;
-    const body = dom.querySelector<HTMLElement>();
-    const thumbX = dom.querySelector<HTMLElement>(":scope > .scrollbar-x")!;
-    thumbX.style.width = clientWidth ** 2 / scrollWidth + "px";
-    const { width } = thumbX.getBoundingClientRect();
-    thumbX.addEventListener("mousedown", (event) => {
-      const { offsetX } = event;
-      const controller = new AbortController();
-      const signal = controller.signal;
-      document.addEventListener(
-        "mousemove",
-        (event) => {
-          event.preventDefault();
-          const { clientX } = event;
-          const maxX = clientWidth - width;
-          const x = clientX - left - offsetX;
-          thumbX.style.transform = `translateX(${
-            x < 0 ? 0 : x > maxX ? maxX : x
-          }px)`;
-        },
-        { signal }
-      );
-      document.addEventListener("mouseup", () => {
-        controller.abort();
-      });
-    });
-    const thumbY = dom.querySelector<HTMLElement>(":scope > .scrollbar-y")!;
-    thumbY.style.height = clientHeight ** 2 / scrollHeight + "px";
-    const { height } = thumbY.getBoundingClientRect();
-    thumbY.addEventListener("mousedown", (event) => {
-      const { offsetY } = event;
-      const controller = new AbortController();
-      const signal = controller.signal;
-      document.addEventListener(
-        "mousemove",
-        (event) => {
-          event.preventDefault();
-          const { clientY } = event;
-          const maxY = clientHeight - height;
-          const y = clientY - top - offsetY;
-          const realY = y < 0 ? 0 : y > maxY ? maxY : y;
-          thumbY.style.transform = `translateY(${realY}px)`;
-          dom.scrollTop = (realY * scrollHeight) / clientHeight;
-        },
-        { signal }
-      );
-      document.addEventListener("mouseup", () => {
-        controller.abort();
-      });
-    });
-  },
-};
-onMounted(() => {});
-</script>
+<script lang="ts" setup></script>
 <style lang="scss" scoped>
-.scrollbar {
-  position: relative;
-  width: 500px;
-  height: 300px;
-  border: 1px red solid;
-  @media (any-hover: hover) {
-    overflow: hidden;
-    &:hover {
-      .scrollbar-x,
-      .scrollbar-y {
-        display: block !important;
-      }
-    }
-  }
-  @media (any-hover: none) {
-    overflow: auto;
-    overflow: overlay;
-  }
-  @mixin scrollbar-thumb {
-    position: absolute;
-    z-index: 1000;
-    display: none;
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-  }
-  .scrollbar-x {
-    @include position(auto, auto, 0, 0);
-    @include scrollbar-thumb;
-    height: 8px;
-  }
-  .scrollbar-y {
-    @include position(0, 0, auto, auto);
-    @include scrollbar-thumb;
-    width: 8px;
-  }
-  .scrollbar-body {
-    > div {
-      height: 1000px;
-      border: 1px dashed green;
-    }
-  }
+.box {
+  width: 300px;
+  height: 400px;
+}
+.h {
+  height: 1000px;
 }
 </style>

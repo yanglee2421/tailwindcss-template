@@ -41,7 +41,7 @@ input[type="number"].num-no-btn {
   margin: 0;
   line-height: 1;
   scrollbar-width: thin;
-  // scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
   @media (any-pointer: none) {
     scrollbar-width: auto;
   }
