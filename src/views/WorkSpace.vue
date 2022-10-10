@@ -128,13 +128,13 @@ const initTable = (i: unknown) => {
 const response = reactive({
   tableData: [],
 });
-request<unknown[]>({
+/* request<unknown[]>({
   method: "get",
   url: "/table",
 }).then((res) => {
   response.tableData = res as any;
   table.total = res.length;
-});
+}); */
 watchEffect(() => {
   const target = response.tableData;
   const { PageIndex, PageSize } = formData;

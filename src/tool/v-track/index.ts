@@ -35,7 +35,7 @@ class BuryingPoint {
       this.setItem();
     });
     setInterval(() => {
-      this.request();
+      // this.request();
     }, 10000);
   }
   push(action: _action) {
@@ -55,6 +55,7 @@ class BuryingPoint {
     actionArr.length &&
       requset({ url: "/track", data }).then((res) => {
         this.clear();
+        this.id = Date.now();
       });
   }
 }
