@@ -6,16 +6,18 @@
         <div>二</div>
         <div>三</div>
       </div>
-      <div class="tbody">
-        <template
-          v-for="item in 10"
-          :key="item"
-        >
-          <div>{{ item + "-1" }}</div>
-          <div>{{ item + "-2" }}</div>
-          <div>{{ item + "-3" }}</div>
-        </template>
-      </div>
+      <swz-scroll>
+        <div class="tbody">
+          <template
+            v-for="item in 10"
+            :key="item"
+          >
+            <div>{{ item + "-1" }}</div>
+            <div>{{ item + "-2" }}</div>
+            <div>{{ item + "-3" }}</div>
+          </template>
+        </div>
+      </swz-scroll>
     </div>
   </div>
 </template>
@@ -38,15 +40,15 @@ export default {
     line-height: 50px;
   }
 }
+.swz-scroll {
+  height: 300px;
+  border: red dashed;
+  border-width: 0 0 1px 1px;
+}
 .tbody {
   display: grid;
   grid-template: 50px / repeat(3, 1fr);
   grid-auto-rows: 50px;
-  max-height: 300px;
-  border: red dashed;
-  border-width: 0 0 1px 1px;
-  overflow: auto;
-  overflow: overlay;
   > div {
     border: red dashed;
     border-width: 1px 1px 0 0;

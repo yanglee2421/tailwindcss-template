@@ -7,11 +7,13 @@
       v-show="state.showX"
       class="thumb-x"
       :class="[{ 'thumb-focus': state.focusX }]"
+      :style="{ transform: `translateX(${state.translateX}px)` }"
     ></div>
     <div
       v-show="state.showY"
       class="thumb-y"
       :class="[{ 'thumb-focus': state.focusY }]"
+      :style="{ transform: `translateY(${state.translateY}px)` }"
     ></div>
     <section class="client">
       <slot></slot>
@@ -29,8 +31,10 @@ import { reactive } from "vue";
 const state = reactive({
   showX: false,
   focusX: false,
+  translateX: 0,
   showY: false,
   focusY: false,
+  translateY: 0,
 });
 const vScroll: Directive<HTMLElement> = {
   mounted(dom) {
@@ -42,6 +46,10 @@ const vScroll: Directive<HTMLElement> = {
     const client = dom.querySelector<HTMLElement>(":scope>.client")!;
     const thumbX = dom.querySelector<HTMLElement>(":scope>.thumb-x")!;
     const thumbY = dom.querySelector<HTMLElement>(":scope>.thumb-y")!;
+    dom.addEventListener("wheel", (event) => {
+      const { deltaY } = event;
+      console.log(thumbY, getComputedStyle(thumbY));
+    });
     /**
      * 移入组件时
      * 计算滑块的宽高
@@ -116,10 +124,9 @@ const vScroll: Directive<HTMLElement> = {
           const y = clientY - offsetY - top;
           const { clientHeight, scrollHeight } = client;
           const maxY = clientHeight - thumbY.offsetHeight;
-          const translate = Math.floor(y < 0 ? 0 : y > maxY ? maxY : y);
-          thumbY.style.transform = `translateY(${translate}px)`;
+          state.translateY = Math.floor(y < 0 ? 0 : y > maxY ? maxY : y);
           client.scrollTop = Math.floor(
-            (translate * scrollHeight) / clientHeight
+            (state.translateY * scrollHeight) / clientHeight
           );
         },
         { signal }
