@@ -39,13 +39,28 @@ const vScroll: Directive<HTMLElement> = {
 </script>
 <style lang="scss" scoped>
 .swz-scroll {
+  position: relative;
   height: 100%;
   overflow: hidden;
+}
+.scroll-content {
+  min-height: 100%;
+  height: 100%;
+  max-height: 100%;
 }
 .thumb-focus {
   background-color: rgba(#000, 0.4);
 }
+@mixin thumb {
+  position: absolute;
+  background-color: rgba(#000, 0.2);
+}
 .thumb-x {
+  width: 30px;
   height: 8px;
+}
+.thumb-y {
+  width: 8px;
+  height: 30px;
 }
 </style>
