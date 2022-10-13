@@ -7,7 +7,7 @@
       v-show="thumbSta.showX"
       v-thumb-x
       class="thumb-x"
-      :class="[{ 'thumb-focus': thumbSta.focusX }]"
+      :class="{ 'thumb-focus': thumbSta.focusX }"
       :style="{
         width: `${contentSta.clientWidth * xRate}px`,
         transform: `translateX(${translateX}px)`,
@@ -17,7 +17,7 @@
       v-show="thumbSta.showY"
       v-thumb-y
       class="thumb-y"
-      :class="[{ 'thumb-focus': thumbSta.focusY }]"
+      :class="{ 'thumb-focus': thumbSta.focusY }"
       :style="{
         height: `${contentSta.clientHeight * yRate}px`,
         transform: `translateY(${translateY}px)`,
@@ -82,9 +82,14 @@ const translateY = computed({
 });
 const xRate = computed(() => contentSta.clientWidth / contentSta.scrollWidth);
 const yRate = computed(() => contentSta.clientHeight / contentSta.scrollHeight);
+/**
+ * vScroll组件根元素
+ * vThumbX滑块
+ * vThumbY滑块
+ */
 const vScroll: Directive<HTMLElement> = {
   mounted(rootDom) {
-    const content = rootDom.querySelector(".scroll-content")!;
+    const content = rootDom.querySelector<HTMLElement>(".scroll-content")!;
     rootDom.addEventListener("mouseover", () => {
       /**
        * 获取content的大小
@@ -111,6 +116,17 @@ const vScroll: Directive<HTMLElement> = {
       thumbSta.focusY || (thumbSta.showY = false);
     });
     /**
+     * 鼠标若在组件内失焦，
+     * thumb不隐藏
+     */
+    rootDom.addEventListener("mouseup", (event) => {
+      const { button } = event;
+      if (button === 0) {
+        thumbSta.showX = true;
+        thumbSta.showY = true;
+      }
+    });
+    /**
      * 滚轮事件
      */
     rootDom.addEventListener("wheel", (event) => {
@@ -131,6 +147,10 @@ const vThumbX: Directive<HTMLElement> = {
         thumbSta.focusX = true;
         const controller = new AbortController();
         const signal = controller.signal;
+        /**
+         * 鼠标移动时，
+         * 移动thumbX
+         */
         document.addEventListener(
           "mousemove",
           (event) => {
@@ -140,14 +160,23 @@ const vThumbX: Directive<HTMLElement> = {
           },
           { signal }
         );
-        document.addEventListener("mouseup", (event) => {
-          const { button } = event;
-          if (button === 0) {
-            controller.abort();
-            thumbSta.showX = false;
-            thumbSta.focusX = false;
-          }
-        });
+        /**
+         * 鼠标松开时，
+         * 不再控制thumbX
+         * 隐藏thumbX
+         */
+        document.addEventListener(
+          "mouseup",
+          (event) => {
+            const { button } = event;
+            if (button === 0) {
+              controller.abort();
+              thumbSta.showX = false;
+              thumbSta.focusX = false;
+            }
+          },
+          { capture: true }
+        );
       }
     });
   },
@@ -160,6 +189,10 @@ const vThumbY: Directive<HTMLElement> = {
         thumbSta.focusY = true;
         const controller = new AbortController();
         const signal = controller.signal;
+        /**
+         * 鼠标移动时，
+         * 移动thumbY
+         */
         document.addEventListener(
           "mousemove",
           (event) => {
@@ -169,15 +202,23 @@ const vThumbY: Directive<HTMLElement> = {
           },
           { signal }
         );
-        document.addEventListener("mouseup", (event) => {
-          const { button } = event;
-          console.log(button);
-          if (button === 0) {
-            thumbSta.showY = false;
-            thumbSta.focusY = false;
-            controller.abort();
-          }
-        });
+        /**
+         * 鼠标松开时，
+         * 不再控制thumbY
+         * thumbY失焦隐藏
+         */
+        document.addEventListener(
+          "mouseup",
+          (event) => {
+            const { button } = event;
+            if (button === 0) {
+              controller.abort();
+              thumbSta.showY = false;
+              thumbSta.focusY = false;
+            }
+          },
+          { capture: true }
+        );
       }
     });
   },
