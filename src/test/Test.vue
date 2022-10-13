@@ -1,46 +1,19 @@
 <template>
   <div>
-    <div class="test"></div>
+    <div class="test">
+      <el-link @click="linkFn">走人</el-link>
+    </div>
   </div>
 </template>
 <script lang="ts">
-import { ref, watch } from "vue";
-
 export default {
   inheritAttrs: true,
-  data() {
-    return {
-      r: 0,
-    };
-  },
-  created() {
-    console.log("created");
-  },
-  mounted() {
-    console.log("mounted");
-  },
-  beforeMount() {
-    console.log("beforeMount");
-  },
-  setup() {
-    const r = ref(0);
-    watch(
-      r,
-      () => {
-        console.log("watch-setup");
-      },
-      { immediate: true }
-    );
-    console.log("setup");
-  },
-  watch: {
-    r: {
-      immediate: true,
-      handler() {
-        console.log("watch");
-      },
-    },
-  },
+};
+</script>
+<script lang="ts" setup>
+const linkFn = () => {
+  localStorage.setItem("linkFn", 789);
+  window.location.replace("http://10.32.16.160:1818/#/work");
 };
 </script>
 <style lang="scss" scoped></style>

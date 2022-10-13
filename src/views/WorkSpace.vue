@@ -121,10 +121,7 @@ const table = reactive<_table>({
   data: [],
   total: 0,
 });
-const initTable = (i: unknown) => {
-  console.log(i);
-  console.log(formData);
-};
+const initTable = (i: unknown) => {};
 const response = reactive({
   tableData: [],
 });

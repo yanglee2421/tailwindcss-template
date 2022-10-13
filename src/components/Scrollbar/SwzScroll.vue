@@ -81,6 +81,7 @@ const translateY = computed({
     thumbSta.translateY = value < 0 ? 0 : value > max ? max : value;
   },
 });
+let i = Date.now();
 const xRate = computed(() => contentSta.clientWidth / contentSta.scrollWidth);
 const yRate = computed(() => contentSta.clientHeight / contentSta.scrollHeight);
 const vScroll: Directive<HTMLElement> = {
@@ -116,16 +117,14 @@ const vScroll: Directive<HTMLElement> = {
      */
     rootDom.addEventListener("wheel", (event) => {
       const { deltaY } = event;
-      const timer = setInterval(() => {
-        if (deltaY > 0) {
-          translateY.value += 1;
-        } else {
-          translateY.value -= 1;
-        }
-      }, 10);
-      setTimeout(() => {
-        clearInterval(timer);
-      }, 200);
+      const j = Date.now();
+      console.dir(j - i);
+      i = j;
+      if (deltaY > 0) {
+        translateY.value += 30;
+      } else {
+        translateY.value -= 30;
+      }
     });
   },
 };
@@ -216,6 +215,7 @@ const vThumbY: Directive<HTMLElement> = {
   position: absolute;
   border-radius: 4px;
   background-color: rgba(#000, 0.2);
+  cursor: pointer;
   will-change: transform;
   &:hover {
     background-color: rgba(#000, 0.3);
