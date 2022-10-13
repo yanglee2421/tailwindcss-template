@@ -81,7 +81,6 @@ const translateY = computed({
     thumbSta.translateY = value < 0 ? 0 : value > max ? max : value;
   },
 });
-let i = Date.now();
 const xRate = computed(() => contentSta.clientWidth / contentSta.scrollWidth);
 const yRate = computed(() => contentSta.clientHeight / contentSta.scrollHeight);
 const vScroll: Directive<HTMLElement> = {
@@ -117,9 +116,6 @@ const vScroll: Directive<HTMLElement> = {
      */
     rootDom.addEventListener("wheel", (event) => {
       const { deltaY } = event;
-      const j = Date.now();
-      console.dir(j - i);
-      i = j;
       if (deltaY > 0) {
         translateY.value += 30;
       } else {
