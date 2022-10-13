@@ -7,12 +7,9 @@
       v-show="thumbSta.showX"
       v-thumb-x
       class="thumb-x"
-      :class="[
-        { 'thumb-focus': thumbSta.focusX },
-        { 'thumb-trans': thumbSta.transX },
-      ]"
+      :class="[{ 'thumb-focus': thumbSta.focusX }]"
       :style="{
-        height: `${contentSta.clientWidth * xRate}px`,
+        width: `${contentSta.clientWidth * xRate}px`,
         transform: `translateX(${translateX}px)`,
       }"
     ></div>
@@ -20,10 +17,7 @@
       v-show="thumbSta.showY"
       v-thumb-y
       class="thumb-y"
-      :class="[
-        { 'thumb-focus': thumbSta.focusY },
-        { 'thumb-trans': thumbSta.transX },
-      ]"
+      :class="[{ 'thumb-focus': thumbSta.focusY }]"
       :style="{
         height: `${contentSta.clientHeight * yRate}px`,
         transform: `translateY(${translateY}px)`,
@@ -44,7 +38,8 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { computed, Directive, reactive } from "vue";
+import type { Directive } from "vue";
+import { computed, reactive, watch } from "vue";
 const contentSta = reactive({
   left: 0,
   top: 0,
@@ -60,16 +55,20 @@ const thumbSta = reactive({
   focusY: false,
   translateX: 0,
   translateY: 0,
-  transX: false,
-  transY: false,
 });
+watch(
+  () => [thumbSta.focusX, thumbSta.focusY],
+  (arr) => {
+    document.body.style.cursor = arr.some((item) => item) ? "pointer" : "";
+  }
+);
 const translateX = computed({
   get() {
     return thumbSta.translateX;
   },
   set(value) {
     const max = contentSta.clientWidth * (1 - xRate.value);
-    thumbSta.translateY = value < 0 ? 0 : value > max ? max : value;
+    thumbSta.translateX = value < 0 ? 0 : value > max ? max : value;
   },
 });
 const translateY = computed({
@@ -85,13 +84,13 @@ const xRate = computed(() => contentSta.clientWidth / contentSta.scrollWidth);
 const yRate = computed(() => contentSta.clientHeight / contentSta.scrollHeight);
 const vScroll: Directive<HTMLElement> = {
   mounted(rootDom) {
+    const content = rootDom.querySelector(".scroll-content")!;
     rootDom.addEventListener("mouseover", () => {
       /**
        * 获取content的大小
        * 将content的大小存入contentSta
        * 根据content的大小决定是否显示thumb
        */
-      const content = rootDom.querySelector(".scroll-content")!;
       const { clientWidth, clientHeight, scrollWidth, scrollHeight } = content;
       const obj = { clientWidth, clientHeight, scrollWidth, scrollHeight };
       Object.assign(contentSta, obj);
@@ -117,9 +116,9 @@ const vScroll: Directive<HTMLElement> = {
     rootDom.addEventListener("wheel", (event) => {
       const { deltaY } = event;
       if (deltaY > 0) {
-        translateY.value += 30;
+        translateY.value += 15;
       } else {
-        translateY.value -= 30;
+        translateY.value -= 15;
       }
     });
   },
@@ -135,6 +134,7 @@ const vThumbX: Directive<HTMLElement> = {
         document.addEventListener(
           "mousemove",
           (event) => {
+            event.preventDefault();
             const { clientX } = event;
             translateX.value = clientX - offsetX - contentSta.left;
           },
@@ -201,20 +201,17 @@ const vThumbY: Directive<HTMLElement> = {
     overflow: overlay;
   }
 }
-.thumb-trans {
-  transition: transform linear 0.1s;
-}
 .thumb-focus {
-  background-color: rgba(#000, 0.4) !important;
+  background-color: rgba(#000, 0.3) !important;
+  will-change: transform;
 }
 @mixin thumb {
   position: absolute;
   border-radius: 4px;
-  background-color: rgba(#000, 0.2);
+  background-color: rgba(#000, 0.1);
   cursor: pointer;
-  will-change: transform;
   &:hover {
-    background-color: rgba(#000, 0.3);
+    background-color: rgba(#000, 0.2);
   }
   @media (any-pointer: coarse) {
     display: none !important;
@@ -223,13 +220,11 @@ const vThumbY: Directive<HTMLElement> = {
 .thumb-x {
   @include thumb();
   @include position(auto, auto, 0, 0);
-  width: 30px;
   height: 8px;
 }
 .thumb-y {
   @include thumb();
   @include position(0, 0, auto, auto);
   width: 8px;
-  height: 30px;
 }
 </style>
