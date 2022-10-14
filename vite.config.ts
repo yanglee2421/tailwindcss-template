@@ -1,17 +1,30 @@
 import { defineConfig } from "vite";
+import type { UserConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
-  const res = {
+  let outDir = "";
+  let assetsDir = "";
+  let target = "";
+  switch (mode) {
+    case "home":
+      outDir = "test";
+      assetsDir = "test/assets";
+      target = "http://192.168.3.9:1818";
+      break;
+    default:
+      outDir = "dist";
+      target = "http://10.32.16.160:1818";
+      assetsDir = "assets";
+  }
+  const config: UserConfig = {
     plugins: [vue()],
-    // 路径别名
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
       },
     },
-    // css预处理器
     css: {
       preprocessorOptions: {
         scss: {
@@ -19,11 +32,10 @@ export default defineConfig(({ command, mode }) => {
         },
       },
     },
-    // 开发服务器代理
     server: {
       proxy: {
         "/api": {
-          target: "http://10.32.16.160:1818",
+          target,
           rewrite: (path) => path.replace(/^\/api/, ""),
           changeOrigin: true,
           ws: true,
@@ -35,12 +47,10 @@ export default defineConfig(({ command, mode }) => {
         },
       },
     },
+    build: {
+      outDir,
+      assetsDir,
+    },
   };
-  switch (mode) {
-    case "home":
-      res.server.proxy["/api"].target = "http://192.168.3.9:1818";
-      break;
-    default:
-  }
-  return res;
+  return config;
 });
