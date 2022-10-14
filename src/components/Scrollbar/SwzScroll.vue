@@ -122,8 +122,10 @@ const vScroll: Directive<HTMLElement> = {
     rootDom.addEventListener("mouseup", (event) => {
       const { button } = event;
       if (button === 0) {
-        thumbSta.showX = true;
-        thumbSta.showY = true;
+        const { clientWidth, clientHeight, scrollWidth, scrollHeight } =
+          content;
+        scrollWidth > clientWidth && (thumbSta.showX = true);
+        scrollHeight > clientHeight && (thumbSta.showY = true);
       }
     });
     /**
