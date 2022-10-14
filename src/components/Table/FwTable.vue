@@ -4,7 +4,7 @@
       <el-form
         v-bind="$attrs"
         v-resize
-        :ref="(ref) => (formSta.ref = ref)"
+        :ref="(ref:any) => (formSta.ref = ref)"
         :style="{
           gridTemplateColumns: `repeat(${columns}, minmax(auto, 1fr))`,
         }"
@@ -32,7 +32,7 @@
     <div class="flex-1-hidden">
       <el-table
         v-bind="$attrs"
-        :ref="(ref) => (tableSta.ref = ref)"
+        :ref="(ref:any) => (tableSta.ref = ref)"
         height="100%"
       >
         <el-table-column

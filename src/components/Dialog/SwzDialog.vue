@@ -3,7 +3,7 @@
     :title="(dialogSta.isAdd ? `新增` : `编辑`) + fwTitle"
     v-bind="$attrs"
     v-model="dialogSta.isShow"
-    :ref="(ref) => (dialogSta.ref = ref)"
+    :ref="(ref:any) => (dialogSta.ref = ref)"
   >
     <template #header>
       <slot
@@ -14,7 +14,7 @@
     <el-form
       v-bind="$attrs"
       :model="model"
-      :ref="(ref) => (formSta.ref = ref)"
+      :ref="(ref:any) => (formSta.ref = ref)"
     >
       <slot :isAdd="dialogSta.isAdd"></slot>
     </el-form>
