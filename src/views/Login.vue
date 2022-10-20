@@ -65,7 +65,7 @@ const login = () => {
 </script>
 <style lang="scss" scoped>
 .div-bg {
-  background-image: url("@/assets/bg.jpg");
+  background-image: url("@/assets/img/bg.jpg");
   // 相对于视口固定
   background-attachment: fixed;
   background-position: center 100vh;
