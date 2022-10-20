@@ -1,0 +1,17 @@
+$primary: #409eff;
+$success: #67c23a;
+$warning: #e6a23c;
+$danger: #f56c6c;
+$info: #909399;
+// 中性色
+$dark-fill: #ebedf0;
+@import "./scss/overflow.scss";
+@import "./scss/flex.scss";
+@import "./scss/position.scss";
+@import "./scss/box.scss";
+@import "./scss/display.scss";
+@import "./scss/float.scss";
+@import "./scss/text.scss";
+@import "./scss/visibility.scss";
+@import "./scss/bgc.scss";
+@import "./scss/mixin.scss";

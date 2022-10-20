@@ -7,7 +7,7 @@
 <script lang="ts" setup></script>
 
 <style lang="scss">
-@import "@/assets/default.scss";
+@import "@/assets/css/default.scss";
 #app {
   height: 100vh;
   background-size: cover;
