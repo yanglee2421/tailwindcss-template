@@ -10,4 +10,3 @@ export { default as SwzScroll } from "./Scrollbar/SwzScroll.vue";
 // Fw
 export { default as FwSwitch } from "./Switch/FwSwitch.vue";
 export { default as FwTable } from "./Table/FwTable.vue";
-export { default as FwCard } from "./Card/FwCard.vue";
