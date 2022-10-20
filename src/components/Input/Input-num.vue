@@ -1,11 +1,9 @@
 <template>
-  <el-input
-    v-model="modelValue"
-    @input="emit('update:modelValue', $event.replace(/[^.\d]/g, ''))"
-    @change="fun($event)"
-  ></el-input>
+  <el-input v-model="inputValue"></el-input>
 </template>
 <script lang="ts" setup>
+import { computed } from "vue";
+
 interface _props {
   modelValue: string;
 }
@@ -14,9 +12,13 @@ interface _emit {
   (event: "update:modelValue", $event: string): void;
 }
 const emit = defineEmits<_emit>();
-const fun = ($event: string) => {
-  const res = Number.parseFloat($event).toFixed(2);
-  emit("update:modelValue", res === "NaN" ? "0" : res);
-};
+const inputValue = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(value) {
+    emit("update:modelValue", value.replace(/[^\d]/g, ""));
+  },
+});
 </script>
 <style lang="scss" scoped></style>

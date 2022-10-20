@@ -7,22 +7,22 @@
         :rules="rules"
       >
         <el-form-item prop="userName">
-          <el-input
-            v-model.trim="formData.userName"
+          <swz-input-num
+            v-model="formData.userName"
             maxlength="20"
             prefix-icon="User"
-            placeholder="用户名"
-          />
+            placeholder="账号（仅数字）"
+          ></swz-input-num>
         </el-form-item>
         <el-form-item prop="pwd">
           <el-input
-            v-model.trim="formData.pwd"
+            v-model="formData.pwd"
             @keydown.enter="login()"
             maxlength="20"
             type="password"
             prefix-icon="Lock"
             placeholder="密码"
-          />
+          ></el-input>
         </el-form-item>
         <el-form-item>
           <div class="w-100 flex center-center">
