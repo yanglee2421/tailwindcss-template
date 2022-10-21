@@ -1,12 +1,15 @@
 <template>
   <div>
-    <el-cascader
-      v-model="state.value"
-      :options="opt"
-      :props="{ multiple: true, checkStrictly: true, emitPath: false }"
-      collapse-tags
+    <el-button @click="dialogSta.model = true">新建</el-button>
+    <el-button @click="dialogSta.model = { text: '778899' }">编辑</el-button>
+    <swz-dialog
+      v-model="dialogSta.model"
+      :model="formSta"
     >
-    </el-cascader>
+      <el-form-item prop="text">
+        <el-input v-model="formSta.text"></el-input>
+      </el-form-item>
+    </swz-dialog>
   </div>
 </template>
 <script lang="ts">
@@ -15,54 +18,12 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { reactive, watch } from "vue";
-const state = reactive({
-  value: "",
+import { reactive } from "vue";
+const dialogSta = reactive<any>({
+  model: false,
 });
-watch(
-  () => state.value,
-  (value) => {
-    console.log(value);
-  }
-);
-
-const opt = reactive([
-  {
-    label: "1",
-    value: "1",
-    children: [
-      {
-        label: "1-1",
-        value: "1-1",
-        children: [
-          { label: "1-1-1", value: "1-1-1" },
-          { label: "1-1-2", value: "1-1-2" },
-        ],
-      },
-      {
-        label: "1-2",
-        value: "1-2",
-        children: [
-          { label: "1-2-1", value: "1-2-1" },
-          { label: "1-2-2", value: "1-2-2" },
-        ],
-      },
-    ],
-  },
-  {
-    label: "2",
-    value: "2",
-    children: [
-      {
-        label: "2-1",
-        value: "2-1",
-        children: [
-          { label: "2-1-1", value: "2-1-1" },
-          { label: "2-1-2", value: "2-1-2" },
-        ],
-      },
-    ],
-  },
-]);
+const formSta = reactive({
+  text: "",
+});
 </script>
 <style lang="scss" scoped></style>
