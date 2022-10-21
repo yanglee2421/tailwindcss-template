@@ -61,10 +61,10 @@
   resolved "https://registry.npmmirror.com/@types/lodash/-/lodash-4.14.185.tgz#c9843f5a40703a8f5edfd53358a58ae729816908"
   integrity sha512-evMDG1bC4rgQg4ku9tKpuMh5iBNEwNa3tf9zRHdP1qlv+1WUg44xat4IxCE14gIpZRGUUWAx2VhItCZc25NfMA==
 
-"@types/node@^18.11.2":
-  version "18.11.2"
-  resolved "https://registry.npmmirror.com/@types/node/-/node-18.11.2.tgz#c59b7641832531264fda3f1ba610362dc9a7dfc8"
-  integrity sha512-BWN3M23gLO2jVG8g/XHIRFWiiV4/GckeFIqbU/C4V3xpoBBWSMk4OZomouN0wCkfQFPqgZikyLr7DOYDysIkkw==
+"@types/node@^18.11.3":
+  version "18.11.3"
+  resolved "https://registry.npmmirror.com/@types/node/-/node-18.11.3.tgz#78a6d7ec962b596fc2d2ec102c4dd3ef073fea6a"
+  integrity sha512-fNjDQzzOsZeKZu5NATgXUPsaFaTxeRgFXoosrHivTl8RGeV733OLawXsGfEk9a8/tySyZUyiZ6E8LcjPFZ2y1A==
 
 "@types/web-bluetooth@^0.0.15":
   version "0.0.15"
@@ -452,10 +452,10 @@ echarts@^5.3.3:
     tslib "2.3.0"
     zrender "5.4.0"
 
-element-plus@^2.2.18:
-  version "2.2.18"
-  resolved "https://registry.npmmirror.com/element-plus/-/element-plus-2.2.18.tgz#62b388e05587506d2d40bede0729046f7c41f9d9"
-  integrity sha512-2pK2zmVOwP14eFl3rGoR+3BWJwDyO+DZCvzjQ8L6qjUR+hVKwFhgxIcSkKJatbcHFw5Xui6UyN20jV+gQP7mLg==
+element-plus@^2.2.19:
+  version "2.2.19"
+  resolved "https://registry.npmmirror.com/element-plus/-/element-plus-2.2.19.tgz#c11cb84b35b7698b2f5fa7ec0fd98034f6861a9e"
+  integrity sha512-uN0gt9lUus/IHzu5J6vkbYoYJgUtU05osdtFv9RO27bHKOG5GN7dH6uA3OKfkQQ6R2sV8ZxY1rc9PH1X8Dgrow==
   dependencies:
     "@ctrl/tinycolor" "^3.4.1"
     "@element-plus/icons-vue" "^2.0.6"
