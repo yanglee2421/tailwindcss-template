@@ -25,5 +25,7 @@ const dialogSta = reactive<any>({
 const formSta = reactive({
   text: "",
 });
+console.log(globalThis.location.hostname);
+console.log(globalThis.location.host);
 </script>
 <style lang="scss" scoped></style>
