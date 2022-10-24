@@ -10,7 +10,10 @@
 }
 
 .swz-vis-trans {
-  overflow: hidden;
   transition: max-height 0.3s;
   will-change: max-height;
+}
+.swz-vis-hidden {
+  max-height: 0;
+  overflow: hidden;
 }

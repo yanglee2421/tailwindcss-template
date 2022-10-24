@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex-column">
     <el-collapse>
       <el-collapse-item
         name="1"
@@ -15,29 +15,39 @@
         </el-form>
       </el-collapse-item>
     </el-collapse>
-    <el-table
-      :data="[{}, {}, {}, {}, {}, {}, {}]"
-      border
-      stripe
-    >
-      <el-table-column
-        label="序号"
-        type="index"
-        align="center"
-        width="55px"
-      ></el-table-column>
-      <el-table-column
-        type="selection"
-        align="center"
-      ></el-table-column>
-      <el-table-column label="标题"></el-table-column>
-      <el-table-column label="标题"></el-table-column>
-      <el-table-column label="标题"></el-table-column>
-      <el-table-column label="标题"></el-table-column>
-      <el-table-column label="标题"></el-table-column>
-      <el-table-column label="标题"></el-table-column>
-      <el-table-column label="标题"></el-table-column>
-    </el-table>
+    <div class="flex-1-hidden">
+      <el-table
+        :data="[{}, {}, {}, {}, {}, {}, {}]"
+        height="100%"
+        border
+        stripe
+      >
+        <el-table-column
+          label="序号"
+          type="index"
+          align="center"
+          width="55px"
+        ></el-table-column>
+        <el-table-column
+          type="selection"
+          align="center"
+        ></el-table-column>
+        <el-table-column label="标题"></el-table-column>
+        <el-table-column label="标题"></el-table-column>
+        <el-table-column label="标题"></el-table-column>
+        <el-table-column label="标题"></el-table-column>
+        <el-table-column label="标题"></el-table-column>
+        <el-table-column label="标题"></el-table-column>
+        <el-table-column label="标题"></el-table-column>
+      </el-table>
+    </div>
+    <el-pagination
+      layout="total,prev,pager,next,jumper"
+      :total="100"
+      :currentPage="1"
+      :pageSize="10"
+      :pageSizes="[10, 20, 30]"
+    ></el-pagination>
   </div>
 </template>
 <script lang="ts">

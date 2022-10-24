@@ -12,16 +12,16 @@ const vVis: Directive<HTMLElement, string | number | boolean> = {
     dom.classList.add("swz-vis-clearfix");
     const { value } = binding;
     switch (value) {
-      case true:
-        dom.style.maxHeight = "";
-        break;
       case false:
-        dom.style.maxHeight = "0";
+        dom.classList.add("swz-vis-hidden");
         break;
       default:
         dom.style.maxHeight = typeof value === "string" ? value : value + "px";
     }
     value !== true && dom.classList.add("swz-vis-trans");
+    dom.addEventListener("transitionend", () => {
+      dom.classList.remove("swz-vis-trans");
+    });
   },
   updated(dom, binding) {
     const { value, oldValue } = binding;
@@ -37,19 +37,13 @@ const vVis: Directive<HTMLElement, string | number | boolean> = {
             dom.style.maxHeight = dom.scrollHeight + "px";
             break;
           case false:
-            dom.style.maxHeight = "0";
+            dom.classList.add("swz-vis-hidden");
             break;
           default:
             dom.style.maxHeight =
               typeof value === "string" ? value : value + "px";
         }
       }, 0);
-      // 若为true，则不需要trans类
-      value === true &&
-        setTimeout(() => {
-          dom.classList.remove("swz-vis-trans");
-          dom.style.maxHeight = "";
-        }, 301);
     }
   },
 };
