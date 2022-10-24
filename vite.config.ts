@@ -17,17 +17,17 @@ export default defineConfig(({ command, mode }) => {
         },
       },
     },
-    server: {
+    /* server: {
       proxy: {
         "/api": {
-          target: "http://127.0.0.1",
+          target: "http://10.32.16.160",
           rewrite: (path) => path.replace(/^\/api/, ""),
           changeOrigin: true,
           ws: true,
         },
       },
     },
-    /* build: {
+    build: {
       outDir: "dist",
       assetsDir: "assets",
     }, */
