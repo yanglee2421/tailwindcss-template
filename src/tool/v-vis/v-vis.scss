@@ -12,6 +12,6 @@
 
 .swz-vis-trans {
   transition: max-height 0.3s;
-  will-change: max-height;
   transform: translateZ(0);
+  will-change: max-height;
 }

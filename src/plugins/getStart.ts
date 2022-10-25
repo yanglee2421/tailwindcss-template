@@ -6,13 +6,7 @@ import "element-plus/dist/index.css";
 import * as icons from "@element-plus/icons-vue";
 import * as components from "@/components";
 import * as directives from "@/tool";
-import type { Directive } from "vue";
-interface App {
-  use(plugin: unknown, option?: unknown): void;
-  component(name: string, component: unknown): void;
-  directive(name: string, directive: Directive): void;
-  mixin(ComponentOptions: unknown): void;
-}
+import type { App } from "vue";
 export default {
   install(app: App) {
     app.use(store);
@@ -22,7 +16,7 @@ export default {
     });
     Object.keys(icons).forEach((key) => {
       Reflect.has(icons, key) &&
-        app.component(key, icons[<keyof typeof icons>key]);
+        app.component(key, icons[key as keyof typeof icons]);
     });
     Object.keys(components).forEach((key) => {
       Reflect.has(components, key) &&

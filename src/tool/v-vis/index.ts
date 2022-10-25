@@ -1,4 +1,4 @@
-import { Directive } from "vue";
+import type { Directive } from "vue";
 /**
  * value可以是一个boolean，也可以是一个string
  * true，高度为''
@@ -6,19 +6,22 @@ import { Directive } from "vue";
  * string，高度为该string
  */
 import "./v-vis.scss";
+const chgHeight = (dom: HTMLElement, value: string | boolean) => {
+  switch (value) {
+    case true:
+      break;
+    case false:
+      dom.style.maxHeight = "0";
+      break;
+    default:
+      dom.style.maxHeight = value;
+  }
+};
 const vVis: Directive<HTMLElement, string | boolean> = {
   mounted(dom, binding) {
-    dom.classList.add("swz-vis-clearfix");
     const { value } = binding;
-    switch (value) {
-      case true:
-        break;
-      case false:
-        dom.style.maxHeight = "0";
-        break;
-      default:
-        dom.style.maxHeight = value;
-    }
+    dom.classList.add("swz-vis-clearfix");
+    chgHeight(dom, value);
     dom.addEventListener("transitionend", () => {
       dom.classList.remove("swz-vis-trans");
       dom.scrollHeight === dom.clientHeight && (dom.style.maxHeight = "");
@@ -28,22 +31,12 @@ const vVis: Directive<HTMLElement, string | boolean> = {
     const { value, oldValue } = binding;
     // value变化才执行
     if (value !== oldValue) {
-      // 获取变化前后的高度
-      const currentValue = dom.offsetHeight + "px";
-      dom.style.maxHeight = currentValue;
+      const currentHeight = dom.offsetHeight + "px";
+      dom.style.maxHeight = currentHeight;
       dom.classList.add("swz-vis-trans");
       setTimeout(() => {
-        switch (value) {
-          case true:
-            dom.style.maxHeight = dom.scrollHeight + "px";
-            break;
-          case false:
-            dom.style.maxHeight = "0";
-            break;
-          default:
-            dom.style.maxHeight = value;
-        }
-      });
+        chgHeight(dom, value);
+      }, 0);
     }
   },
 };
