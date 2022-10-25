@@ -33,8 +33,6 @@ interface _emit {
 }
 const emit = defineEmits<_emit>();
 
-const attrs = useAttrs();
-console.log(attrs);
 const inputValue = computed({
   get() {
     return props.modelValue === props.trueValue;

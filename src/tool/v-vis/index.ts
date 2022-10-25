@@ -9,6 +9,7 @@ import "./v-vis.scss";
 const chgHeight = (dom: HTMLElement, value: string | boolean) => {
   switch (value) {
     case true:
+      dom.style.maxHeight = dom.scrollHeight + "px";
       break;
     case false:
       dom.style.maxHeight = "0";
@@ -22,6 +23,7 @@ const vVis: Directive<HTMLElement, string | boolean> = {
     const { value } = binding;
     dom.classList.add("swz-vis-clearfix");
     chgHeight(dom, value);
+    dom.style.maxHeight = "";
     dom.addEventListener("transitionend", () => {
       dom.classList.remove("swz-vis-trans");
       dom.scrollHeight === dom.clientHeight && (dom.style.maxHeight = "");
