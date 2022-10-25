@@ -1,17 +1,10 @@
 .swz-vis-clearfix {
   border: 0 !important;
   overflow: hidden;
-
-  &::before,
-  &::after {
-    content: "";
-    display: table;
-    clear: both;
-  }
 }
 
 .swz-vis-trans {
-  transition: max-height 0.3s;
+  transition: max-height 0.17s ease-in;
   transform: translateZ(0);
   will-change: max-height;
 }
