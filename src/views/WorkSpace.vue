@@ -139,7 +139,7 @@ const table = reactive<_table>({
 });
 const initTable = (i: unknown) => {};
 const response = reactive({
-  tableData: [],
+  tableData: [{}],
 });
 /* request<unknown[]>({
   method: "get",

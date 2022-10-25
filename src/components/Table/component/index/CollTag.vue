@@ -48,6 +48,9 @@ const state = reactive({
 });
 </script>
 <style lang="scss" scoped>
+label {
+  cursor: pointer;
+}
 .trans {
   transition: color 0.3s;
   will-change: color;

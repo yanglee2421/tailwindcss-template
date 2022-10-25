@@ -4,23 +4,24 @@ import { Directive } from "vue";
  * true，高度为''
  * false，高度为0
  * string，高度为该string
- * number，高度为该number+px
  */
 import "./v-vis.scss";
-const vVis: Directive<HTMLElement, string | number | boolean> = {
+const vVis: Directive<HTMLElement, string | boolean> = {
   mounted(dom, binding) {
     dom.classList.add("swz-vis-clearfix");
     const { value } = binding;
     switch (value) {
+      case true:
+        break;
       case false:
-        dom.classList.add("swz-vis-hidden");
+        dom.style.maxHeight = "0";
         break;
       default:
-        dom.style.maxHeight = typeof value === "string" ? value : value + "px";
+        dom.style.maxHeight = value;
     }
-    value !== true && dom.classList.add("swz-vis-trans");
     dom.addEventListener("transitionend", () => {
       dom.classList.remove("swz-vis-trans");
+      dom.scrollHeight === dom.clientHeight && (dom.style.maxHeight = "");
     });
   },
   updated(dom, binding) {
@@ -37,13 +38,12 @@ const vVis: Directive<HTMLElement, string | number | boolean> = {
             dom.style.maxHeight = dom.scrollHeight + "px";
             break;
           case false:
-            dom.classList.add("swz-vis-hidden");
+            dom.style.maxHeight = "0";
             break;
           default:
-            dom.style.maxHeight =
-              typeof value === "string" ? value : value + "px";
+            dom.style.maxHeight = value;
         }
-      }, 0);
+      });
     }
   },
 };

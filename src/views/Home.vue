@@ -41,9 +41,7 @@
       style="overflow: overlay"
     >
       <router-view #default="{ Component }">
-        <keep-alive>
-          <component :is="Component" />
-        </keep-alive>
+        <component :is="Component" />
       </router-view>
     </main>
   </div>

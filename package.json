@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --port=5174",
+    "dev": "vite --port=5174 --host",
     "build:dev": "vue-tsc --noEmit && vite build --mode development",
-    "host": "vite --port=5174 --host",
+    "dev:prod": "vite --port=5174 --host --mode production",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
