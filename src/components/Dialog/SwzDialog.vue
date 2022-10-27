@@ -89,7 +89,10 @@ watch(
       default:
         dialogSta.isShow = true;
         nextTick(() => {
-          Object.assign(props.model, props.modelValue);
+          Object.assign(
+            props.model,
+            JSON.parse(JSON.stringify(props.modelValue))
+          );
           emit("fw-edit");
         });
     }
