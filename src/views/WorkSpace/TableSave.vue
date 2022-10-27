@@ -43,7 +43,35 @@
     <el-form-item
       label="爱好："
       prop="hobby"
-    ></el-form-item>
+    >
+      <el-tag
+        v-for="(item, index) in formSta.model.hobby"
+        :key="index"
+        type="danger"
+        effect="plain"
+        closable
+        @close="
+          formSta.model.hobby.splice(formSta.model.hobby.indexOf(item), 1)
+        "
+        >{{ item }}</el-tag
+      >
+      <el-input
+        v-if="hobbySta.isEdit"
+        v-model.trim="hobbySta.text"
+        @keydown.enter="
+          formSta.model.hobby.push(hobbySta.text);
+          hobbySta.text = '';
+        "
+        size="small"
+        maxlength="5"
+      ></el-input>
+      <el-button
+        v-else
+        @click="hobbySta.isEdit = true"
+        icon="plus"
+        >爱好</el-button
+      >
+    </el-form-item>
   </swz-dialog>
 </template>
 <script lang="ts">
@@ -58,7 +86,16 @@ interface _emit {
   (event: "success"): void;
 }
 const emit = defineEmits<_emit>();
-const formSta = reactive({
+const formSta = reactive<{
+  model: {
+    id: string;
+    name: string;
+    age: string;
+    gender: string;
+    address: string;
+    hobby: string[];
+  };
+}>({
   model: {
     id: "",
     name: "",
@@ -67,6 +104,10 @@ const formSta = reactive({
     address: "",
     hobby: [],
   },
+});
+const hobbySta = reactive({
+  isEdit: false,
+  text: "",
 });
 const confrimFn = (close: Function) => {
   const index = response.findIndex((item) => item.id == formSta.model.id);
@@ -81,4 +122,11 @@ const confrimFn = (close: Function) => {
   emit("success");
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.el-tag {
+  + .el-tag,
+  + .el-button {
+    margin-left: 10px;
+  }
+}
+</style>
