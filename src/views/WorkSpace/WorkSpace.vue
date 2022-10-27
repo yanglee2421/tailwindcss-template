@@ -1,5 +1,5 @@
 <template>
-  <div class="h-100 p-1">
+  <div class="h-100">
     <fw-table
       :model="formData"
       :data="table.data"
@@ -12,17 +12,49 @@
       fw-selection
     >
       <template #form>
-        <el-form-item label="姓名：">
+        <el-form-item
+          label="姓名："
+          prop="name"
+        >
           <el-input v-model.trim="formData.name" />
         </el-form-item>
-        <el-form-item label="年龄：">
-          <el-input v-model.trim="formData.age" />
+        <el-form-item
+          label="年龄："
+          prop="age"
+        >
+          <el-input
+            v-model.trim="formData.age"
+            @input="formData.age = $event.replace(/[^\d]/g, '')"
+            maxlength="3"
+          />
         </el-form-item>
-        <el-form-item label="性别：">
-          <el-input></el-input>
+        <el-form-item
+          label="性别："
+          prop="gender"
+        >
+          <el-select v-model="formData.gender">
+            <el-option
+              label="男"
+              value="男"
+            ></el-option>
+            <el-option
+              label="女"
+              value="女"
+            ></el-option>
+            <el-option
+              label="不男不女"
+              value="不男不女"
+            ></el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="地址：">
-          <el-input></el-input>
+        <el-form-item
+          label="地址："
+          prop="address"
+        >
+          <el-input
+            v-model.trim="formData.address"
+            maxlength="50"
+          ></el-input>
         </el-form-item>
       </template>
       <template #btn-bar>
@@ -81,13 +113,14 @@
         width="100"
         fixed="right"
       >
-        <template #default="{ $index }">
+        <template #default="{ $index, row }">
           <el-link
             data-btn="编辑"
             type="primary"
             >编辑</el-link
           >
           <el-link
+            @click="deteleLink(row)"
             type="danger"
             class="ml-1"
             >删除</el-link
@@ -108,11 +141,11 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { reactive, watchEffect, onMounted } from "vue";
+import { reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useGallery } from "@/hooks";
 import request from "@/api/request";
-import data from "./data";
+import response from "./data";
 const router = useRouter();
 const loginOut = () => {
   localStorage.removeItem("token");
@@ -139,21 +172,42 @@ const formData = reactive({
   PageSize: 20,
   name: "",
   age: "",
+  gender: "",
+  address: "",
 });
-interface _table {
-  data: unknown[];
-  total: number;
-}
-const table = reactive<_table>({
-  data,
+const table = reactive<{ data: unknown[]; total: number }>({
+  data: [],
   total: 0,
 });
-const initTable = (i: unknown) => {};
-watchEffect(() => {
-  const target = table.data;
+const deteleLink = (row: { id: string }) => {
+  const index = response.findIndex((item) => item.id == row.id);
+  table.data.splice(index, 1);
+  response.splice(index, 1);
+};
+const initTable = (isQuery: boolean) => {
   const { PageIndex, PageSize } = formData;
-  table.data = target.slice((PageIndex - 1) * PageSize, PageIndex * PageSize);
-});
+  const chkForm = {
+    ...formData,
+    ...{ PageIndex: "", PageSize: "" },
+  };
+  const chkKey = Object.keys(chkForm).filter(
+    (key) => chkForm[key as keyof typeof chkForm]
+  );
+  const filterRes = response.filter((item) => {
+    return chkKey.every((key) => {
+      return (item[key as keyof typeof item] as string).includes(
+        chkForm[key as keyof typeof chkForm]
+      );
+    });
+  });
+  const total = filterRes.length;
+  const data = filterRes.slice(
+    (PageIndex - 1) * PageSize,
+    PageIndex * PageSize
+  );
+  table.data = data;
+  table.total = total;
+};
 </script>
 <style lang="scss" scoped>
 .el-tag + .el-tag {

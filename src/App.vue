@@ -14,6 +14,6 @@
   background-attachment: fixed;
 }
 .el-pagination {
-  padding-top: 5px !important;
+  padding-top: 10px !important;
 }
 </style>
