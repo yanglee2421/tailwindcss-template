@@ -58,7 +58,11 @@
         </el-form-item>
       </template>
       <template #btn-bar>
-        <el-button type="success">新增</el-button>
+        <el-button
+          @click="saveSta.model = true"
+          type="success"
+          >新增</el-button
+        >
         <el-button
           @click="gallerySta.isShow = true"
           type="warning"
@@ -103,6 +107,8 @@
           <el-tag
             v-for="(item, index) in row.hobby"
             :key="index"
+            type="danger"
+            effect="plain"
             >{{ item }}</el-tag
           >
         </template>
@@ -115,7 +121,7 @@
       >
         <template #default="{ $index, row }">
           <el-link
-            data-btn="编辑"
+            @click="saveSta.model = row"
             type="primary"
             >编辑</el-link
           >
@@ -128,11 +134,20 @@
         </template>
       </el-table-column>
     </fw-table>
+    <!-- #region 图片展示区 -->
     <el-image-viewer
       v-if="gallerySta.isShow"
       :url-list="gallerySta.urlList"
       @close="gallerySta.isShow = false"
     ></el-image-viewer>
+    <!-- #endregion -->
+    <!-- #region 保存弹窗 -->
+    <table-save
+      v-model="saveSta.model"
+      @success="initTable(false)"
+    >
+    </table-save>
+    <!-- #endregion -->
   </div>
 </template>
 <script lang="ts">
@@ -146,6 +161,7 @@ import { useRouter } from "vue-router";
 import { useGallery } from "@/hooks";
 import request from "@/api/request";
 import response from "./data";
+import tableSave from "./TableSave.vue";
 const router = useRouter();
 const loginOut = () => {
   localStorage.removeItem("token");
@@ -184,6 +200,10 @@ const deteleLink = (row: { id: string }) => {
   table.data.splice(index, 1);
   response.splice(index, 1);
 };
+/**
+ * 刷新表格
+ * @param isQuery
+ */
 const initTable = (isQuery: boolean) => {
   const { PageIndex, PageSize } = formData;
   const chkForm = {
@@ -208,6 +228,12 @@ const initTable = (isQuery: boolean) => {
   table.data = data;
   table.total = total;
 };
+/**
+ * 保存弹窗
+ */
+const saveSta = reactive({
+  model: false,
+});
 </script>
 <style lang="scss" scoped>
 .el-tag + .el-tag {
