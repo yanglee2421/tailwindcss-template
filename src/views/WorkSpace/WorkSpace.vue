@@ -9,25 +9,24 @@
       @fw-initTable="initTable"
       :total="table.total"
       fw-index
+      fw-selection
     >
       <template #form>
         <el-form-item label="姓名：">
           <el-input v-model.trim="formData.name" />
         </el-form-item>
-        <el-form-item
-          label="年龄："
-          v-for="item in 4"
-          :key="item"
-        >
+        <el-form-item label="年龄：">
           <el-input v-model.trim="formData.age" />
+        </el-form-item>
+        <el-form-item label="性别：">
+          <el-input></el-input>
+        </el-form-item>
+        <el-form-item label="地址：">
+          <el-input></el-input>
         </el-form-item>
       </template>
       <template #btn-bar>
-        <el-button
-          @click="go()"
-          type="success"
-          >新增</el-button
-        >
+        <el-button type="success">新增</el-button>
         <el-button
           @click="gallerySta.isShow = true"
           type="warning"
@@ -44,17 +43,38 @@
         label="姓名"
         prop="name"
         align="center"
+        width="100"
       />
-      <template
-        v-for="item in 6"
-        :key="item"
+      <el-table-column
+        label="年龄"
+        prop="age"
+        align="center"
+        width="70"
+      />
+      <el-table-column
+        label="性别"
+        prop="gender"
+        align="center"
+        width="70"
+      />
+      <el-table-column
+        label="地址"
+        prop="address"
+        align="center"
+      />
+      <el-table-column
+        label="爱好"
+        prop="age"
+        align="center"
       >
-        <el-table-column
-          label="年龄"
-          prop="age"
-          align="center"
-        />
-      </template>
+        <template #default="{ row }">
+          <el-tag
+            v-for="(item, index) in row.hobby"
+            :key="index"
+            >{{ item }}</el-tag
+          >
+        </template>
+      </el-table-column>
       <el-table-column
         label="操作"
         align="center"
@@ -92,20 +112,11 @@ import { reactive, watchEffect, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useGallery } from "@/hooks";
 import request from "@/api/request";
+import data from "./data";
 const router = useRouter();
 const loginOut = () => {
   localStorage.removeItem("token");
   router.replace("/login");
-};
-const go = () => {
-  router.push({
-    name: "test04",
-    state: {
-      bb: {
-        aaa: 777,
-      },
-    },
-  });
 };
 const gallerySta = useGallery();
 onMounted(() => {
@@ -134,24 +145,18 @@ interface _table {
   total: number;
 }
 const table = reactive<_table>({
-  data: [],
+  data,
   total: 0,
 });
 const initTable = (i: unknown) => {};
-const response = reactive({
-  tableData: [],
-});
-/* request<unknown[]>({
-  method: "get",
-  url: "/table",
-}).then((res) => {
-  response.tableData = res as any;
-  table.total = res.length;
-}); */
 watchEffect(() => {
-  const target = response.tableData;
+  const target = table.data;
   const { PageIndex, PageSize } = formData;
   table.data = target.slice((PageIndex - 1) * PageSize, PageIndex * PageSize);
 });
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.el-tag + .el-tag {
+  margin-left: 10px;
+}
+</style>

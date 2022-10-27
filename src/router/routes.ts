@@ -35,7 +35,7 @@ const routes: RouterOptions["routes"] = [
       {
         path: "work",
         name: "work",
-        component: () => import("@/views/WorkSpace.vue"),
+        component: () => import("@/views/WorkSpace/WorkSpace.vue"),
         meta: { title: "长期在写的东西" },
       },
       /* {
