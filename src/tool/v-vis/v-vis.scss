@@ -4,7 +4,7 @@
 }
 
 .swz-vis-trans {
-  transition: max-height 0.17s ease-in;
+  transition: max-height 0.17s ease-in-out;
   transform: translateZ(0);
   will-change: max-height;
 }
