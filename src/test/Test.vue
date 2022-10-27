@@ -44,8 +44,8 @@
     <el-pagination
       layout="total,prev,pager,next,jumper"
       :total="100"
-      :currentPage="1"
-      :pageSize="10"
+      v-model:currentPage="state.PageIndex"
+      v-model:pageSize="state.PageSize"
       :pageSizes="[10, 20, 30]"
     ></el-pagination>
   </div>
@@ -55,5 +55,12 @@ export default {
   inheritAttrs: true,
 };
 </script>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { reactive } from "vue";
+
+const state = reactive({
+  PageIndex: 1,
+  PageSize: 10,
+});
+</script>
 <style lang="scss" scoped></style>
