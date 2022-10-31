@@ -1,0 +1,1 @@
+import{_ as e,e as t,h as s}from"./index.af5c9659.js";const r={inheritAttrs:!0};function o(c,n,a,_,i,p){return s(),t("div")}const u=e(r,[["render",o],["__file","C:/Users/Administrator/Desktop/vue/src/test/Test02.vue"]]);export{u as default};
