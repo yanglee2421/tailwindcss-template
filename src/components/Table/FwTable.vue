@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-column">
+  <div class="flex-column p-1">
     <div v-vis="formSta.vis">
       <el-form
         v-bind="$attrs"
