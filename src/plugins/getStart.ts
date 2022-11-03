@@ -5,7 +5,7 @@ import locale from "element-plus/es/locale/lang/zh-cn";
 import "element-plus/dist/index.css";
 import * as icons from "@element-plus/icons-vue";
 import * as components from "@/components";
-import * as directives from "@/tool";
+import * as directives from "@/util";
 import type { App } from "vue";
 export default {
   install(app: App) {
