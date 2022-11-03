@@ -6,35 +6,36 @@ export default createStore({
       value: "vuex中的值（默认）",
     };
   },
-  getters: {},
-  mutations: {},
-  actions: {},
   modules: {
     mod1: {
       namespaced: true,
       state() {
         return {
-          value: "mod1中的值（默认）",
-          currentUser: "admin",
+          currentUser: "",
           currentPage: "",
         };
-      },
-      mutations: {
-        value(state, payload) {
-          state.value = payload;
-        },
       },
       getters: {
         userPermission(state, getters) {
           return [];
         },
       },
-      actions: {
-        value({ commit }, payload) {
-          commit("value", payload);
+      mutations: {
+        currentUser(state, payload) {
+          state.currentUser = payload;
+        },
+        currentPage(state, payload) {
+          state.currentPage = payload;
         },
       },
-      modules: {},
+      actions: {
+        currentUser({ commit }, payload) {
+          commit("currentUser", payload);
+        },
+        currentPage({ commit }, payload) {
+          commit("currentPage", payload);
+        },
+      },
     },
   },
 });
