@@ -11,32 +11,31 @@ const routes: RouterOptions["routes"] = [
         path: "test",
         name: "test",
         component: () => import("@/test/Test.vue"),
-        meta: { title: "个人简介" },
+        meta: { title: "测试一" },
       },
       {
         path: "test02",
         name: "test02",
         component: () => import("@/test/Test02.vue"),
-        meta: { title: "求职意向" },
+        meta: { title: "测试二" },
       },
       {
         path: "test03",
         name: "test03",
         component: () => import("@/test/Test03.vue"),
-        meta: { title: "教育经历" },
+        meta: { title: "测试三" },
       },
       {
         path: "test04",
         name: "test04",
         component: () => import("@/test/Test04.vue"),
-        meta: { title: "个人经历" },
-        props: { text: "写在routes里的" },
+        meta: { title: "测试四" },
       },
       {
         path: "work",
         name: "work",
         component: () => import("@/views/WorkSpace/WorkSpace.vue"),
-        meta: { title: "长期在写的东西" },
+        meta: { title: "工作区" },
       },
       {
         path: "param",
@@ -67,9 +66,7 @@ const routes: RouterOptions["routes"] = [
     name: "404",
     component: () => import("@/views/404.vue"),
     meta: { title: "找不到你要的页面了！" },
-    props(to) {
-      return {};
-    },
+    props: (to) => {},
   },
 ];
 export default routes;
