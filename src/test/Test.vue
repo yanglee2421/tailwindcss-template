@@ -10,23 +10,11 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { Directive, reactive } from "vue";
+import { reactive } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const state = reactive({
   isShow: true,
 });
-const vTest: Directive<HTMLElement, boolean> = {
-  mounted(dom, { value }, vnode) {
-    if (!value) {
-      dom.remove();
-    }
-  },
-  updated(dom, { value }) {
-    if (!value) {
-      dom.remove();
-    } else {
-      console.log(dom);
-    }
-  },
-};
 </script>
 <style lang="scss" scoped></style>

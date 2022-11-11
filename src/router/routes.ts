@@ -38,7 +38,7 @@ const routes: RouterOptions["routes"] = [
         component: () => import("@/views/WorkSpace/WorkSpace.vue"),
         meta: { title: "长期在写的东西" },
       },
-      /* {
+      {
         path: "param",
         name: "param",
         component: () => import("@/views/param/param.vue"),
@@ -52,7 +52,7 @@ const routes: RouterOptions["routes"] = [
             return false;
           }
         },
-      }, */
+      },
     ],
   },
   {

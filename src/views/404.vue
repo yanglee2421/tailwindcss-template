@@ -10,9 +10,13 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { useRouter } from "vue-router";
-
+import { onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+const route = useRoute();
 const router = useRouter();
+onMounted(() => {
+  console.log(route);
+});
 const loginOut = () => {
   localStorage.removeItem("token");
   router.replace("/login");
