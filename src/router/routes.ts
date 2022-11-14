@@ -8,7 +8,7 @@ const routes: RouterOptions["routes"] = [
     children: [
       {
         path: "checkCar",
-        component: () => import("@/views/checkCar/CheckCar.vue"),
+        component: () => import("@/views/check-car/CheckCar.vue"),
         name: "checkCar",
         meta: { title: "车检" },
       },
