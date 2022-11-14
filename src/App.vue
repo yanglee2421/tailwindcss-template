@@ -16,4 +16,7 @@
 .el-pagination {
   padding-top: 10px !important;
 }
+.el-image {
+  vertical-align: bottom;
+}
 </style>

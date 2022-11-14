@@ -5,60 +5,26 @@ const routes: RouterOptions["routes"] = [
     path: "/",
     component: () => import("@/views/Home.vue"),
     meta: { title: "首页" },
-    props: {},
     children: [
       {
-        path: "test",
-        name: "test",
-        component: () => import("@/test/Test.vue"),
-        meta: { title: "测试一" },
+        path: "checkCar",
+        component: () => import("@/views/checkCar/CheckCar.vue"),
+        name: "checkCar",
+        meta: { title: "车检" },
       },
       {
-        path: "test02",
-        name: "test02",
-        component: () => import("@/test/Test02.vue"),
-        meta: { title: "测试二" },
+        path: "entertainment",
+        component: () => import("@/views/entertainment/Entertainment.vue"),
+        name: "entertainment",
+        meta: { title: "娱乐" },
       },
       {
-        path: "test03",
-        name: "test03",
-        component: () => import("@/test/Test03.vue"),
-        meta: { title: "测试三" },
-      },
-      {
-        path: "test04",
-        name: "test04",
-        component: () => import("@/test/Test04.vue"),
-        meta: { title: "测试四" },
-      },
-      {
-        path: "work",
-        name: "work",
-        component: () => import("@/views/WorkSpace/WorkSpace.vue"),
-        meta: { title: "工作区" },
-      },
-      {
-        path: "param",
-        name: "param",
-        component: () => import("@/views/param/param.vue"),
-        meta: { title: "传参案例" },
-        beforeEnter(to, from) {
-          if (from.meta.title === "首页") {
-            ElMessage({
-              type: "error",
-              message: "不许从首页直接来！",
-            });
-            return false;
-          }
-        },
+        path: "insurance",
+        component: () => import("@/views/insurance/Insurance.vue"),
+        name: "insurance",
+        meta: { title: "保险" },
       },
     ],
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: () => import("@/views/Login.vue"),
-    meta: { title: "登录" },
   },
   { path: "/:else", redirect: "/404" },
   {
@@ -66,7 +32,6 @@ const routes: RouterOptions["routes"] = [
     name: "404",
     component: () => import("@/views/404.vue"),
     meta: { title: "找不到你要的页面了！" },
-    props: (to) => {},
   },
 ];
 export default routes;

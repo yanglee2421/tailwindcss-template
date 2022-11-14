@@ -1,38 +1,25 @@
-// ======================================type=number的上下按钮
-@mixin num-no-btn {
-  -moz-appearance: textfield;
-
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
-}
-
-.num-no-btn {
-  input[type="number"] {
-    @include num-no-btn;
-  }
-}
-
-input[type="number"].num-no-btn {
-  @include num-no-btn;
-}
-
 // =======================================清除浏览器用户代理样式表
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  // PC端
+  @media (any-hover: hover) {
+    width: 8px;
+    height: 8px;
+  }
+  // 移动端不显示滑块
+  @media (any-hover: none) {
+    width: 0;
+    height: 0;
+  }
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
   background-color: rgba(#000, 0.1);
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  // 移动端不展示
   @media (any-hover: none) {
     display: none;
-  }
-  @media (any-hover: hover) {
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.2);
-    }
   }
 }
 * {

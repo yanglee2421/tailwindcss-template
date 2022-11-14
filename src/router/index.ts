@@ -5,14 +5,6 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
-// 登录校验
-router.beforeEach((to, from) => {
-  const auth = localStorage.getItem("token");
-  if (to.name === "login") {
-    return auth ? "/" : undefined;
-  }
-  return auth ? undefined : "/login";
-});
 // 网页标题
 router.afterEach((to, from) => {
   if (to.meta.title) {
