@@ -1,33 +1,31 @@
 <template>
-  <div class="">
-    <div class="view">
-      <el-card v-for="(item, index) in 10">
-        <div class="card-item">
-          <swz-image
-            src=""
-            lazy
-          >
-          </swz-image>
-          <div>
-            <p>山海足浴</p>
-            <p>
-              <span> 套餐原介： </span>
-              <span class="text-danger">{{ 199 }}</span>
-              <span>元</span>
-            </p>
-            <p>
-              <span> 检车优惠价格： </span>
-              <span class="text-danger">{{ 199 }}</span>
-              <span>元</span>
-            </p>
-          </div>
-          <div class="flex">
-            <span>详情</span>
-            <el-icon><DArrowRight /></el-icon>
-          </div>
+  <div class="flex-1">
+    <el-card v-for="(item, index) in 10">
+      <div class="card-item">
+        <swz-image
+          src=""
+          lazy
+        >
+        </swz-image>
+        <div>
+          <p>山海足浴</p>
+          <p>
+            <span> 套餐原介： </span>
+            <span class="text-danger">{{ 199 }}</span>
+            <span>元</span>
+          </p>
+          <p>
+            <span> 检车优惠价格： </span>
+            <span class="text-danger">{{ 199 }}</span>
+            <span>元</span>
+          </p>
         </div>
-      </el-card>
-    </div>
+        <div class="flex">
+          <span>详情</span>
+          <el-icon><DArrowRight /></el-icon>
+        </div>
+      </div>
+    </el-card>
   </div>
 </template>
 <script lang="ts">

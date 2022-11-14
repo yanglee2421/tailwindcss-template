@@ -1,10 +1,7 @@
 <template>
   <div class="h-100 flex-column">
     <h1>{{ title }}</h1>
-    <main
-      class="flex-1-auto px-1"
-      style="overflow: overlay"
-    >
+    <main>
       <router-view #default="{ Component }">
         <component :is="Component" />
       </router-view>
@@ -23,6 +20,14 @@ console.log(store);
 :deep(h1) {
   padding: 15px;
   text-align: center;
+}
+main {
+  flex: 1;
+  overflow: auto;
+  overflow: overlay;
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
 }
 p {
   padding: 15px;
