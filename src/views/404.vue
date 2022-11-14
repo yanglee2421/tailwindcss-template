@@ -1,6 +1,13 @@
 <template>
   <div class="text-center pt-3">
-    <h1 class="mt-3">404，这里没有你要找的东西</h1>
+    <h1 class="text-danger">出了点小问题</h1>
+    <el-empty description="404，找不到对应内容"></el-empty>
+    <el-button
+      @click="router.go(-1)"
+      type="danger"
+      plain
+      >返回</el-button
+    >
   </div>
 </template>
 <script lang="ts" setup>
