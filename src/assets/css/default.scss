@@ -48,3 +48,6 @@ a {
 img {
   vertical-align: bottom;
 }
+[v-cloak] {
+  display: none !important;
+}

@@ -8,6 +8,7 @@ export { default as SwzFragment } from "./Fragment/index.vue";
 export { default as SwzInputNum } from "./Input/Input-num.vue";
 export { default as SwzScroll } from "./Scrollbar/SwzScroll.vue";
 export { default as SwzImage } from "./Image/SwzImage.vue";
+export { default as LayoutMobile } from "./Layout/LayoutMobile.vue";
 // Fw
 export { default as FwSwitch } from "./Switch/FwSwitch.vue";
 export { default as FwTable } from "./Table/FwTable.vue";
