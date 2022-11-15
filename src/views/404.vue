@@ -5,6 +5,7 @@
     <el-button
       @click="router.go(-1)"
       type="danger"
+      size="large"
       plain
       >返回</el-button
     >
