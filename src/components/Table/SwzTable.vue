@@ -76,7 +76,7 @@ export default {
 <script lang="ts" setup>
 import { computed, reactive, watch, ref, Directive, onMounted } from "vue";
 import { CollTag } from "./component";
-import { useClientWidth } from "@/hooks";
+import { useClientWidth } from "@/hook";
 // #region ----------------------------------------------------------------Props
 interface _props {
   PageIndex: number;

@@ -17,7 +17,7 @@ export default createStore({
       },
       getters: {
         userPermission(state, getters) {
-          return [];
+          return state.currentPage === "保险" ? ["add", "edit", "delete"] : [];
         },
       },
       mutations: {

@@ -1,4 +1,4 @@
-const dateFormat = (
+export default (
   date: Date | number | string = Date.now(),
   needSecond = true
 ) => {
@@ -18,4 +18,3 @@ const dateFormat = (
     ? `${yyyy}-${MM}-${dd} ${hh}:${mm}:${ss}`
     : `${yyyy}-${MM}-${dd}`;
 };
-export default dateFormat;

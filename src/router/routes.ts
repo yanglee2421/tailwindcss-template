@@ -1,22 +1,21 @@
-import { ElMessage } from "element-plus";
 import type { RouterOptions } from "vue-router";
 const routes: RouterOptions["routes"] = [
   { path: "/", redirect: "/404" },
   {
     path: "/checkCar",
-    component: () => import("@/views/check-car/CheckCar.vue"),
+    component: () => import("@/page/check-car/CheckCar.vue"),
     name: "checkCar",
     meta: { title: "检车" },
   },
   {
     path: "/entertainment",
-    component: () => import("@/views/entertainment/Entertainment.vue"),
+    component: () => import("@/page/entertainment/Entertainment.vue"),
     name: "entertainment",
     meta: { title: "娱乐" },
   },
   {
     path: "/insurance",
-    component: () => import("@/views/insurance/Insurance.vue"),
+    component: () => import("@/page/insurance/Insurance.vue"),
     name: "insurance",
     meta: { title: "保险" },
   },
@@ -24,7 +23,7 @@ const routes: RouterOptions["routes"] = [
   {
     path: "/404",
     name: "404",
-    component: () => import("@/views/404.vue"),
+    component: () => import("@/page/404.vue"),
     meta: { title: "404" },
   },
 ];
