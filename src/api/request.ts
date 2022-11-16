@@ -2,16 +2,16 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { ElLoadingService, ElMessage } from "element-plus";
 /**
  * Axios实例
- * loading共享变量
  */
 const request = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 6000,
 });
-let loading: null | ReturnType<typeof ElLoadingService>;
 /**
+ * loading控制变量
  * 请求拦截器
  */
+let loading: null | ReturnType<typeof ElLoadingService>;
 request.interceptors.request.use(
   (config: any) => {
     config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
@@ -23,8 +23,9 @@ request.interceptors.request.use(
     });
     return config;
   },
-  (err) => {
-    console.error(err);
+  ({ message }: AxiosError) => {
+    ElMessage.error({ message: "请求时发生了一些问题" });
+    console.error(message);
   }
 );
 /**
@@ -41,8 +42,10 @@ request.interceptors.response.use(
       console.warn(statusText);
     }
   },
-  (err: AxiosError) => {
-    console.error(err.message);
+  ({ message }: AxiosError) => {
+    loading?.close();
+    ElMessage.error({ message });
+    console.error(message);
   }
 );
 /**

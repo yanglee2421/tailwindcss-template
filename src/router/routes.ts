@@ -14,6 +14,13 @@ const routes: RouterOptions["routes"] = [
     meta: { title: "娱乐" },
   },
   {
+    path: "/entertainmentDetail",
+    component: () =>
+      import("@/page/entertainment-detail/EntertainmentDetail.vue"),
+    name: "entertainmentDetail",
+    meta: { title: "套餐介绍" },
+  },
+  {
     path: "/insurance",
     component: () => import("@/page/insurance/Insurance.vue"),
     name: "insurance",

@@ -20,6 +20,7 @@
         </p>
       </div>
       <el-link
+        @click="router.push({ name: 'entertainmentDetail', state: { item } })"
         type="primary"
         class="flex"
       >
@@ -35,22 +36,17 @@ export default {
 };
 </script>
 <script lang="ts" setup>
+import { useRouter } from "vue-router";
+
 const props = withDefaults(
   defineProps<{
-    item?: {
-      imgUrl: string;
-      shop: string;
-    };
+    item?: number;
   }>(),
   {
-    item: () => {
-      return {
-        imgUrl: "",
-        shop: "",
-      };
-    },
+    item: 0,
   }
 );
+const router = useRouter();
 </script>
 <style lang="scss" scoped>
 .el-card {

@@ -12,6 +12,10 @@
 
 - 路由：/entertainment
 
+## 套餐介绍页面
+
+- 路由：/entertainment/whatever
+
 ## 404 页面
 
 - 路由：/404

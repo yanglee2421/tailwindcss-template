@@ -4,11 +4,12 @@
     :infinite-scroll-disabled="disabled"
     title="饭店/会所"
     footer-text="滇ICP备2022005213号-1"
-    footer-link="https://beian.miit.gov.cn/#/Integrated/index"
+    footer-link="https://beian.miit.gov.cn/#/home"
   >
     <card-item-vue
       v-for="(item, index) in num"
       :key="index"
+      :item="item"
     ></card-item-vue>
     <p>加载中。。。</p>
   </layout-mobile>

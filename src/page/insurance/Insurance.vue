@@ -2,7 +2,7 @@
   <layout-mobile
     title="保险"
     footer-text="滇ICP备2022005213号-1"
-    footer-link="https://beian.miit.gov.cn/#/Integrated/index"
+    footer-link="https://beian.miit.gov.cn/#/home"
   >
     <el-card header="服务车类型：">
       <p>渣土车</p>
@@ -16,7 +16,7 @@
       <p>中国太平洋保险</p>
     </el-card>
     <a
-      href="tel:18872082421"
+      href="tel:13888997401"
       class="call-btn"
     >
       <el-button
