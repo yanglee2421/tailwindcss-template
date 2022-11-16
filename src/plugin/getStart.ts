@@ -1,5 +1,15 @@
+/**
+ * vuex
+ * vue-router
+ * pinia
+ * element-plus
+ * @element-plus/icons-vue
+ * 自定义全局组件
+ * 自定义指令
+ */
 import store from "./store";
 import router from "@/router";
+import { createPinia } from "pinia";
 import ElementPlus from "element-plus";
 import locale from "element-plus/es/locale/lang/zh-cn";
 import "element-plus/dist/index.css";
@@ -9,8 +19,18 @@ import * as directives from "@/util";
 import type { App } from "vue";
 export default {
   install(app: App) {
+    /**
+     * vuex
+     * vue-router
+     * pinia
+     * element-plus
+     * @element-plus/icons-vue
+     * 自定义全局组件
+     * 自定义指令
+     */
     app.use(store);
     app.use(router);
+    app.use(createPinia());
     app.use(ElementPlus, {
       locale,
     });

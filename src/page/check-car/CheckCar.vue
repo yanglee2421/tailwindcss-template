@@ -5,9 +5,11 @@
     footer-link="https://beian.miit.gov.cn/#/home"
   >
     <card-item-vue
-      v-for="(item, index) in 20"
+      v-for="(item, index) in store.couter"
       :key="index"
     ></card-item-vue>
+    <p>{{ store.gett }}</p>
+    <el-link @click="add()">加加</el-link>
   </layout-mobile>
 </template>
 <script lang="ts">
@@ -17,6 +19,11 @@ export default {
 </script>
 <script lang="ts" setup>
 import CardItemVue from "./component/CardItem.vue";
+import usePinia from "@/hook/usePinia";
+const store = usePinia();
+const add = () => {
+  store.couter++;
+};
 </script>
 <style lang="scss" scoped>
 .el-card {
