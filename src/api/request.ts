@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import { ElLoadingService, ElMessage } from "element-plus";
 /**
  * Axios实例
@@ -12,22 +12,19 @@ const request = axios.create({
  * 请求拦截器
  */
 let loading: null | ReturnType<typeof ElLoadingService>;
-request.interceptors.request.use(
-  (config: any) => {
-    config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
-    config.headers["Content-Type"] = "application/json;charset=utf-8";
-    loading = ElLoadingService({
-      lock: true,
-      text: "加载中。。。",
-      background: "rgba(0, 0, 0, 0.7)",
-    });
+request.interceptors.request.use((config: AxiosRequestConfig) => {
+  if (!config.headers) {
     return config;
-  },
-  ({ message }: AxiosError) => {
-    ElMessage.error({ message: "请求时发生了一些问题" });
-    console.error(message);
   }
-);
+  config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+  config.headers["Content-Type"] = "application/json;charset=utf-8";
+  loading = ElLoadingService({
+    lock: true,
+    text: "加载中。。。",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  return config;
+});
 /**
  * 响应拦截器
  */
@@ -37,15 +34,16 @@ request.interceptors.response.use(
     if (status === 200) {
       loading?.close();
       return data;
-    } else {
-      ElMessage.warning({ message: statusText });
-      console.warn(statusText);
     }
+    ElMessage.warning({ message: statusText });
+    console.warn(statusText);
+    return new Promise(() => {});
   },
   ({ message }: AxiosError) => {
     loading?.close();
     ElMessage.error({ message });
     console.error(message);
+    return new Promise(() => {});
   }
 );
 /**
