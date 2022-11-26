@@ -86,9 +86,10 @@ onBeforeMount(() => {
 }
 .img-grid {
   display: grid;
-  grid-template: repeat(2, 1fr) / repeat(2, calc(50vw - 15px));
+  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
   gap: 10px;
-  height: calc(100vw - 30px);
+  width: calc(100vw - 20px);
+  height: calc(100vw - 20px);
   .swz-image {
     border-radius: 5px;
     box-shadow: $box-shadow;
