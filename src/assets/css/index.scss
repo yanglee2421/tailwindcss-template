@@ -1,19 +1,16 @@
-$primary: #409eff;
-$success: #67c23a;
-$warning: #e6a23c;
-$danger: #f56c6c;
-$info: #909399;
-// 中性色
-$dark-fill: #ebedf0;
-$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-$box-shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-@import "./scss/overflow.scss";
-@import "./scss/flex.scss";
-@import "./scss/position.scss";
-@import "./scss/box.scss";
-@import "./scss/display.scss";
-@import "./scss/float.scss";
-@import "./scss/text.scss";
-@import "./scss/visibility.scss";
-@import "./scss/bgc.scss";
-@import "./scss/mixin.scss";
+// 定位
+@forward "./scss/position.scss";
+// 盒模型
+@forward "./scss/display.scss";
+@forward "./scss/flex.scss";
+@forward "./scss/box.scss";
+@forward "./scss/shadow.scss";
+// 盒样式
+@forward "./scss/bgc.scss";
+@forward "./scss/overflow.scss";
+@forward "./scss/float.scss";
+@forward "./scss/visibility.scss";
+// 文本
+@forward "./scss/color.scss";
+@forward "./scss/text.scss";
+@forward "./scss/mixin.scss";

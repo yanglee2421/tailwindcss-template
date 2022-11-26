@@ -1,23 +1,24 @@
+@use "./color.scss" as *;
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .text-primary {
-    color: $primary;
+  color: $primary;
 }
 
 .text-success {
-    color: $success;
+  color: $success;
 }
 
 .text-warning {
-    color: $warning;
+  color: $warning;
 }
 
 .text-danger {
-    color: $danger;
+  color: $danger;
 }
 
 .text-info {
-    color: $info;
+  color: $info;
 }
