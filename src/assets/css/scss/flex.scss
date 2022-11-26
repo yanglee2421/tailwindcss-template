@@ -31,23 +31,30 @@
   height: 100%;
 }
 
-$align: start, center, end, stretch, between, around, evenly;
+$-align: start, center, end, stretch, between, around, evenly;
 
-@each $item in $align {
+@each $item in $-align {
   // 作为属性值使用
-  $item-copy: if($item ==between or $item ==evenly or $item ==around, #{'space-'+$item}, $item);
+  $item-copy: if(
+    $item ==between or $item ==evenly or $item ==around,
+    #{"space-" + $item},
+    $item
+  );
 
   .justify-#{$item} {
     justify-content: #{$item-copy};
   }
 
   .align-#{$item} {
-
     align-items: #{$item-copy};
   }
 
-  @each $i in $align {
-    $i-copy: if($i ==between or $i ==evenly or $i ==around, #{'space-'+$i}, $i);
+  @each $i in $-align {
+    $i-copy: if(
+      $i ==between or $i ==evenly or $i ==around,
+      #{"space-" + $i},
+      $i
+    );
 
     .#{$item}-#{$i} {
       justify-content: #{$item-copy};

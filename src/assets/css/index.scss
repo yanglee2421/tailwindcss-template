@@ -4,13 +4,14 @@
 @forward "./scss/display.scss";
 @forward "./scss/flex.scss";
 @forward "./scss/box.scss";
-@forward "./scss/shadow.scss";
 // 盒样式
 @forward "./scss/bgc.scss";
 @forward "./scss/overflow.scss";
 @forward "./scss/float.scss";
 @forward "./scss/visibility.scss";
 // 文本
-@forward "./scss/color.scss";
 @forward "./scss/text.scss";
-@forward "./scss/mixin.scss";
+// 全局变量
+@forward "./scss/mixin/mixin.scss";
+@forward "./scss/var/color.scss";
+@forward "./scss/var/shadow.scss";

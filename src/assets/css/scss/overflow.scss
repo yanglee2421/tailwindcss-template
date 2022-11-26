@@ -1,7 +1,6 @@
-$dirs: 'x', 'y';
+$-dirs: "x", "y";
 
-@each $dir in $dirs {
-
+@each $dir in $-dirs {
   .overflow-#{$dir}-auto {
     overflow-#{$dir}: auto;
   }
