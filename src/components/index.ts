@@ -11,4 +11,3 @@ export { default as SwzImage } from "./Image/SwzImage.vue";
 export { default as LayoutMobile } from "./Layout/LayoutMobile.vue";
 // Fw
 export { default as FwSwitch } from "./Switch/FwSwitch.vue";
-export { default as FwTable } from "./Table/FwTable.vue";

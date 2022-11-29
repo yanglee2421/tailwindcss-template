@@ -36,16 +36,18 @@
         height="100%"
       >
         <el-table-column
+          v-if="fwSelection"
+          type="selection"
+          align="center"
+          fixed
+        />
+        <el-table-column
           v-if="fwIndex"
           label="序号"
           type="index"
           align="center"
           width="60px"
-        />
-        <el-table-column
-          v-if="fwSelection"
-          type="selection"
-          align="center"
+          fixed
         />
         <slot></slot>
         <template #empty>
