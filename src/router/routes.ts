@@ -26,6 +26,12 @@ const routes: RouterOptions["routes"] = [
     name: "insurance",
     meta: { title: "保险" },
   },
+  {
+    path: "/test",
+    component: () => import("@/test/Test01.vue"),
+    name: "test",
+    meta: { title: "测试页01" },
+  },
   { path: "/:else", redirect: "/404" },
   {
     path: "/404",
