@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <el-card header="子组件">
     <p>子组件</p>
-  </div>
+  </el-card>
 </template>
 <script lang="ts">
 export default {

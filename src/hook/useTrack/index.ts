@@ -1,7 +1,7 @@
-import { buryingPoint } from "./v-track";
+import { buryingPoint } from "../../util/v-track";
 import { onMounted, onBeforeMount, onActivated, onDeactivated } from "vue";
 import { onBeforeRouteLeave } from "vue-router";
-import type { _action } from "./v-track";
+import type { _action } from "../../util/v-track";
 export default (meta: unknown) => {
   /**
    * 事件控制器

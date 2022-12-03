@@ -50,7 +50,7 @@ request.interceptors.response.use(
  * 导出方法
  */
 export default async <T = unknown>({
-  method = "post",
+  method = "get",
   url = "",
   data = {},
   params = {},
