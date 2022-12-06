@@ -1,10 +1,6 @@
-import {
-  createRouter,
-  createWebHashHistory,
-  createWebHistory,
-} from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import routes from "./routes";
-import store from "@/plugin/store";
+import { usePinia } from "@/hook";
 const router = createRouter({
   history: createWebHistory(),
   routes,
@@ -13,7 +9,8 @@ const router = createRouter({
 router.afterEach((to, from) => {
   if (to.meta.title) {
     document.title = <string>to.meta.title;
-    store.dispatch("mod1/currentPage", to.meta.title);
+    const state = usePinia();
+    state.currentPage = to.meta.title as string;
   }
 });
 export default router;

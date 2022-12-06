@@ -1,6 +1,7 @@
-import store from "@/plugin/store";
+import { usePinia } from "@/hook";
 import { computed, unref } from "vue";
 export default (btnType: string) => {
-  const userPermission: string[] = store.getters["mod1/userPermission"];
+  const state = usePinia();
+  const userPermission: string[] = state.userPermission;
   return unref(computed(() => userPermission.includes(btnType)));
 };

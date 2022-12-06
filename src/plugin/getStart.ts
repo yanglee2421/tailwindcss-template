@@ -1,5 +1,4 @@
 /**
- * vuex
  * vue-router
  * pinia
  * element-plus
@@ -7,9 +6,8 @@
  * 自定义全局组件
  * 自定义指令
  */
-import store from "./store";
-import router from "@/router";
 import { createPinia } from "pinia";
+import router from "@/router";
 import ElementPlus from "element-plus";
 import locale from "element-plus/es/locale/lang/zh-cn";
 import "element-plus/dist/index.css";
@@ -28,9 +26,8 @@ export default {
      * 自定义全局组件
      * 自定义指令
      */
-    app.use(store);
-    app.use(router);
     app.use(createPinia());
+    app.use(router);
     app.use(ElementPlus, {
       locale,
     });

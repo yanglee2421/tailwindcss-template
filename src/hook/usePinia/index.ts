@@ -1,11 +1,16 @@
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
-const piniaStore = defineStore("pinia-01", () => {
-  const couter = ref(0);
-  const gett = computed(() => couter);
-  return {
-    couter,
-    gett,
-  };
+import { reactive } from "vue";
+export default defineStore("demoState", () => {
+  const state = reactive<{
+    data: string;
+    currentUser: string;
+    currentPage: string;
+    userPermission: string[];
+  }>({
+    data: "这是一个存储在pinia中的全局data",
+    currentUser: "",
+    currentPage: "",
+    userPermission: [],
+  });
+  return state;
 });
-export default piniaStore;
