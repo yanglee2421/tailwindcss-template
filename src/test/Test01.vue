@@ -7,7 +7,7 @@
         >必应壁纸</el-button
       >
       <el-button
-        @click="state.galleryModel = null"
+        @click="state.galleryModel = false"
         type="danger"
         >画廊报错</el-button
       >
