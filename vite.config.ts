@@ -26,10 +26,9 @@ export default defineConfig(({ command, mode }) => {
           ws: true,
         },
       },
-    },
-    build: {
-      outDir: "dist",
-      assetsDir: "assets",
     }, */
+    build: {
+      outDir: "dist-vue",
+    },
   };
 });
