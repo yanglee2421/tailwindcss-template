@@ -14,5 +14,5 @@ export default defineStore("demoState", () => {
     userPermission: [],
     isDark: false,
   });
-  return { state };
+  return state;
 });

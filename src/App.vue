@@ -9,10 +9,10 @@ import { watch } from "vue";
 import { usePinia, useDark } from "@/hook";
 const pinia = usePinia();
 useDark((darkQuery) => {
-  pinia.state.isDark = darkQuery.matches;
+  pinia.isDark = darkQuery.matches;
 });
 watch(
-  () => pinia.state.isDark,
+  () => pinia.isDark,
   (isDark) => {
     if (isDark) {
       document.documentElement.classList.add("dark");

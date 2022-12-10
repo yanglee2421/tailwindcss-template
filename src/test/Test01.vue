@@ -11,7 +11,7 @@
         type="danger"
         >画廊报错</el-button
       >
-      <el-switch v-model="pinia.state.isDark"></el-switch>
+      <el-switch v-model="pinia.isDark"></el-switch>
     </div>
     <swz-count></swz-count>
     <test-02-vue></test-02-vue>
