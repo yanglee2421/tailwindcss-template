@@ -6,11 +6,13 @@ export default defineStore("demoState", () => {
     currentUser: string;
     currentPage: string;
     userPermission: string[];
+    isDark: boolean;
   }>({
     data: "这是一个存储在pinia中的全局data",
     currentUser: "",
     currentPage: "",
     userPermission: [],
+    isDark: false,
   });
-  return state;
+  return { state };
 });

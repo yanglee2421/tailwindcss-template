@@ -11,7 +11,7 @@
         type="danger"
         >画廊报错</el-button
       >
-      <el-switch v-model="isDark"></el-switch>
+      <el-switch v-model="pinia.state.isDark"></el-switch>
     </div>
     <swz-count></swz-count>
     <test-02-vue></test-02-vue>
@@ -26,15 +26,10 @@ export default {
 </script>
 <script lang="ts" setup>
 import request from "@/api/request";
-import { onUpdated, reactive, ref, watch } from "vue";
+import { reactive } from "vue";
 import Test02Vue from "./Test02.vue";
-const isDark = ref(false);
-watch(isDark, (isDark) => {
-  document.documentElement.classList.toggle("dark");
-});
-onUpdated(() => {
-  console.log("父组件更新");
-});
+import { usePinia } from "@/hook";
+const pinia = usePinia();
 const state = reactive<{ galleryModel: boolean | string[]; imgArr: string[] }>({
   galleryModel: false,
   imgArr: [],
