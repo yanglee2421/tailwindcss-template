@@ -11,11 +11,13 @@
         type="danger"
         >画廊报错</el-button
       >
+      <el-switch v-model="isDark"></el-switch>
     </div>
     <swz-count></swz-count>
     <test-02-vue></test-02-vue>
     <swz-gallery v-model="state.galleryModel"></swz-gallery>
   </div>
+  <el-table></el-table>
 </template>
 <script lang="ts">
 export default {
@@ -24,8 +26,12 @@ export default {
 </script>
 <script lang="ts" setup>
 import request from "@/api/request";
-import { onUpdated, reactive } from "vue";
+import { onUpdated, reactive, ref, watch } from "vue";
 import Test02Vue from "./Test02.vue";
+const isDark = ref(false);
+watch(isDark, (isDark) => {
+  document.documentElement.classList.toggle("dark");
+});
 onUpdated(() => {
   console.log("父组件更新");
 });
