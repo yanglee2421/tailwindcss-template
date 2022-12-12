@@ -5,11 +5,13 @@ import path from "path";
 export default defineConfig(({ command, mode }) => {
   return {
     plugins: [vue()],
+    // 路径别名
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
       },
     },
+    // CSS预处理器
     css: {
       preprocessorOptions: {
         scss: {
@@ -17,16 +19,21 @@ export default defineConfig(({ command, mode }) => {
         },
       },
     },
-    /* server: {
+    // 开发服务器
+    server: {
+      port: 5174,
       proxy: {
         "/api": {
-          target: "http://10.32.16.160",
-          rewrite: (path) => path.replace(/^\/api/, ""),
+          target: "http://192.168.3.3",
+          rewrite: (path) => path.replace(/^\/dev/, ""),
           changeOrigin: true,
           ws: true,
         },
       },
-    }, */
-    base: "./",
+    },
+    base: "/vue/",
+    build: {
+      outDir: "vue-app",
+    },
   };
 });

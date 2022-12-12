@@ -1,8 +1,8 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import routes from "./routes";
 import { usePinia } from "@/hook";
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory("/vue/"),
   routes,
 });
 // 网页标题
