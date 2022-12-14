@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite",
     "build:dev": "vue-tsc --noEmit && vite build --mode development",
     "dev:prod": "vite --port=5174 --host --mode production",
     "build": "vue-tsc --noEmit && vite build",

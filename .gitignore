@@ -10,7 +10,7 @@ lerna-debug.log*
 node_modules
 dist/
 dist-ssr
-dist-vue
+vue-app
 *.local
 
 # Editor directories and files

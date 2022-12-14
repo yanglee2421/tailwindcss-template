@@ -24,10 +24,12 @@
     </el-card>
     <el-divider>详细信息</el-divider>
     <div class="img-grid">
-      <swz-image src=""></swz-image>
-      <swz-image src=""></swz-image>
-      <swz-image src=""></swz-image>
-      <swz-image src=""></swz-image>
+      <div>
+        <swz-image src=""></swz-image>
+        <swz-image src=""></swz-image>
+        <swz-image src=""></swz-image>
+        <swz-image src=""></swz-image>
+      </div>
     </div>
     <el-divider>联系购买</el-divider>
     <el-card>
@@ -75,6 +77,7 @@ onBeforeMount(() => {
   grid-template: auto/auto 1fr;
   gap: 20px;
   align-items: center;
+
   .swz-image {
     width: 6rem;
     height: 6rem;
@@ -85,11 +88,17 @@ onBeforeMount(() => {
   }
 }
 .img-grid {
-  display: grid;
-  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
-  gap: 10px;
-  width: calc(100vw - 20px);
-  height: calc(100vw - 20px);
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding: 100% 0 0;
+  > div {
+    position: absolute;
+    @include position(0);
+    display: grid;
+    grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+    gap: 10px;
+  }
   .swz-image {
     border-radius: 5px;
     box-shadow: $box-shadow;
