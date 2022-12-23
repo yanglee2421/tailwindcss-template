@@ -23,8 +23,8 @@ export default defineConfig(({ command, mode }) => {
     server: {
       port: 5174,
       proxy: {
-        "/api": {
-          target: "http://192.168.3.3",
+        "/dev": {
+          target: "http://192.168.1.4",
           rewrite: (path) => path.replace(/^\/dev/, ""),
           changeOrigin: true,
           ws: true,

@@ -17,7 +17,6 @@ let loading: null | ReturnType<typeof ElLoadingService> = null;
 request.interceptors.request.use((config: AxiosRequestConfig) => {
   if (!config.headers) return config;
   config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
-  config.headers["Content-Type"] = "application/json;charset=utf-8";
   loading = ElLoadingService({
     lock: true,
     text: "加载中。。。",
