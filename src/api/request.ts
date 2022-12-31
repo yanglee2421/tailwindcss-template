@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { ElLoadingService, ElMessage } from "element-plus";
 /**
  * 创建Axios实例
@@ -8,15 +8,16 @@ import { ElLoadingService, ElMessage } from "element-plus";
 const request = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 6000,
+  headers: {
+    common: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  },
 });
 /**
  * loading控制器
  * 请求拦截器
  */
 let loading: null | ReturnType<typeof ElLoadingService> = null;
-request.interceptors.request.use((config: AxiosRequestConfig) => {
-  if (!config.headers) return config;
-  config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+request.interceptors.request.use((config) => {
   loading = ElLoadingService({
     lock: true,
     text: "加载中。。。",
@@ -28,7 +29,7 @@ request.interceptors.request.use((config: AxiosRequestConfig) => {
  * 响应拦截器
  */
 request.interceptors.response.use(
-  (res: AxiosResponse) => {
+  (res) => {
     loading?.close();
     const { data, status, statusText } = res;
     if (status === 200) return data;
@@ -36,7 +37,7 @@ request.interceptors.response.use(
     console.warn(statusText);
     return new Promise(() => {});
   },
-  (err: AxiosError) => {
+  (err) => {
     loading?.close();
     const { message } = err;
     ElMessage.error({ message });
