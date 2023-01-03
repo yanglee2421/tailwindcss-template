@@ -19,6 +19,8 @@ const useResize = <T extends HTMLElement>(
   onBeforeUnmount(() => {
     if (!domRef.value) return;
     observer.unobserve(domRef.value);
+    observer.disconnect();
   });
+  return domRef;
 };
 export default useResize;

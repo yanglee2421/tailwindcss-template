@@ -14,6 +14,12 @@ const routes: RouterOptions["routes"] = [
     meta: { title: "demo" },
   },
   {
+    path: "/particle",
+    component: () => import("@/page/particle/particle.vue"),
+    name: "particle",
+    meta: { title: "粒子动画" },
+  },
+  {
     path: "/table",
     component: () => import("@/page/table/table.vue"),
     name: "table",

@@ -1,5 +1,5 @@
 import { onBeforeUnmount, onMounted } from "vue";
-export default (callback: (mediaQuery: MediaQueryList) => void) => {
+const useDark = (callback: (mediaQuery: MediaQueryList) => void) => {
   const controller = new AbortController();
   const { signal } = controller;
   onMounted(() => {
@@ -17,3 +17,4 @@ export default (callback: (mediaQuery: MediaQueryList) => void) => {
     controller.abort();
   });
 };
+export default useDark;

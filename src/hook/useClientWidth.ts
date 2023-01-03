@@ -1,6 +1,6 @@
 import { computed, reactive } from "vue";
 import type { Ref } from "vue";
-export default (itemCount: Ref<number>) => {
+const useClientWidth = (itemCount: Ref<number>) => {
   const state = reactive({
     clientWidth: 0,
   });
@@ -8,3 +8,4 @@ export default (itemCount: Ref<number>) => {
   const needColl = computed(() => itemCount.value > columns.value);
   return { state, columns, needColl };
 };
+export default useClientWidth;

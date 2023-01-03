@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
-export default defineStore("demoState", () => {
+const usePinia = defineStore("demoState", () => {
   const state = reactive<{
     data: string;
     currentUser: string;
@@ -16,3 +16,4 @@ export default defineStore("demoState", () => {
   });
   return state;
 });
+export default usePinia;
