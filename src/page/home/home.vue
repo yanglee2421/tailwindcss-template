@@ -1,5 +1,5 @@
 <template>
-  <el-card></el-card>
+  <div></div>
 </template>
 <script lang="ts">
 export default {

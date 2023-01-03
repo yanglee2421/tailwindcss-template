@@ -13,7 +13,6 @@ import locale from "element-plus/es/locale/lang/zh-cn";
 import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/dark/css-vars.css";
 import * as icons from "@element-plus/icons-vue";
-import * as components from "@/components";
 import Vue from "vue";
 // 引入ly-components
 const lyComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
@@ -48,9 +47,6 @@ export default {
     // 注册el-icons
     Object.entries(icons).forEach(([key, icon]) => {
       app.component(key, icon);
-    });
-    Object.entries(components).forEach(([key, component]) => {
-      Reflect.has(components, key) && app.component(key, component);
     });
     // 注册ly-components
     Object.entries(lyComponents).forEach(([key, component]) => {

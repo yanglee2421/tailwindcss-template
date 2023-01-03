@@ -1,43 +1,30 @@
 import type { RouterOptions } from "vue-router";
 const routes: RouterOptions["routes"] = [
-  { path: "/", redirect: "/404" },
+  { path: "/", redirect: "/home" },
   {
-    path: "/checkCar",
-    component: () => import("@/page/check-car/CheckCar.vue"),
-    name: "checkCar",
-    meta: { title: "检车" },
-  },
-  {
-    path: "/entertainment",
-    component: () => import("@/page/entertainment/Entertainment.vue"),
-    name: "entertainment",
-    meta: { title: "娱乐" },
-  },
-  {
-    path: "/entertainmentDetail",
-    component: () =>
-      import("@/page/entertainment-detail/EntertainmentDetail.vue"),
-    name: "entertainmentDetail",
-    meta: { title: "套餐介绍" },
-  },
-  {
-    path: "/insurance",
-    component: () => import("@/page/insurance/Insurance.vue"),
-    name: "insurance",
-    meta: { title: "保险" },
+    path: "/home",
+    component: () => import("@/page/home/home.vue"),
+    name: "home",
+    meta: { title: "首页" },
   },
   {
     path: "/demo",
-    component: () => import("@/page/demo/Demo.vue"),
+    component: () => import("@/page/demo/demo.vue"),
     name: "demo",
     meta: { title: "demo" },
+  },
+  {
+    path: "/table",
+    component: () => import("@/page/table/table.vue"),
+    name: "table",
+    meta: { title: "表格" },
   },
   { path: "/:else", redirect: "/404" },
   {
     path: "/404",
     name: "404",
-    component: () => import("@/page/404.vue"),
-    meta: { title: "404" },
+    component: () => import("@/page/404/404.vue"),
+    meta: { title: "404，找不到你要的了" },
   },
 ];
 export default routes;
