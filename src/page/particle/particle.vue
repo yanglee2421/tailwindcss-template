@@ -1,12 +1,13 @@
 <template>
   <div
-    :ref="(div:any) => (boxRef = div)"
+    :ref="(div: any) => (boxRef = div)"
     class="particle-box"
   >
     <canvas
-      :ref="(dom:any) => (canRef = dom)"
+      :ref="(dom: any) => (canRef = dom)"
       class="particle-canvas"
     ></canvas>
+    <div class="particle-content"></div>
   </div>
 </template>
 <script lang="ts">
@@ -17,23 +18,28 @@ export default {
 <script lang="ts" setup>
 import Particles from "@/util/class-particle";
 import { useResize } from "@/hook";
-import { onMounted, reactive, ref } from "vue";
-const a = ref;
+import { reactive, ref, watchPostEffect } from "vue";
 const box = reactive({
   width: 0,
   height: 0,
 });
-const boxRef = useResize<HTMLDivElement>(({ width, height }) => {
-  if (!canRef.value) return;
-  canRef.value.width &&= width;
-  canRef.value.height &&= height;
+const boxRef = useResize(({ width, height }) => {
+  box.width = width;
+  box.height = height;
 });
 const canRef = ref<HTMLCanvasElement>();
-onMounted(() => {
+let p: Particles | null = null;
+watchPostEffect(() => {
   if (!canRef.value) return;
-  const particles = new Particles(canRef.value, { number: 150 });
-  particles.animate();
-  particles.bindEvent();
+  if (p) {
+    p.abortAnimate();
+    p.abortEvent();
+  }
+  canRef.value.width = box.width;
+  canRef.value.height = box.height;
+  p = new Particles(canRef.value);
+  p.animate();
+  p.bindEvent();
 });
 </script>
 <style lang="scss" scoped>
@@ -45,9 +51,16 @@ onMounted(() => {
     rgba(32, 39, 216, 0.71)
   );
 }
+
 .particle-canvas {
   position: absolute;
   top: 0;
   left: 0;
+}
+.particle-content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  overflow: overlay;
 }
 </style>
