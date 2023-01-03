@@ -7,7 +7,11 @@
       :ref="(dom: any) => (canRef = dom)"
       class="particle-canvas"
     ></canvas>
-    <div class="particle-content"></div>
+    <div class="particle-content">
+      <ly-counter>
+        <p :style="{ height: box.width }"></p>
+      </ly-counter>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -18,7 +22,10 @@ export default {
 <script lang="ts" setup>
 import Particles from "@/util/class-particle";
 import { useResize } from "@/hook";
-import { reactive, ref, watchPostEffect } from "vue";
+import { onBeforeUpdate, reactive, ref, watchPostEffect } from "vue";
+onBeforeUpdate(() => {
+  console.log("before");
+});
 const box = reactive({
   width: 0,
   height: 0,
@@ -58,6 +65,7 @@ watchPostEffect(() => {
   left: 0;
 }
 .particle-content {
+  position: absolute;
   width: 100%;
   height: 100%;
   overflow: auto;

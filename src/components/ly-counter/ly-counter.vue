@@ -15,7 +15,9 @@
       class="mt-1"
       >=1</el-button
     >
+    <div></div>
   </el-card>
+  <slot> </slot>
 </template>
 <script lang="ts">
 export default {
@@ -23,7 +25,10 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onBeforeUpdate, ref } from "vue";
 const count = ref(0);
+onBeforeUpdate(() => {
+  console.log("onBeforeUpdate");
+});
 </script>
 <style lang="scss" scoped></style>
