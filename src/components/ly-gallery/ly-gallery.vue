@@ -13,7 +13,6 @@ export default {
 </script>
 <script lang="ts" setup>
 import { onBeforeMount, reactive, watch } from "vue";
-import isStrArr from "@/util/else/isStrArr";
 const props = withDefaults(defineProps<{ modelValue: string[] | false }>(), {
   modelValue: false,
 });
@@ -35,11 +34,6 @@ const state = reactive<{ isShow: boolean; imgArr: string[] }>({
  */
 onBeforeMount(() => {
   if (props.modelValue === false) return;
-  try {
-    isStrArr(props.modelValue);
-  } catch (err: any) {
-    throw new Error("swz-gallery的v-model必须为false或string[]");
-  }
   state.isShow = true;
 });
 /**
@@ -54,11 +48,6 @@ watch(
     if (model === false) {
       state.isShow = false;
       return;
-    }
-    try {
-      isStrArr(model);
-    } catch (err: any) {
-      throw new Error("swz-gallery的v-model必须为false或string[]");
     }
     state.imgArr = model;
     state.isShow = true;

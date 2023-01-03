@@ -27,10 +27,10 @@ const routes: RouterOptions["routes"] = [
     meta: { title: "保险" },
   },
   {
-    path: "/test",
-    component: () => import("@/test/Test01.vue"),
-    name: "test",
-    meta: { title: "测试页01" },
+    path: "/demo",
+    component: () => import("@/page/demo/Demo.vue"),
+    name: "demo",
+    meta: { title: "demo" },
   },
   { path: "/:else", redirect: "/404" },
   {
