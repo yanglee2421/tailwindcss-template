@@ -25,10 +25,27 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { onBeforeUpdate, ref } from "vue";
+import {
+  onBeforeMount,
+  onMounted,
+  onActivated,
+  onDeactivated,
+  onBeforeUpdate,
+  onUpdated,
+  onBeforeUnmount,
+  onUnmounted,
+  ref,
+} from "vue";
 const count = ref(0);
+onBeforeMount(() => {});
+onMounted(() => {});
+onActivated(() => {});
+onDeactivated(() => {});
 onBeforeUpdate(() => {
   console.log("onBeforeUpdate");
 });
+onUpdated(() => {});
+onBeforeUnmount(() => {});
+onUnmounted(() => {});
 </script>
 <style lang="scss" scoped></style>
