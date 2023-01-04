@@ -1,8 +1,8 @@
-import { onBeforeUnmount, onMounted, ref } from "vue";
-const useResize = <T extends HTMLElement>(
+import { onBeforeUnmount, onMounted, ref, unref } from "vue";
+const useResize = (
   callback: (params: { width: number; height: number }) => void
 ) => {
-  const domRef = ref<T>();
+  const resizeRef = ref();
   const observer = new ResizeObserver(
     ([
       {
@@ -13,14 +13,18 @@ const useResize = <T extends HTMLElement>(
     }
   );
   onMounted(() => {
-    if (!domRef.value) return;
-    observer.observe(domRef.value);
+    const dom = unref(resizeRef);
+    if (dom instanceof HTMLElement) {
+      observer.observe(dom);
+    }
   });
   onBeforeUnmount(() => {
-    if (!domRef.value) return;
-    observer.unobserve(domRef.value);
-    observer.disconnect();
+    const dom = unref(resizeRef);
+    if (dom instanceof HTMLElement) {
+      observer.unobserve(dom);
+      observer.disconnect();
+    }
   });
-  return domRef;
+  return resizeRef;
 };
 export default useResize;
