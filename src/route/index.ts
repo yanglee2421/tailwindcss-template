@@ -8,8 +8,6 @@ import whiteList from "./whiteList";
 /**
  * 根据环境打包模式确定路由模式
  */
-console.log(import.meta.env.MODE);
-
 const history =
   import.meta.env.MODE === "gitee"
     ? createWebHashHistory()
@@ -27,4 +25,5 @@ router.afterEach((to, from) => {
     document.title = <string>to.meta.title;
   }
 });
+
 export default router;

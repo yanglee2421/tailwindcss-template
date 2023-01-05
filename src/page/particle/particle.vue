@@ -8,9 +8,7 @@
       class="particle-canvas"
     ></canvas>
     <div class="particle-content">
-      <ly-counter>
-        <p :style="{ height: box.width }"></p>
-      </ly-counter>
+      <dark-switch />
     </div>
   </div>
 </template>
@@ -23,6 +21,7 @@ export default {
 import Particles from "@/util/class-particle";
 import { useResize } from "@/hook";
 import { onBeforeUpdate, reactive, ref, watchPostEffect } from "vue";
+import DarkSwitch from "@/components/dark-switch/dark-switch.vue";
 onBeforeUpdate(() => {
   console.log("before");
 });
@@ -40,13 +39,11 @@ watchPostEffect(() => {
   if (!canRef.value) return;
   if (p) {
     p.abortAnimate();
-    p.abortEvent();
   }
   canRef.value.width = box.width;
   canRef.value.height = box.height;
   p = new Particles(canRef.value);
   p.animate();
-  p.bindEvent();
 });
 </script>
 <style lang="scss" scoped>
