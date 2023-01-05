@@ -1,9 +1,12 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
-
-export namespace type {
+/**
+ * 类型
+ */
+export namespace Type {
   export interface state {
     isDark: boolean;
+    docTitle: string;
     // 登录校验
     isLogined: boolean;
     invalidTime: number;
@@ -12,10 +15,13 @@ export namespace type {
     userPermission: string[];
   }
 }
-
-const usePinia = defineStore("demoState", () => {
-  const state = reactive<type.state>({
+/**
+ * 全局 store
+ */
+export const usePinia = defineStore("demoState", () => {
+  const state = reactive<Type.state>({
     isDark: false,
+    docTitle: document.title,
     // 登录校验
     isLogined: true,
     invalidTime: 0,
@@ -24,9 +30,12 @@ const usePinia = defineStore("demoState", () => {
     userPermission: [],
   });
   function setIsDark(isDark: boolean) {
-    state.isDark = isDark;
+    state.isDark = Boolean(isDark);
   }
-  return { state, setIsDark };
+  function setDocTitle(title: string) {
+    if (typeof title !== "string") return;
+    state.docTitle = title;
+    document.title = title;
+  }
+  return { state, setIsDark, setDocTitle };
 });
-
-export default usePinia;

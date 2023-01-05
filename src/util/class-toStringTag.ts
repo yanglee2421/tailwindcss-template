@@ -1,4 +1,4 @@
-class ToStringTag {
+export class ToStringTag {
   toStringTag: string;
   constructor(target: unknown) {
     this.toStringTag = Object.prototype.toString
@@ -7,4 +7,3 @@ class ToStringTag {
       .toLocaleLowerCase();
   }
 }
-export default ToStringTag;

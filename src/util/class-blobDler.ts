@@ -1,4 +1,4 @@
-class DownloadBlob {
+export class BlobDler {
   #blob: Blob;
   #fileName: string;
   constructor(file: BlobPart, fileName: string) {
@@ -13,4 +13,3 @@ class DownloadBlob {
     URL.revokeObjectURL(a.href);
   }
 }
-export default DownloadBlob;

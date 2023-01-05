@@ -20,7 +20,7 @@ export default {
 <script lang="ts" setup>
 import { useResize } from "@/hook";
 import { reactive, ref, watchPostEffect } from "vue";
-import Particles from "@/util/class-particle";
+import { Particles } from "@/util";
 const state = reactive({
   width: 0,
   height: 0,

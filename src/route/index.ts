@@ -3,27 +3,26 @@ import {
   createWebHashHistory,
   createWebHistory,
 } from "vue-router";
-import routes from "./routes";
-import whiteList from "./whiteList";
+import { routes, whiteList } from "./routes";
+import { usePinia } from "@/hook";
 /**
- * 根据环境打包模式确定路由模式
+ * 根据环境打包模式决定路由模式
  */
-const history =
-  import.meta.env.MODE === "gitee"
-    ? createWebHashHistory()
-    : createWebHistory("/vue/");
-const router = createRouter({ history, routes });
-// 前置钩子
+const isGitee = import.meta.env.MODE === "gitee";
+const history = isGitee ? createWebHashHistory() : createWebHistory("/vue/");
+export const router = createRouter({ history, routes });
+/**
+ * 全局钩子
+ */
 router.beforeEach((to, from) => {
   if (whiteList.includes(to.path)) {
     return true;
   }
 });
-// 后置钩子
 router.afterEach((to, from) => {
-  if (to.meta.title) {
-    document.title = <string>to.meta.title;
+  const title = to.meta.title;
+  if (typeof title === "string") {
+    const store = usePinia();
+    store.setDocTitle(title);
   }
 });
-
-export default router;

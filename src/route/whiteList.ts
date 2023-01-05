@@ -1,2 +1,1 @@
-const whiteList: string[] = [];
-export default whiteList;
+export const whiteList: string[] = [];

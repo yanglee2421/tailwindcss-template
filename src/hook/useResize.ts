@@ -1,6 +1,6 @@
 import { onBeforeUnmount, onMounted, ref, unref } from "vue";
 
-function useResize(
+export function useResize(
   callback: (params: { width: number; height: number }) => void
 ) {
   const resizeRef = ref();
@@ -28,5 +28,3 @@ function useResize(
   });
   return resizeRef;
 }
-
-export default useResize;

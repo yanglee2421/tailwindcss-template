@@ -1,22 +1,17 @@
 <template>
-  <el-input
-    v-bind="$attrs"
-    v-model="inputValue"
-  ></el-input>
+  <el-input v-model="inputValue" />
 </template>
 <script lang="ts" setup>
 import { computed } from "vue";
-
-const props = withDefaults(
-  defineProps<{
-    modelValue: string;
-    justNumber?: boolean;
-  }>(),
-  { justNumber: false }
-);
-const emit = defineEmits<{
+interface _props {
+  modelValue: string;
+  justNumber?: boolean;
+}
+const props = withDefaults(defineProps<_props>(), { justNumber: false });
+interface _emit {
   (event: "update:modelValue", $event: string): void;
-}>();
+}
+const emit = defineEmits<_emit>();
 const inputValue = computed({
   get() {
     return props.modelValue;

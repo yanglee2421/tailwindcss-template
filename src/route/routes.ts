@@ -1,5 +1,6 @@
 import type { RouterOptions } from "vue-router";
-const routes: RouterOptions["routes"] = [
+export { whiteList } from "./whiteList";
+export const routes: RouterOptions["routes"] = [
   { path: "/", redirect: "/home" },
   {
     path: "/home",
@@ -33,4 +34,3 @@ const routes: RouterOptions["routes"] = [
     meta: { title: "404，找不到你要的了" },
   },
 ];
-export default routes;

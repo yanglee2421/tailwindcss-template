@@ -18,10 +18,10 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import Particles from "@/util/class-particle";
+import { Particles } from "@/util";
 import { useResize } from "@/hook";
 import { onBeforeUpdate, reactive, ref, watchPostEffect } from "vue";
-import DarkSwitch from "@/components/dark-switch/dark-switch.vue";
+import { DarkSwitch } from "@/components";
 onBeforeUpdate(() => {
   console.log("before");
 });
