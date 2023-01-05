@@ -1,7 +1,8 @@
 import { onBeforeUnmount, onMounted, ref, unref } from "vue";
-const useResize = (
+
+function useResize(
   callback: (params: { width: number; height: number }) => void
-) => {
+) {
   const resizeRef = ref();
   const observer = new ResizeObserver(
     ([
@@ -26,5 +27,6 @@ const useResize = (
     }
   });
   return resizeRef;
-};
+}
+
 export default useResize;

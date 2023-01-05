@@ -1,15 +1,6 @@
 <template>
   <div>
-    <ly-counter></ly-counter>
-    <div>
-      <el-icon
-        v-for="(item, index) in arr"
-        :key="index"
-        v-drag="{ arr, index }"
-        >{{ item }}
-        <Search />
-      </el-icon>
-    </div>
+    <dark-switch />
   </div>
 </template>
 <script lang="ts">
@@ -19,7 +10,6 @@ export default {
 </script>
 <script lang="ts" setup>
 import { reactive } from "vue";
-
-const arr = reactive([1, 2, 3]);
+import DarkSwitch from "@/components/dark-switch/dark-switch.vue";
 </script>
 <style lang="scss" scoped></style>

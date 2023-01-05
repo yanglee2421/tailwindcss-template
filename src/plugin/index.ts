@@ -55,8 +55,8 @@ export default {
     });
     // 注册自定义指令
     Object.entries(vDirectives).forEach(([key, directive]) => {
-      const vName = key.replace(/(^\/.+\/v-)|(\.ts$)/g, "");
-      app.directive(vName, directive);
+      const name = key.replace(/(^\/.+\/v-)|(\.ts$)/g, "");
+      app.directive(name, directive);
     });
   },
 };
