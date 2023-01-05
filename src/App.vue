@@ -8,9 +8,7 @@
 import { usePinia, useDark } from "@/hook";
 const pinia = usePinia();
 const { state, setIsDark } = pinia;
-useDark((darkQuery) => {
-  setIsDark(darkQuery.matches);
-});
+useDark((darkQuery) => setIsDark(darkQuery.matches));
 // 监听暗夜模式
 pinia.$onAction(({ after }) => {
   after(() => {
