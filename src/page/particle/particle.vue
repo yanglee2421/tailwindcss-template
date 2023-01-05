@@ -1,10 +1,10 @@
 <template>
   <div
-    :ref="(div: any) => (boxRef = div)"
+    :ref="(div) => (boxRef = div)"
     class="particle-box"
   >
     <canvas
-      :ref="(dom: any) => (canRef = dom)"
+      :ref="(dom) => (canRef = dom)"
       class="particle-canvas"
     ></canvas>
     <div class="particle-content">
@@ -33,12 +33,13 @@ const boxRef = useResize(({ width, height }) => {
   box.width = width;
   box.height = height;
 });
-const canRef = ref<HTMLCanvasElement>();
+const canRef = ref();
 let p: Particles | null = null;
 watchPostEffect(() => {
   if (!canRef.value) return;
   if (p) {
     p.abortAnimate();
+    p = null;
   }
   canRef.value.width = box.width;
   canRef.value.height = box.height;
@@ -55,7 +56,6 @@ watchPostEffect(() => {
     rgba(32, 39, 216, 0.71)
   );
 }
-
 .particle-canvas {
   position: absolute;
   top: 0;
