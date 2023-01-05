@@ -1,10 +1,20 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+} from "vue-router";
 import routes from "./routes";
 import whiteList from "./whiteList";
-const router = createRouter({
-  history: createWebHistory("/vue/"),
-  routes,
-});
+/**
+ * 根据环境打包模式确定路由模式
+ */
+console.log(import.meta.env.MODE);
+
+const history =
+  import.meta.env.MODE === "gitee"
+    ? createWebHashHistory()
+    : createWebHistory("/vue/");
+const router = createRouter({ history, routes });
 // 前置钩子
 router.beforeEach((to, from) => {
   if (whiteList.includes(to.path)) {

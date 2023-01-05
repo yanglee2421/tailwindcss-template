@@ -50,7 +50,7 @@ img {
 [v-cloak] {
   display: none !important;
 }
-#app {
+#root {
   @extend .clearfix;
   height: 100vh;
   overflow: auto;
