@@ -1,4 +1,4 @@
-// =======================================清除浏览器用户代理样式表
+// ========清除浏览器用户代理样式表
 ::-webkit-scrollbar {
   // PC端
   @media (any-hover: hover) {
@@ -26,7 +26,6 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  line-height: 1;
   scrollbar-width: thin;
   scrollbar-color: rgba(#000, 0.1) transparent;
   @media (any-pointer: none) {
@@ -50,4 +49,10 @@ img {
 }
 [v-cloak] {
   display: none !important;
+}
+#app {
+  @extend .clearfix;
+  height: 100vh;
+  overflow: auto;
+  overflow: overlay;
 }

@@ -37,11 +37,6 @@ pinia.$onAction(({ after }) => {
 
 <style lang="scss">
 @import "@/assets/default.scss";
-#app {
-  height: 100vh;
-  background-size: cover;
-  background-attachment: fixed;
-}
 .el-pagination {
   padding-top: 10px !important;
 }
