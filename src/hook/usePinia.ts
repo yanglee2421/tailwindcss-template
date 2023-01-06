@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
 /**
- * 类型
+ * @function usePinia 中使用的类型
  */
 export namespace Type {
   export interface state {
@@ -16,7 +16,8 @@ export namespace Type {
   }
 }
 /**
- * 全局 store
+ * @function usePinia 返回全局 store 的 hook
+ * @returns 全局 store
  */
 export const usePinia = defineStore("demoState", () => {
   const state = reactive<Type.state>({

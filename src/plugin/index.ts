@@ -6,20 +6,23 @@ import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/dark/css-vars.css";
 import * as icons from "@element-plus/icons-vue";
 import Vue from "vue";
+/**
+ * @module plugin 中的类型空间
+ */
+export namespace Type {
+  export type SFC = Vue.DefineComponent<{}, {}, any>;
+  export type Directive = Vue.Directive;
+}
 // 引入 components/ 下所有以 ly- 开头的 vue 文件
-const lyComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
-  "@/components/**/ly-*.vue",
-  {
-    eager: true,
-    import: "default",
-  }
-);
-// 引入 hook/v-/ 下所有以 v- 开头的 ts 文件
-const vDirectives = import.meta.glob<Vue.Directive>("@/hook/v-/v-*.ts", {
+const lyComponents = import.meta.glob<Type.SFC>("@/component/**/ly-*.vue", {
   eager: true,
   import: "default",
 });
-
+// 引入 hook/v-/ 下所有以 v- 开头的 ts 文件
+const vDirectives = import.meta.glob<Type.Directive>("@/hook/v-/v-*.ts", {
+  eager: true,
+  import: "default",
+});
 export default {
   install(app: Vue.App) {
     /**

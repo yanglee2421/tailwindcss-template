@@ -9,6 +9,6 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { DarkSwitch } from "@/components";
+import { DarkSwitch } from "@/component";
 </script>
 <style lang="scss" scoped></style>

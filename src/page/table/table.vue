@@ -1,5 +1,11 @@
 <template>
-  <div></div>
+  <div>
+    <el-form></el-form>
+    <div>
+      <el-table></el-table>
+    </div>
+    <el-pagination />
+  </div>
 </template>
 <script lang="ts">
 export default {

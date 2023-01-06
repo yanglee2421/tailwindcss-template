@@ -11,24 +11,24 @@ const { state, setIsDark } = pinia;
 useDark((darkQuery) => setIsDark(darkQuery.matches));
 // 监听暗夜模式
 pinia.$onAction(({ after }) => {
+  const htmlClass = document.documentElement.classList;
   after(() => {
-    const isDark = state.isDark;
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-      return;
-    }
-    document.documentElement.classList.remove("dark");
-    return;
+    state.isDark ? htmlClass.add("dark") : htmlClass.remove("dark");
   });
 });
 // 监听登录状态
 pinia.$onAction(({ after }) => {
-  const prevLogined = state.isLogined;
-  if (!prevLogined) return;
+  // 未登录直接返回
+  if (!state.isLogined) return;
   after(() => {
-    const neoLogined = state.isLogined;
-    if (neoLogined) return;
-    neoLogined;
+    // 依然是登录状态则返回
+    if (state.isLogined) return;
+    // isLogined 由真变假
+    /**
+     * 执行注销操作
+     * 清空storage
+     * 跳转到登录页
+     */
   });
 });
 </script>

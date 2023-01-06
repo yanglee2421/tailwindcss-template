@@ -1,5 +1,9 @@
 import { onBeforeUnmount, onMounted, ref, unref } from "vue";
-
+/**
+ * 监听 dom resize 的钩子
+ * @param callback 挂载、dom resize时执行
+ * @returns 用于指定 dom 的 ref
+ */
 export function useResize(
   callback: (params: { width: number; height: number }) => void
 ) {

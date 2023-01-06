@@ -1,39 +1,18 @@
 <template>
-  <div class="h-100">
-    <ly-particle>
-      <div class="h-100 flex center-center">
-        <el-card>
-          <el-form>
-            <el-form-item>
-              <el-input></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-input
-                v-model="state.pwd"
-                type="password"
-              ></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-checkbox label="remember" />
-            </el-form-item>
-            <el-form-item>
-              <el-button
-                type="primary"
-                class="w-100"
-                >Login</el-button
-              >
-            </el-form-item>
-            <el-form-item>
-              <p class="text-white w-100 text-center">
-                <span> Or </span>
-                <el-link type="danger"> resgister </el-link>
-                <span> ? </span>
-              </p>
-            </el-form-item>
-          </el-form>
-        </el-card>
-      </div>
-    </ly-particle>
+  <div class="home-box">
+    <el-card></el-card>
+    <el-card></el-card>
+    <el-card header="主题">
+      <el-form>
+        <el-form-item label="黑夜模式">
+          <dark-switch />
+        </el-form-item>
+      </el-form>
+    </el-card>
+    <el-card></el-card>
+    <el-card></el-card>
+    <el-card></el-card>
+    <el-card></el-card>
   </div>
 </template>
 <script lang="ts">
@@ -42,17 +21,26 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { reactive } from "vue";
-
-const state = reactive({
-  pwd: "",
-});
+import { DarkSwitch } from "@/component";
 </script>
 <style lang="scss" scoped>
-.el-card {
-  $color: rgba(#fff, 0.2);
-  border-color: $color;
-  background-color: $color;
-  backdrop-filter: blur(4px);
+.home-box {
+  @extend .p-1;
+  display: grid;
+  grid-template: repeat(3, minmax(300px, 1fr)) / repeat(6, minmax(100px, 1fr));
+  gap: 10px;
+  & > *:first-child,
+  & > *:nth-child(2),
+  & > *:nth-child(3),
+  & > :nth-child(4) {
+    grid-column: span 2;
+  }
+  & > *:nth-child(5) {
+    grid-column: span 4;
+  }
+  & > *:nth-child(6),
+  & > *:nth-child(7) {
+    grid-column: span 3;
+  }
 }
 </style>

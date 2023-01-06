@@ -20,8 +20,8 @@ export default {
 <script lang="ts" setup>
 import { Particles } from "@/util";
 import { useResize } from "@/hook";
-import { onBeforeUpdate, reactive, ref, watchPostEffect } from "vue";
-import { DarkSwitch } from "@/components";
+import { onBeforeUpdate, reactive, ref, watchPostEffect, unref } from "vue";
+import { DarkSwitch } from "@/component";
 onBeforeUpdate(() => {
   console.log("before");
 });
@@ -36,14 +36,15 @@ const boxRef = useResize(({ width, height }) => {
 const canRef = ref();
 let p: Particles | null = null;
 watchPostEffect(() => {
-  if (!canRef.value) return;
+  const canvas = unref(canRef);
+  if (!canvas) return;
   if (p) {
     p.abortAnimate();
     p = null;
   }
-  canRef.value.width = box.width;
-  canRef.value.height = box.height;
-  p = new Particles(canRef.value);
+  canvas.width = box.width;
+  canvas.height = box.height;
+  p = new Particles(canvas);
   p.animate();
 });
 </script>

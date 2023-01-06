@@ -1,13 +1,13 @@
 import { onBeforeUnmount, onMounted } from "vue";
 /**
- * 类型
+ * @function useDark 中使用的类型
  */
 export namespace Type {
   export type callback = (mediaQuery: MediaQueryList) => void;
 }
 /**
- * 组件挂载时，执行回调
- * 浏览器主题改变时，执行回调
+ * 监听浏览器主题变换的钩子
+ * @param callback 挂载、主题变化时执行
  */
 export function useDark(callback: Type.callback) {
   const controller = new AbortController();
