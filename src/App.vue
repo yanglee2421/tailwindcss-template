@@ -34,7 +34,7 @@ pinia.$onAction(({ after }) => {
 </script>
 
 <style lang="scss">
-@import "@/assets/default.scss";
+@import "@/assets/reset.scss";
 .el-pagination {
   padding-top: 10px !important;
 }
