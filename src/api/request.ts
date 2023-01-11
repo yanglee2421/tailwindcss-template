@@ -1,10 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { ElLoadingService, ElMessage } from "element-plus";
-/**
- * 创建Axios实例
- * 请求域名
- * 最长等待时间
- */
 const request = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 6000,
@@ -12,10 +7,6 @@ const request = axios.create({
     common: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   },
 });
-/**
- * loading控制器
- * 请求拦截器
- */
 let loading: null | ReturnType<typeof ElLoadingService> = null;
 request.interceptors.request.use((config) => {
   loading = ElLoadingService({
@@ -25,9 +16,6 @@ request.interceptors.request.use((config) => {
   });
   return config;
 });
-/**
- * 响应拦截器
- */
 request.interceptors.response.use(
   (res) => {
     loading?.close();
@@ -45,9 +33,5 @@ request.interceptors.response.use(
     return new Promise(() => {});
   }
 );
-/**
- * 导出方法
- */
-export default async <T = unknown>(params: AxiosRequestConfig) => {
-  return (await request(params)) as unknown as T;
-};
+export default async <T = unknown>(params: AxiosRequestConfig) =>
+  (await request(params)) as unknown as T;
