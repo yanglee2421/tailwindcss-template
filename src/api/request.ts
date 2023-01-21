@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { RawAxiosRequestConfig } from "axios";
 import { ElLoadingService, ElMessage } from "element-plus";
 const request = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -33,5 +33,5 @@ request.interceptors.response.use(
     return new Promise(() => {});
   }
 );
-export default async <T = unknown>(params: AxiosRequestConfig) =>
+export default async <T = unknown>(params: RawAxiosRequestConfig) =>
   request(params) as unknown as T;
