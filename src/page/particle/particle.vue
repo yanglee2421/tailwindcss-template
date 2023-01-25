@@ -20,32 +20,16 @@ export default {
 <script lang="ts" setup>
 import { Particles } from "@/util";
 import { useResize } from "@/hook";
-import { onBeforeUpdate, reactive, ref, watchPostEffect, unref } from "vue";
+import { ref, unref } from "vue";
 import { DarkSwitch } from "@/component";
-onBeforeUpdate(() => {
-  console.log("before");
-});
-const box = reactive({
-  width: 0,
-  height: 0,
-});
-const boxRef = useResize(({ width, height }) => {
-  box.width = width;
-  box.height = height;
-});
 const canRef = ref();
-let p: Particles | null = null;
-watchPostEffect(() => {
+const boxRef = useResize((box) => {
   const canvas = unref(canRef);
   if (!canvas) return;
-  if (p) {
-    p.abortAnimate();
-    p = null;
-  }
-  canvas.width = box.width;
-  canvas.height = box.height;
-  p = new Particles(canvas);
+  Object.assign(canvas, box);
+  const p = new Particles(canvas, (box.width / 1920) * 120, 110);
   p.animate();
+  return () => p.abortAnimate();
 });
 </script>
 <style lang="scss" scoped>
