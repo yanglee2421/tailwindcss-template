@@ -11,6 +11,9 @@ export default defineConfig(({ command, mode }) => {
     case "gitee":
       base = "./";
       break;
+    case "github":
+      base = "/vite-vue/";
+      break;
     default:
       base = "/vue/";
   }
@@ -20,6 +23,9 @@ export default defineConfig(({ command, mode }) => {
   let outDir = "dist";
   switch (mode) {
     case "gitee":
+      outDir = "docs";
+      break;
+    case "github":
       outDir = "docs";
       break;
     default:
