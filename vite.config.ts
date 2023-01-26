@@ -12,7 +12,7 @@ export default defineConfig(({ command, mode }) => {
       base = "/vite-vue/";
       break;
     default:
-      base = "/vue/";
+      base = "/vite-vue/";
   }
   /**
    * 输出目录

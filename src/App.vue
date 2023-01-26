@@ -7,8 +7,8 @@
 <script lang="ts" setup>
 import { usePinia, useDark } from "@/hook";
 const pinia = usePinia();
-const { state, setIsDark } = pinia;
-useDark((darkQuery) => setIsDark(darkQuery.matches));
+const { state, actIsDark } = pinia;
+useDark((darkQuery) => actIsDark(darkQuery.matches));
 // 监听暗夜模式
 pinia.$onAction(({ after }) => {
   const htmlClass = document.documentElement.classList;
