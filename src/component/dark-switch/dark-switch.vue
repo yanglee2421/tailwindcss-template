@@ -9,15 +9,13 @@ export default {
 <script lang="ts" setup>
 import { usePinia } from "@/hook";
 import { reactive, watch } from "vue";
-const { state, setIsDark } = usePinia();
+const { state, actIsDark } = usePinia();
 const switchState = reactive({
   model: state.isDark,
 });
 watch(
   () => switchState.model,
-  (model) => {
-    setIsDark(model);
-  }
+  (model) => actIsDark(model)
 );
 </script>
 <style lang="scss" scoped></style>

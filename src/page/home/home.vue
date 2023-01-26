@@ -7,6 +7,11 @@
         <el-form-item label="黑夜模式">
           <dark-switch />
         </el-form-item>
+        <el-form-item label="雪飘">
+          <router-link to="/demo">
+            <el-link type="primary">snow</el-link>
+          </router-link>
+        </el-form-item>
       </el-form>
     </el-card>
     <el-card></el-card>
