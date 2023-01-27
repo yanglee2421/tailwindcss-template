@@ -14,12 +14,23 @@ export const routes: RouterOptions["routes"] = [
     name: "login",
     meta: { title: "登录" },
   },
-  { path: "/", redirect: "/home" },
   {
-    path: "/home",
-    component: () => import("@/page/home/home.vue"),
-    name: "home",
-    meta: { title: "首页" },
+    path: "",
+    component: () => import("@/page/layout/layout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("@/page/home/home.vue"),
+        name: "home",
+        meta: { title: "首页" },
+      },
+      {
+        path: "table",
+        component: () => import("@/page/table/table.vue"),
+        name: "table",
+        meta: { title: "表格" },
+      },
+    ],
   },
   {
     path: "/demo",
@@ -32,11 +43,5 @@ export const routes: RouterOptions["routes"] = [
     component: () => import("@/page/particle/particle.vue"),
     name: "particle",
     meta: { title: "粒子动画" },
-  },
-  {
-    path: "/table",
-    component: () => import("@/page/table/table.vue"),
-    name: "table",
-    meta: { title: "表格" },
   },
 ];

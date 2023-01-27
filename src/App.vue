@@ -2,6 +2,10 @@
   <router-view #default="{ Component }">
     <component :is="Component" />
   </router-view>
+  <el-backtop
+    :right="36"
+    :bottom="36"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -19,10 +23,10 @@ pinia.$onAction(({ after }) => {
 // 监听登录状态
 pinia.$onAction(({ after }) => {
   // 未登录直接返回
-  if (!state.isLogined) return;
+  if (!state) return;
   after(() => {
     // 依然是登录状态则返回
-    if (state.isLogined) return;
+    if (state) return;
     // isLogined 由真变假
     /**
      * 执行注销操作

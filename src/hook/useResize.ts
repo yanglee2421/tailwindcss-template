@@ -32,12 +32,21 @@ export function useResize(callback: Type.cb) {
     const dom = unref(resizeRef);
     if (dom instanceof HTMLElement) {
       observer.observe(dom);
+      return;
+    }
+    if (dom.$el instanceof HTMLElement) {
+      observer.observe(dom.$el);
     }
   });
   onBeforeUnmount(() => {
     const dom = unref(resizeRef);
     if (dom instanceof HTMLElement) {
       observer.unobserve(dom);
+      observer.disconnect();
+      return;
+    }
+    if (dom.$el instanceof HTMLElement) {
+      observer.unobserve(dom.$el);
       observer.disconnect();
     }
   });

@@ -18,11 +18,6 @@ const lyComponents = import.meta.glob<Type.SFC>("@/component/**/ly-*.vue", {
   eager: true,
   import: "default",
 });
-// 引入 hook/v-/ 下所有以 v- 开头的 ts 文件
-const vDirectives = import.meta.glob<Type.Directive>("@/hook/v-/v-*.ts", {
-  eager: true,
-  import: "default",
-});
 export default {
   install(app: Vue.App) {
     /**
@@ -36,16 +31,11 @@ export default {
     /**
      * el-icons
      * ly-components
-     * 自定义指令
      */
     Object.entries(icons).forEach(([key, icon]) => app.component(key, icon));
     Object.entries(lyComponents).forEach(([key, component]) => {
       const name = key.replace(/(^\/.+\/)|(\.vue$)/g, "");
       app.component(name, component);
-    });
-    Object.entries(vDirectives).forEach(([key, directive]) => {
-      const name = key.replace(/(^\/.+\/v-)|(\.ts$)/g, "");
-      app.directive(name, directive);
     });
   },
 };
