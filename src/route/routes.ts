@@ -1,7 +1,7 @@
 import type { RouterOptions } from "vue-router";
 export { whiteList } from "./whiteList";
 export const routes: RouterOptions["routes"] = [
-  { path: "/:else", redirect: "/404" },
+  { path: "/:pathMatch(.*)*", redirect: "/404" },
   {
     path: "/404",
     component: () => import("@/page/404/404.vue"),
