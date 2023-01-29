@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "build:gitee": "vue-tsc --noEmit && vite build --mode=gitee",
+    "preview": "vite preview",
+    "preview:gitee": "vite preview --mode=gitee"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",

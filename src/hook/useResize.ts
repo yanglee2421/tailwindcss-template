@@ -15,19 +15,19 @@ namespace Type {
  */
 export function useResize(callback: Type.cb) {
   const resizeRef = ref();
-  let clearFn: void | Function;
+
+  let clearFn: Function | void;
   const observer = new ResizeObserver(
     ([
       {
         contentBoxSize: [{ inlineSize: width, blockSize: height }],
       },
     ]) => {
-      if (typeof clearFn === "function") {
-        clearFn();
-      }
+      typeof clearFn === "function" && clearFn();
       clearFn = callback({ width, height });
     }
   );
+
   onMounted(() => {
     const dom = unref(resizeRef);
     if (dom instanceof HTMLElement) {
@@ -36,9 +36,13 @@ export function useResize(callback: Type.cb) {
     }
     if (dom.$el instanceof HTMLElement) {
       observer.observe(dom.$el);
+      return;
     }
+    throw new Error("resizeRef必须指向一个htmlelement");
   });
   onBeforeUnmount(() => {
+    typeof clearFn === "function" && clearFn();
+
     const dom = unref(resizeRef);
     if (dom instanceof HTMLElement) {
       observer.unobserve(dom);
@@ -48,7 +52,10 @@ export function useResize(callback: Type.cb) {
     if (dom.$el instanceof HTMLElement) {
       observer.unobserve(dom.$el);
       observer.disconnect();
+      return;
     }
+    throw new Error("resizeRef必须指向一个htmlelement");
   });
+
   return resizeRef;
 }
