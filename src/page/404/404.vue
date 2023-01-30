@@ -12,7 +12,14 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { reactive } from "vue";
 import { useRouter } from "vue-router";
+import { getJoke } from "@/api/api-joke";
 const router = useRouter();
+getJoke().then((res) => {
+  console.log(res);
+});
+const url = new URL("/api/joke", import.meta.env.VITE_BASE_URL);
+url.searchParams.set("key", "GY7rE1J3f4ovi4wGONXshLHOHv");
 </script>
 <style lang="scss" scoped></style>

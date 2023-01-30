@@ -1,11 +1,13 @@
 import { defineConfig, ConfigEnv, UserConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import path from "path";
+import { resolve } from "node:path";
+import { readFileSync } from "node:fs";
+
 // https://vitejs.dev/config/
 export default defineConfig((ConfigEnv) => ({
   plugins: [vue()],
   resolve: {
-    alias: { "@": path.resolve(__dirname, "./src") },
+    alias: { "@": resolve(__dirname, "./src") },
   },
   css: {
     preprocessorOptions: {
@@ -14,7 +16,7 @@ export default defineConfig((ConfigEnv) => ({
       },
     },
   },
-  envDir: path.resolve(__dirname, "./config"),
+  envDir: resolve(__dirname, "./config"),
   base: base(ConfigEnv),
   build: build(ConfigEnv),
   server: server(),
@@ -32,6 +34,10 @@ function build({ mode }: ConfigEnv): UserConfig["build"] {
 function server(): UserConfig["server"] {
   return {
     port: 5174,
+    https: {
+      key: readFileSync(resolve(__dirname, "./config/localhost+1-key.pem")),
+      cert: readFileSync(resolve(__dirname, "./config/localhost+1.pem")),
+    },
     proxy: {
       "/dev": {
         target: "http://192.168.1.4",
