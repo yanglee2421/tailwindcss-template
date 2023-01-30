@@ -1,6 +1,8 @@
 import { ElMessage } from "element-plus";
 import { defineStore } from "pinia";
 import { reactive } from "vue";
+import { router } from "@/route";
+
 namespace Type {
   export interface loginParams {
     user: string;
@@ -8,8 +10,10 @@ namespace Type {
     token: string;
   }
 }
-export const storeAuth = defineStore("auth", () => {
+
+export const useAuth = defineStore("auth", () => {
   const state = reactive(initState());
+
   function actLogin(payload: Type.loginParams, isRemember = false) {
     const { user, invalidTime, token } = payload;
     Object.assign(state, { user, invalidTime, token, isLogined: true });
@@ -17,7 +21,10 @@ export const storeAuth = defineStore("auth", () => {
     if (!isRemember) return;
     localStorage.setItem("auth", JSON.stringify(state));
     localStorage.setItem("token", token);
+    router.replace({ name: "home" });
+    setTimeout(actSignUp, invalidTime - Date.now());
   }
+
   function actSignUp() {
     Object.assign(state, {
       isLogined: false,
@@ -28,6 +35,7 @@ export const storeAuth = defineStore("auth", () => {
     localStorage.removeItem("auth");
     localStorage.removeItem("token");
     ElMessage.success("已注销");
+    router.replace({ name: "login" });
   }
   return { state, actLogin, actSignUp };
 });
@@ -42,19 +50,23 @@ function initState() {
   try {
     const prevJson = localStorage.getItem("auth");
     if (!prevJson) return target;
+
     const prevState = JSON.parse(prevJson);
     const { user, invalidTime, token } = prevState;
+
     if (!user || !invalidTime || !token) throw new Error();
     if (typeof user !== "string") throw new Error();
     if (typeof invalidTime !== "number") throw new Error();
     if (invalidTime < Date.now() + 1000 * 60 * 15) throw new Error();
     if (typeof token !== "string") throw new Error();
+
     Object.assign(target, { user, invalidTime, token, isLogined: true });
     localStorage.setItem("token", token);
   } catch (err: any) {
     localStorage.removeItem("auth");
     localStorage.removeItem("token");
     ElMessage.warning("登录信息已失效");
+  } finally {
+    return target;
   }
-  return target;
 }

@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { reactive } from "vue";
-import { useResize } from "@/hook";
+import { useResize, useAuth } from "@/hook";
 import avatar from "@/assets/image/avatar.jpg";
+
 const state = reactive({
   isCollMenu: true,
   isDrawer: false,
@@ -12,6 +13,8 @@ const resizeRef = useResize(({ width }) => {
   state.isCollMenu = width < 1200;
   state.isAside = width > 500;
 });
+
+const { actSignUp } = useAuth();
 </script>
 <template>
   <el-container
@@ -109,6 +112,7 @@ const resizeRef = useResize(({ width }) => {
     direction="ltr"
   >
     <span>Hi, there!</span>
+    <el-button @click="actSignUp()">Sign Out</el-button>
   </el-drawer>
 </template>
 <style lang="scss" scoped>
