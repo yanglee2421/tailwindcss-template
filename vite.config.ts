@@ -19,7 +19,7 @@ export default defineConfig((ConfigEnv) => ({
   envDir: resolve(__dirname, "./config"),
   base: base(ConfigEnv),
   build: build(ConfigEnv),
-  server: server(),
+  server: server(ConfigEnv),
 }));
 
 function base({ mode }: ConfigEnv): UserConfig["base"] {
@@ -31,10 +31,11 @@ function build({ mode }: ConfigEnv): UserConfig["build"] {
   return { outDir };
 }
 
-function server(): UserConfig["server"] {
+function server({ mode }: ConfigEnv): UserConfig["server"] {
+  const isGitee = mode === "gitee";
   return {
     port: 5174,
-    https: {
+    https: isGitee && {
       key: readFileSync(resolve(__dirname, "./config/localhost+1-key.pem")),
       cert: readFileSync(resolve(__dirname, "./config/localhost+1.pem")),
     },
