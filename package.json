@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --mode=gitee",
+    "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "build:gitee": "vue-tsc --noEmit && vite build --mode=gitee",
     "preview": "vite preview",

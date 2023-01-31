@@ -50,6 +50,7 @@ const { actSignUp } = useAuth();
         width="auto"
       >
         <el-menu
+          router
           default-active="2"
           :collapse="state.isCollMenu"
           class="h-100"
@@ -63,8 +64,8 @@ const { actSignUp } = useAuth();
               <el-icon size="24"><VideoCameraFilled /></el-icon>
               <span>动效</span>
             </template>
-            <el-menu-item>雪飘</el-menu-item>
-            <el-menu-item>粒子</el-menu-item>
+            <el-menu-item :route="{ name: 'demo' }">雪飘</el-menu-item>
+            <el-menu-item :route="{ name: 'particle' }">粒子</el-menu-item>
           </el-sub-menu>
           <el-menu-item
             index="3"

@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { useAuth } from "@/hook";
 import { useRouter } from "vue-router";
+import { ElMessage } from "element-plus";
+
 const { state, actLogin } = useAuth();
 const router = useRouter();
-// if (state.isLogined) router.replace("/");
+
 console.log("");
 </script>
 <template>
@@ -13,7 +15,9 @@ console.log("");
       to="/"
       replace
     >
-      <el-button>Take me home</el-button>
+      <el-button @click="router.replace({ name: 'home' })"
+        >Take me home</el-button
+      >
     </router-link>
     <el-form>
       <el-form-item>
@@ -21,9 +25,9 @@ console.log("");
           @click="
             actLogin(
               {
-                user: '',
-                invalidTime: Date.now() + 1000 * 10,
-                token: '',
+                user: 'yang',
+                token: '788',
+                invalidTime: Date.now() + 1000 * 60 * 2,
               },
               true
             )
