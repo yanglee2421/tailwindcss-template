@@ -24,9 +24,6 @@ const resizeRef = useResize((box) => {
       :ref="(e) => (cvsRef = e)"
       class="cvs"
     ></canvas>
-    <router-link to="/">
-      <el-link type="danger">首页</el-link>
-    </router-link>
   </div>
 </template>
 

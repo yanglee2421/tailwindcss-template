@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import { reactive } from "vue";
 import { useResize, useAuth } from "@/hook";
+import { useRoute } from "vue-router";
 import avatar from "@/assets/image/avatar.jpg";
+
+const route = useRoute();
 
 const state = reactive({
   isCollMenu: true,
@@ -9,9 +12,13 @@ const state = reactive({
   isAside: true,
   search: "",
 });
+let timer: number | NodeJS.Timer = 0;
 const resizeRef = useResize(({ width }) => {
-  state.isCollMenu = width < 1200;
-  state.isAside = width > 500;
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    state.isCollMenu = width < 1200;
+    state.isAside = width > 500;
+  }, 500);
 });
 
 const { actSignUp } = useAuth();
@@ -19,7 +26,7 @@ const { actSignUp } = useAuth();
 <template>
   <el-container
     :ref="(e:any) => (resizeRef = e)"
-    class="box"
+    class="box h-100h"
   >
     <el-header class="box-header flex between-center shadow">
       <el-icon
@@ -51,11 +58,14 @@ const { actSignUp } = useAuth();
       >
         <el-menu
           router
-          default-active="2"
+          :default-active="route.name"
           :collapse="state.isCollMenu"
           class="h-100"
         >
-          <el-menu-item index="1">
+          <el-menu-item
+            index="home"
+            :route="{ name: 'home' }"
+          >
             <el-icon size="24"><HomeFilled /></el-icon>
             <template #title>首页</template>
           </el-menu-item>
@@ -64,27 +74,36 @@ const { actSignUp } = useAuth();
               <el-icon size="24"><VideoCameraFilled /></el-icon>
               <span>动效</span>
             </template>
-            <el-menu-item :route="{ name: 'demo' }">雪飘</el-menu-item>
-            <el-menu-item :route="{ name: 'particle' }">粒子</el-menu-item>
+            <el-menu-item
+              index="snow"
+              :route="{ name: 'snow' }"
+              >雪飘</el-menu-item
+            >
+            <el-menu-item
+              index="particle"
+              :route="{ name: 'particle' }"
+              >粒子</el-menu-item
+            >
           </el-sub-menu>
-          <el-menu-item
-            index="3"
-            title="454"
-          >
+          <el-menu-item index="3">
             <el-icon size="24"><PictureFilled /></el-icon>
             <template #title>画廊</template>
           </el-menu-item>
           <el-menu-item
-            index="3"
-            title="454"
+            index="demo"
+            :route="{ name: 'demo' }"
           >
             <el-icon size="24"><ChromeFilled /></el-icon>
-            <template #title>浏览</template>
+            <template #title>Demo</template>
           </el-menu-item>
         </el-menu>
       </el-aside>
       <el-main>
-        <router-view></router-view>
+        <router-view #default="{ Component }">
+          <keep-alive>
+            <component :is="Component" />
+          </keep-alive>
+        </router-view>
       </el-main>
     </el-container>
     <el-footer
@@ -117,9 +136,6 @@ const { actSignUp } = useAuth();
   </el-drawer>
 </template>
 <style lang="scss" scoped>
-.box {
-  height: 100vh;
-}
 .menu-icon {
   cursor: pointer;
   &:hover {
@@ -132,7 +148,5 @@ const { actSignUp } = useAuth();
 }
 </style>
 <script lang="ts">
-export default {
-  inheritAttrs: true,
-};
+export default { inheritAttrs: true };
 </script>

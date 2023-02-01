@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
 import { router } from "@/route";
+import { ElMessage } from "element-plus";
 
 namespace Type {
   export interface loginParams {
@@ -18,8 +19,21 @@ export const useAuth = defineStore("auth", () => {
     invalidTime: 0,
   });
 
+  // 登出行为
+  const actSignUp = () => {
+    const defAuth = { isLogined: false, user: "", token: "", invalidTime: 0 };
+    Object.assign(state, defAuth);
+    router.replace({ name: "login" });
+
+    clearTimeout(timer);
+
+    localStorage.removeItem("auth");
+    localStorage.removeItem("token");
+  };
+
+  // 登录行为
   let timer: number | NodeJS.Timeout = 0;
-  function actLogin(payload: Type.loginParams, isRemember = false) {
+  const actLogin = (payload: Type.loginParams, isRemember = false) => {
     const { user, invalidTime, token } = payload;
     Object.assign(state, { user, invalidTime, token, isLogined: true });
 
@@ -31,17 +45,35 @@ export const useAuth = defineStore("auth", () => {
       localStorage.setItem("auth", JSON.stringify(state));
       localStorage.setItem("token", token);
     }
-  }
+  };
 
-  function actSignUp() {
-    const defAuth = { isLogined: false, user: "", token: "", invalidTime: 0 };
-    Object.assign(state, defAuth);
+  // 还原上次登录行为
+  const prevAuth = () => {
+    try {
+      const prevJson = localStorage.getItem("auth");
+      if (!prevJson) return false;
 
-    router.replace({ name: "login" });
-    clearTimeout(timer);
+      const prevAuth = JSON.parse(prevJson);
+      const { user, token, invalidTime } = prevAuth;
+      if (!user || !token || !invalidTime) throw new Error();
+      if (typeof user !== "string") throw new Error();
+      if (typeof token !== "string") throw new Error();
+      if (typeof invalidTime !== "number") throw new Error();
+      if (invalidTime - Date.now() < 1000 * 60 * 5) throw new Error();
 
-    localStorage.removeItem("auth");
-    localStorage.removeItem("token");
-  }
-  return { state, actLogin, actSignUp };
+      actLogin({ user, token, invalidTime });
+      return true;
+    } catch (err) {
+      console.error(err);
+      localStorage.removeItem("auth");
+      localStorage.removeItem("token");
+      ElMessage.warning("登录信息已失效");
+    }
+    return false;
+  };
+
+  // 是否已登录
+  const isLogined = computed(() => state.isLogined || prevAuth());
+
+  return { isLogined, state, actLogin, actSignUp };
 });

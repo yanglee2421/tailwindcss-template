@@ -1,3 +1,4 @@
+import { useAuth } from "@/hook";
 import type { RouterOptions } from "vue-router";
 export { whiteList } from "./whiteList";
 
@@ -8,6 +9,10 @@ export const routes: RouterOptions["routes"] = [
     component: () => import("@/page/login/login.vue"),
     name: "login",
     meta: { title: "登录" },
+    beforeEnter(to, from) {
+      const store = useAuth();
+      if (store.isLogined) return { name: "home", replace: true };
+    },
   },
   {
     path: "",
@@ -31,6 +36,18 @@ export const routes: RouterOptions["routes"] = [
         name: "table",
         meta: { title: "表格" },
       },
+      {
+        path: "particle",
+        component: () => import("@/page/particle/particle.vue"),
+        name: "particle",
+        meta: { title: "粒子动画" },
+      },
+      {
+        path: "snow",
+        component: () => import("@/page/snow/snow.vue"),
+        name: "snow",
+        meta: { title: "雪飘" },
+      },
     ],
   },
   {
@@ -38,11 +55,5 @@ export const routes: RouterOptions["routes"] = [
     component: () => import("@/page/demo/demo.vue"),
     name: "demo",
     meta: { title: "demo" },
-  },
-  {
-    path: "/particle",
-    component: () => import("@/page/particle/particle.vue"),
-    name: "particle",
-    meta: { title: "粒子动画" },
   },
 ];

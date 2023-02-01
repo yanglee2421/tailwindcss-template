@@ -2,11 +2,15 @@
 import { useAuth } from "@/hook";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
+import { reactive } from "vue";
 
-const { state, actLogin } = useAuth();
-const router = useRouter();
-
-console.log("");
+const {
+  state: { isLogined },
+  actLogin,
+} = useAuth();
+const state = reactive({
+  isRemember: false,
+});
 </script>
 <template>
   <div>
@@ -15,11 +19,12 @@ console.log("");
       to="/"
       replace
     >
-      <el-button @click="router.replace({ name: 'home' })"
-        >Take me home</el-button
-      >
+      <el-button>Take me home</el-button>
     </router-link>
     <el-form>
+      <el-form-item>
+        <el-checkbox v-model="state.isRemember">记住我</el-checkbox>
+      </el-form-item>
       <el-form-item>
         <el-button
           @click="
@@ -27,9 +32,9 @@ console.log("");
               {
                 user: 'yang',
                 token: '788',
-                invalidTime: Date.now() + 1000 * 60 * 2,
+                invalidTime: Date.now() + 1000 * 60 * 30,
               },
-              true
+              state.isRemember
             )
           "
         >
