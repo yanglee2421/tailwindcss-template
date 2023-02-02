@@ -23,11 +23,11 @@ export const usePinia = defineStore("demoState", () => {
     userPermission: [],
   });
 
-  function actIsDark(isDark: boolean) {
+  const actIsDark = (isDark: boolean) => {
     const htmlClass = document.documentElement.classList;
     state.isDark = isDark;
     state.isDark ? htmlClass.add("dark") : htmlClass.remove("dark");
-  }
+  };
 
   return { state, actIsDark };
 });

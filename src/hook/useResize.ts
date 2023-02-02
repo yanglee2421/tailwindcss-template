@@ -1,13 +1,15 @@
 import { onBeforeUnmount, onMounted, ref, unref } from "vue";
+
 namespace Type {
-  interface cbParams {
+  interface params {
     width: number;
     height: number;
   }
   export interface cb {
-    (params: cbParams): void | Function;
+    (params: params): void | Function;
   }
 }
+
 /**
  * 监听 dom resize 的钩子
  * @param callback 挂载、dom resize时执行
@@ -38,22 +40,28 @@ export function useResize(callback: Type.cb) {
       observer.observe(dom.$el);
       return;
     }
+
     throw new Error("resizeRef必须指向一个htmlelement");
   });
+
   onBeforeUnmount(() => {
     typeof clearFn === "function" && clearFn();
 
-    const dom = unref(resizeRef);
-    if (dom instanceof HTMLElement) {
+    const unobserve = (dom: HTMLElement) => {
       observer.unobserve(dom);
       observer.disconnect();
+    };
+
+    const dom = unref(resizeRef);
+    if (dom instanceof HTMLElement) {
+      unobserve(dom);
       return;
     }
     if (dom.$el instanceof HTMLElement) {
-      observer.unobserve(dom.$el);
-      observer.disconnect();
+      unobserve(dom.$el);
       return;
     }
+
     throw new Error("resizeRef必须指向一个htmlelement");
   });
 

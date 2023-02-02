@@ -2,10 +2,12 @@ import { defineConfig, ConfigEnv, UserConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { resolve } from "node:path";
 import { readFileSync } from "node:fs";
+import gzip from "vite-plugin-compression";
+import imagemin from "vite-plugin-imagemin";
 
 // https://vitejs.dev/config/
 export default defineConfig((ConfigEnv) => ({
-  plugins: [vue()],
+  plugins: [vue(), gzip({ deleteOriginFile: true }), imagemin()],
   resolve: {
     alias: { "@": resolve(__dirname, "./src") },
   },
@@ -27,25 +29,38 @@ function base({ mode }: ConfigEnv): UserConfig["base"] {
 }
 
 function build({ mode }: ConfigEnv): UserConfig["build"] {
-  let outDir = mode === "gitee" ? "docs" : "vue-app";
-  return { outDir };
+  const outDir = mode === "gitee" ? "docs" : "vue-app";
+
+  const rollupOptions = {
+    output: {
+      manualChunks: {
+        echarts: ["echarts"],
+        qrcode: ["qrcode"],
+      },
+    },
+  };
+
+  return { outDir, rollupOptions };
 }
 
 function server({ mode }: ConfigEnv): UserConfig["server"] {
   const isGitee = mode === "gitee";
-  return {
-    port: 5174,
-    https: isGitee && {
-      key: readFileSync(resolve(__dirname, "./config/localhost+1-key.pem")),
-      cert: readFileSync(resolve(__dirname, "./config/localhost+1.pem")),
-    },
-    proxy: {
-      "/dev": {
-        target: "http://192.168.1.4",
-        rewrite: (path) => path.replace(/^\/dev/, ""),
-        changeOrigin: true,
-        ws: true,
-      },
+
+  const https = isGitee && {
+    key: readFileSync(resolve(__dirname, "./config/localhost+1-key.pem")),
+    cert: readFileSync(resolve(__dirname, "./config/localhost+1.pem")),
+  };
+
+  const proxy = {
+    "/dev": {
+      target: "http://192.168.1.4",
+      rewrite: (path) => path.replace(/^\/dev/, ""),
+      changeOrigin: true,
+      ws: true,
     },
   };
+
+  const port = 5174;
+
+  return { https, port, proxy };
 }
