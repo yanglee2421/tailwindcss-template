@@ -1,4 +1,4 @@
-import { useAuth } from "@/hook";
+import { useAuth } from "@/stores";
 import type { RouterOptions } from "vue-router";
 export { whiteList } from "./whiteList";
 

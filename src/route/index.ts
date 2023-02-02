@@ -4,7 +4,7 @@ import {
   createWebHistory,
 } from "vue-router";
 import { routes, whiteList } from "./routes";
-import { useAuth } from "@/hook";
+import { useAuth } from "@/stores";
 import { storeToRefs } from "pinia";
 import { ElMessage } from "element-plus";
 

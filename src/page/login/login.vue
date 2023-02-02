@@ -1,52 +1,114 @@
 <script lang="ts" setup>
-import { useAuth } from "@/hook";
-import { useRouter } from "vue-router";
-import { ElMessage } from "element-plus";
-import { reactive } from "vue";
+import { useAuth } from "@/stores";
+import { reactive, ref } from "vue";
+import { ElMessage, FormInstance, FormRules } from "element-plus";
 
-const {
-  state: { isLogined },
-  actLogin,
-} = useAuth();
-const state = reactive({
-  isRemember: false,
+const { actLogin } = useAuth();
+interface formState {
+  model: {
+    isRemember: boolean;
+    pwd: string;
+    user: string;
+  };
+  rules: FormRules;
+}
+const formState = reactive<formState>({
+  model: {
+    isRemember: false,
+    pwd: "",
+    user: "",
+  },
+  rules: {
+    user: [{ required: true }],
+    pwd: [{ required: true }],
+  },
 });
+const formRef = ref<FormInstance | null>(null);
+const submitHandler = () => {
+  formRef.value?.validate((isPass) => {
+    console.log(isPass);
+    if (!isPass) return false;
+
+    const form = formState.model;
+    const userArr = [
+      { user: "123456", pwd: "123456" },
+      { user: "admin", pwd: "admin" },
+    ];
+    try {
+      if (!userArr.map((item) => item.user).includes(form.user))
+        throw new Error();
+      if (!userArr.map((item) => item.pwd).includes(form.pwd))
+        throw new Error();
+      switch (form.user) {
+        case "123456":
+          if (form.pwd !== "123456") throw new Error();
+        case "admin":
+          if (form.pwd !== "admin") throw new Error();
+      }
+    } catch {
+      ElMessage.warning("用户名或密码不正确");
+      return;
+    }
+
+    actLogin(
+      {
+        user: form.user,
+        token: "788",
+        invalidTime: Date.now() + 1000 * 60 * 30,
+      },
+      formState.model.isRemember
+    );
+  });
+};
 </script>
 <template>
-  <div>
-    <h1>没登录你上尼玛的网</h1>
-    <router-link
-      to="/"
-      replace
-    >
-      <el-button>Take me home</el-button>
-    </router-link>
-    <el-form>
-      <el-form-item>
-        <el-checkbox v-model="state.isRemember">记住我</el-checkbox>
-      </el-form-item>
-      <el-form-item>
-        <el-button
-          @click="
-            actLogin(
-              {
-                user: 'yang',
-                token: '788',
-                invalidTime: Date.now() + 1000 * 60 * 30,
-              },
-              state.isRemember
-            )
-          "
-        >
-          Login</el-button
-        >
-      </el-form-item>
-    </el-form>
+  <div class="box">
+    <el-card header="没登录你上尼玛的网">
+      <el-form
+        :ref="(e:any) => (formRef = e)"
+        :model="formState.model"
+        :rules="formState.rules"
+      >
+        <el-form-item prop="user">
+          <el-input
+            v-model="formState.model.user"
+            prefix-icon="User"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="pwd">
+          <el-input
+            v-model="formState.model.pwd"
+            prefix-icon="Lock"
+            type="password"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="isRemember">
+          <el-checkbox v-model="formState.model.isRemember">记住我</el-checkbox>
+        </el-form-item>
+        <el-form-item>
+          <el-button
+            @click="submitHandler"
+            type="success"
+            class="w-100"
+          >
+            Login</el-button
+          >
+        </el-form-item>
+      </el-form>
+    </el-card>
   </div>
 </template>
-<style lang="scss" scoped></style>
+
+<style lang="scss" scoped>
+.box {
+  @extend .h-100h, .flex, .center-center;
+  @include bgc-img;
+  background-image: url("@/assets/image/bg.jpg");
+  > * {
+    transform: translate(0, -5%);
+  }
+}
+</style>
 <script lang="ts">
-export default {
-  inheritAttrs: true,
-};
+export default { inheritAttrs: true };
 </script>

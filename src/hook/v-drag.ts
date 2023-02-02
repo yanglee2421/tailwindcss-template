@@ -5,7 +5,7 @@ interface _value {
   arr: unknown[];
 }
 
-const vDrag: Directive<HTMLElement, _value> = (dom, bind) => {
+export const vDrag: Directive<HTMLElement, _value> = (dom, bind) => {
   try {
     const {
       value: { index, arr },
@@ -26,5 +26,3 @@ const vDrag: Directive<HTMLElement, _value> = (dom, bind) => {
     console.error(new Error("v-drag指令没有获取到正确的值"));
   }
 };
-
-export default vDrag;

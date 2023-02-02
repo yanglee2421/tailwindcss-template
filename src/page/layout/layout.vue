@@ -1,10 +1,9 @@
 <script lang="ts" setup>
 import { reactive } from "vue";
-import { useResize, useAuth } from "@/hook";
+import { useResize } from "@/hook";
+import { useAuth } from "@/stores";
 import { useRoute } from "vue-router";
 import avatar from "@/assets/image/avatar.jpg";
-
-const route = useRoute();
 
 const state = reactive({
   isCollMenu: true,
@@ -12,6 +11,7 @@ const state = reactive({
   isAside: true,
   search: "",
 });
+
 let timer: number | NodeJS.Timer = 0;
 const resizeRef = useResize(({ width }) => {
   clearTimeout(timer);
@@ -22,6 +22,7 @@ const resizeRef = useResize(({ width }) => {
 });
 
 const { actSignUp } = useAuth();
+const route = useRoute();
 </script>
 <template>
   <el-container

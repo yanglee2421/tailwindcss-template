@@ -2,7 +2,7 @@ import type { Directive } from "vue";
 /**
  * img标签出现在可视区时才加载图片
  */
-const vLazy: Directive<HTMLImageElement, string> = {
+export const vLazy: Directive<HTMLImageElement, string> = {
   mounted(el, { value }) {
     // 类型检查
     if (!(el instanceof HTMLImageElement)) {
@@ -21,4 +21,3 @@ const vLazy: Directive<HTMLImageElement, string> = {
     observer.observe(el);
   },
 };
-export default vLazy;

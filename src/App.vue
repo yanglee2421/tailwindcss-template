@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { usePinia, useDark, useAuth } from "@/hook";
+import { useDark } from "@/hook";
+import { usePinia } from "@/stores";
 
 const pinia = usePinia();
 const { actIsDark } = pinia;
