@@ -26,7 +26,6 @@ const formState = reactive<formState>({
 const formRef = ref<FormInstance | null>(null);
 const submitHandler = () => {
   formRef.value?.validate((isPass) => {
-    console.log(isPass);
     if (!isPass) return false;
 
     const form = formState.model;
@@ -35,16 +34,9 @@ const submitHandler = () => {
       { user: "admin", pwd: "admin" },
     ];
     try {
-      if (!userArr.map((item) => item.user).includes(form.user))
-        throw new Error();
-      if (!userArr.map((item) => item.pwd).includes(form.pwd))
-        throw new Error();
-      switch (form.user) {
-        case "123456":
-          if (form.pwd !== "123456") throw new Error();
-        case "admin":
-          if (form.pwd !== "admin") throw new Error();
-      }
+      const user = userArr.find((user) => user.user === form.user);
+      if (!user) throw new Error();
+      if (form.pwd !== user.pwd) throw new Error();
     } catch {
       ElMessage.warning("用户名或密码不正确");
       return;
@@ -54,7 +46,7 @@ const submitHandler = () => {
       {
         user: form.user,
         token: "788",
-        invalidTime: Date.now() + 1000 * 60 * 30,
+        expiration: Date.now() + 1000 * 60 * 30,
       },
       formState.model.isRemember
     );

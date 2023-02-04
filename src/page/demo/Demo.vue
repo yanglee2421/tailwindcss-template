@@ -1,50 +1,42 @@
 <script lang="ts" setup>
-import { useResize } from "@/hook";
-import { Snow } from "@/util";
-import { ref, unref } from "vue";
-const cvsRef = ref();
-const resizeRef = useResize((box) => {
-  const cvs = unref(cvsRef);
-  if (!cvs) return;
-  Object.assign(cvs, box);
-  const snow = new Snow(cvs, (box.width / 1920) * 200);
-  snow.animation();
-  return () => {
-    snow.abortAnimation();
-  };
+import { useCssModule, ref, onMounted } from "vue";
+
+const str = `<a class="pp" onclick="if('str'){return false}else{return false}" href="https://www.baidu.com" target="_blank">
+              this is a p
+            </a>`;
+const style = useCssModule();
+console.log(style);
+const box = ref<HTMLDivElement | null>(null);
+onMounted(() => {
+  const arr = box.value?.querySelectorAll("a");
+  arr?.forEach((a) => {
+    a.addEventListener("click", (e) => {
+      // e.preventDefault();
+    });
+  });
 });
 </script>
 
 <template>
   <div
-    :ref="(e) => (resizeRef = e)"
-    class="box"
-  >
-    <canvas
-      :ref="(e) => (cvsRef = e)"
-      class="cvs"
-    ></canvas>
-    <router-link to="/">
-      <el-link type="danger">首页</el-link>
-    </router-link>
-  </div>
+    v-html="str"
+    :ref="(e:any) => (box = e)"
+    :class="style.box + ' box'"
+  ></div>
 </template>
 
 <style lang="scss" scoped>
 .box {
-  position: relative;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  margin: 0;
-  background-image: url("@/assets/image/snow-bg.jpg");
-  background-size: cover;
-  background-position: top center;
-  background-attachment: fixed;
+  :deep(.pp) {
+    color: green !important;
+  }
 }
-.cvs {
-  position: absolute;
-  @include position(0);
+</style>
+<style lang="scss" module>
+.box {
+  :global(.pp) {
+    color: red;
+  }
 }
 </style>
 <script lang="ts">
