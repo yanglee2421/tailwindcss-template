@@ -3,7 +3,7 @@ import { reactive } from "vue";
 import { useResize } from "@/hook";
 import { useAuth } from "@/stores";
 import { useRoute } from "vue-router";
-import avatar from "@/assets/image/avatar.jpg";
+import avatar from "@/assets/image/avatar/vergil.jpg";
 
 const state = reactive({
   isCollMenu: true,

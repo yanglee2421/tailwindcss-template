@@ -15,6 +15,7 @@
     "axios": "^1.2.3",
     "echarts": "^5.4.1",
     "element-plus": "^2.2.28",
+    "normalize.css": "^8.0.1",
     "pinia": "^2.0.29",
     "qrcode": "^1.5.1",
     "vue": "^3.2.45",

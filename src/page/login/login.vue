@@ -95,7 +95,7 @@ const submitHandler = () => {
 .box {
   @extend .h-100h, .flex, .center-center;
   @include bgc-img;
-  background-image: url("@/assets/image/bg.jpg");
+  background-image: url("@/assets/image/bg/bg.jpg");
   > * {
     transform: translate(0, -5%);
   }

@@ -34,7 +34,7 @@ const resizeRef = useResize((box) => {
   padding: 0;
   border: 0;
   margin: 0;
-  background-image: url("@/assets/image/snow-bg.jpg");
+  background-image: url("@/assets/image/bg/snow.jpg");
   background-size: cover;
   background-position: top center;
   background-attachment: fixed;
