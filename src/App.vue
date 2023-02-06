@@ -9,12 +9,10 @@ useDark(({ matches }) => actIsDark(matches));
 
 <template>
   <router-view #default="{ Component }">
-    <component :is="Component" />
+    <keep-ailve>
+      <component :is="Component" />
+    </keep-ailve>
   </router-view>
-  <el-backtop
-    :right="36"
-    :bottom="36"
-  />
 </template>
 
 <style lang="scss">
