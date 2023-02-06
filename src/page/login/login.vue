@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { useAuth } from "@/stores";
-import { reactive, ref } from "vue";
+import { reactive, ref, unref } from "vue";
 import { ElMessage, FormInstance, FormRules } from "element-plus";
+import { useResize } from "@/hook";
+import { Particles } from "@/util";
 
-const { actLogin } = useAuth();
 interface formState {
   model: {
     isRemember: boolean;
@@ -12,6 +13,7 @@ interface formState {
   };
   rules: FormRules;
 }
+
 const formState = reactive<formState>({
   model: {
     isRemember: false,
@@ -24,6 +26,7 @@ const formState = reactive<formState>({
   },
 });
 const formRef = ref<FormInstance | null>(null);
+const { actLogin } = useAuth();
 const submitHandler = () => {
   formRef.value?.validate((isPass) => {
     if (!isPass) return false;
@@ -52,9 +55,35 @@ const submitHandler = () => {
     );
   });
 };
+
+// 粒子动画
+const cvsRef = ref<HTMLCanvasElement>();
+let timer: number | NodeJS.Timeout = 0;
+const resizeRef = useResize((box) => {
+  const canvas = unref(cvsRef);
+  if (!canvas) return;
+  Object.assign(canvas, box);
+  let p: null | Particles = null;
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    p = new Particles(canvas, (box.width / 1920) * 120);
+    p.animate();
+    p.bindEvent();
+  }, 500);
+  return () => {
+    clearTimeout(timer);
+    p?.abortAnimate();
+    p?.abortEvent();
+  };
+});
 </script>
+
 <template>
-  <div class="box">
+  <div
+    :ref="(e) => (resizeRef = e)"
+    class="box"
+  >
+    <canvas :ref="(e:any) => (cvsRef = e)"></canvas>
     <el-card header="没登录你上尼玛的网">
       <el-form
         :ref="(e:any) => (formRef = e)"
@@ -95,9 +124,14 @@ const submitHandler = () => {
 .box {
   @extend .h-100h, .flex, .center-center;
   @include bgc-img;
+  position: relative;
   background-image: url("@/assets/image/bg/bg.jpg");
-  > * {
+  > *:not(canvas) {
     transform: translate(0, -5%);
+  }
+  canvas {
+    position: absolute;
+    @include position(0);
   }
 }
 </style>

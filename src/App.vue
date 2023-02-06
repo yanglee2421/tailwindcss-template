@@ -9,9 +9,9 @@ useDark(({ matches }) => actIsDark(matches));
 
 <template>
   <router-view #default="{ Component }">
-    <keep-ailve>
+    <keep-alive>
       <component :is="Component" />
-    </keep-ailve>
+    </keep-alive>
   </router-view>
 </template>
 
