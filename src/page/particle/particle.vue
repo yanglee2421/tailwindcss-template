@@ -2,7 +2,6 @@
 import { Particles } from "@/util";
 import { useResize } from "@/hook";
 import { ref, unref } from "vue";
-import { DarkSwitch } from "@/component";
 
 const canRef = ref();
 const boxRef = useResize((box) => {

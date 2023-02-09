@@ -6,7 +6,7 @@ import { ElMessage } from "element-plus";
 export const useAuth = defineStore("auth", () => {
   const state = reactive(initAuth());
 
-  // 登出行为
+  // signOut & signIn
   let timer: number | NodeJS.Timeout = 0;
   const actSignUp = () => {
     Object.assign(state, initAuth());

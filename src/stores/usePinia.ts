@@ -1,9 +1,7 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
-/**
- * @function usePinia 中使用的类型
- */
-export namespace Type {
+
+namespace t {
   export interface state {
     isDark: boolean;
     currentUser: string;
@@ -11,12 +9,13 @@ export namespace Type {
     userPermission: string[];
   }
 }
+
 /**
- * @function usePinia 返回全局 store 的 hook
- * @returns 全局 store
+ * Returns the store where the theme is saved
+ * @returns theme store
  */
-export const usePinia = defineStore("demoState", () => {
-  const state = reactive<Type.state>({
+export const usePinia = defineStore("themeState", () => {
+  const state = reactive<t.state>({
     isDark: false,
     currentUser: "",
     currentPage: "",

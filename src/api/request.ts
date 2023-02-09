@@ -7,7 +7,6 @@ const isGitee = import.meta.env.MODE === "gitee";
 export const request = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 6000,
-  withCredentials: false,
   headers: {
     common: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   },

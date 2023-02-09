@@ -1,4 +1,3 @@
-export { useClientWidth } from "./useClientWidth";
 export { useDark } from "./useDark";
 export { useResize } from "./useResize";
 

@@ -1,44 +1,33 @@
 <script lang="ts" setup>
-import { useCssModule, ref, onMounted } from "vue";
-
-const str = `<a class="pp" onclick="if('str'){return false}else{return false}" href="https://www.baidu.com" target="_blank">
-              this is a p
-            </a>`;
-const style = useCssModule();
-console.log(style);
-const box = ref<HTMLDivElement | null>(null);
-onMounted(() => {
-  const arr = box.value?.querySelectorAll("a");
-  arr?.forEach((a) => {
-    a.addEventListener("click", (e) => {
-      // e.preventDefault();
-    });
-  });
+import { watch, reactive } from "vue";
+const state = reactive({ count: 0, prev: 0, three: 0 });
+watch(
+  () => state.count,
+  () => {
+    state.prev += 1;
+    console.log("count");
+  }
+);
+watch(state, () => {
+  console.log("state", state);
 });
 </script>
 
 <template>
-  <div
-    v-html="str"
-    :ref="(e:any) => (box = e)"
-    :class="style.box + ' box'"
-  ></div>
+  <div class="p-1">
+    <p>{{ state.count }}</p>
+    <el-link
+      @click="
+        Object.assign(state, { count: state.count + 1 });
+        Object.assign(state, { count: state.count + 1 });
+      "
+      type="primary"
+      >link</el-link
+    >
+  </div>
 </template>
 
-<style lang="scss" scoped>
-.box {
-  :deep(.pp) {
-    color: green !important;
-  }
-}
-</style>
-<style lang="scss" module>
-.box {
-  :global(.pp) {
-    color: red;
-  }
-}
-</style>
+<style lang="scss" scoped></style>
 <script lang="ts">
 export default { inheritAttrs: true };
 </script>
