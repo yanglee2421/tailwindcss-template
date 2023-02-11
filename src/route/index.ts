@@ -13,9 +13,9 @@ const history = isGitee
 export const router = createRouter({ history, routes });
 
 router.beforeEach((to) => {
-  const store = useAuth();
+  const { state } = useAuth();
   if (isInWl(to.path)) return;
-  if (store.isLogined) return;
+  if (state.expiration) return;
   return { name: "login" };
 });
 router.afterEach((to) => {

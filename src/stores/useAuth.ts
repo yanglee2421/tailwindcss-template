@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, reactive } from "vue";
+import { reactive } from "vue";
 import { router } from "@/route";
 import { ElMessage } from "element-plus";
 
@@ -8,63 +8,72 @@ export const useAuth = defineStore("auth", () => {
 
   // signOut & signIn
   let timer: number | NodeJS.Timeout = 0;
-  const actSignUp = () => {
-    Object.assign(state, initAuth());
-    router.push({ name: "login" });
+  const signOut = async () => {
     clearTimeout(timer);
     localStorage.removeItem("auth");
     localStorage.removeItem("token");
+    Object.assign(state, initAuth());
+    try {
+      await router.push("/login");
+    } catch (err) {
+      console.error(err);
+    }
   };
-  const actLogin = (
+  const signIn = async (
     { user, expiration, token }: ReturnType<typeof initAuth>,
     isRemember = false
   ) => {
-    Object.assign(state, { user, token, expiration });
-    if (router.currentRoute.value.name === "login")
-      router.replace({ name: "home" });
     clearTimeout(timer);
-    timer = setTimeout(actSignUp, expiration - Date.now());
+    timer = setTimeout(signIn, expiration - Date.now());
     if (isRemember) {
       localStorage.setItem("auth", JSON.stringify(state));
       localStorage.setItem("token", token);
     }
-  };
-
-  // 还原上次登录行为
-  const prevAuth = () => {
+    Object.assign(state, { user, token, expiration });
+    if (router.currentRoute.value.name !== "login") return;
     try {
-      const prevJson = localStorage.getItem("auth");
-      if (!prevJson) return false;
-
-      const prevAuth = JSON.parse(prevJson);
-      const { user, token, expiration } = prevAuth;
-      if (!user || !token || !expiration) throw new Error();
-      if (typeof user !== "string") throw new Error();
-      if (typeof token !== "string") throw new Error();
-      if (typeof expiration !== "number") throw new Error();
-      if (expiration - Date.now() < 1000 * 60 * 5) throw new Error();
-
-      actLogin({ user, token, expiration });
-      return true;
+      await router.replace({ name: "home" });
     } catch (err) {
       console.error(err);
-      localStorage.removeItem("auth");
-      localStorage.removeItem("token");
-      ElMessage.warning("登录信息已失效");
     }
-    return false;
   };
 
-  // 是否已登录
-  const isLogined = computed(() => Boolean(state.expiration) || prevAuth());
-
-  return { isLogined, state, actLogin, actSignUp };
+  return { state, signOut, signIn };
 });
 
+/**
+ * function to generate initial state
+ * @returns a initital state for auth
+ */
 function initAuth() {
-  return {
+  const init = {
     user: "",
     token: "",
     expiration: 0,
   };
+  try {
+    const prevJson = localStorage.getItem("auth");
+    if (!prevJson) return init;
+
+    const prevAuth = JSON.parse(prevJson);
+    const { user, token, expiration } = prevAuth;
+    if (!user || !token || !expiration)
+      throw new Error("There are fields that are empty");
+    if (typeof user !== "string")
+      throw new Error("The user field is not a string");
+    if (typeof token !== "string")
+      throw new Error("The token field is not a string");
+    if (typeof expiration !== "number")
+      throw new Error("The expiration field is not a number");
+    if (expiration - Date.now() < 1000 * 60 * 5)
+      throw new Error("token has expired");
+
+    return { user, token, expiration };
+  } catch (err) {
+    console.error(err);
+    localStorage.removeItem("auth");
+    localStorage.removeItem("token");
+    ElMessage.warning("登录信息已失效");
+  }
+  return init;
 }

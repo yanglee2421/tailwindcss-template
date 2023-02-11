@@ -10,8 +10,9 @@ export const routes: RouterOptions["routes"] = [
     name: "login",
     meta: { title: "登录" },
     beforeEnter(to, from) {
-      const store = useAuth();
-      if (store.isLogined) return { name: "home", replace: true };
+      const { state } = useAuth();
+      console.log(state);
+      if (state.expiration) return { name: "home", replace: true };
     },
   },
   {

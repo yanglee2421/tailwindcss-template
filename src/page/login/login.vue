@@ -26,7 +26,7 @@ const formState = reactive<formState>({
   },
 });
 const formRef = ref<FormInstance | null>(null);
-const { actLogin } = useAuth();
+const { signIn } = useAuth();
 const submitHandler = () => {
   formRef.value?.validate((isPass) => {
     if (!isPass) return false;
@@ -45,7 +45,7 @@ const submitHandler = () => {
       return;
     }
 
-    actLogin(
+    signIn(
       {
         user: form.user,
         token: "788",
@@ -93,6 +93,7 @@ const resizeRef = useResize((box) => {
         <el-form-item prop="user">
           <el-input
             v-model="formState.model.user"
+            autofocus
             prefix-icon="User"
           ></el-input>
         </el-form-item>
@@ -101,6 +102,7 @@ const resizeRef = useResize((box) => {
             v-model="formState.model.pwd"
             prefix-icon="Lock"
             type="password"
+            show-password
           ></el-input>
         </el-form-item>
         <el-form-item prop="isRemember">

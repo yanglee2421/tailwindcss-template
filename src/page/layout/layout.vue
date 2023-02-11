@@ -21,7 +21,7 @@ const resizeRef = useResize(({ width }) => {
   }, 500);
 });
 
-const { actSignUp } = useAuth();
+const { signOut } = useAuth();
 const route = useRoute();
 </script>
 <template>
@@ -38,9 +38,10 @@ const route = useRoute();
       /></el-icon>
       <div>
         <el-input
-          v-model="state.search"
+          v-model.trim="state.search"
+          maxlength="9"
+          show-word-limit
           prefix-icon="Search"
-          type="search"
         >
           <template #append>
             <el-button>Go</el-button>
@@ -133,7 +134,7 @@ const route = useRoute();
     direction="ltr"
   >
     <span>Hi, there!</span>
-    <el-button @click="actSignUp()">Sign Out</el-button>
+    <el-button @click="signOut()">Sign Out</el-button>
   </el-drawer>
 </template>
 <style lang="scss" scoped>
