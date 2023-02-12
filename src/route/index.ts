@@ -14,9 +14,11 @@ export const router = createRouter({ history, routes });
 
 router.beforeEach((to) => {
   const { state } = useAuth();
+  const isLogined = Boolean(state.expiration);
+  if (to.name === "login") return isLogined ? "/" : true;
   if (isInWl(to.path)) return;
-  if (state.expiration) return;
-  return { name: "login" };
+  if (isLogined) return;
+  return "/login";
 });
 router.afterEach((to) => {
   const title = to.meta.title;

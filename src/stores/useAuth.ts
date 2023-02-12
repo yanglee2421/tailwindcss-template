@@ -5,9 +5,9 @@ import { ElMessage } from "element-plus";
 
 export const useAuth = defineStore("auth", () => {
   const state = reactive(initAuth());
+  let timer: number | NodeJS.Timeout = 0;
 
   // signOut & signIn
-  let timer: number | NodeJS.Timeout = 0;
   const signOut = async () => {
     clearTimeout(timer);
     localStorage.removeItem("auth");
@@ -30,9 +30,9 @@ export const useAuth = defineStore("auth", () => {
       localStorage.setItem("token", token);
     }
     Object.assign(state, { user, token, expiration });
-    if (router.currentRoute.value.name !== "login") return;
     try {
-      await router.replace({ name: "home" });
+      const isInLogin = router.currentRoute.value.name === "login";
+      if (isInLogin) await router.replace({ name: "home" });
     } catch (err) {
       console.error(err);
     }
