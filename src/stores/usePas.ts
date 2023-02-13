@@ -40,11 +40,11 @@ export const usePas = defineStore("password", () => {
     }
   };
   const save = async ({ id, site, user, pwd }: Pas) => {
+    const prev = state.find((item) => item.id === id);
     try {
-      const prev = state.find((item) => item.id === id);
       if (prev) return clone(Object.assign(prev, { site, user, pwd }));
-      const id = getId();
-      const target = { id, site, user, pwd };
+      const neoId = getId();
+      const target = { id: neoId, site, user, pwd };
       state.push(target);
       return clone(target);
     } catch {
