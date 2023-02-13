@@ -1,1 +1,0 @@
-import{_ as r}from"./_plugin-vue_export-helper-c27b6911.js";import{z as s,P as e,A as c,y as l,a7 as o}from"./runtime-core.esm-bundler-780f1e82.js";const _={inheritAttrs:!0};function p(i,m,f,d,u,$){const t=o("el-form"),n=o("el-table"),a=o("el-pagination");return l(),s("div",null,[e(t),c("div",null,[e(n)]),e(a)])}const x=r(_,[["render",p]]);export{x as default};

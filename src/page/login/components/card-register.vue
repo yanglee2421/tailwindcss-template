@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useUser } from "@/stores";
-import { FormInstance, FormRules } from "element-plus";
+import { ElMessage, FormInstance, FormRules } from "element-plus";
 import { ref, reactive } from "vue";
 
 interface formState {
@@ -21,7 +21,19 @@ const formState = reactive<formState>({
   rules: {
     user: [{ required: true }],
     pwd: [{ required: true }],
-    pwd2: [{ required: true }, { validator(rule, value, callback) {} }],
+    pwd2: [
+      { required: true },
+      {
+        trigger: "blur",
+        validator(rule, value, callback) {
+          callback(
+            value === formState.model.pwd
+              ? undefined
+              : new Error("两次输入的密码不一致！")
+          );
+        },
+      },
+    ],
   },
 });
 
@@ -32,6 +44,7 @@ const submitHandler = () => {
     if (!isPass) return false;
     const form = formState.model;
     register(form);
+    ElMessage.success("注册成功");
   });
 };
 </script>

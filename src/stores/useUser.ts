@@ -9,6 +9,7 @@ export const useUser = defineStore("user", () => {
   const register = ({ user, pwd }: Omit<user, "id">) => {
     const id = crypto.randomUUID();
     state.push({ user, pwd, id });
+    console.log(state);
   };
   const loginOut = (id: string) => {
     try {

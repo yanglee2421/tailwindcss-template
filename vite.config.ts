@@ -3,11 +3,10 @@ import vue from "@vitejs/plugin-vue";
 import { resolve } from "node:path";
 import { readFileSync } from "node:fs";
 import gzip from "vite-plugin-compression";
-import imagemin from "vite-plugin-imagemin";
 
 // https://vitejs.dev/config/
 export default defineConfig((ConfigEnv) => ({
-  plugins: [vue(), gzip({ deleteOriginFile: false }), imagemin()],
+  plugins: [vue(), gzip({ deleteOriginFile: false })],
   resolve: {
     alias: { "@": resolve(__dirname, "./src") },
   },
@@ -32,12 +31,7 @@ function build({ mode }: ConfigEnv): UserConfig["build"] {
   const outDir = mode === "gitee" ? "docs" : "vue-app";
 
   const rollupOptions = {
-    output: {
-      manualChunks: {
-        echarts: ["echarts"],
-        qrcode: ["qrcode"],
-      },
-    },
+    output: { manualChunks: {} },
   };
 
   return { outDir, rollupOptions };
