@@ -2,33 +2,19 @@ import { ElMessage } from "element-plus";
 import { defineStore } from "pinia";
 import { reactive } from "vue";
 
-interface user {
-  id: string;
-  user: string;
-  pwd: string;
-}
+type user = ReturnType<typeof init>[0];
+
 export const useUser = defineStore("user", () => {
-  const state = reactive<user[]>([
-    {
-      id: crypto.randomUUID(),
-      user: "admin",
-      pwd: "admin",
-    },
-    {
-      id: crypto.randomUUID(),
-      user: "123456",
-      pwd: "123456",
-    },
-  ]);
+  const state = reactive(init());
   const register = ({ user, pwd }: Omit<user, "id">) => {
     const id = crypto.randomUUID();
     state.push({ user, pwd, id });
   };
   const loginOut = (id: string) => {
     try {
-      const user = state.find((item) => item.id === id);
-      if (!user) throw new Error();
-      state.splice(state.indexOf(user), 1);
+      const index = state.findIndex((item) => item.id === id);
+      if (index === -1) throw new Error();
+      state.splice(index, 1);
     } catch {
       ElMessage.warning("no user");
     }
@@ -45,3 +31,18 @@ export const useUser = defineStore("user", () => {
   };
   return { state, register, loginOut, validate };
 });
+
+function init() {
+  return [
+    {
+      id: crypto.randomUUID(),
+      user: "admin",
+      pwd: "admin",
+    },
+    {
+      id: crypto.randomUUID(),
+      user: "123456",
+      pwd: "123456",
+    },
+  ];
+}

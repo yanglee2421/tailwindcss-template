@@ -37,7 +37,7 @@ const submitHandler = () => {
         {
           user: form.user,
           token: "788",
-          expiration: Date.now() + 1000 * 60 * 30,
+          expiration: Date.now() + 1000 * 60 * 60 * 24,
         },
         formState.model.isRemember
       );
@@ -47,7 +47,7 @@ const submitHandler = () => {
 
 <template>
   <el-card
-    header="没登录你上尼玛的网"
+    header="登录"
     class="card-login"
   >
     <el-form

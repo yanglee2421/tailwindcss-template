@@ -133,8 +133,10 @@ const route = useRoute();
     title="I am the title"
     direction="ltr"
   >
-    <span>Hi, there!</span>
     <el-button @click="signOut()">Sign Out</el-button>
+    <router-link to="/table">
+      <el-button>table</el-button>
+    </router-link>
   </el-drawer>
 </template>
 <style lang="scss" scoped>
@@ -147,6 +149,9 @@ const route = useRoute();
 .box-header {
   position: relative;
   z-index: 1;
+}
+a {
+  text-decoration: none;
 }
 </style>
 <script lang="ts">

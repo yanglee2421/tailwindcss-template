@@ -25,11 +25,12 @@ export const useAuth = defineStore("auth", () => {
   ) => {
     clearTimeout(timer);
     timer = setTimeout(signIn, expiration - Date.now());
+    const next = { user, token, expiration };
     if (isRemember) {
-      localStorage.setItem("auth", JSON.stringify(state));
+      localStorage.setItem("auth", JSON.stringify(next));
       localStorage.setItem("token", token);
     }
-    Object.assign(state, { user, token, expiration });
+    Object.assign(state, next);
     try {
       const isInLogin = router.currentRoute.value.name === "login";
       if (isInLogin) await router.replace({ name: "home" });
