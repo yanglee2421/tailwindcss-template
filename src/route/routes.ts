@@ -11,7 +11,6 @@ export const routes: RouterOptions["routes"] = [
     meta: { title: "登录" },
     beforeEnter(to, from) {
       const { state } = useAuth();
-      console.log(state);
       if (state.expiration) return { name: "home", replace: true };
     },
   },

@@ -40,11 +40,13 @@ const formState = reactive<formState>({
 const { register } = useUser();
 const formRef = ref<FormInstance | null>(null);
 const submitHandler = () => {
-  formRef.value?.validate((isPass) => {
-    if (!isPass) return false;
+  formRef.value?.validate(async (isPass) => {
+    if (!isPass) return;
     const form = formState.model;
-    register(form);
-    ElMessage.success("注册成功");
+    try {
+      await register(form);
+      ElMessage.success("注册成功");
+    } catch {}
   });
 };
 </script>

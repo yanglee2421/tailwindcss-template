@@ -29,12 +29,7 @@ function base({ mode }: ConfigEnv): UserConfig["base"] {
 
 function build({ mode }: ConfigEnv): UserConfig["build"] {
   const outDir = mode === "gitee" ? "docs" : "vue-app";
-
-  const rollupOptions = {
-    output: { manualChunks: {} },
-  };
-
-  return { outDir, rollupOptions };
+  return { outDir };
 }
 
 function server({ mode }: ConfigEnv): UserConfig["server"] {

@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
-import { router } from "@/route";
 import { ElMessage } from "element-plus";
 
 export const useAuth = defineStore("auth", () => {
@@ -13,11 +12,6 @@ export const useAuth = defineStore("auth", () => {
     localStorage.removeItem("auth");
     localStorage.removeItem("token");
     Object.assign(state, initAuth());
-    try {
-      await router.push("/login");
-    } catch (err) {
-      console.error(err);
-    }
   };
   const signIn = async (
     { user, expiration, token }: ReturnType<typeof initAuth>,
@@ -31,12 +25,6 @@ export const useAuth = defineStore("auth", () => {
       localStorage.setItem("token", token);
     }
     Object.assign(state, next);
-    try {
-      const isInLogin = router.currentRoute.value.name === "login";
-      if (isInLogin) await router.replace({ name: "home" });
-    } catch (err) {
-      console.error(err);
-    }
   };
 
   return { state, signOut, signIn };

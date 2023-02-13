@@ -28,12 +28,13 @@ const { signIn } = useAuth();
 const { validate } = useUser();
 const formRef = ref<FormInstance | null>(null);
 const submitHandler = () => {
-  formRef.value?.validate((isPass) => {
+  formRef.value?.validate(async (isPass) => {
     if (!isPass) return false;
 
     const form = formState.model;
-    validate(form) &&
-      signIn(
+    try {
+      await validate(form);
+      await signIn(
         {
           user: form.user,
           token: "788",
@@ -41,6 +42,7 @@ const submitHandler = () => {
         },
         formState.model.isRemember
       );
+    } catch {}
   });
 };
 </script>

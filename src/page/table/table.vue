@@ -129,6 +129,7 @@ const resetHandler = () => {
           type="selection"
           align="center"
           width="40"
+          fixed
         ></el-table-column>
         <el-table-column
           type="index"
@@ -165,6 +166,7 @@ const resetHandler = () => {
           label="操作"
           align="center"
           width="100"
+          fixed="right"
         >
           <template #default="{ row }">
             <el-link type="primary">编辑</el-link>
