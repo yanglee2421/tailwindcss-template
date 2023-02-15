@@ -1,10 +1,34 @@
 <script lang="ts" setup>
 import { DarkSwitch } from "@/component";
+import { customRef } from "vue";
+// proxy target
+let target: any = null;
+// vue customRef
+function myRef(value: unknown) {
+  return customRef((track, trigger) => {
+    return {
+      get() {
+        track();
+        return Boolean(target);
+      },
+      set(neoValue) {
+        target = Boolean(neoValue);
+        console.log("myRef");
+        trigger();
+      },
+    };
+  });
+}
+// customRef instance
+const a = myRef(100);
 </script>
 
 <template>
   <div class="home-box">
-    <el-card></el-card>
+    <el-card>
+      <p>{{ a }}</p>
+      <el-button @click="a = 0">4399</el-button>
+    </el-card>
     <el-card></el-card>
     <el-card header="主题">
       <el-form>
