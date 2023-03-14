@@ -56,7 +56,7 @@ const resizeRef = useResize((box) => {
   }
   > canvas {
     position: absolute;
-    @include position(0);
+    inset: 0;
   }
 }
 </style>
