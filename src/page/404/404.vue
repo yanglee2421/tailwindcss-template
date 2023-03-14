@@ -9,10 +9,17 @@
       plain
       >Take me home</el-button
     >
+    <el-button @click="handleError">handleError</el-button>
   </div>
 </template>
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
 const router = useRouter();
+function handleError() {
+  const err = new Error("msg", { cause: "cause" });
+  console.log(err.name);
+  console.log(err.message);
+  console.log(err.cause);
+}
 </script>
 <style lang="scss" scoped></style>
