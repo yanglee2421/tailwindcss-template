@@ -52,7 +52,7 @@ export const routes: RouterOptions["routes"] = [
   },
   {
     path: "/demo",
-    component: () => import("@/page/demo/demo.vue"),
+    component: () => import("@/page/demo/page-demo.vue"),
     name: "demo",
     meta: { title: "demo" },
   },

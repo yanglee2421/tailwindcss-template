@@ -16,6 +16,7 @@ const state = reactive({ count: 0, prev: 0, three: 0 });
         <li><router-link to="/demo">Sass</router-link></li>
       </ul>
     </div>
+    <ly-icon></ly-icon>
   </div>
 </template>
 
@@ -51,9 +52,6 @@ const state = reactive({ count: 0, prev: 0, three: 0 });
   gap: 0.5rem;
   margin-block: 1rem;
 
-  > img {
-    height: 24px;
-  }
   > span {
     line-height: 1.5;
     color: transparent;
