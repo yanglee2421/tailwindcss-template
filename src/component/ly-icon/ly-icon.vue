@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed, ref, unref, onMounted, onBeforeUnmount } from "vue";
 
 interface props {
   modelValue?: boolean;
@@ -21,10 +21,30 @@ const model = computed({
     emits("update:modelValue", value);
   },
 });
+
+const el = ref<HTMLLabelElement | null>(null);
+const observer = new IntersectionObserver(([{ isIntersecting }]) => {
+  isIntersecting || emits("update:modelValue", isIntersecting);
+});
+
+onMounted(() => {
+  const dom = unref(el);
+  if (!dom) return;
+  observer.observe(dom);
+});
+
+onBeforeUnmount(() => {
+  const dom = unref(el);
+  if (!dom) return;
+  observer.unobserve(dom);
+});
 </script>
 
 <template>
-  <label class="icon-list">
+  <label
+    :ref="(e:any) => (el = e)"
+    class="ly-icon"
+  >
     <input
       v-model="model"
       type="checkbox"
@@ -36,7 +56,7 @@ const model = computed({
 </template>
 
 <style lang="scss" scoped>
-.icon-list {
+.ly-icon {
   position: relative;
   display: block;
   width: 25px;

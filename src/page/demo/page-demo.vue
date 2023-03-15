@@ -1,32 +1,34 @@
 <script lang="ts" setup>
+import { NavMenu, NavLogo, NavDrawer } from "./components";
 import { watch, reactive } from "vue";
-const state = reactive({ count: 0, prev: 0, three: 0 });
+const state = reactive({ showDrawer: false });
 </script>
 
 <template>
   <div class="box">
     <div class="header">
-      <h3 class="h-logo">
-        <span>Yang Lee</span>
-      </h3>
-      <ul class="h-ul">
-        <li><router-link to="/">ECMAScript</router-link></li>
-        <li><router-link to="/">TypeScript</router-link></li>
-        <li><router-link to="/">React</router-link></li>
-        <li><router-link to="/demo">Sass</router-link></li>
-      </ul>
+      <nav-logo />
+      <div class="header-content">
+        <div class="icon-search">
+          <el-icon><Search /></el-icon>
+        </div>
+        <nav-menu />
+        <ly-icon v-model="state.showDrawer" />
+      </div>
     </div>
-    <ly-icon></ly-icon>
+    <nav-drawer v-model="state.showDrawer" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.router-link-active {
-  color: #1475f7 !important;
+:global(.dark) {
+  .header {
+    @include acrylic(true);
+  }
 }
 .box {
   height: 100vh;
-  background-image: url("@/assets/image/bg/bg.jpg");
+  // background-image: url("@/assets/image/bg/bg.jpg");
   @include bgc-img;
 }
 .header {
@@ -40,35 +42,32 @@ const state = reactive({ count: 0, prev: 0, three: 0 });
   font-size: 1rem;
   font-weight: 600;
 }
-:global(.dark) {
-  .header {
-    @include acrylic(true);
-  }
-}
-.h-logo {
+.header-content {
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: start;
-  gap: 0.5rem;
-  margin-block: 1rem;
+  justify-content: end;
+}
+.icon-search {
+  display: flex;
+  align-items: center;
+  // justify-content: start;
+  padding: 1rem;
 
-  > span {
-    line-height: 1.5;
-    color: transparent;
-    -webkit-background-clip: text;
-    background-image: linear-gradient(45deg, #7114ef, #1475f7);
+  @media (min-width: 575px) {
+    flex: 1;
   }
 }
-.h-ul {
-  list-style: none;
-  display: flex;
+.ly-icon {
+  display: none !important;
+}
 
-  > li {
-    padding: 0.5rem;
+@media (max-width: 575px) {
+  .nav-menu {
+    display: none;
   }
-  a {
-    color: #555;
-    text-decoration: none;
+  .ly-icon {
+    display: block !important;
   }
 }
 </style>
