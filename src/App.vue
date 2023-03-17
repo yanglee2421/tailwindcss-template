@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { useDark } from "@/hook";
 import { usePinia, useAuth } from "@/stores";
-import { watch } from "vue";
 import { useRouter } from "vue-router";
 
 /**
@@ -37,23 +36,6 @@ stores.$onAction(({ after }) => {
       return;
   }
 });
-
-/* watch(
-  () => stores.state.expiration,
-  (curr, prev, clearFn) => {
-    // signOut
-    if (curr && !prev) {
-      router.push("/login");
-      return;
-    }
-    // signIn
-    if (!curr && prev) {
-      const isInPageLogin = router.currentRoute.value.path === "/login";
-      isInPageLogin && router.replace("/");
-      return;
-    }
-  }
-); */
 </script>
 
 <template>
@@ -65,7 +47,6 @@ stores.$onAction(({ after }) => {
 </template>
 
 <style lang="scss">
-@import "@/assets/reset.scss";
 .el-pagination {
   padding-top: 10px !important;
 }

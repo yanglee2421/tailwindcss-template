@@ -14,7 +14,7 @@ interface formState {
 
 const formState = reactive<formState>({
   model: {
-    isRemember: false,
+    isRemember: true,
     pwd: "",
     user: "",
   },

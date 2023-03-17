@@ -62,4 +62,10 @@ export const routes: RouterOptions["routes"] = [
     name: "shapes",
     meta: { title: "shapes" },
   },
+  {
+    path: "/result",
+    component: () => import("@/page/result/page-result.vue"),
+    name: "result",
+    meta: { title: "result" },
+  },
 ];
