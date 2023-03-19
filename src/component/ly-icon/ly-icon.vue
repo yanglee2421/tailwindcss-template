@@ -22,7 +22,7 @@ const model = computed({
   },
 });
 
-const el = ref<HTMLLabelElement | null>(null);
+const el = ref<HTMLLabelElement>();
 const observer = new IntersectionObserver(([{ isIntersecting }]) => {
   isIntersecting || emits("update:modelValue", isIntersecting);
 });
@@ -77,18 +77,18 @@ onBeforeUnmount(() => {
     will-change: transform;
   }
 
-  &:has(> input:checked) {
-    div {
+  input:checked {
+    ~ div {
       position: absolute;
       top: 6px;
     }
-    div:nth-of-type(1) {
+    ~ div:nth-of-type(1) {
       transform: rotate(45deg);
     }
-    div:nth-of-type(2) {
+    ~ div:nth-of-type(2) {
       display: none;
     }
-    div:nth-of-type(3) {
+    ~ div:nth-of-type(3) {
       transform: rotate(-45deg);
     }
   }
