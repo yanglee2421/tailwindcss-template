@@ -8,6 +8,10 @@ class Pas {
   pwd = "";
 }
 
+interface saveParams extends Omit<Pas, "id"> {
+  id?: string;
+}
+
 export const usePas = defineStore("password", () => {
   const state = reactive(init());
 
@@ -39,7 +43,7 @@ export const usePas = defineStore("password", () => {
       throw new Error("not found");
     }
   };
-  const save = async ({ id, site, user, pwd }: Pas) => {
+  const save = async ({ id = getId(), site, user, pwd }: saveParams) => {
     const prev = state.find((item) => item.id === id);
     try {
       if (prev) return clone(Object.assign(prev, { site, user, pwd }));

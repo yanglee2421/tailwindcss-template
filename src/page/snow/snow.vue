@@ -41,7 +41,7 @@ const resizeRef = useResize((box) => {
 }
 .cvs {
   position: absolute;
-  @include position(0);
+  inset: 0;
 }
 </style>
 <script lang="ts">
