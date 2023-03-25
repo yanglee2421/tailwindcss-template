@@ -12,20 +12,14 @@ export default defineConfig((ConfigEnv) => ({
   },
   css: {
     preprocessorOptions: {
-      scss: {
-        additionalData: `@use "@/assets/index.scss" as *;`,
-      },
+      scss: { additionalData: `@use "@/assets/index.scss" as *;` },
     },
   },
+  base: "/vite-vue/",
   envDir: resolve(__dirname, "./config"),
-  base: base(ConfigEnv),
   build: build(ConfigEnv),
   server: server(ConfigEnv),
 }));
-
-function base({ mode }: ConfigEnv): UserConfig["base"] {
-  return "/vite-vue/";
-}
 
 function build({ mode }: ConfigEnv): UserConfig["build"] {
   const outDir = mode === "gitee" ? "docs" : "vue-app";
@@ -34,22 +28,21 @@ function build({ mode }: ConfigEnv): UserConfig["build"] {
 
 function server({ mode }: ConfigEnv): UserConfig["server"] {
   const isGitee = mode === "gitee";
-
   const https = isGitee && {
     key: readFileSync(resolve(__dirname, "./config/localhost+1-key.pem")),
     cert: readFileSync(resolve(__dirname, "./config/localhost+1.pem")),
   };
 
-  const proxy = {
-    "/dev": {
-      target: "http://192.168.1.4",
-      rewrite: (path) => path.replace(/^\/dev/, ""),
-      changeOrigin: true,
-      ws: true,
+  return {
+    https,
+    port: 5174,
+    proxy: {
+      "/dev": {
+        target: "http://192.168.1.4",
+        rewrite: (path) => path.replace(/^\/dev/, ""),
+        changeOrigin: true,
+        ws: true,
+      },
     },
   };
-
-  const port = 5174;
-
-  return { https, port, proxy };
 }
