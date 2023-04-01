@@ -1,5 +1,5 @@
 import { createPinia } from "pinia";
-import { router } from "@/route";
+import { router } from "@/routes";
 import ElementPlus from "element-plus";
 import locale from "element-plus/es/locale/lang/zh-cn";
 import "element-plus/dist/index.css";

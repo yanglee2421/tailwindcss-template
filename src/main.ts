@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import getStart from "@/plugin";
+import getStart from "@/plugins";
 import "@/assets/reset.scss";
 
 const app = createApp(App);
