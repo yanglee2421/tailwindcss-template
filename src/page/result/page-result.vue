@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { provide, reactive } from "vue";
+import { provide, reactive, ref, watch } from "vue";
 import { CardLeft, CardRight } from "./components";
+import { TinymceEditor } from "@/component";
 const form = reactive({});
 provide("gpt-form", form);
 
@@ -17,6 +18,11 @@ const res = reactive({
   error: null,
 });
 provide("gpt-res", res);
+
+const html = ref("");
+watch(html, (html) => {
+  console.log(html);
+});
 </script>
 
 <template>
@@ -33,6 +39,7 @@ provide("gpt-res", res);
       <card-left />
       <card-right />
     </div>
+    <tinymce-editor v-model="html" />
   </div>
 </template>
 
