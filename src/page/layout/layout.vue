@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { reactive } from "vue";
-import { useResize } from "@/hook";
+import { useResize } from "@/hooks";
 import { useAuth } from "@/stores";
 import { useRoute } from "vue-router";
 import avatar from "@/assets/image/avatar/vergil.jpg";

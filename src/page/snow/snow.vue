@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useResize } from "@/hook";
+import { useResize } from "@/hooks";
 import { Snow } from "@/util";
 import { ref, unref } from "vue";
 const cvsRef = ref();

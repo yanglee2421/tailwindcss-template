@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useDark } from "@/hook";
+import { useDark } from "@/hooks";
 import { usePinia, useAuth } from "@/stores";
 import { useRouter } from "vue-router";
 

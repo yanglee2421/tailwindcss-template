@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { reactive, ref, unref } from "vue";
-import { useResize } from "@/hook";
+import { useResize } from "@/hooks";
 import { Particles } from "@/util";
 import CardRegister from "./components/card-register.vue";
 import CardLogin from "./components/card-login.vue";

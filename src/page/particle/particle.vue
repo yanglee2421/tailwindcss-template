@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Particles } from "@/util";
-import { useResize } from "@/hook";
+import { useResize } from "@/hooks";
 import { ref, unref } from "vue";
 
 const canRef = ref();
