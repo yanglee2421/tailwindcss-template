@@ -9,6 +9,14 @@ const state = reactive({
   tab: 1,
 });
 provide("gpt-state", state);
+
+const res = reactive({
+  isSuccess: false,
+  data: null,
+  isError: false,
+  error: null,
+});
+provide("gpt-res", res);
 </script>
 
 <template>
