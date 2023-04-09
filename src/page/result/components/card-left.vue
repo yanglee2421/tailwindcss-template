@@ -4,6 +4,7 @@ import ItemLanguage from "./item-language.vue";
 import ItemGenerate from "./item-generate.vue";
 import ItemWords from "./item-words.vue";
 import ItemDescription from "./item-description.vue";
+import ItemProduct from "./item-product.vue";
 import { FormInstance } from "element-plus";
 
 const state = inject<any>("gpt-state");
@@ -15,14 +16,16 @@ const items = computed(() => {
   switch (tab) {
     case 1:
       return isProd
-        ? [ItemLanguage, ItemGenerate]
+        ? [ItemProduct, ItemLanguage, ItemGenerate]
         : [ItemDescription, ItemLanguage, ItemGenerate];
     case 2:
       return isProd
-        ? [ItemLanguage, ItemWords]
+        ? [ItemProduct, ItemLanguage, ItemWords]
         : [ItemDescription, ItemLanguage, ItemWords];
     case 3:
-      return isProd ? [ItemLanguage] : [ItemDescription, ItemLanguage];
+      return isProd
+        ? [ItemProduct, ItemLanguage]
+        : [ItemDescription, ItemLanguage];
     default:
       return [];
   }
@@ -55,11 +58,14 @@ function toTimeout() {
 <template>
   <el-card>
     <template #header>
-      <el-link
-        @click="state.isProd = !state.isProd"
-        type="primary"
-        >xxx</el-link
-      >
+      <div class="btns-header">
+        <b>Left</b>
+        <el-link
+          @click="state.isProd = !state.isProd"
+          type="primary"
+          >xxx</el-link
+        >
+      </div>
     </template>
     <el-form
       :ref="(e:FormInstance) => (formRef = e)"
@@ -86,6 +92,11 @@ function toTimeout() {
 </template>
 
 <style lang="scss" scoped>
+.btns-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .btns-box {
   display: flex;
   align-items: center;

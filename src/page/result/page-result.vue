@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { provide, reactive, ref, watch } from "vue";
+import { provide, reactive } from "vue";
 import { CardLeft, CardRight } from "./components";
 
 // tab & isProd
@@ -12,6 +12,11 @@ provide("gpt-state", state);
 // left-card form state
 const form = reactive({
   Generate: ["Title", "Keywords", "Description"],
+  Product: {
+    Title: "title",
+    Keywords: ["keyword"],
+    Description: "<h1>this is description</h1>",
+  },
 });
 provide("gpt-form", form);
 
