@@ -7,6 +7,7 @@ import ItemDescription from "./item-description.vue";
 import { FormInstance } from "element-plus";
 
 const state = inject<any>("gpt-state");
+const form = inject("gpt-form");
 const res = inject<any>("gpt-res");
 
 const items = computed(() => {
@@ -17,20 +18,17 @@ const items = computed(() => {
         ? [ItemLanguage, ItemGenerate]
         : [ItemDescription, ItemLanguage, ItemGenerate];
     case 2:
-      return isProd ? [ItemLanguage, ItemWords] : [ItemLanguage, ItemWords];
-    case 3:
       return isProd
-        ? [ItemDescription, ItemLanguage]
-        : [ItemDescription, ItemDescription, ItemLanguage];
+        ? [ItemLanguage, ItemWords]
+        : [ItemDescription, ItemLanguage, ItemWords];
+    case 3:
+      return isProd ? [ItemLanguage] : [ItemDescription, ItemLanguage];
     default:
       return [];
   }
 });
 
-const form = inject("gpt-form");
-
 const formRef = ref<FormInstance>();
-
 const handleSubmit = () => {
   formRef.value?.validate(async (isPass) => {
     if (!isPass) return;
@@ -66,7 +64,7 @@ function toTimeout() {
     <el-form
       :ref="(e:FormInstance) => (formRef = e)"
       :model="form"
-      label-width="5rem"
+      label-width="6rem"
       label-position="left"
     >
       <component
@@ -75,18 +73,30 @@ function toTimeout() {
         :is="item"
       />
       <el-form-item>
-        <el-button
-          @click="handleSubmit"
-          :loading="res.isLoading"
-          type="primary"
-          >Let`s write</el-button
-        >
+        <div class="flex-1">
+          <div class="btns-box">
+            <el-button
+              @click="handleSubmit"
+              :loading="res.isLoading"
+              type="primary"
+              >Let`s write</el-button
+            >
+            <el-link>feedback</el-link>
+          </div>
+        </div>
       </el-form-item>
     </el-form>
   </el-card>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.btns-box {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 1rem;
+}
+</style>
 <script lang="ts">
 export default { inheritAttrs: true };
 </script>

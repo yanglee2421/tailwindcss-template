@@ -60,7 +60,7 @@ provide("gpt-res", res);
 }
 .box {
   display: grid;
-  grid-template-columns: repeat(2, minmax(31rem, 1fr));
+  grid-template-columns: 31rem minmax(31rem, 1fr);
   gap: 1rem;
   margin-top: 1rem;
 }
