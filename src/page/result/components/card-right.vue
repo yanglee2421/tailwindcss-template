@@ -33,6 +33,9 @@ const state = reactive({
         <article v-html="res.data.Description"></article>
       </el-descriptions-item>
     </el-descriptions>
+    <div>
+      <el-link type="primary">post</el-link>
+    </div>
   </el-card>
 </template>
 

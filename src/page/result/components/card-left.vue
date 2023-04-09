@@ -47,7 +47,7 @@ console.log(items.value.map((item) => item.__name));
 
 function toTimeout() {
   return new Promise((res) => {
-    setTimeout(res, 3000);
+    setTimeout(res, 1000);
   });
 }
 </script>
@@ -72,19 +72,15 @@ function toTimeout() {
         :key="item.__name"
         :is="item"
       />
-      <el-form-item>
-        <div class="flex-1">
-          <div class="btns-box">
-            <el-button
-              @click="handleSubmit"
-              :loading="res.isLoading"
-              type="primary"
-              >Let`s write</el-button
-            >
-            <el-link>feedback</el-link>
-          </div>
-        </div>
-      </el-form-item>
+      <div class="btns-box">
+        <el-button
+          @click="handleSubmit"
+          :loading="res.isLoading"
+          type="primary"
+          >Let`s write</el-button
+        >
+        <el-link>feedback</el-link>
+      </div>
     </el-form>
   </el-card>
 </template>
