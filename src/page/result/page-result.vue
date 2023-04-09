@@ -2,18 +2,22 @@
 import { provide, reactive, ref, watch } from "vue";
 import { CardLeft, CardRight } from "./components";
 
-const form = reactive({
-  Generate: ["Title", "Keywords", "Description"],
-});
-provide("gpt-form", form);
-
+// tab & isProd
 const state = reactive({
   isProd: true,
   tab: 1,
 });
 provide("gpt-state", state);
 
+// left-card form state
+const form = reactive({
+  Generate: ["Title", "Keywords", "Description"],
+});
+provide("gpt-form", form);
+
+// right-card request state
 const res = reactive({
+  isLoading: false,
   isSuccess: false,
   data: {
     Title: "这是标题",
@@ -24,11 +28,6 @@ const res = reactive({
   error: null,
 });
 provide("gpt-res", res);
-
-const html = ref("");
-watch(html, (html) => {
-  console.log(html);
-});
 </script>
 
 <template>
@@ -43,7 +42,14 @@ watch(html, (html) => {
     </el-radio-group>
     <div class="box">
       <card-left />
-      <card-right />
+      <card-right v-if="res.isSuccess" />
+      <p v-else-if="res.isError"></p>
+      <p
+        v-else
+        v-loading="res.isLoading"
+      >
+        hello world
+      </p>
     </div>
   </div>
 </template>

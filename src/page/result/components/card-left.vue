@@ -32,9 +32,13 @@ const form = inject("gpt-form");
 const formRef = ref<FormInstance>();
 
 const handleSubmit = () => {
-  formRef.value?.validate((isPass) => {
+  formRef.value?.validate(async (isPass) => {
     if (!isPass) return;
     console.log(form);
+    res.isLoading = true;
+    await toTimeout();
+    res.isLoading = false;
+    res.isSuccess = true;
     res.data.Title = "title";
     res.data.Keywords = ["ok"];
     res.data.Description = "<h1>hello world</h1>";
@@ -42,6 +46,12 @@ const handleSubmit = () => {
 };
 
 console.log(items.value.map((item) => item.__name));
+
+function toTimeout() {
+  return new Promise((res) => {
+    setTimeout(res, 3000);
+  });
+}
 </script>
 
 <template>
@@ -67,6 +77,7 @@ console.log(items.value.map((item) => item.__name));
       <el-form-item>
         <el-button
           @click="handleSubmit"
+          :loading="res.isLoading"
           type="primary"
           >Let`s write</el-button
         >

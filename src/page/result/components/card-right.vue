@@ -5,7 +5,7 @@ import DrawerEdit from "./drawer-edit.vue";
 const res = inject<any>("gpt-res");
 
 const state = reactive({
-  showEdit: true,
+  showEdit: false,
 });
 </script>
 
