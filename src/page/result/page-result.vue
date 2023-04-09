@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { provide, reactive } from "vue";
 import { CardLeft, CardRight } from "./components";
+import type { Product, formData } from "./type";
 
 // tab & isProd
 const state = reactive({
@@ -10,7 +11,7 @@ const state = reactive({
 provide("gpt-state", state);
 
 // left-card form state
-const form = reactive({
+const form = reactive<formData>({
   Generate: ["Title", "Keywords", "Description"],
   Product: {
     Title: "title",

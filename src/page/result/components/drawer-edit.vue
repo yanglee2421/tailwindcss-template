@@ -2,9 +2,10 @@
 import { TinymceEditor } from "@/component";
 import { FormInstance } from "element-plus";
 import { computed, inject, reactive, ref, watchEffect } from "vue";
+import type { Result, Product } from "../type";
 
 // global res
-const res = inject<any>("gpt-res");
+const res = inject<Result>("gpt-res")!;
 
 // props & emit
 interface Props {
@@ -28,9 +29,9 @@ const showDrawer = computed({
 });
 
 // form element
-const form = reactive({
+const form = reactive<Product>({
   Title: "",
-  Keywords: [] as string[],
+  Keywords: [],
   Description: "",
 });
 

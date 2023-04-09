@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import { inject } from "vue";
+import { Result, formData } from "../type";
 
-const form = inject<any>("gpt-form");
-const res = inject<any>("gpt-res");
+const form = inject<formData>("gpt-form")!;
+const res = inject<Result>("gpt-res")!;
 </script>
 
 <template>
@@ -19,20 +20,20 @@ const res = inject<any>("gpt-res");
       >
         <el-descriptions-item label="Title">
           <p class="item-title">
-            <b>{{ form.Product.Title }}</b>
+            <b>{{ form.Product?.Title }}</b>
           </p>
         </el-descriptions-item>
         <el-descriptions-item label="Keywords">
           <p class="item-keywords">
             <b
-              v-for="item in form.Product.Keywords"
+              v-for="item in form.Product?.Keywords"
               :key="item"
               >{{ item }}</b
             >
           </p>
         </el-descriptions-item>
         <el-descriptions-item label="Description">
-          <article v-html="form.Product.Description"></article>
+          <article v-html="form.Product?.Description"></article>
         </el-descriptions-item>
       </el-descriptions>
       <div class="center-divider"></div>

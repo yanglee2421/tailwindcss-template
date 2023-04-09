@@ -2,8 +2,9 @@
 import { inject, reactive } from "vue";
 import DrawerEdit from "./drawer-edit.vue";
 import dialogComparison from "./dialog-comparison.vue";
+import { Result } from "../type";
 
-const res = inject<any>("gpt-res");
+const res = inject<Result>("gpt-res")!;
 
 const state = reactive({
   showEdit: false,

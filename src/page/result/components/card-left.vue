@@ -6,10 +6,11 @@ import ItemWords from "./item-words.vue";
 import ItemDescription from "./item-description.vue";
 import ItemProduct from "./item-product.vue";
 import { FormInstance } from "element-plus";
+import type { Result, GlobalState, formData } from "../type";
 
-const state = inject<any>("gpt-state");
-const form = inject("gpt-form");
-const res = inject<any>("gpt-res");
+const state = inject<GlobalState>("gpt-state")!;
+const form = inject<formData>("gpt-form")!;
+const res = inject<Result>("gpt-res")!;
 
 const items = computed(() => {
   const { tab, isProd } = state;
@@ -45,8 +46,6 @@ const handleSubmit = () => {
     res.data.Description = "<h1>hello world</h1>";
   });
 };
-
-console.log(items.value.map((item) => item.__name));
 
 function toTimeout() {
   return new Promise((res) => {
