@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { inject } from "vue";
-const form = inject<any>("gpt-form");
+import type { formData } from "../type";
+
+const form = inject<formData>("gpt-form")!;
 </script>
 
 <template>
@@ -9,6 +11,7 @@ const form = inject<any>("gpt-form");
     prop="Description"
   >
     <el-input
+      v-model.trim="form.Description"
       type="textarea"
       :rows="7"
       placeholder="something in here"

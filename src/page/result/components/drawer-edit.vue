@@ -84,7 +84,7 @@ watchEffect(() => {
         prop="Title"
       >
         <el-input
-          v-model="form.Title"
+          v-model.trim="form.Title"
           maxlength="100"
         ></el-input>
       </el-form-item>
@@ -100,7 +100,7 @@ watchEffect(() => {
         prop="Description"
       >
         <div class="flex-1">
-          <tinymce-editor v-model="form.Description" />
+          <tinymce-editor v-model.trim="form.Description" />
         </div>
       </el-form-item>
     </el-form>

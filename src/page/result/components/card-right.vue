@@ -2,7 +2,7 @@
 import { inject, reactive } from "vue";
 import DrawerEdit from "./drawer-edit.vue";
 import dialogComparison from "./dialog-comparison.vue";
-import { Result } from "../type";
+import type { Result } from "../type";
 
 const res = inject<Result>("gpt-res")!;
 
