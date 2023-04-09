@@ -7,6 +7,7 @@ import ItemDescription from "./item-description.vue";
 import { FormInstance } from "element-plus";
 
 const state = inject<any>("gpt-state");
+const res = inject<any>("gpt-res");
 
 const items = computed(() => {
   const { tab, isProd } = state;
@@ -34,6 +35,9 @@ const handleSubmit = () => {
   formRef.value?.validate((isPass) => {
     if (!isPass) return;
     console.log(form);
+    res.data.Title = "title";
+    res.data.Keywords = ["ok"];
+    res.data.Description = "<h1>hello world</h1>";
   });
 };
 

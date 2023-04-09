@@ -3,11 +3,12 @@ import Editor from "@tinymce/tinymce-vue";
 
 function init() {
   return {
-    // skin: true,
-    // content_css: true,
+    skin: "oxide",
+    // skin_url: "/tinymce-polaris-main/polaris",
+    content_css: false,
     menubar: false,
     branding: false,
-    height: 500,
+    height: 420,
     plugins: plugins(),
     toolbar: toolbar(),
     content_style: content_style(),

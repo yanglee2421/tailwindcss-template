@@ -2,7 +2,9 @@
 import { provide, reactive, ref, watch } from "vue";
 import { CardLeft, CardRight } from "./components";
 
-const form = reactive({});
+const form = reactive({
+  Generate: ["Title", "Keywords", "Description"],
+});
 provide("gpt-form", form);
 
 const state = reactive({
@@ -13,7 +15,11 @@ provide("gpt-state", state);
 
 const res = reactive({
   isSuccess: false,
-  data: null,
+  data: {
+    Title: "这是标题",
+    Keywords: [],
+    Description: "<p>这是描述</p>",
+  },
   isError: false,
   error: null,
 });

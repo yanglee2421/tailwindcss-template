@@ -1,22 +1,78 @@
 <script lang="ts" setup>
 import { TinymceEditor } from "@/component";
-import { inject, reactive } from "vue";
+import { FormInstance } from "element-plus";
+import { computed, inject, reactive, ref, watchEffect } from "vue";
+
+// global res
 const res = inject<any>("gpt-res");
+
+// props & emit
+interface Props {
+  modelValue: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {});
+
+interface Emit {
+  (evt: "update:modelValue", $evt: boolean): void;
+}
+const emit = defineEmits<Emit>();
+
+const showDrawer = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(value) {
+    emit("update:modelValue", value);
+  },
+});
+
+// form element
 const form = reactive({
   Title: "",
   Keywords: [] as string[],
   Description: "",
 });
+
+const formRef = ref<FormInstance>();
+const handleSubmit = () => {
+  formRef.value?.validate((isPass) => {
+    if (!isPass) return;
+    Object.assign(res.data, form);
+    emit("update:modelValue", false);
+  });
+};
+const handleReset = () => {
+  formRef.value?.resetFields();
+};
+
+watchEffect(() => {
+  const isShow = props.modelValue;
+  if (!isShow) return;
+  Object.assign(form, res.data);
+});
 </script>
 
 <template>
   <el-drawer
-    title="Edit"
+    v-model="showDrawer"
     direction="ttb"
     size="100%"
     append-to-body
+    destroy-on-close
   >
+    <template #header>
+      <div>
+        <el-button @click="handleReset">reset</el-button
+        ><el-button
+          @click="handleSubmit"
+          type="primary"
+          >submit</el-button
+        >
+      </div>
+    </template>
     <el-form
+      :ref="(e:FormInstance) => (formRef = e)"
       :model="form"
       label-width="100px"
       label-position="left"
@@ -52,5 +108,5 @@ const form = reactive({
 
 <style lang="scss" scoped></style>
 <script lang="ts">
-export default { inheritAttrs: true };
+export default { inheritAttrs: false };
 </script>
