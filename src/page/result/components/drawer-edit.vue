@@ -1,18 +1,35 @@
 <script lang="ts" setup>
 import { TinymceEditor } from "@/component";
-import { inject } from "vue";
+import { inject, reactive } from "vue";
 const res = inject<any>("gpt-res");
+const form = reactive({
+  Title: "",
+  Keywords: [] as string[],
+  Description: "",
+});
 </script>
 
 <template>
-  <el-drawer>
-    <el-form>
+  <el-drawer
+    title="Edit"
+    direction="ttb"
+    size="100%"
+    append-to-body
+  >
+    <el-form
+      :model="form"
+      label-width="100px"
+      label-position="left"
+    >
       <el-form-item
         v-if="true"
         label="Title"
         prop="Title"
       >
-        <el-input maxlength="100"></el-input>
+        <el-input
+          v-model="form.Title"
+          maxlength="100"
+        ></el-input>
       </el-form-item>
       <el-form-item
         v-if="true"
@@ -25,7 +42,9 @@ const res = inject<any>("gpt-res");
         label="Description"
         prop="Description"
       >
-        <tinymce-editor />
+        <div class="flex-1">
+          <tinymce-editor v-model="form.Description" />
+        </div>
       </el-form-item>
     </el-form>
   </el-drawer>

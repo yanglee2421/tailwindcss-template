@@ -3,8 +3,8 @@ import Editor from "@tinymce/tinymce-vue";
 
 function init() {
   return {
-    skin: true,
-    content_css: true,
+    // skin: true,
+    // content_css: true,
     menubar: false,
     branding: false,
     height: 500,
@@ -60,7 +60,11 @@ function content_style() {
   />
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+:global(.tox.tox-silver-sink.tox-tinymce-aux) {
+  z-index: 9999;
+}
+</style>
 <script lang="ts">
 export default { inheritAttrs: true };
 </script>
