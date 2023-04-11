@@ -59,7 +59,6 @@ watchEffect(() => {
     v-model="showDrawer"
     direction="ttb"
     size="100%"
-    append-to-body
     destroy-on-close
   >
     <template #header>

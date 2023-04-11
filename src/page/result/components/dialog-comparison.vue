@@ -11,7 +11,6 @@ const res = inject<Result>("gpt-res")!;
     title="Comparison"
     width="80vw"
     top="50px"
-    append-to-body
   >
     <div class="box">
       <el-descriptions

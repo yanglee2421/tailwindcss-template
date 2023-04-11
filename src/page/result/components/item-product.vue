@@ -25,7 +25,6 @@ const state = reactive({
     v-model="state.showDialog"
     width="80vw"
     top="50px"
-    append-to-body
   >
     <div class="dlg-box">
       <aside class="left">
