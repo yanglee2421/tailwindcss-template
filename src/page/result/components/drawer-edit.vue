@@ -72,7 +72,7 @@ watchEffect(() => {
       </div>
     </template>
     <el-form
-      :ref="(e:FormInstance) => (formRef = e)"
+      :ref="(e) => (formRef = e)"
       :model="form"
       label-width="100px"
       label-position="left"
