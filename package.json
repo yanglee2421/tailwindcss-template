@@ -25,6 +25,7 @@
     "sass": "^1.61.0",
     "typescript": "^5.0.4",
     "unplugin-auto-import": "^0.15.2",
+    "unplugin-icons": "^0.16.1",
     "unplugin-vue-components": "^0.24.1",
     "vite": "^4.2.1",
     "vite-plugin-compression": "^0.5.1",
