@@ -7,7 +7,7 @@ const form = inject<any>("gpt-form");
   <el-form-item
     label="Language"
     props="Language"
-    :rules="[{ required: true }]"
+    :rules="[{ require: true }]"
   >
     <el-select
       v-model="form.Language"

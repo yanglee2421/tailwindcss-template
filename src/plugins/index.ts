@@ -1,10 +1,10 @@
 import { createPinia } from "pinia";
 import { router } from "@/routes";
-// import ElementPlus from "element-plus";
-// import locale from "element-plus/es/locale/lang/zh-cn";
-// import "element-plus/dist/index.css";
-// import "element-plus/theme-chalk/dark/css-vars.css";
-// import * as icons from "@element-plus/icons-vue";
+import ElementPlus from "element-plus";
+import locale from "element-plus/es/locale/lang/zh-cn";
+import "element-plus/dist/index.css";
+import "element-plus/theme-chalk/dark/css-vars.css";
+import * as icons from "@element-plus/icons-vue";
 import Vue from "vue";
 
 // 引入 components/ 下所有以 ly- 开头的 vue 文件
@@ -20,9 +20,9 @@ export default {
   install(app: Vue.App) {
     app.use(createPinia());
     app.use(router);
-    // app.use(ElementPlus, { locale });
+    app.use(ElementPlus, { locale });
 
-    // Object.entries(icons).forEach(([key, icon]) => app.component(key, icon));
+    Object.entries(icons).forEach(([key, icon]) => app.component(key, icon));
     Object.entries(lyComponents).forEach(([key, component]) => {
       const name = key.replace(/(^\/.+\/)|(\.vue$)/g, "");
       app.component(name, component);

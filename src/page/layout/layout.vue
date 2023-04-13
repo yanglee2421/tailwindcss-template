@@ -12,7 +12,7 @@ const state = reactive({
   search: "",
 });
 
-let timer: number = 0;
+let timer: number | NodeJS.Timer = 0;
 const resizeRef = useResize(({ width }) => {
   clearTimeout(timer);
   timer = setTimeout(() => {
@@ -60,7 +60,7 @@ const route = useRoute();
       >
         <el-menu
           router
-          :default-active="route.name as any"
+          :default-active="route.name"
           :collapse="state.isCollMenu"
           class="h-100"
         >

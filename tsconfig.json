@@ -4,7 +4,6 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["vite/client", "element-plus/global", "unplugin-icons/types/vue"],
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
