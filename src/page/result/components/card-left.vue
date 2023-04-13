@@ -67,7 +67,7 @@ function toTimeout() {
       </div>
     </template>
     <el-form
-      :ref="(e:FormInstance) => (formRef = e)"
+      ref="formRef"
       :model="form"
       label-width="6rem"
       label-position="left"
