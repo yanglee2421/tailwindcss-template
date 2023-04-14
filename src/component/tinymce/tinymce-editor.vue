@@ -55,8 +55,9 @@ function content_style() {
 </script>
 
 <template>
+  <!-- api-key="4hxy0mee8bp47o512g4sy8s3ihg2djrmbiwtei8kduky11io" -->
   <Editor
-    api-key="4hxy0mee8bp47o512g4sy8s3ihg2djrmbiwtei8kduky11io"
+    tinymceScriptSrc="/tinymce/tinymce.min.js"
     :init="init()"
   />
 </template>
