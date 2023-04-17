@@ -16,39 +16,33 @@ export const routes: RouterOptions["routes"] = [
   },
   {
     path: "",
-    component: () => import("@/page/layout/layout.vue"),
-    children: [
-      {
-        path: "",
-        component: () => import("@/page/home/home.vue"),
-        name: "home",
-        meta: { title: "首页" },
-      },
-      {
-        path: "404",
-        component: () => import("@/page/404/404.vue"),
-        name: "404",
-        meta: { title: "404，找不到你要的了" },
-      },
-      {
-        path: "table",
-        component: () => import("@/page/table/table.vue"),
-        name: "table",
-        meta: { title: "表格" },
-      },
-      {
-        path: "particle",
-        component: () => import("@/page/particle/particle.vue"),
-        name: "particle",
-        meta: { title: "粒子动画" },
-      },
-      {
-        path: "snow",
-        component: () => import("@/page/snow/snow.vue"),
-        name: "snow",
-        meta: { title: "雪飘" },
-      },
-    ],
+    component: () => import("@/page/home/home.vue"),
+    name: "home",
+    meta: { title: "首页" },
+  },
+  {
+    path: "404",
+    component: () => import("@/page/404/404.vue"),
+    name: "404",
+    meta: { title: "404，找不到你要的了" },
+  },
+  {
+    path: "table",
+    component: () => import("@/page/table/table.vue"),
+    name: "table",
+    meta: { title: "表格" },
+  },
+  {
+    path: "particle",
+    component: () => import("@/page/particle/particle.vue"),
+    name: "particle",
+    meta: { title: "粒子动画" },
+  },
+  {
+    path: "snow",
+    component: () => import("@/page/snow/snow.vue"),
+    name: "snow",
+    meta: { title: "雪飘" },
   },
   {
     path: "/demo",
@@ -61,11 +55,5 @@ export const routes: RouterOptions["routes"] = [
     component: () => import("@/page/shapes/page-shapes.vue"),
     name: "shapes",
     meta: { title: "shapes" },
-  },
-  {
-    path: "/result",
-    component: () => import("@/page/result/page-result.vue"),
-    name: "result",
-    meta: { title: "result" },
   },
 ];
