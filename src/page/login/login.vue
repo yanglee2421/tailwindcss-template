@@ -7,7 +7,7 @@ import CardLogin from "./components/card-login.vue";
 
 // 粒子动画
 const cvsRef = ref<HTMLCanvasElement>();
-let timer: number | NodeJS.Timeout = 0;
+let timer: number = 0;
 const resizeRef = useResize((box) => {
   const canvas = unref(cvsRef);
   if (!canvas) return;
@@ -40,7 +40,7 @@ const resizeRef = useResize((box) => {
 
 <style lang="scss" scoped>
 .box {
-  @extend .h-100h;
+  @extend .h-100;
   @include bgc-img;
   position: relative;
   background-image: url("@/assets/image/bg/bg.jpg");

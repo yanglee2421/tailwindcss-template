@@ -1,5 +1,5 @@
 import type { Directive } from "vue";
-import "@/assets/v-vis.scss";
+import "@/assets/scss/v-vis.scss";
 
 /**
  * value可以是一个boolean，也可以是一个string
