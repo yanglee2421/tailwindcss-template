@@ -1,23 +1,7 @@
-<script lang="ts" setup>
-import { NavMenu, NavLogo, NavDrawer } from "./components";
-import { watch, reactive } from "vue";
-const state = reactive({ showDrawer: false });
-</script>
+<script lang="ts" setup></script>
 
 <template>
-  <div class="box">
-    <div class="header">
-      <nav-logo />
-      <div class="header-content">
-        <div class="icon-search">
-          <el-icon><Search /></el-icon>
-        </div>
-        <nav-menu />
-        <ly-icon v-model="state.showDrawer" />
-      </div>
-    </div>
-    <nav-drawer v-model="state.showDrawer" />
-  </div>
+  <div class="box"></div>
 </template>
 
 <style lang="scss" scoped>

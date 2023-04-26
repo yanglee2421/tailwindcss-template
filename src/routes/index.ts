@@ -4,7 +4,6 @@ import {
   createWebHistory,
 } from "vue-router";
 import { routes, whiteList } from "./routes";
-import { useAuth } from "@/stores";
 
 const isGitee = import.meta.env.MODE === "gitee";
 const history = isGitee
@@ -12,14 +11,7 @@ const history = isGitee
   : createWebHistory("/vite-vue/");
 export const router = createRouter({ history, routes });
 
-router.beforeEach((to) => {
-  const { state } = useAuth();
-  const isLogined = Boolean(state.expiration);
-  if (to.name === "login") return isLogined ? "/" : true;
-  if (isInWl(to.path)) return;
-  if (isLogined) return;
-  return "/login";
-});
+router.beforeEach((to) => {});
 router.afterEach((to) => {
   const title = to.meta.title;
   if (typeof title === "string") document.title = title;

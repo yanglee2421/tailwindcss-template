@@ -1,4 +1,3 @@
-import { useAuth } from "@/stores";
 import type { RouterOptions } from "vue-router";
 export { whiteList } from "./whiteList";
 
@@ -9,10 +8,7 @@ export const routes: RouterOptions["routes"] = [
     component: () => import("@/page/login/login.vue"),
     name: "login",
     meta: { title: "登录" },
-    beforeEnter(to, from) {
-      const { state } = useAuth();
-      if (state.expiration) return { name: "home", replace: true };
-    },
+    beforeEnter(to, from) {},
   },
   {
     path: "/",
@@ -25,12 +21,6 @@ export const routes: RouterOptions["routes"] = [
     component: () => import("@/page/404/404.vue"),
     name: "404",
     meta: { title: "404，找不到你要的了" },
-  },
-  {
-    path: "/table",
-    component: () => import("@/page/table/table.vue"),
-    name: "table",
-    meta: { title: "表格" },
   },
   {
     path: "/particle",

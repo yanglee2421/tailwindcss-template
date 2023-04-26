@@ -1,65 +1,10 @@
-<script lang="ts" setup>
-import { reactive, ref, unref } from "vue";
-import { useResize } from "@/hooks";
-import { Particles } from "@/util";
-import CardRegister from "./components/card-register.vue";
-import CardLogin from "./components/card-login.vue";
-
-// 粒子动画
-const cvsRef = ref<HTMLCanvasElement>();
-let timer: number = 0;
-const resizeRef = useResize((box) => {
-  const canvas = unref(cvsRef);
-  if (!canvas) return;
-  Object.assign(canvas, box);
-  let p: null | Particles = null;
-  clearTimeout(timer);
-  timer = setTimeout(() => {
-    p = new Particles(canvas, (box.width / 1920) * 120);
-    p.animate();
-    p.bindEvent();
-  }, 500);
-  return () => {
-    clearTimeout(timer);
-    p?.abortAnimate();
-    p?.abortEvent();
-  };
-});
-</script>
+<script lang="ts" setup></script>
 
 <template>
-  <div
-    :ref="(e) => (resizeRef = e)"
-    class="box"
-  >
-    <canvas :ref="(e:any) => (cvsRef = e)"></canvas>
-    <card-register />
-    <card-login />
-  </div>
+  <div></div>
 </template>
 
-<style lang="scss" scoped>
-.box {
-  @extend .h-100;
-  @include bgc-img;
-  position: relative;
-  background-image: url("@/assets/image/bg/bg.jpg");
-  display: grid;
-  place-items: center;
-  @media (min-width: 768px) {
-    grid-template: auto/repeat(2, minmax(0, auto));
-    gap: 10px;
-    place-content: center;
-    > *:not(canvas) {
-      transform: translate(0, -5%);
-    }
-  }
-  > canvas {
-    position: absolute;
-    inset: 0;
-  }
-}
-</style>
+<style lang="scss" scoped></style>
 <script lang="ts">
 export default { inheritAttrs: true };
 </script>
