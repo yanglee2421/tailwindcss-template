@@ -5,6 +5,7 @@ import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/dark/css-vars.css";
 import * as icons from "@element-plus/icons-vue";
 import Vue from "vue";
+import { VueQueryPlugin, VueQueryPluginOptions } from "@tanstack/vue-query";
 
 // 引入 components/ 下所有以 ly- 开头的 vue 文件
 const lyComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
@@ -17,6 +18,7 @@ const lyComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
 
 export default {
   install(app: Vue.App) {
+    app.use(VueQueryPlugin, queryClientConfig());
     app.use(createPinia());
     app.use(router);
     app.use(ElementPlus);
@@ -28,3 +30,16 @@ export default {
     });
   },
 };
+
+function queryClientConfig(): VueQueryPluginOptions {
+  return {
+    queryClientConfig: {
+      defaultOptions: {
+        queries: {
+          staleTime: 1000 * 10 * 5,
+          refetchOnWindowFocus: false,
+        },
+      },
+    },
+  };
+}
