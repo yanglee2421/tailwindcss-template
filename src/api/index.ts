@@ -1,7 +1,12 @@
-export async function getDemo<TData>(data: TData) {
-  console.log("request", data);
+import { PendingTask } from "@/types/pageDemo";
+import { toJsonClone } from "@/utils";
+
+export async function getDemo(data: PendingTask) {
   await timeout();
-  return data;
+  const res = toJsonClone(data);
+  console.log("request", res);
+  res.task_status = "FAILURE";
+  return res;
 }
 
 async function timeout(milliseconds = 1000) {
