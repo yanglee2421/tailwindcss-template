@@ -4,11 +4,11 @@ import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/dark/css-vars.css";
 import * as icons from "@element-plus/icons-vue";
-import Vue from "vue";
+import { Plugin, DefineComponent } from "vue";
 import { VueQueryPlugin, VueQueryPluginOptions } from "@tanstack/vue-query";
 
 // 引入 components/ 下所有以 ly- 开头的 vue 文件
-const lyComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
+const lyComponents = import.meta.glob<DefineComponent<{}, {}, any>>(
   "@/component/**/ly-*.vue",
   {
     eager: true,
@@ -16,8 +16,8 @@ const lyComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
   }
 );
 
-export default {
-  install(app: Vue.App) {
+export const plugin: Plugin = {
+  install(app) {
     app.use(VueQueryPlugin, queryClientConfig());
     app.use(createPinia());
     app.use(router);
