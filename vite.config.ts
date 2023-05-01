@@ -16,7 +16,7 @@ export default defineConfig((ConfigEnv) => ({
     },
   },
   base: "/vite-vue/",
-  envDir: resolve(__dirname, "./config"),
+  // envDir: resolve(__dirname, "./config"),
   build: build(ConfigEnv),
   server: server(ConfigEnv),
 }));
