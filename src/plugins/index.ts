@@ -1,11 +1,9 @@
-import { createPinia } from "pinia";
 import { router } from "@/routes";
-import ElementPlus from "element-plus";
-import "element-plus/dist/index.css";
-import "element-plus/theme-chalk/dark/css-vars.css";
-import * as icons from "@element-plus/icons-vue";
-import { Plugin, DefineComponent } from "vue";
-import { VueQueryPlugin, VueQueryPluginOptions } from "@tanstack/vue-query";
+import type { Plugin, DefineComponent } from "vue";
+import { pinia } from "./pinia";
+import { VueQueryPlugin, queryClientConfig } from "./vue-query";
+import { ElementPlus } from "./element-plus";
+import { icons } from "./el-icons";
 
 // 引入 components/ 下所有以 ly- 开头的 vue 文件
 const lyComponents = import.meta.glob<DefineComponent<{}, {}, any>>(
@@ -19,27 +17,14 @@ const lyComponents = import.meta.glob<DefineComponent<{}, {}, any>>(
 export const plugin: Plugin = {
   install(app) {
     app.use(VueQueryPlugin, queryClientConfig());
-    app.use(createPinia());
+    app.use(pinia);
     app.use(router);
     app.use(ElementPlus);
+    app.use(icons);
 
-    Object.entries(icons).forEach(([key, icon]) => app.component(key, icon));
     Object.entries(lyComponents).forEach(([key, component]) => {
       const name = key.replace(/(^\/.+\/)|(\.vue$)/g, "");
       app.component(name, component);
     });
   },
 };
-
-function queryClientConfig(): VueQueryPluginOptions {
-  return {
-    queryClientConfig: {
-      defaultOptions: {
-        queries: {
-          staleTime: 1000 * 10 * 5,
-          refetchOnWindowFocus: false,
-        },
-      },
-    },
-  };
-}
