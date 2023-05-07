@@ -4,6 +4,12 @@ export { whiteList } from "./whiteList";
 export const routes: RouterOptions["routes"] = [
   { path: "/:pathMatch(.*)*", redirect: "/404" },
   {
+    path: "/404",
+    component: () => import("@/page/404/404.vue"),
+    name: "404",
+    meta: { title: "404，找不到你要的了" },
+  },
+  {
     path: "/login",
     component: () => import("@/page/login/login.vue"),
     name: "login",
@@ -15,12 +21,6 @@ export const routes: RouterOptions["routes"] = [
     component: () => import("@/page/home/home.vue"),
     name: "home",
     meta: { title: "首页" },
-  },
-  {
-    path: "/404",
-    component: () => import("@/page/404/404.vue"),
-    name: "404",
-    meta: { title: "404，找不到你要的了" },
   },
   {
     path: "/particle",
