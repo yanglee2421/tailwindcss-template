@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "build:gitee": "vue-tsc --noEmit && vite build --mode=gitee",
+    "build:gitee": "vite build --mode=gitee",
     "preview": "vite preview",
     "preview:gitee": "vite preview --mode=gitee"
   },
