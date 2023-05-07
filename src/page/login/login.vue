@@ -1,7 +1,12 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useLoginPost } from "./hooks";
+const { mutate } = useLoginPost();
+</script>
 
 <template>
-  <div></div>
+  <div>
+    <button @click="() => mutate()">login</button>
+  </div>
 </template>
 
 <style lang="scss" scoped></style>

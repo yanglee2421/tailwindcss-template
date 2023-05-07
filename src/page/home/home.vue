@@ -1,5 +1,9 @@
 <script lang="ts" setup>
 import { DarkSwitch } from "@/component";
+import { useLogoutPost } from "./hooks";
+
+const { mutate } = useLogoutPost();
+const handleLogout = () => mutate();
 </script>
 
 <template>
@@ -12,6 +16,9 @@ import { DarkSwitch } from "@/component";
       <el-form>
         <el-form-item label="黑夜模式">
           <dark-switch />
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="handleLogout">logout</el-button>
         </el-form-item>
       </el-form>
     </el-card>
