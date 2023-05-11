@@ -12,6 +12,9 @@ export function useResizeEffect(cb: Cb) {
   let returnFn: unknown;
   watchPostEffect((clearFn) => {
     const div = unref(resizeRef);
+    const isElement = div instanceof Element;
+    if (!isElement) throw new Error("resizeRef must sign a Element");
+
     const observer = new ResizeObserver((entries) => {
       const [{ contentBoxSize }] = entries;
       const [cntBoxSize] = contentBoxSize;
@@ -26,6 +29,7 @@ export function useResizeEffect(cb: Cb) {
 
     // Clear previous watchPostEffect
     clearFn(() => {
+      if (typeof returnFn === "function") returnFn();
       observer.disconnect();
     });
   });
