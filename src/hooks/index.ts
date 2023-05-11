@@ -7,3 +7,4 @@ export { vVis } from "./v-vis";
 export { useDark } from "./useDark";
 export { useResize } from "./useResize";
 export { useLoginStore } from "./useLoginStore";
+export { useResizeEffect } from "./useResizeEffect";

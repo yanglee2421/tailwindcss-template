@@ -10,16 +10,12 @@ export function useResize(
 ) {
   const resizeRef = ref();
   let clearFn: Function | void;
-  const observer = new ResizeObserver(
-    ([
-      {
-        contentBoxSize: [{ inlineSize: width, blockSize: height }],
-      },
-    ]) => {
-      typeof clearFn === "function" && clearFn();
-      clearFn = callback({ width, height });
-    }
-  );
+  const observer = new ResizeObserver((entries) => {
+    const [{ contentBoxSize }] = entries;
+    const [{ inlineSize: width, blockSize: height }] = contentBoxSize;
+    typeof clearFn === "function" && clearFn();
+    clearFn = callback({ width, height });
+  });
   onMounted(() => {
     const dom = unref(resizeRef);
     if (dom instanceof HTMLElement) {
