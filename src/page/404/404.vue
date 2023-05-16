@@ -1,9 +1,13 @@
 <script lang="ts" setup>
+import { unref } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 
+const btnRef = ref();
+
 const handleClick = () => {
-  console.log("xxxxx");
+  console.log("xxxxx", unref(btnRef));
 };
 </script>
 
@@ -18,7 +22,11 @@ const handleClick = () => {
       plain
       >Take me home</el-button
     >
-    <ly-btn @click="handleClick">handleError</ly-btn>
+    <ly-btn
+      ref="btnRef"
+      @click="handleClick"
+      >handleError</ly-btn
+    >
   </div>
 </template>
 

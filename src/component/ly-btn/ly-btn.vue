@@ -1,7 +1,17 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { ref } from "vue";
+
+const btnRef = ref();
+defineExpose({ btnRef });
+</script>
 
 <template>
-  <button v-bind="$attrs">click me</button>
+  <button
+    ref="btnRef"
+    v-bind="$attrs"
+  >
+    click me
+  </button>
 </template>
 
 <style lang="scss" scoped></style>
