@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Particles } from "@/util";
+import { Particles } from "@/utils";
 import { useResize } from "@/hooks";
 import { ref, unref } from "vue";
 

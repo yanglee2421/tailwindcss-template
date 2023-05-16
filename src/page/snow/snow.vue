@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useResize } from "@/hooks";
-import { Snow } from "@/util";
+import { Snow } from "@/utils";
 import { ref, unref } from "vue";
 const cvsRef = ref();
 const resizeRef = useResize((box) => {
