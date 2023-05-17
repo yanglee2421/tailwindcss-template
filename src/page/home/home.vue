@@ -11,7 +11,9 @@ const handleLogout = () => mutate();
     <el-card>
       <el-calendar />
     </el-card>
-    <el-card></el-card>
+    <el-card>
+      <ly-upload></ly-upload>
+    </el-card>
     <el-card header="主题">
       <el-form>
         <el-form-item label="黑夜模式">
@@ -22,7 +24,7 @@ const handleLogout = () => mutate();
         </el-form-item>
       </el-form>
     </el-card>
-    <el-card></el-card>
+    <el-card> </el-card>
     <el-card></el-card>
     <el-card></el-card>
   </div>

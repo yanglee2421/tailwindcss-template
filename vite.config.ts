@@ -37,9 +37,9 @@ function server({ mode }: ConfigEnv): UserConfig["server"] {
     https,
     port: 5174,
     proxy: {
-      "/dev": {
-        target: "http://192.168.1.4",
-        rewrite: (path) => path.replace(/^\/dev/, ""),
+      "/api": {
+        target: "https://gjcx.whsybj.cn:8443",
+        // rewrite: (path) => path.replace(/^\/dev/, ""),
         changeOrigin: true,
         ws: true,
       },
