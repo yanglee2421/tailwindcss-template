@@ -13,10 +13,10 @@ export const request = axios.create({
 request.interceptors.request.use((config) => config);
 request.interceptors.response.use(
   (res) => {
-    const { data, status, statusText } = res;
-    if (status > 199 && status < 300) return data;
-
-    throw new Error(statusText);
+    const { data } = res;
+    if (data.code !== 0) throw new Error(data.msg);
+    if (data.data) return data.data;
+    return data;
   },
   (err) => {
     const { message } = err;

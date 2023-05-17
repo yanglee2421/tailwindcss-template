@@ -1,9 +1,14 @@
 <script lang="ts" setup>
 import { DarkSwitch } from "@/component";
 import { useLogoutPost } from "./hooks";
+import { reactive } from "vue";
 
 const { mutate } = useLogoutPost();
 const handleLogout = () => mutate();
+
+const state = reactive({
+  imgSrc: "",
+});
 </script>
 
 <template>
@@ -12,7 +17,7 @@ const handleLogout = () => mutate();
       <el-calendar />
     </el-card>
     <el-card>
-      <ly-upload></ly-upload>
+      <ly-upload v-model="state.imgSrc"></ly-upload>
     </el-card>
     <el-card header="主题">
       <el-form>

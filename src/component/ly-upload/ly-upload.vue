@@ -1,21 +1,40 @@
 <script lang="ts" setup>
-import { UploadProps } from "element-plus";
+import { ElMessage, UploadProps } from "element-plus";
 import { intf_uploadimage } from "@/api";
+import { computed } from "vue";
 
+// Props
 interface Props {
   modelValue?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   modelValue: "",
 });
+const imgSrc = computed(() => {
+  if (!props.modelValue) return;
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  return baseUrl + props.modelValue;
+});
 
-const handleUpload: UploadProps["httpRequest"] = (ops) => {
+// Emits
+interface Emits {
+  (evt: "update:modelValue", $evt: string): void;
+}
+const emit = defineEmits<Emits>();
+
+const handleUpload: UploadProps["httpRequest"] = async (ops) => {
   console.log(ops);
-  return intf_uploadimage({
-    imgfile: ops.file,
-    card: "360111198912280969",
-    type: 1,
-  });
+  try {
+    const { PATH } = await intf_uploadimage({
+      imgfile: ops.file,
+      card: "360111198912280969",
+      type: 1,
+    });
+    console.log(PATH);
+    emit("update:modelValue", PATH);
+  } catch (err: any) {
+    ElMessage.error(err.message);
+  }
 };
 
 defineOptions({ inheritAttrs: false });
@@ -28,7 +47,10 @@ defineOptions({ inheritAttrs: false });
     :show-file-list="false"
     drag
   >
-    <el-image v-if="modelValue"></el-image>
+    <el-image
+      v-if="modelValue"
+      :src="imgSrc"
+    ></el-image>
     <el-icon v-else><Plus /></el-icon>
   </el-upload>
 </template>
