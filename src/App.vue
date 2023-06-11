@@ -1,10 +1,4 @@
-<script lang="ts" setup>
-import { useDark } from "@/hooks";
-import { usePinia } from "@/stores";
-
-const { actIsDark } = usePinia();
-useDark(({ matches }) => actIsDark(matches));
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <router-view #default="{ Component }">

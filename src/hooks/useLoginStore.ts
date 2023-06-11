@@ -21,7 +21,7 @@ export const useLoginStore = defineStore(
       enabled: true,
       strategies: [
         {
-          storage: localStorage,
+          storage: sessionStorage,
         },
       ],
     },

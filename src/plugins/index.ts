@@ -5,7 +5,6 @@ import { VueQueryPlugin, queryClientConfig } from "./vue-query";
 import { ElementPlus } from "./element-plus";
 import { icons } from "./el-icons";
 
-// 引入 components/ 下所有以 ly- 开头的 vue 文件
 const lyComponents = import.meta.glob<DefineComponent<{}, {}, any>>(
   "@/component/**/ly-*.vue",
   {

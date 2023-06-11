@@ -1,5 +1,4 @@
 import type { RouterOptions } from "vue-router";
-export { whiteList } from "./whiteList";
 
 export const routes: RouterOptions["routes"] = [
   { path: "/:pathMatch(.*)*", redirect: "/404" },
@@ -7,20 +6,23 @@ export const routes: RouterOptions["routes"] = [
     path: "/404",
     component: () => import("@/page/404/404.vue"),
     name: "404",
-    meta: { title: "404，找不到你要的了" },
+    meta: { title: "NotFound" },
   },
   {
     path: "/login",
     component: () => import("@/page/login/login.vue"),
     name: "login",
     meta: { title: "登录" },
-    beforeEnter(to, from) {},
   },
   {
     path: "/",
     component: () => import("@/page/home/home.vue"),
     name: "home",
     meta: { title: "首页" },
+    beforeEnter(to) {
+      const redirectUrl = decodeURIComponent(String(to.query.returnUrl)) || "/";
+      return redirectUrl || true;
+    },
   },
   {
     path: "/particle",
