@@ -13,7 +13,7 @@ import { toIsWhitelist } from "./whitelist";
 
 const isGitee = import.meta.env.MODE === "gitee";
 const history = isGitee
-  ? createWebHashHistory("/vite-vue/")
+  ? createWebHashHistory()
   : createWebHistory("/vite-vue/");
 export const router = createRouter({ history, routes });
 

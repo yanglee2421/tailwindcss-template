@@ -19,10 +19,6 @@ export const routes: RouterOptions["routes"] = [
     component: () => import("@/page/home/home.vue"),
     name: "home",
     meta: { title: "首页" },
-    beforeEnter(to) {
-      const redirectUrl = decodeURIComponent(String(to.query.returnUrl)) || "/";
-      return redirectUrl || true;
-    },
   },
   {
     path: "/particle",
