@@ -1,5 +1,9 @@
 import type { VueQueryPluginOptions } from "@tanstack/vue-query";
 
+// Persister Imports
+import { persistQueryClient } from "@tanstack/query-persist-client-core";
+import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
+
 export { VueQueryPlugin } from "@tanstack/vue-query";
 
 export function queryClientConfig(): VueQueryPluginOptions {
@@ -11,6 +15,14 @@ export function queryClientConfig(): VueQueryPluginOptions {
           refetchOnWindowFocus: false,
         },
       },
+    },
+    clientPersister(queryClient) {
+      return persistQueryClient({
+        queryClient,
+        persister: createSyncStoragePersister({
+          storage: globalThis.sessionStorage,
+        }),
+      });
     },
   };
 }
