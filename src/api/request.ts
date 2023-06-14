@@ -15,6 +15,7 @@ request.interceptors.request.use((config) => {
 request.interceptors.response.use(
   (res) => {
     const { data } = res;
+    return data;
     if (data.code !== 0) throw new Error(data.msg);
     if (data.data) return data.data;
     return data;
