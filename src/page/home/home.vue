@@ -26,7 +26,8 @@ defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <div class="page">
+  <div class="page p-2">
+    <div></div>
     <div class="flex-1-hidden">
       <el-table
         :data="data.rows"

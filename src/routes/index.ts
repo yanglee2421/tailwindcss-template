@@ -11,6 +11,10 @@ import { useLoginStore } from "@/hooks";
 import { routes } from "./routes";
 import { toIsWhitelist } from "./whitelist";
 
+// Nprogress Imports
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+
 const isGitee = import.meta.env.MODE === "gitee";
 const history = isGitee
   ? createWebHashHistory()
@@ -18,6 +22,9 @@ const history = isGitee
 export const router = createRouter({ history, routes });
 
 router.beforeEach((to) => {
+  NProgress.start();
+
+  // ** Auth
   const { state } = useLoginStore();
   const { isLogined } = state;
   const nextName = String(to.name);
@@ -38,6 +45,9 @@ router.beforeEach((to) => {
   return true;
 });
 router.afterEach((to) => {
+  NProgress.done();
+
+  // ** Title
   const title = to.meta.title;
   if (typeof title === "string") document.title = title;
 });
