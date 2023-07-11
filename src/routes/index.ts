@@ -1,47 +1,47 @@
+// Router Imports
 import {
   createRouter,
   createWebHashHistory,
   createWebHistory,
 } from "vue-router";
+import { routes } from "./routes";
+import { toIsWhitelist } from "./whitelist";
 
 // Hooks Imports
 import { useLoginStore } from "@/hooks";
 
-// Configure Imports
-import { routes } from "./routes";
-import { toIsWhitelist } from "./whitelist";
-
 // Nprogress Imports
 import NProgress from "nprogress";
-import "nprogress/nprogress.css";
+// import "nprogress/nprogress.css";
 
 const isGitee = import.meta.env.MODE === "gitee";
 const history = isGitee
   ? createWebHashHistory()
   : createWebHistory("/vite-vue/");
+
 export const router = createRouter({ history, routes });
 
 router.beforeEach((to) => {
   NProgress.start();
 
-  // ** Auth
+  // Pinia Hooks
   const { state } = useLoginStore();
   const { isLogined } = state;
   const nextName = String(to.name);
 
-  // In Login Page
+  // To Login
   const isInLogin = nextName === "login";
   if (isInLogin) return true;
 
-  // In Whitelist, Go
+  // To Whitelist
   const isInWl = toIsWhitelist(nextName);
   if (isInWl) return true;
 
-  // No Logged, Go Login
+  // Not Logged
   const returnUrl = encodeURIComponent(to.fullPath);
   if (!isLogined) return { name: "login", query: { returnUrl } };
 
-  // Logged, Go
+  // Has Logged
   return true;
 });
 router.afterEach((to) => {

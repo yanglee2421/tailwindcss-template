@@ -1,6 +1,5 @@
+// Query Imports
 import type { VueQueryPluginOptions } from "@tanstack/vue-query";
-
-// Persister Imports
 import { persistQueryClient } from "@tanstack/query-persist-client-core";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 
