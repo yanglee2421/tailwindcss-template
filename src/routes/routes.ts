@@ -44,4 +44,10 @@ export const routes: RouterOptions["routes"] = [
     name: "shapes",
     meta: { title: "shapes" },
   },
+  {
+    path: "/absen",
+    component: () => import("@/page/absen/page-absen.vue"),
+    name: "absen",
+    meta: { title: "absen" },
+  },
 ];

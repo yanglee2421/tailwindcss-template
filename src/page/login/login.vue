@@ -32,10 +32,10 @@ useQuery({
       </row-cell>
       <row-cell title="list">
         <ul class="list b">
-          <li>libsen Green</li>
-          <li>Find Plirtner</li>
-          <li>Clireers</li>
-          <li>News</li>
+          <li><a href="#">libsen Green</a></li>
+          <li><a href="#">Find Plirtner</a></li>
+          <li><a href="#">Clireers</a></li>
+          <li><a href="#">News</a></li>
         </ul>
       </row-cell>
     </el-row>
@@ -97,20 +97,24 @@ useQuery({
     transform: scale(1);
   }
 }
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 100%;
-  background-color: #e0852e;
-  position: absolute;
+.yang-relative {
+  position: relative;
 }
-.dot::before {
+.yang-dot {
+  position: absolute;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 100% !important;
+  background-color: #e0852e !important;
+}
+.yang-dot::after {
   content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
   display: block;
   width: 300%;
   height: 300%;
-  top: 50%;
-  left: 50%;
   margin-left: -150%;
   margin-top: -150%;
   position: absolute;
@@ -167,20 +171,24 @@ ul {
   padding: 10px;
   border-radius: 10px;
   transition: all 0.5s;
-  opacity: 0;
-  visibility: hidden;
-  opacity: 1;
-  visibility: visible;
-  z-index: 10;
-  // transform: translateX(-50%) scale(1, 0);
-  // transform-origin: 0 0;
 }
-.list:hover {
-  opacity: 1;
-  visibility: visible;
-  top: 100%;
-  transform: translateX(-50%) scale(1);
+.list > li {
+  padding: 5px 10px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21px;
 }
+.list > li:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+</style>
+<script lang="ts">
+export default { inheritAttrs: true };
+</script>
+
+<style>
 p.elementor-heading-title.elementor-size-default > a {
   display: inline-block;
   padding: 8px 16px;
@@ -197,6 +205,29 @@ p.elementor-heading-title.elementor-size-default > a:hover {
   color: #fff !important;
 }
 </style>
-<script lang="ts">
-export default { inheritAttrs: true };
-</script>
+<style>
+header nav ul.sub-menu {
+  background: -moz-linear-gradient(90deg, #ef993a 0%, #e78131 100%);
+  background: -webkit-linear-gradient(90deg, #ef993a 0%, #e78131 100%);
+  background: -ms-linear-gradient(90deg, #ef993a 0%, #e78131 100%);
+  background: linear-gradient(90deg, #ef993a 0%, #e78131 100%);
+  padding: 10px;
+  border-radius: 10px !important;
+  transition: all 0.5s;
+}
+header nav ul.sub-menu > li {
+  padding: 5px 10px;
+  border: 0 !important;
+  color: #fff;
+}
+header nav ul.sub-menu > li > a {
+  color: #fff !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  line-height: 21px !important;
+}
+header nav ul.sub-menu > li:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+</style>
