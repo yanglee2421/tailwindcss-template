@@ -11,7 +11,9 @@ defineOptions({ inheritAttrs: false });
   <el-col
     :xs="24"
     :sm="12"
-    :md="6"
+    :md="8"
+    :lg="6"
+    :xl="4"
   >
     <el-card
       :header="title"
