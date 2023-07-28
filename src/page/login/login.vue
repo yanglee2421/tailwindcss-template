@@ -14,6 +14,31 @@ useQuery({
     return { name: "xxx" };
   },
 });
+
+const handleClick = () => {
+  const searchParams = new URLSearchParams(window.location.search);
+  const prev = searchParams.get("search");
+  prev
+    ? searchParams.delete("search")
+    : searchParams.set("search", "search-data");
+  window.location.search = searchParams.toString();
+};
+const handleReplaceClick = () => {
+  const url = new URL(window.location.href);
+  const prev = url.searchParams.get("replace-state");
+  prev
+    ? url.searchParams.delete("replace-state")
+    : url.searchParams.set("replace-state", "test-data");
+  history.replaceState(null, "", url.toString());
+};
+const handlePushClick = () => {
+  const url = new URL(window.location.href);
+  const prev = url.searchParams.get("push-state");
+  prev
+    ? url.searchParams.delete("push-state")
+    : url.searchParams.set("push-state", "test-data");
+  history.pushState(null, "", url.toString());
+};
 </script>
 
 <template>
@@ -38,6 +63,19 @@ useQuery({
           <li><a href="#">News</a></li>
         </ul>
       </row-cell>
+      <el-col
+        :xs="24"
+        :sm="12"
+        :md="8"
+        :lg="6"
+        :xl="4"
+      >
+        <el-button-group>
+          <el-button @click="handleClick">window-search</el-button>
+          <el-button @click="handleReplaceClick">replace-state</el-button>
+          <el-button @click="handlePushClick">push-state</el-button>
+        </el-button-group>
+      </el-col>
     </el-row>
   </div>
 </template>

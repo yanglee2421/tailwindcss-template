@@ -25,6 +25,15 @@ defineOptions({ inheritAttrs: false });
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+</style>
+
 <style>
 .hotspots__map {
   width: 74.86111%;
@@ -49,10 +58,16 @@ defineOptions({ inheritAttrs: false });
 }
 .hotspots__map .dot {
   position: absolute;
-  width: 8px !important;
-  height: 8px !important;
-  border-radius: 100% !important;
-  background-color: #e0852e !important;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  background-color: #e0852e;
+}
+@media screen and (max-width: 520px) {
+  .hotspots__map .dot {
+    width: 4px;
+    height: 4px;
+  }
 }
 .hotspots__map .dot::after {
   content: "";
@@ -112,11 +127,5 @@ defineOptions({ inheritAttrs: false });
 .hotspots__map .dot.dot10 {
   left: 86.08534%;
   top: 37.3928%;
-}
-</style>
-
-<style lang="scss" scoped>
-.container {
-  width: 1440px;
 }
 </style>
