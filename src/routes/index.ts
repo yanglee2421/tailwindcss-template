@@ -5,7 +5,7 @@ import {
   createWebHistory,
 } from "vue-router";
 import { routes } from "./routes";
-import { toIsWhitelist } from "./whitelist";
+import { toIsWhitelist } from "./routes-whitelist";
 
 // Hooks Imports
 import { useLoginStore } from "@/hooks";
