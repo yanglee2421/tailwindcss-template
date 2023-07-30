@@ -50,4 +50,16 @@ export const routes: RouterOptions["routes"] = [
     name: "absen",
     meta: { title: "absen" },
   },
+  {
+    path: "/absen-img",
+    component: () => import("@/page/absen-img/absen-img.vue"),
+    name: "absen-img",
+    meta: { title: "absen-img" },
+  },
+  {
+    path: "/absen-post",
+    component: () => import("@/page/absen-img/absen-img.vue"),
+    name: "absen-img",
+    meta: { title: "absen-img" },
+  },
 ];

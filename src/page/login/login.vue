@@ -63,6 +63,29 @@ const handlePushClick = () => {
           <li><a href="#">News</a></li>
         </ul>
       </row-cell>
+      <row-cell title="btn">
+        <button
+          type="button"
+          class="yang-btn"
+        >
+          Contact sales
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 16 16"
+            fill="none"
+          >
+            <path
+              d="M6.33337 4L10.3334 8L6.33337 12"
+              stroke="white"
+              stroke-width="1.33333"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
+        </button>
+      </row-cell>
       <el-col
         :xs="24"
         :sm="12"
@@ -79,6 +102,41 @@ const handlePushClick = () => {
     </el-row>
   </div>
 </template>
+<style>
+.yang-btn {
+  position: relative !important;
+  display: inline-flex !important;
+  justify-content: start;
+  align-items: center;
+
+  min-width: 152px;
+  height: 33px !important;
+  min-height: 33px !important;
+  max-height: 33px !important;
+  padding: 0 18px !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+
+  outline: none;
+  background: linear-gradient(90deg, #ef993a 0%, #e78131 100%) !important;
+
+  color: #fff !important;
+  text-align: center;
+  line-height: 33px;
+
+  cursor: pointer !important;
+}
+.yang-btn > svg {
+  margin-left: 18px !important;
+  transition: 0.5s !important;
+}
+.yang-btn:hover > svg {
+  transform: translateX(10px);
+}
+#wpforms-submit-603 {
+  display: none;
+}
+</style>
 
 <style lang="scss" scoped>
 .link {
