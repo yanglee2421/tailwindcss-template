@@ -44,22 +44,4 @@ export const routes: RouterOptions["routes"] = [
     name: "shapes",
     meta: { title: "shapes" },
   },
-  {
-    path: "/absen",
-    component: () => import("@/page/absen/page-absen.vue"),
-    name: "absen",
-    meta: { title: "absen" },
-  },
-  {
-    path: "/absen-img",
-    component: () => import("@/page/absen-img/absen-img.vue"),
-    name: "absen-img",
-    meta: { title: "absen-img" },
-  },
-  {
-    path: "/absen-post",
-    component: () => import("@/page/absen-img/absen-img.vue"),
-    name: "absen-img",
-    meta: { title: "absen-img" },
-  },
 ];

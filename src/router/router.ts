@@ -4,8 +4,8 @@ import {
   createWebHashHistory,
   createWebHistory,
 } from "vue-router";
-import { routes } from "./routes";
-import { toIsWhitelist } from "./routes-whitelist";
+import { routes } from "./router-routes";
+import { toIsWhitelist } from "./router-whitelist";
 
 // Hooks Imports
 import { useLoginStore } from "@/hooks";

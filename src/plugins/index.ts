@@ -1,6 +1,6 @@
 // Vue Imports
 import type { Plugin, DefineComponent } from "vue";
-import { router } from "@/routes";
+import { router } from "@/router";
 import { pinia } from "./pinia";
 import { VueQueryPlugin, queryClientConfig } from "./vue-query";
 import { ElementPlus } from "./element-plus";
