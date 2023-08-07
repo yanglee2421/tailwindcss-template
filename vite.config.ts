@@ -1,12 +1,14 @@
+// Vite Imports
 import { defineConfig, ConfigEnv, UserConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+
+// NodeJs Imports
 import { resolve } from "node:path";
 import { readFileSync } from "node:fs";
-import gzip from "vite-plugin-compression";
 
 // https://vitejs.dev/config/
 export default defineConfig((ConfigEnv) => ({
-  plugins: [vue(), gzip({ deleteOriginFile: false })],
+  plugins: [vue()],
   resolve: {
     alias: { "@": resolve(__dirname, "./src") },
   },
@@ -22,8 +24,22 @@ export default defineConfig((ConfigEnv) => ({
 }));
 
 function build({ mode }: ConfigEnv): UserConfig["build"] {
-  const outDir = mode === "gitee" ? "docs" : "vue-app";
-  return { outDir };
+  let outDir = "dist";
+  switch (mode) {
+    case "live":
+      outDir = "dist";
+  }
+
+  return {
+    outDir,
+    manifest: true,
+    rollupOptions: {
+      output: {
+        entryFileNames: "assets/vite-app.js",
+        assetFileNames: "assets/[name][extname]",
+      },
+    },
+  };
 }
 
 function server({ mode }: ConfigEnv): UserConfig["server"] {

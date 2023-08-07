@@ -85,7 +85,6 @@ section {
 .spikes {
   position: relative;
   padding-block: 2rem;
-  background-image: $img-orange;
   color: black;
 
   $spikes-width: 50px;
@@ -123,7 +122,6 @@ section {
     position: absolute;
     inset: 0;
     z-index: -1;
-    background-image: $img-dazzling;
     transform: skewY(-3deg);
   }
 }
@@ -131,7 +129,6 @@ section {
 $mask: radial-gradient(50.39px at 50% 68.7px);
 .wavy {
   padding: 2rem;
-  background-image: $img-sprite;
 
   --mask: radial-gradient(50.39px at 50% 68.75px, #000 99%, #0000 101%)
       calc(50% - 50px) 0/100px 51% repeat-x,
