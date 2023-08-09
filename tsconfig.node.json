@@ -2,7 +2,7 @@
   "compilerOptions": {
     "types": ["node"],
 
-    // Initialized by vite
+    // Initialized By Vite
     "composite": true,
     "skipLibCheck": true,
     "module": "ESNext",

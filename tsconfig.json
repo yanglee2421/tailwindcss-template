@@ -3,9 +3,8 @@
     "types": ["vite/client", "element-plus/global"],
     "baseUrl": ".",
     "paths": { "@/*": ["src/*"] },
-    "allowSyntheticDefaultImports": true,
 
-    // Initialed by Vite
+    // Initialized By Vite
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -14,6 +13,7 @@
 
     /* Bundler mode */
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

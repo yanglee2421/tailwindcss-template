@@ -3,7 +3,7 @@
  * 在这里声明的类型仅为语法提示发挥作用，不参与到编译中
  * 不能写枚举
  */
-/// <reference types="vite/client" />
+
 declare module "*.vue" {
   import type { DefineComponent } from "vue";
   const component: DefineComponent<{}, {}, any>;
