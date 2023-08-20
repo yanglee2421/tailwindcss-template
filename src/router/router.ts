@@ -1,9 +1,5 @@
 // Router Imports
-import {
-  createRouter,
-  createWebHashHistory,
-  createWebHistory,
-} from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import { routes } from "./router-routes";
 import { toIsWhitelist } from "./router-whitelist";
 
@@ -14,10 +10,7 @@ import { useLoginStore } from "@/hooks";
 import NProgress from "nprogress";
 // import "nprogress/nprogress.css";
 
-const isGitee = import.meta.env.MODE === "gitee";
-const history = isGitee
-  ? createWebHashHistory()
-  : createWebHistory("/vite-vue/");
+const history = createWebHashHistory();
 
 export const router = createRouter({ history, routes });
 

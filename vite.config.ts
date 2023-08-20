@@ -4,7 +4,6 @@ import vue from "@vitejs/plugin-vue";
 
 // NodeJs Imports
 import { resolve } from "node:path";
-import { readFileSync } from "node:fs";
 
 // https://vitejs.dev/config/
 export default defineConfig((ConfigEnv) => ({
@@ -24,41 +23,26 @@ export default defineConfig((ConfigEnv) => ({
 }));
 
 function build({ mode }: ConfigEnv): UserConfig["build"] {
-  let outDir = "dist";
-  switch (mode) {
-    case "live":
-      outDir = "dist";
-  }
+  void mode;
 
-  return {
-    outDir,
-    manifest: true,
-    rollupOptions: {
-      output: {
-        entryFileNames: "assets/vite-app.js",
-        assetFileNames: "assets/[name][extname]",
-      },
-    },
-  };
+  return {};
 }
 
 function server({ mode }: ConfigEnv): UserConfig["server"] {
-  const isGitee = mode === "gitee";
-  const https = isGitee && {
-    key: readFileSync(resolve(__dirname, "./config/localhost+1-key.pem")),
-    cert: readFileSync(resolve(__dirname, "./config/localhost+1.pem")),
-  };
+  void mode;
 
   return {
-    https,
+    https: false,
+    fs: { allow: [] },
     port: 5174,
     proxy: {
       "/dev": {
-        // target: "https://gjcx.whsybj.cn:8443",
-        target: "http://localhost",
-        rewrite: (path) => path.replace(/^\/dev/, ""),
-        changeOrigin: true,
         ws: true,
+        changeOrigin: true,
+        target: "http://localhost",
+        rewrite(path) {
+          return path.replace(/^\/dev/, "");
+        },
       },
     },
   };
