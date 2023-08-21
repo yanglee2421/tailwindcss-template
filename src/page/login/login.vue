@@ -6,10 +6,22 @@ onMounted(() => {
   sort.onclick = () => {
     record(container);
     change();
-    move(container);
+    play(container);
   };
 
   const container = document.querySelector(".container");
+
+  function record(container: Element | null) {
+    if (!container) return;
+
+    for (let i = 0, len = container.children.length; i < len; i++) {
+      const dom = container.children[i];
+      const rect = dom.getBoundingClientRect();
+      Reflect.set(dom, "startX", rect.left);
+      Reflect.set(dom, "startY", rect.top);
+    }
+  }
+
   function change() {
     if (!container) return;
 
@@ -28,18 +40,7 @@ onMounted(() => {
     }
   }
 
-  function record(container: Element | null) {
-    if (!container) return;
-
-    for (let i = 0, len = container.children.length; i < len; i++) {
-      const dom = container.children[i];
-      const rect = dom.getBoundingClientRect();
-      Reflect.set(dom, "startX", rect.left);
-      Reflect.set(dom, "startY", rect.top);
-    }
-  }
-
-  function move(container: Element | null) {
+  function play(container: Element | null) {
     if (!container) return;
 
     for (let i = 0, len = container.children.length; i < len; i++) {
