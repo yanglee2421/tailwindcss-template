@@ -16,6 +16,7 @@ export default defineConfig((ConfigEnv) => ({
       scss: { additionalData: `@use "@yanglee2421/scss/src" as *;` },
     },
   },
+
   base: "/vite-vue",
   // envDir: resolve(__dirname, "./config"),
   build: build(ConfigEnv),
@@ -25,7 +26,7 @@ export default defineConfig((ConfigEnv) => ({
 function build({ mode }: ConfigEnv): UserConfig["build"] {
   void mode;
 
-  return {};
+  return { outDir: "docs" };
 }
 
 function server({ mode }: ConfigEnv): UserConfig["server"] {
