@@ -1,0 +1,1 @@
+import{_ as a,o as e,c as s,F as o,i as _,g as r}from"./index-e79f88da.js";const c={inheritAttrs:!0};const n={class:"page"};function d(p,i,l,u,f,m){return e(),s("div",n,[(e(),s(o,null,_(5,t=>r("div",{key:t,class:"b"})),64))])}const v=a(c,[["render",d],["__scopeId","data-v-ad20d8ef"]]);export{v as default};

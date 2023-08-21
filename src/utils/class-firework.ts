@@ -1,7 +1,6 @@
 import { GetRandom } from "./class-getRandom";
 const getRGB = new GetRandom(0, 255);
-const getSize = new GetRandom(1, 4.5);
-const getSpeed = new GetRandom(-5, 5);
+
 const getFire = new GetRandom(30, 70);
 class Firework {
   radius = new GetRandom(0.1, 0.9).get() * 5;

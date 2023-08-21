@@ -7,6 +7,7 @@ interface Props {
 const props = withDefaults(defineProps<Partial<Props>>(), {
   class: "",
 });
+void props;
 
 const btnRef = ref();
 defineExpose({ btnRef });
