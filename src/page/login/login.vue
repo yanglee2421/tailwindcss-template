@@ -1,127 +1,129 @@
 <script lang="ts" setup>
-import { onMounted } from "vue";
+import { reactive } from "vue";
 
-onMounted(() => {
-  const sort = document.getElementById("sort")!;
-  sort.onclick = () => {
-    record(container);
-    change();
-    play(container);
-  };
-
-  const container = document.querySelector(".container");
-
-  function record(container: Element | null) {
-    if (!container) return;
-
-    for (let i = 0, len = container.children.length; i < len; i++) {
-      const dom = container.children[i];
-      const rect = dom.getBoundingClientRect();
-      Reflect.set(dom, "startX", rect.left);
-      Reflect.set(dom, "startY", rect.top);
-    }
-  }
-
-  function change() {
-    if (!container) return;
-
-    const childrens = [...container.children];
-    for (let i = 0, l = childrens.length; i < l; i++) {
-      const children = childrens[i];
-      const j = Math.floor(Math.random() * l);
-      if (i !== j) {
-        // 获取当前dom的下一个元素
-        const inextDom = children.nextElementSibling;
-        // 把i插入j之前
-        container.insertBefore(children, childrens[j]);
-        // 把下标j的元素插入到i元素之前
-        container.insertBefore(childrens[j], inextDom);
-      }
-    }
-  }
-
-  function play(container: Element | null) {
-    if (!container) return;
-
-    for (let i = 0, len = container.children.length; i < len; i++) {
-      const dom = container.children[i];
-      const { left, top } = dom.getBoundingClientRect();
-
-      const startX = Reflect.get(dom, "startX");
-      const startY = Reflect.get(dom, "startY");
-
-      dom.animate(
-        [
-          {
-            transform: `translate(${startX - left}px, ${startY - top}px)`,
-          },
-          { transform: `translate(0px, 0px)` },
-        ],
-        { duration: 600 }
-      );
-    }
-  }
+const formValues = reactive({
+  email: "",
+  passwd: "",
 });
 
 defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <div class="btns">
-    <button id="sort">随机排序</button>
-  </div>
-  <div class="container">
-    <div
-      v-for="item in 50"
-      :key="item"
-      class="item"
-    >
-      {{ item }}
-    </div>
+  <div class="page">
+    <el-row :gutter="16">
+      <el-col
+        :xs="24"
+        :md="12"
+        :lg="16"
+        :xl="20"
+      >
+        <el-image
+          src="https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg"
+          class="h-100"
+        ></el-image>
+      </el-col>
+      <el-col
+        :xs="24"
+        :md="12"
+        :lg="8"
+        :xl="4"
+      >
+        <el-card :body-style="{ height: '100%' }">
+          <div class="flex center-center h-100">
+            <el-space
+              direction="vertical"
+              fill
+            >
+              <el-text
+                tag="h1"
+                size="large"
+                >Hello World!</el-text
+              >
+              <el-text
+                >Please sign-in to your account and start the
+                adventure.</el-text
+              >
+              <el-form
+                label-position="top"
+                size="large"
+                class="mt-1"
+              >
+                <el-form-item
+                  label="Email"
+                  name="email"
+                >
+                  <el-input
+                    v-model.trim="formValues.email"
+                    type="email"
+                  ></el-input>
+                </el-form-item>
+                <el-form-item
+                  label="Password"
+                  name="passwd"
+                >
+                  <el-input
+                    v-model.trim="formValues.passwd"
+                    type="password"
+                    show-password
+                  ></el-input>
+                </el-form-item>
+                <el-form-item>
+                  <div class="flex between-center w-100">
+                    <el-checkbox>Remember Me</el-checkbox>
+                    <el-button
+                      type="primary"
+                      link
+                      >Forgot Password?</el-button
+                    >
+                  </div>
+                </el-form-item>
+                <el-form-item>
+                  <el-button
+                    type="primary"
+                    class="w-100"
+                    >Submit</el-button
+                  >
+                </el-form-item>
+                <el-divider>or</el-divider>
+                <el-form-item>
+                  <div class="flex center-center w-100 box__signup">
+                    <el-text>New on out platform?</el-text>
+                    <el-button
+                      type="primary"
+                      link
+                      class="link__signup"
+                      >Sign up</el-button
+                    >
+                  </div>
+                </el-form-item>
+              </el-form>
+            </el-space>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <style lang="scss" scoped>
-* {
-  margin: 0;
-  padding: 0;
+.el-row {
+  height: 100%;
 }
-
-.btns {
-  text-align: center;
+.el-card {
+  height: 100%;
 }
-
-.btns button {
-  margin: 0 1em;
-  outline: none;
-  border: none;
-  background: #579ef8;
-  color: #fff;
-  padding: 7px 10px;
-  border-radius: 5px;
-  cursor: pointer;
+h1.el-text {
+  font-size: 1.5rem;
 }
-
-.btns button:hover {
-  opacity: 0.8;
+.page {
+  height: 100%;
+  padding: 8px;
 }
-
-.container {
-  width: 500px;
-  overflow: hidden;
-  margin: 20px auto;
-  display: flex;
-  flex-wrap: wrap;
+.link__signup {
+  font-size: 1rem;
 }
-
-.item {
-  width: 50px;
-  height: 50px;
-  box-sizing: border-box;
-  text-align: center;
-  background: #eef5fe;
-  border: 1px solid #ddebfd;
-  line-height: 50px;
-  margin: 5px;
+.box__signup {
+  gap: 1rem;
 }
 </style>
