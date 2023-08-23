@@ -10,100 +10,96 @@ defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <div class="page">
-    <el-row :gutter="16">
-      <el-col
-        :xs="24"
-        :md="12"
-        :lg="16"
-        :xl="20"
-      >
-        <el-image
-          src="https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg"
-          class="h-100"
-        ></el-image>
-      </el-col>
-      <el-col
-        :xs="24"
-        :md="12"
-        :lg="8"
-        :xl="4"
-      >
-        <el-card :body-style="{ height: '100%' }">
-          <div class="flex center-center h-100">
-            <el-space
-              direction="vertical"
-              fill
+  <el-row>
+    <el-col
+      :xs="0"
+      :sm="8"
+      :md="12"
+      :lg="16"
+      :xl="20"
+      class="flex center-center"
+    >
+      <div class="right__col--bg"></div>
+    </el-col>
+    <el-col
+      :xs="24"
+      :sm="16"
+      :md="12"
+      :lg="8"
+      :xl="4"
+    >
+      <el-card :body-style="{ height: '100%' }">
+        <div class="flex center-center h-100">
+          <el-space
+            direction="vertical"
+            fill
+          >
+            <el-text
+              tag="h1"
+              size="large"
+              >Hello World!</el-text
             >
-              <el-text
-                tag="h1"
-                size="large"
-                >Hello World!</el-text
+            <el-text
+              >Please sign-in to your account and start the adventure.</el-text
+            >
+            <el-form
+              label-position="top"
+              size="large"
+              class="mt-1"
+            >
+              <el-form-item
+                label="Email"
+                name="email"
               >
-              <el-text
-                >Please sign-in to your account and start the
-                adventure.</el-text
+                <el-input
+                  v-model.trim="formValues.email"
+                  type="email"
+                ></el-input>
+              </el-form-item>
+              <el-form-item
+                label="Password"
+                name="passwd"
               >
-              <el-form
-                label-position="top"
-                size="large"
-                class="mt-1"
-              >
-                <el-form-item
-                  label="Email"
-                  name="email"
-                >
-                  <el-input
-                    v-model.trim="formValues.email"
-                    type="email"
-                  ></el-input>
-                </el-form-item>
-                <el-form-item
-                  label="Password"
-                  name="passwd"
-                >
-                  <el-input
-                    v-model.trim="formValues.passwd"
-                    type="password"
-                    show-password
-                  ></el-input>
-                </el-form-item>
-                <el-form-item>
-                  <div class="flex between-center w-100">
-                    <el-checkbox>Remember Me</el-checkbox>
-                    <el-button
-                      type="primary"
-                      link
-                      >Forgot Password?</el-button
-                    >
-                  </div>
-                </el-form-item>
-                <el-form-item>
+                <el-input
+                  v-model.trim="formValues.passwd"
+                  type="password"
+                  show-password
+                ></el-input>
+              </el-form-item>
+              <el-form-item>
+                <div class="flex between-center w-100">
+                  <el-checkbox>Remember Me</el-checkbox>
                   <el-button
                     type="primary"
-                    class="w-100"
-                    >Submit</el-button
+                    link
+                    >Forgot Password?</el-button
                   >
-                </el-form-item>
-                <el-divider>or</el-divider>
-                <el-form-item>
-                  <div class="flex center-center w-100 box__signup">
-                    <el-text>New on out platform?</el-text>
-                    <el-button
-                      type="primary"
-                      link
-                      class="link__signup"
-                      >Sign up</el-button
-                    >
-                  </div>
-                </el-form-item>
-              </el-form>
-            </el-space>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
-  </div>
+                </div>
+              </el-form-item>
+              <el-form-item>
+                <el-button
+                  type="primary"
+                  class="w-100"
+                  >Submit</el-button
+                >
+              </el-form-item>
+              <el-divider>or</el-divider>
+              <el-form-item>
+                <div class="flex center-center w-100 box__signup">
+                  <el-text size="default">New on out platform?</el-text>
+                  <el-button
+                    type="primary"
+                    link
+                    >Create an account</el-button
+                  >
+                </div>
+              </el-form-item>
+            </el-form>
+          </el-space>
+        </div>
+      </el-card>
+    </el-col>
+  </el-row>
 </template>
 
 <style lang="scss" scoped>
@@ -116,12 +112,12 @@ defineOptions({ inheritAttrs: false });
 h1.el-text {
   font-size: 1.5rem;
 }
-.page {
-  height: 100%;
-  padding: 8px;
-}
-.link__signup {
-  font-size: 1rem;
+.right__col--bg {
+  $size: 30rem;
+  width: $size;
+  height: $size;
+  background-image: linear-gradient(-45deg, #bd34fe 50%, #47caff 50%);
+  filter: blur(72px);
 }
 .box__signup {
   gap: 1rem;
