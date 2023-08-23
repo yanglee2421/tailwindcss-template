@@ -35,6 +35,8 @@ function build({ mode }: ConfigEnv): UserConfig["build"] {
         manualChunks(id) {
           const isVue = id.includes("node_modules/vue");
           if (isVue) return "vue";
+          const isAxios = id.includes("node_modules/axios");
+          if (isAxios) return "axios";
         },
       },
     },
