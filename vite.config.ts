@@ -26,7 +26,19 @@ export default defineConfig((ConfigEnv) => ({
 function build({ mode }: ConfigEnv): UserConfig["build"] {
   void mode;
 
-  return { outDir: "docs" };
+  return {
+    outDir: "docs",
+    emptyOutDir: true,
+    chunkSizeWarningLimit: 1024,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          const isVue = id.includes("node_modules/vue");
+          if (isVue) return "vue";
+        },
+      },
+    },
+  };
 }
 
 function server({ mode }: ConfigEnv): UserConfig["server"] {
