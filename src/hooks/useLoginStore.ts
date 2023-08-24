@@ -11,7 +11,7 @@ export const useLoginStore = defineStore(
   "login-store",
   () => {
     const state = reactive<State>({
-      isLogined: false,
+      isLogined: true,
     });
     const setState = (cb: Cb) => cb(state);
     return { state, setState };

@@ -44,4 +44,12 @@ export const routes: RouterOptions["routes"] = [
     name: "shapes",
     meta: { title: "shapes" },
   },
+  {
+    path: "/scroll",
+    component() {
+      return import("@/page/scroll");
+    },
+    name: "scroll",
+    meta: { title: "scroll" },
+  },
 ];
