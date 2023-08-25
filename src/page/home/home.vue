@@ -8,7 +8,7 @@ defineOptions({ inheritAttrs: false });
   <div class="page">
     <el-row :gutter="16">
       <el-col
-        :xs="24"
+        :xs="0"
         :sm="12"
       >
         <el-text tag="h1">Wellcome to JavaScript!</el-text>
@@ -21,6 +21,13 @@ defineOptions({ inheritAttrs: false });
         <div class="logo--bg">
           <el-image :src="viteLogo"></el-image>
         </div>
+      </el-col>
+      <el-col
+        :xs="24"
+        :sm="0"
+      >
+        <el-text tag="h1">Wellcome to JavaScript!</el-text>
+        <el-text>JavaScript</el-text>
       </el-col>
       <el-col
         v-for="item in 6"
