@@ -1,10 +1,23 @@
 <script lang="ts" setup>
-import { reactive } from "vue";
+// Vue Imports
+import { reactive, provide } from "vue";
 
-const formValues = reactive({
+// Components Imports
+import iconBtn from "./icon-btn.vue";
+import loginForm from "./login-form.vue";
+
+// Symbols Imports
+import { symbolForm } from "./login-symbols";
+
+// Types Imports
+import { FormValues } from "@/types/page-login";
+
+const formValues = reactive<FormValues>({
   email: "",
   passwd: "",
+  isRemember: true,
 });
+provide(symbolForm, formValues);
 
 defineOptions({ inheritAttrs: false });
 </script>
@@ -32,48 +45,7 @@ defineOptions({ inheritAttrs: false });
           <el-text class="text-basic text-slate-400"
             >Please sign-in to your account and start the adventure.</el-text
           >
-          <el-form
-            label-position="top"
-            size="large"
-            class="mt-1"
-          >
-            <el-form-item
-              label="Email"
-              name="email"
-            >
-              <el-input
-                v-model.trim="formValues.email"
-                type="email"
-              ></el-input>
-            </el-form-item>
-            <el-form-item
-              label="Password"
-              name="passwd"
-            >
-              <el-input
-                v-model.trim="formValues.passwd"
-                type="password"
-                show-password
-              ></el-input>
-            </el-form-item>
-            <el-form-item>
-              <div class="flex justify-between w-full">
-                <el-checkbox>Remember Me</el-checkbox>
-                <el-button
-                  type="primary"
-                  link
-                  >Forgot Password?</el-button
-                >
-              </div>
-            </el-form-item>
-            <el-form-item>
-              <el-button
-                type="primary"
-                class="w-full uppercase bg-none bg-blue-400"
-                >sign in</el-button
-              >
-            </el-form-item>
-          </el-form>
+          <login-form />
           <div class="flex justify-center gap-3 w-full">
             <el-text size="default">New on out platform?</el-text>
             <el-button
@@ -83,32 +55,7 @@ defineOptions({ inheritAttrs: false });
             >
           </div>
           <el-divider>or</el-divider>
-          <div class="flex justify-center">
-            <el-button
-              icon="ChromeFilled"
-              size="large"
-              circle
-              text
-            />
-            <el-button
-              icon="WindPower"
-              size="large"
-              circle
-              text
-            />
-            <el-button
-              icon="ElementPlus"
-              size="large"
-              circle
-              text
-            />
-            <el-button
-              icon="SwitchFilled"
-              size="large"
-              circle
-              text
-            />
-          </div>
+          <icon-btn />
         </el-space>
       </el-card>
     </div>

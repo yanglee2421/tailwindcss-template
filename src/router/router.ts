@@ -4,7 +4,7 @@ import { routes } from "./router-routes";
 import { toIsWhitelist } from "./router-whitelist";
 
 // Hooks Imports
-import { useLoginStore } from "@/hooks";
+import { useStoreLogin } from "@/hooks";
 
 // Nprogress Imports
 import NProgress from "nprogress";
@@ -18,8 +18,8 @@ router.beforeEach((to) => {
   NProgress.start();
 
   // Pinia Hooks
-  const { state } = useLoginStore();
-  const { isLogined } = state;
+  const { state } = useStoreLogin();
+  const isLogined = state.usr;
   const nextName = String(to.name);
 
   // To Login

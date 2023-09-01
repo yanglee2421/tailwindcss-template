@@ -1,17 +1,13 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
 
-interface State {
-  isLogined: boolean;
-}
-
 type Cb = (state: State) => void;
 
-export const useLoginStore = defineStore(
+export const useStoreLogin = defineStore(
   "login-store",
   () => {
     const state = reactive<State>({
-      isLogined: false,
+      usr: null,
     });
     const setState = (cb: Cb) => cb(state);
     return { state, setState };
@@ -27,3 +23,11 @@ export const useLoginStore = defineStore(
     },
   }
 );
+
+interface State {
+  usr: Usr | null;
+}
+
+interface Usr {
+  role: string;
+}
