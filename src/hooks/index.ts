@@ -4,9 +4,9 @@ export { vLazy } from "./v-lazy";
 export { vVis } from "./v-vis";
 
 // Hooks
-export { useDark } from "./useDark";
-export { useResize } from "./useResize";
-export { useResizeEffect } from "./useResizeEffect";
+export * from "./use-is-dark";
+export * from "./use-resize";
 
 // Pinia Stores
 export * from "./use-store-login";
+export * from "./use-store-theme";

@@ -1,14 +1,15 @@
+// Pinia Imports
 import { defineStore } from "pinia";
+
+// Vue Imports
 import { reactive, readonly } from "vue";
 
-type Dispatch = (state: State) => void;
-
-export const useStoreLogin = defineStore(
-  "login",
+export const useStoreTheme = defineStore(
+  "theme",
   () => {
     // State && Dispatch
-    const state = reactive<State>({
-      usr: null,
+    const state = reactive({
+      isDark: false,
     });
     const setState = (dispatch: Dispatch) => {
       dispatch(state);
@@ -25,9 +26,6 @@ export const useStoreLogin = defineStore(
 );
 
 interface State {
-  usr: Usr | null;
+  isDark: boolean;
 }
-
-interface Usr {
-  role: string;
-}
+type Dispatch = (s: State) => void;
