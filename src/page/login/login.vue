@@ -73,18 +73,42 @@ defineOptions({ inheritAttrs: false });
                 >sign in</el-button
               >
             </el-form-item>
-            <el-divider>or</el-divider>
-            <el-form-item>
-              <div class="flex justify-center gap-3 w-full">
-                <el-text size="default">New on out platform?</el-text>
-                <el-button
-                  type="primary"
-                  link
-                  >Create an account</el-button
-                >
-              </div>
-            </el-form-item>
           </el-form>
+          <div class="flex justify-center gap-3 w-full">
+            <el-text size="default">New on out platform?</el-text>
+            <el-button
+              type="primary"
+              link
+              >Create an account</el-button
+            >
+          </div>
+          <el-divider>or</el-divider>
+          <div class="flex justify-center">
+            <el-button
+              icon="ChromeFilled"
+              size="large"
+              circle
+              text
+            />
+            <el-button
+              icon="WindPower"
+              size="large"
+              circle
+              text
+            />
+            <el-button
+              icon="ElementPlus"
+              size="large"
+              circle
+              text
+            />
+            <el-button
+              icon="SwitchFilled"
+              size="large"
+              circle
+              text
+            />
+          </div>
         </el-space>
       </el-card>
     </div>
