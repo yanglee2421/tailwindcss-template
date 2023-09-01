@@ -9,6 +9,7 @@ import { plugin } from "@/plugins";
 
 // Styles Imports
 import "@/assets/scss/global.scss";
+import "@/assets/css/style.css";
 
 const app = createApp(App);
 app.use(plugin);

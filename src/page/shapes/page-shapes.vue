@@ -65,9 +65,6 @@
 $main-bg: hsl(0, 0%, 25%);
 $main-color: white;
 .box {
-  @extend .clearfix;
-  background-color: $main-bg;
-  color: $main-color;
   font-size: 1.2rem;
   font-family: "consolas";
 }

@@ -11,10 +11,14 @@ defineOptions({ inheritAttrs: false });
 
 <template>
   <div class="flex h-full">
-    <div class="right__col--bg"></div>
+    <div class="flex-1"></div>
 
-    <el-card :body-style="{ height: '100%' }">
-      <div class="flex center-center h-100">
+    <div class="w-full md:max-w-lg">
+      <el-card
+        :body-style="{ height: '100%' }"
+        body-class="flex justify-center items-center"
+        class="h-full"
+      >
         <el-space
           direction="vertical"
           fill
@@ -22,9 +26,10 @@ defineOptions({ inheritAttrs: false });
           <el-text
             tag="h1"
             size="large"
-            >Hello World!</el-text
+            class="text-2xl"
+            >Wellcome to Yang_Lee!</el-text
           >
-          <el-text
+          <el-text class="text-basic text-slate-400"
             >Please sign-in to your account and start the adventure.</el-text
           >
           <el-form
@@ -52,7 +57,7 @@ defineOptions({ inheritAttrs: false });
               ></el-input>
             </el-form-item>
             <el-form-item>
-              <div class="flex between-center w-100">
+              <div class="flex justify-between w-full">
                 <el-checkbox>Remember Me</el-checkbox>
                 <el-button
                   type="primary"
@@ -64,13 +69,13 @@ defineOptions({ inheritAttrs: false });
             <el-form-item>
               <el-button
                 type="primary"
-                class="w-100"
-                >Submit</el-button
+                class="w-full uppercase bg-none bg-blue-400"
+                >sign in</el-button
               >
             </el-form-item>
             <el-divider>or</el-divider>
             <el-form-item>
-              <div class="flex center-center w-100 box__signup">
+              <div class="flex justify-center gap-3 w-full">
                 <el-text size="default">New on out platform?</el-text>
                 <el-button
                   type="primary"
@@ -81,29 +86,17 @@ defineOptions({ inheritAttrs: false });
             </el-form-item>
           </el-form>
         </el-space>
-      </div>
-    </el-card>
+      </el-card>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.el-row {
-  height: 100%;
-}
-.el-card {
-  height: 100%;
-}
-h1.el-text {
-  font-size: 1.5rem;
-}
 .right__col--bg {
   $size: 30rem;
   width: $size;
   height: $size;
   background-image: linear-gradient(-45deg, #bd34fe 50%, #47caff 50%);
   filter: blur(72px);
-}
-.box__signup {
-  gap: 1rem;
 }
 </style>

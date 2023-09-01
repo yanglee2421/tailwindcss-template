@@ -47,10 +47,10 @@ defineOptions({ inheritAttrs: true });
 
   &:hover,
   &:focus {
-    border-color: $primary;
-    outline-color: $primary;
+    border-color: red;
+    outline-color: red;
 
-    color: $primary;
+    color: red;
   }
 }
 </style>
