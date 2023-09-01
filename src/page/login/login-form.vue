@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 // Vue Imoprts
-import { inject } from "vue";
+import { inject, ref, unref } from "vue";
 
 // Symbol Imports
 import { symbolForm } from "./login-symbols";
@@ -8,20 +8,48 @@ import { symbolForm } from "./login-symbols";
 // Types Imports
 import { FormValues } from "@/types/page-login";
 
+// Element Imports
+import { FormInstance } from "element-plus";
+
+// API Imports
+import { useUsrPost } from "@/hooks";
+
 const formValues = inject<FormValues>(symbolForm);
 if (!formValues) throw new Error("No Provider symbolForm!");
+
+// API Hooks
+const { mutate, isLoading } = useUsrPost();
+
+// ** Form
+const formRef = ref<FormInstance>();
+
+const handleSubmit = () => {
+  unref(formRef)?.validate((isVali) => {
+    if (!isVali) return;
+    mutate({ data: formValues });
+  });
+};
 
 defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
   <el-form
+    ref="formRef"
     :model="formValues"
+    :rules="{}"
     label-position="top"
     size="large"
     autocapitalize="off"
   >
-    <el-form-item name="email">
+    <el-form-item
+      prop="email"
+      :rules="[
+        { required: true },
+        { type: 'string', min: 8, max: 50 },
+        { type: 'email' },
+      ]"
+    >
       <el-input
         v-model.trim="formValues.email"
         prefix-icon="User"
@@ -29,7 +57,10 @@ defineOptions({ inheritAttrs: false });
         placeholder="Email"
       ></el-input>
     </el-form-item>
-    <el-form-item name="passwd">
+    <el-form-item
+      prop="passwd"
+      :rules="[{ required: true }, { type: 'string', min: 8, max: 16 }]"
+    >
       <el-input
         v-model.trim="formValues.passwd"
         type="password"
@@ -38,7 +69,7 @@ defineOptions({ inheritAttrs: false });
         placeholder="Password"
       ></el-input>
     </el-form-item>
-    <el-form-item>
+    <el-form-item prop="prop">
       <div class="flex justify-between w-full">
         <el-checkbox>Remember Me</el-checkbox>
         <el-button
@@ -50,6 +81,8 @@ defineOptions({ inheritAttrs: false });
     </el-form-item>
     <el-form-item>
       <el-button
+        @click="handleSubmit"
+        :loading="isLoading"
         type="primary"
         class="w-full uppercase bg-none bg-blue-400"
         >sign in</el-button

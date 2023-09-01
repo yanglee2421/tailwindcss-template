@@ -1,1 +1,2 @@
-export { intf_uploadimage } from "./intf_uploadimage";
+// ** Usr
+export { usr_post } from "./usr_post";

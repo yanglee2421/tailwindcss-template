@@ -1,22 +1,39 @@
 <script lang="ts" setup>
 import { Particles } from "@/utils";
 import { useResize } from "@/hooks";
-import { ref, unref } from "vue";
+import { ref, unref, watch } from "vue";
 
 const canRef = ref();
-const boxRef = useResize((box) => {
-  const canvas = unref(canRef);
-  if (!canvas) return;
-  Object.assign(canvas, box);
-  const p = new Particles(canvas, (box.width / 1920) * 120, 110);
-  p.animate();
-  return () => p.abortAnimate();
-});
+const boxRef = ref<HTMLDivElement>();
+const sizeRef = useResize(boxRef);
+watch(
+  sizeRef,
+  (size) => {
+    if (!size) return;
+
+    const [box] = size.contentBoxSize;
+
+    const canvas = unref(canRef);
+    if (!canvas) return;
+
+    Object.assign(canvas, {
+      width: box.inlineSize,
+      height: box.blockSize,
+    });
+
+    const p = new Particles(canvas, (box.inlineSize / 1920) * 120, 110);
+    p.animate();
+    return () => {
+      p.abortAnimate();
+    };
+  },
+  { flush: "post", immediate: true }
+);
 </script>
 
 <template>
   <div
-    :ref="(div) => (boxRef = div)"
+    ref="boxRef"
     class="particle-box"
   >
     <canvas

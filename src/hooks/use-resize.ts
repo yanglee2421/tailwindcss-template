@@ -8,7 +8,7 @@ export function useResize(elRef: Ref<unknown>) {
     const el = unref(elRef);
     const isElement = el instanceof Element;
     if (!isElement) {
-      console.error("resizeRef must sign a Element");
+      console.error("elRef must sign a Element");
       return;
     }
 

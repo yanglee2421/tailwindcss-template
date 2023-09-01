@@ -11,6 +11,9 @@ import { plugin } from "@/plugins";
 import "@/assets/scss/global.scss";
 import "@/assets/css/style.css";
 
+// FakeDB
+import "@/api/fakedb";
+
 const app = createApp(App);
 app.use(plugin);
 app.mount("#root");

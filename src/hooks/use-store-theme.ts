@@ -2,7 +2,7 @@
 import { defineStore } from "pinia";
 
 // Vue Imports
-import { reactive, readonly } from "vue";
+import { reactive } from "vue";
 
 export const useStoreTheme = defineStore(
   "theme",
@@ -15,7 +15,7 @@ export const useStoreTheme = defineStore(
       dispatch(state);
     };
 
-    return { state: readonly(state), setState };
+    return { state, setState };
   },
   {
     persist: {

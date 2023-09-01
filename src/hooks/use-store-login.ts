@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { reactive, readonly } from "vue";
+import { reactive } from "vue";
 
 type Dispatch = (state: State) => void;
 
@@ -14,7 +14,7 @@ export const useStoreLogin = defineStore(
       dispatch(state);
     };
 
-    return { state: readonly(state), setState };
+    return { state, setState };
   },
   {
     persist: {

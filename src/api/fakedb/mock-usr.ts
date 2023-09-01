@@ -4,12 +4,12 @@ import { mock } from "./mock";
 const BASE_URI = "/usr";
 const usrList = [
   {
-    email: "admin@demo.com",
+    email: "admin@yang.com",
     passwd: "admin123456",
     role: "admin",
   },
   {
-    email: "client@demo.com",
+    email: "client@yang.com",
     passwd: "client123456",
     role: "client",
   },
