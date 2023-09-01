@@ -8,7 +8,6 @@ import App from "./App.vue";
 import { plugin } from "@/plugins";
 
 // Styles Imports
-import "@yanglee2421/scss";
 import "@/assets/scss/global.scss";
 
 const app = createApp(App);
