@@ -19,26 +19,23 @@ defineOptions({ inheritAttrs: false });
     :model="formValues"
     label-position="top"
     size="large"
-    class="mt-1"
     autocapitalize="off"
   >
-    <el-form-item
-      label="Email"
-      name="email"
-    >
+    <el-form-item name="email">
       <el-input
         v-model.trim="formValues.email"
+        prefix-icon="User"
         type="email"
+        placeholder="Email"
       ></el-input>
     </el-form-item>
-    <el-form-item
-      label="Password"
-      name="passwd"
-    >
+    <el-form-item name="passwd">
       <el-input
         v-model.trim="formValues.passwd"
         type="password"
+        prefix-icon="Lock"
         show-password
+        placeholder="Password"
       ></el-input>
     </el-form-item>
     <el-form-item>
