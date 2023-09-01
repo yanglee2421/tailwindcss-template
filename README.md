@@ -1,5 +1,9 @@
 # vite-vue
 
+## Get Started
+
+[Live Preview](https://yanglee2421.github.io/vite-vue)
+
 ## vue3.3
 
 ### TypeScript 与 setup 改进
