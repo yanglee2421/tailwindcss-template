@@ -17,6 +17,7 @@ const usrList = [
 
 // ** Endpoints
 mock.onPut(BASE_URI).reply((config) => {
+  void config;
   return [200, {}];
 });
 mock.onDelete(BASE_URI).reply((config) => {
@@ -33,6 +34,7 @@ mock.onDelete(BASE_URI).reply((config) => {
   }
 });
 mock.onPatch(BASE_URI).reply((config) => {
+  void config;
   return [200, {}];
 });
 mock.onPost(BASE_URI).reply((config) => {

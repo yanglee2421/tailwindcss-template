@@ -8,12 +8,19 @@ import { resolve } from "node:path";
 // https://vitejs.dev/config/
 export default defineConfig((ConfigEnv) => ({
   plugins: [vue()],
+
+  // Path Alias
   resolve: {
     alias: { "@": resolve(__dirname, "./src") },
   },
+
+  // ** CSS
   css: {
     preprocessorOptions: {
       scss: { additionalData: `@use "@/assets/scss" as *;` },
+    },
+    modules: {
+      localsConvention: "camelCaseOnly",
     },
   },
 

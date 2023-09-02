@@ -1,27 +1,52 @@
 <script lang="ts" setup>
+// Hooks Imports
 import { useResize } from "@/hooks";
+
+// Utils Imports
 import { Snow } from "@/utils";
-import { ref, unref } from "vue";
-const cvsRef = ref();
-const resizeRef = useResize((box) => {
-  const cvs = unref(cvsRef);
-  if (!cvs) return;
-  Object.assign(cvs, box);
-  const snow = new Snow(cvs, (box.width / 1920) * 200);
-  snow.animation();
-  return () => {
-    snow.abortAnimation();
-  };
-});
+
+// Vue Imports
+import { ref, unref, watch } from "vue";
+
+// DOM Ref
+const boxRef = ref<HTMLDivElement>();
+const cvsRef = ref<HTMLCanvasElement>();
+const sizeRef = useResize(boxRef);
+
+watch(
+  sizeRef,
+  (size) => {
+    if (!size) return;
+    const [box] = size.contentBoxSize;
+
+    const cvs = unref(cvsRef);
+    if (!cvs) return;
+
+    Object.assign(cvs, {
+      width: box.inlineSize,
+      height: box.blockSize,
+    });
+    const snow = new Snow(cvs, (box.inlineSize / 1920) * 200);
+    snow.animation();
+
+    // Clear Effect
+    return () => {
+      snow.abortAnimation();
+    };
+  },
+  { flush: "post", immediate: true }
+);
+
+defineOptions({ inheritAttrs: true });
 </script>
 
 <template>
   <div
-    :ref="(e) => (resizeRef = e)"
+    ref="boxRef"
     class="box"
   >
     <canvas
-      :ref="(e) => (cvsRef = e)"
+      ref="cvsRef"
       class="cvs"
     ></canvas>
   </div>
@@ -44,6 +69,3 @@ const resizeRef = useResize((box) => {
   inset: 0;
 }
 </style>
-<script lang="ts">
-export default { inheritAttrs: true };
-</script>
