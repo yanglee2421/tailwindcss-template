@@ -84,7 +84,7 @@ defineOptions({ inheritAttrs: false });
         @click="handleSubmit"
         :loading="isLoading"
         type="primary"
-        class="w-full uppercase bg-none bg-blue-400"
+        class="w-full uppercase bg-none bg-sky-500 font-semibold"
         >sign in</el-button
       >
     </el-form-item>

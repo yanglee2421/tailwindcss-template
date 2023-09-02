@@ -1,5 +1,15 @@
 <script lang="ts" setup>
+// Assets Imports
 import viteLogo from "@/assets/image/logo/react.svg";
+
+// Hooks Imports
+import { useLogin } from "@/hooks";
+
+const { signOut } = useLogin();
+
+const handleSignOut = () => {
+  signOut();
+};
 
 defineOptions({ inheritAttrs: false });
 </script>
@@ -11,7 +21,7 @@ defineOptions({ inheritAttrs: false });
         :xs="0"
         :sm="12"
       >
-        <el-text tag="h1">Wellcome to JavaScript!</el-text>
+        <el-text tag="h1">Wellcome to Yang_Lee!</el-text>
         <el-text>JavaScript</el-text>
       </el-col>
       <el-col
@@ -39,7 +49,15 @@ defineOptions({ inheritAttrs: false });
         <el-card>{{ item }}</el-card>
       </el-col>
     </el-row>
-    <el-card></el-card>
+    <el-card>
+      <el-button
+        @click="handleSignOut"
+        type="danger"
+        size="large"
+        class="bg-rose-600 uppercase font-semibold"
+        >sign out</el-button
+      >
+    </el-card>
   </div>
 </template>
 
