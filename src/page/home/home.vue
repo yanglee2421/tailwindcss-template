@@ -5,10 +5,26 @@ import viteLogo from "@/assets/image/logo/react.svg";
 // Hooks Imports
 import { useLogin } from "@/hooks";
 
-const { signOut } = useLogin();
+// Acl Imports
+import { useAcl } from "@/configs/acl";
+
+// Vue Imports
+import { computed } from "vue";
+
+const { signOut, signIn } = useLogin();
 
 const handleSignOut = () => {
   signOut();
+};
+
+const acl = useAcl();
+
+const showPage = computed(() => {
+  return acl.can("update", "Article");
+});
+
+const handleSignIn = (role: string) => {
+  signIn({ role, email: "demo@yang.com" });
 };
 
 defineOptions({ inheritAttrs: false });
@@ -16,7 +32,10 @@ defineOptions({ inheritAttrs: false });
 
 <template>
   <div class="page">
-    <el-row :gutter="16">
+    <el-row
+      v-if="showPage"
+      :gutter="16"
+    >
       <el-col
         :xs="0"
         :sm="12"
@@ -57,6 +76,8 @@ defineOptions({ inheritAttrs: false });
         class="bg-rose-600 uppercase font-semibold"
         >sign out</el-button
       >
+      <el-button @click="handleSignIn('admin')">sign in as admin</el-button>
+      <el-button @click="handleSignIn('client')">sign in as client</el-button>
     </el-card>
   </div>
 </template>

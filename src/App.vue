@@ -5,6 +5,9 @@ import { useStoreTheme, useIsDark } from "@/hooks";
 // Vue Imports
 import { watch } from "vue";
 
+// Acl Imports
+import { useAclProvider } from "@/configs/acl";
+
 // Dark mode and theme binding
 const { state, setState } = useStoreTheme();
 watch(
@@ -30,6 +33,9 @@ watch(
   },
   { flush: "post", immediate: true }
 );
+
+// Acl Provider
+useAclProvider();
 </script>
 
 <template>
