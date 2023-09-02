@@ -2,21 +2,22 @@
 import { ref, watchPostEffect, readonly } from "vue";
 
 export function useIsDark() {
-  const controller = new AbortController();
-  const { signal } = controller;
-
+  // Prepare Ref
   const { matches } = matchMedia("(prefers-color-scheme: dark)");
-  const queryRef = ref<boolean>(matches);
+  const isDarkRef = ref<boolean>(matches);
 
   // Bind Change
   watchPostEffect((clearEffect) => {
-    const darkQuery = matchMedia("(prefers-color-scheme: dark)");
-    queryRef.value = darkQuery.matches;
+    const controller = new AbortController();
+    const { signal } = controller;
 
-    darkQuery.addEventListener(
+    const mediaQuery = matchMedia("(prefers-color-scheme: dark)");
+    isDarkRef.value = mediaQuery.matches;
+
+    mediaQuery.addEventListener(
       "change",
       (evt) => {
-        queryRef.value = evt.matches;
+        isDarkRef.value = evt.matches;
       },
       { signal }
     );
@@ -27,5 +28,5 @@ export function useIsDark() {
     });
   });
 
-  return readonly(queryRef);
+  return readonly(isDarkRef);
 }
