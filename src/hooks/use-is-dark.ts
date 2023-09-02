@@ -5,14 +5,14 @@ export function useIsDark() {
   const controller = new AbortController();
   const { signal } = controller;
 
-  const queryRef = ref<boolean>(false);
+  const { matches } = matchMedia("(prefers-color-scheme: dark)");
+  const queryRef = ref<boolean>(matches);
 
+  // Bind Change
   watchPostEffect((clearEffect) => {
-    // ** Mounted
     const darkQuery = matchMedia("(prefers-color-scheme: dark)");
     queryRef.value = darkQuery.matches;
 
-    // Bind Change
     darkQuery.addEventListener(
       "change",
       (evt) => {
