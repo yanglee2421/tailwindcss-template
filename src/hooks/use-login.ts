@@ -1,69 +1,98 @@
 // Store Imports
+import { computed, nextTick } from "vue";
+
+// Store Imports
 import { useStoreLogin, Usr } from "./use-store-login";
 
-// Router Imports
-import {
-  useRouter,
-  useRoute,
-  LocationQueryValue,
-  RouteLocationRaw,
-} from "vue-router";
+// API Imports
+import { useQueryClient } from "@tanstack/vue-query";
 
 // Vue Imports
-import { nextTick } from "vue";
+import {} from "vue";
 
-// Element Imports
+// Router Imports
+import { useRouter, useRoute } from "vue-router";
+import { toHomeRoute } from "@/router/to-home-route";
+
+// Toast Imports
 import { ElMessage } from "element-plus";
 
 export function useLogin() {
+  // Store Hooks
+  const { session, setSession, local, setLocal } = useStoreLogin();
+
+  const usr = computed(() => {
+    return local.usr || session.usr;
+  });
+
   // Router Hooks
   const router = useRouter();
   const route = useRoute();
 
-  // Store Hooks
-  const { state, setState } = useStoreLogin();
-
   // Sign In
-  const signIn = async (data: Usr) => {
+  const signIn = async (data: Usr, remember?: boolean) => {
     // Change Store
-    setState((state) => {
-      state.usr = data;
-    });
+    switch (Boolean(remember)) {
+      // ** Local
+      case true:
+        setLocal((state) => {
+          state.usr = data;
+        });
+        break;
+      // ** Session
+      case false:
+        setSession((state) => {
+          state.usr = data;
+        });
+        break;
+    }
 
-    // Change Router
+    // ** Router
     await nextTick();
     const homeRoute = toHomeRoute(route.query.returnUrl);
     await router.push(homeRoute);
 
-    // Show Toast
+    // ** Toast
     ElMessage.closeAll();
     ElMessage.success("Wellcome back!");
   };
 
+  // API Hooks
+  const queryClient = useQueryClient();
+
   // Sign Out
   const signOut = async () => {
-    // Change Store
-    setState((state) => {
+    // Clear Store
+    setSession((state) => {
+      state.usr = null;
+    });
+    setLocal((state) => {
       state.usr = null;
     });
 
-    // Change Router
+    // Clear Query
+    queryClient.clear();
+
     await nextTick();
     await router.push({ name: "login" });
-
-    // Show Toast
-    ElMessage.closeAll();
-    ElMessage.success("Sign Out Successlly!");
   };
 
-  return { signIn, signOut, state };
-}
+  // Update User
+  const updateUsr = (usr: Partial<Usr>) => {
+    // ** Session
+    setSession((state) => {
+      const prev = state.usr;
+      if (!prev) return;
+      Object.assign(prev, usr);
+    });
 
-function toHomeRoute(params: ToHomeRouteParams): RouteLocationRaw {
-  if (Array.isArray(params)) {
-    return { name: "home" };
-  }
-  if (!params) return { name: "home" };
-  return { path: decodeURIComponent(params) };
+    // ** Local
+    setLocal((state) => {
+      const prev = state.usr;
+      if (!prev) return;
+      Object.assign(prev, usr);
+    });
+  };
+
+  return { signIn, signOut, updateUsr, usr };
 }
-type ToHomeRouteParams = LocationQueryValue | LocationQueryValue[];

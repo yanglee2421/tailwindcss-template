@@ -24,9 +24,13 @@ export default defineConfig((ConfigEnv) => ({
     },
   },
 
-  base: "/vite-vue",
+  base: "./",
   // envDir: resolve(__dirname, "./config"),
+
+  // ** Build
   build: build(ConfigEnv),
+
+  // DEV Server
   server: server(ConfigEnv),
 }));
 
@@ -45,6 +49,9 @@ function build({ mode }: ConfigEnv): UserConfig["build"] {
           const isAxios = id.includes("node_modules/axios");
           if (isAxios) return "axios";
         },
+        entryFileNames: "assets/wp-vite-main.js",
+        assetFileNames: "assets/[name][extname]",
+        chunkFileNames: "assets/[name]-[hash].js",
       },
     },
   };
@@ -55,8 +62,8 @@ function server({ mode }: ConfigEnv): UserConfig["server"] {
 
   return {
     https: false,
-    fs: { allow: ["./"] },
-    port: 3004,
+    fs: { allow: [resolve(__dirname, "../../")] },
+    port: 3008,
     proxy: {
       "/dev": {
         ws: true,

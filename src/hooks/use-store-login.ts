@@ -1,28 +1,45 @@
+// Pinia Imports
 import { defineStore } from "pinia";
-import { reactive } from "vue";
 
-type Dispatch = (state: State) => void;
+// Vue Imports
+import { reactive } from "vue";
 
 export const useStoreLogin = defineStore(
   "login",
   () => {
-    // State && Dispatch
-    const state = reactive<State>({
+    // ** Local
+    const local = reactive<State>({
       usr: null,
     });
-    const setState = (dispatch: Dispatch) => {
-      dispatch(state);
-    };
+    const setLocal = (dispatch: Dispatch) => dispatch(local);
 
-    return { state, setState };
+    // ** Session
+    const session = reactive<State>({
+      usr: null,
+    });
+    const setSession = (dispatch: Dispatch) => dispatch(session);
+
+    return {
+      state: local,
+      setState: setLocal,
+      local,
+      setLocal,
+      session,
+      setSession,
+    };
   },
   {
     persist: {
       enabled: true,
-      strategies: [{ storage: localStorage }],
+      strategies: [
+        { storage: localStorage, paths: ["local"] },
+        { storage: sessionStorage, paths: ["session"] },
+      ],
     },
   }
 );
+
+type Dispatch = (state: State) => void;
 
 interface State {
   usr: Usr | null;
@@ -31,4 +48,5 @@ interface State {
 export interface Usr {
   role: string;
   email: string;
+  loginAt: number;
 }

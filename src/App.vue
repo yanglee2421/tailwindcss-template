@@ -8,6 +8,11 @@ import { watch } from "vue";
 // Acl Imports
 import { useAclProvider } from "@/configs/acl";
 
+// Login Imports
+import { useLoginMe } from "@/hooks";
+
+useLoginMe();
+
 // Dark mode and theme binding
 const { state, setState } = useStoreTheme();
 watch(

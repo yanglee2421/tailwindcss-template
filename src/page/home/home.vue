@@ -24,7 +24,7 @@ const showPage = computed(() => {
 });
 
 const handleSignIn = (role: string) => {
-  signIn({ role, email: "demo@yang.com" });
+  signIn({ role, email: "demo@yang.com", loginAt: Date.now() });
 };
 
 defineOptions({ inheritAttrs: false });

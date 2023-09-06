@@ -4,6 +4,7 @@ export * from "./use-resize";
 
 // ** Login
 export * from "./use-login";
+export * from "./use-login-me";
 
 // Pinia Stores
 export * from "./use-store-login";

@@ -11,8 +11,8 @@ import { FormValues } from "@/types/page-login";
 // Element Imports
 import { FormInstance } from "element-plus";
 
-// API Imports
-import { useUsrPost } from "@/hooks";
+// Hooks Imports
+import { useUsrPost, useLogin } from "@/hooks";
 
 const formValues = inject<FormValues>(symbolForm);
 if (!formValues) throw new Error("No Provider symbolForm!");
@@ -23,10 +23,20 @@ const { mutate, isLoading } = useUsrPost();
 // ** Form
 const formRef = ref<FormInstance>();
 
+// Login Hooks
+const { signIn } = useLogin();
+
 const handleSubmit = () => {
   unref(formRef)?.validate((isVali) => {
     if (!isVali) return;
-    mutate({ data: formValues });
+    mutate(
+      { data: formValues },
+      {
+        onSuccess(data) {
+          signIn(data, formValues.isRemember);
+        },
+      }
+    );
   });
 };
 
@@ -71,7 +81,7 @@ defineOptions({ inheritAttrs: false });
     </el-form-item>
     <el-form-item prop="prop">
       <div class="flex justify-between w-full">
-        <el-checkbox>Remember Me</el-checkbox>
+        <el-checkbox v-model="formValues.isRemember">Remember Me</el-checkbox>
         <el-button
           type="primary"
           link

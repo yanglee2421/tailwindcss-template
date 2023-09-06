@@ -15,11 +15,14 @@ const usrList = [
   },
 ];
 
-// ** Endpoints
+// Add User
 mock.onPut(BASE_URI).reply((config) => {
   void config;
+
   return [200, {}];
 });
+
+// Delete User
 mock.onDelete(BASE_URI).reply((config) => {
   const { data } = config;
 
@@ -33,10 +36,15 @@ mock.onDelete(BASE_URI).reply((config) => {
     return [500, { msg }];
   }
 });
+
+// Update User
 mock.onPatch(BASE_URI).reply((config) => {
   void config;
+
   return [200, {}];
 });
+
+// Sign In
 mock.onPost(BASE_URI).reply((config) => {
   // ** Config
   const { data } = config;
@@ -49,5 +57,16 @@ mock.onPost(BASE_URI).reply((config) => {
   const isVali = usr.passwd === passwd;
   if (!isVali) throw new Error("Email or password is incorrect!");
 
-  return [200, usr];
+  return [200, { email: usr.email, role: usr.role, loginAt: Date.now() }];
+});
+
+// Refresh Token
+mock.onGet(BASE_URI).reply((config) => {
+  const { loginAt } = config.params;
+
+  const time = Date.now() - Number(loginAt);
+  const expiredTime = import.meta.env.DEV ? 1000 * 20 : 1000 * 60 * 60;
+  if (time > expiredTime) throw new Error("Token Has Expired!");
+
+  return [200, { loginAt: Date.now() }];
 });
