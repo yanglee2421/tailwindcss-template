@@ -25,9 +25,9 @@ defineOptions({ inheritAttrs: false });
 
 <template>
   <div class="flex h-full">
-    <div class="flex-1"></div>
+    <div class="flex-1 overflow-hidden"></div>
 
-    <div class="w-full sm:max-w-sm">
+    <div class="w-full sm:max-w-md">
       <el-card class="flex flex-col justify-center h-full px-1">
         <el-text
           tag="h1"
