@@ -9,7 +9,7 @@ import { useLogin } from "@/hooks";
 import { useAcl } from "@/configs/acl";
 
 // Vue Imports
-import { computed } from "vue";
+import { computed, reactive } from "vue";
 
 const { signOut, signIn } = useLogin();
 
@@ -26,6 +26,8 @@ const showPage = computed(() => {
 const handleSignIn = (role: string) => {
   signIn({ role, email: "demo@yang.com", loginAt: Date.now() });
 };
+
+const state = reactive({ showBtn: false });
 
 defineOptions({ inheritAttrs: false });
 </script>
@@ -78,6 +80,10 @@ defineOptions({ inheritAttrs: false });
       >
       <el-button @click="handleSignIn('admin')">sign in as admin</el-button>
       <el-button @click="handleSignIn('client')">sign in as client</el-button>
+    </el-card>
+    <el-card>
+      <ly-btn v-if="state.showBtn"></ly-btn>
+      <el-switch v-model="state.showBtn"></el-switch>
     </el-card>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 // Hooks Imports
-import { useResize } from "@/hooks";
+import { useObserverResize } from "@/hooks";
 
 // Utils Imports
 import { Snow } from "@/utils";
@@ -11,11 +11,12 @@ import { ref, unref, watch } from "vue";
 // DOM Ref
 const boxRef = ref<HTMLDivElement>();
 const cvsRef = ref<HTMLCanvasElement>();
-const sizeRef = useResize(boxRef);
+const sizeRef = useObserverResize(boxRef);
 
 watch(
   sizeRef,
-  (size) => {
+  (size, prev, onClear) => {
+    void prev;
     if (!size) return;
     const [box] = size.contentBoxSize;
 
@@ -30,9 +31,9 @@ watch(
     snow.animation();
 
     // Clear Effect
-    return () => {
+    onClear(() => {
       snow.abortAnimation();
-    };
+    });
   },
   { flush: "post", immediate: true }
 );

@@ -4,50 +4,50 @@ export const routes: RouterOptions["routes"] = [
   { path: "/:pathMatch(.*)*", redirect: "/404" },
   {
     path: "/404",
-    component: () => import("@/page/404/404.vue"),
+    component: () => import("@/pages/404/404.vue"),
     name: "404",
     meta: { title: "NotFound" },
   },
   {
     path: "/login",
-    component: () => import("@/page/login/login.vue"),
+    component: () => import("@/pages/login/login.vue"),
     name: "login",
     meta: { title: "登录" },
   },
   {
     path: "/",
-    component: () => import("@/page/home/home.vue"),
+    component: () => import("@/pages/home/home.vue"),
     name: "home",
     meta: { title: "首页" },
   },
   {
     path: "/particle",
-    component: () => import("@/page/particle/particle.vue"),
+    component: () => import("@/pages/particle/particle.vue"),
     name: "particle",
     meta: { title: "粒子动画" },
   },
   {
     path: "/snow",
-    component: () => import("@/page/snow/snow.vue"),
+    component: () => import("@/pages/snow/snow.vue"),
     name: "snow",
     meta: { title: "雪飘" },
   },
   {
     path: "/demo",
-    component: () => import("@/page/demo/page-demo.vue"),
+    component: () => import("@/pages/demo/page-demo.vue"),
     name: "demo",
     meta: { title: "demo" },
   },
   {
     path: "/shapes",
-    component: () => import("@/page/shapes/page-shapes.vue"),
+    component: () => import("@/pages/shapes/page-shapes.vue"),
     name: "shapes",
     meta: { title: "shapes" },
   },
   {
     path: "/scroll",
     component() {
-      return import("@/page/scroll");
+      return import("@/pages/scroll");
     },
     name: "scroll",
     meta: { title: "scroll" },

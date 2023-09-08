@@ -1,13 +1,13 @@
 // Vue Imports
 import type { Plugin, DefineComponent } from "vue";
-import { router } from "@/router";
+import { router } from "@/routers";
 import { pinia } from "./pinia";
 import { VueQueryPlugin, queryClientConfig } from "./vue-query";
 import { ElementPlus } from "./element-plus";
 import { icons } from "./el-icons";
 
 const lyComponents = import.meta.glob<DefineComponent<{}, {}, any>>(
-  "@/component/**/ly-*.vue",
+  "@/components/**/ly-*.vue",
   {
     eager: true,
     import: "default",

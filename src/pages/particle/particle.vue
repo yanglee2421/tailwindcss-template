@@ -1,14 +1,15 @@
 <script lang="ts" setup>
 import { Particles } from "@/utils";
-import { useResize } from "@/hooks";
+import { useObserverResize } from "@/hooks";
 import { ref, unref, watch } from "vue";
 
 const canRef = ref();
 const boxRef = ref<HTMLDivElement>();
-const sizeRef = useResize(boxRef);
+const sizeRef = useObserverResize(boxRef);
 watch(
   sizeRef,
-  (size) => {
+  (size, prev, onClear) => {
+    void prev;
     if (!size) return;
 
     const [box] = size.contentBoxSize;
@@ -23,9 +24,11 @@ watch(
 
     const p = new Particles(canvas, (box.inlineSize / 1920) * 120, 110);
     p.animate();
-    return () => {
+
+    // Clear Effect
+    onClear(() => {
       p.abortAnimate();
-    };
+    });
   },
   { flush: "post", immediate: true }
 );

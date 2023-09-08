@@ -2,7 +2,7 @@
 import Vue, { readonly, ref, unref, watchPostEffect } from "vue";
 
 export function useObserverMutation<TRef extends Element>(
-  elRef: Vue.Ref<TRef>
+  elRef: Vue.Ref<TRef | undefined>
 ) {
   // Prepare Ref
   const recordRef = ref<MutationRecord | null>(null);

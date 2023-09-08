@@ -12,7 +12,7 @@ import {} from "vue";
 
 // Router Imports
 import { useRouter, useRoute } from "vue-router";
-import { toHomeRoute } from "@/router/to-home-route";
+import { toHomeRoute } from "@/routers";
 
 // Toast Imports
 import { ElMessage } from "element-plus";
