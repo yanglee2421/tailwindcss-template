@@ -12,6 +12,9 @@ import { symbolForm } from "./login-symbols";
 // Types Imports
 import { FormValues } from "@/types/page-login";
 
+// Assets Imports
+import bgImg from "@/assets/image/bg/justHer.jpg";
+
 // ** Form
 const formValues = reactive<FormValues>({
   email: "",
@@ -25,7 +28,19 @@ defineOptions({ inheritAttrs: false });
 
 <template>
   <div class="flex h-full">
-    <div class="flex-1 overflow-hidden"></div>
+    <div
+      class="relative flex-1 overflow-hidden bg-fixed bg-cover"
+      :style="{ backgroundImage: `url(${bgImg})` }"
+    >
+      <div class="absolute top-6 left-6 flex gap-3">
+        <icon-react />
+        <el-text
+          tag="h2"
+          class="text-2xl"
+          >Yang_Lee</el-text
+        >
+      </div>
+    </div>
 
     <div class="w-full sm:max-w-md">
       <el-card class="flex flex-col justify-center h-full px-1">

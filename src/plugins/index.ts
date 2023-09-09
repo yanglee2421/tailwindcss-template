@@ -14,6 +14,14 @@ const lyComponents = import.meta.glob<DefineComponent<{}, {}, any>>(
   }
 );
 
+const iconComponents = import.meta.glob<DefineComponent<{}, {}, any>>(
+  "@/components/**/icon-*.vue",
+  {
+    eager: true,
+    import: "default",
+  }
+);
+
 export const plugin: Plugin = {
   install(app) {
     app.use(VueQueryPlugin, queryClientConfig());
@@ -23,6 +31,10 @@ export const plugin: Plugin = {
     app.use(icons);
 
     Object.entries(lyComponents).forEach(([key, component]) => {
+      const name = key.replace(/(^\/.+\/)|(\.vue$)/g, "");
+      app.component(name, component);
+    });
+    Object.entries(iconComponents).forEach(([key, component]) => {
       const name = key.replace(/(^\/.+\/)|(\.vue$)/g, "");
       app.component(name, component);
     });
