@@ -40,7 +40,7 @@ export function useLoginMe() {
     },
 
     // ** Refetch
-    refetchInterval: import.meta.env.DEV ? 1000 * 10 : 1000 * 60 * 30,
+    refetchInterval: import.meta.env.DEV ? 1000 * 30 : 1000 * 60 * 30,
 
     // ** Retry
     retry: 2,

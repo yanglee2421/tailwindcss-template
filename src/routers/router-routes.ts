@@ -17,39 +17,41 @@ export const routes: RouterOptions["routes"] = [
   {
     path: "/",
     component: () => import("@/pages/home/home.vue"),
-    name: "home",
-    meta: { title: "首页" },
-  },
-  {
-    path: "/particle",
-    component: () => import("@/pages/particle/particle.vue"),
-    name: "particle",
-    meta: { title: "粒子动画" },
-  },
-  {
-    path: "/snow",
-    component: () => import("@/pages/snow/snow.vue"),
-    name: "snow",
-    meta: { title: "雪飘" },
-  },
-  {
-    path: "/demo",
-    component: () => import("@/pages/demo/page-demo.vue"),
-    name: "demo",
-    meta: { title: "demo" },
-  },
-  {
-    path: "/shapes",
-    component: () => import("@/pages/shapes/page-shapes.vue"),
-    name: "shapes",
-    meta: { title: "shapes" },
-  },
-  {
-    path: "/scroll",
-    component() {
-      return import("@/pages/scroll");
-    },
-    name: "scroll",
-    meta: { title: "scroll" },
+    children: [
+      {
+        path: "",
+        meta: { title: "首页" },
+        name: "home",
+        component() {
+          return import("@/pages/demo/page-demo.vue");
+        },
+      },
+      {
+        path: "/particle",
+        component: () => import("@/pages/particle/particle.vue"),
+        name: "particle",
+        meta: { title: "粒子动画" },
+      },
+      {
+        path: "/snow",
+        component: () => import("@/pages/snow/snow.vue"),
+        name: "snow",
+        meta: { title: "雪飘" },
+      },
+      {
+        path: "/shapes",
+        component: () => import("@/pages/shapes/page-shapes.vue"),
+        name: "shapes",
+        meta: { title: "shapes" },
+      },
+      {
+        path: "/scroll",
+        component() {
+          return import("@/pages/scroll");
+        },
+        name: "scroll",
+        meta: { title: "scroll" },
+      },
+    ],
   },
 ];

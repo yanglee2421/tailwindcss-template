@@ -1,91 +1,42 @@
 <script lang="ts" setup>
-// Assets Imports
-import viteLogo from "@/assets/image/logo/react.svg";
+// Components Imports
+import homeHeader from "./home-header.vue";
+import homeAsideMenu from "./home-aside-menu.vue";
+import { reactive } from "vue";
 
-// Hooks Imports
-import { useLogin } from "@/hooks";
-
-// Acl Imports
-import { useAcl } from "@/configs/acl";
-
-// Vue Imports
-import { computed, reactive } from "vue";
-
-const { signOut, signIn } = useLogin();
-
-const handleSignOut = () => {
-  signOut();
-};
-
-const acl = useAcl();
-
-const showPage = computed(() => {
-  return acl.can("update", "Article");
+const state = reactive({
+  collapse: false,
 });
-
-const handleSignIn = (role: string) => {
-  signIn({ role, email: "demo@yang.com", loginAt: Date.now() });
-};
-
-const state = reactive({ showBtn: false });
 
 defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <div class="page">
-    <el-row
-      v-if="showPage"
-      :gutter="16"
+  <el-container class="h-full">
+    <el-aside
+      width="auto"
+      :class="[
+        'transition-all',
+        'overflow-hidden',
+        state.collapse ? 'w-36' : 'w-12',
+      ]"
     >
-      <el-col
-        :xs="0"
-        :sm="12"
-      >
-        <el-text tag="h1">Wellcome to Yang_Lee!</el-text>
-        <el-text>JavaScript</el-text>
-      </el-col>
-      <el-col
-        :xs="24"
-        :sm="12"
-      >
-        <div class="logo--bg">
-          <el-image :src="viteLogo"></el-image>
-        </div>
-      </el-col>
-      <el-col
-        :xs="24"
-        :sm="0"
-      >
-        <el-text tag="h1">Wellcome to JavaScript!</el-text>
-        <el-text>JavaScript</el-text>
-      </el-col>
-      <el-col
-        v-for="item in 6"
-        :key="item"
-        :xs="24"
-        :sm="12"
-        :md="8"
-      >
-        <el-card>{{ item }}</el-card>
-      </el-col>
-    </el-row>
-    <el-card>
-      <el-button
-        @click="handleSignOut"
-        type="danger"
-        size="large"
-        class="bg-rose-600 uppercase font-semibold"
-        >sign out</el-button
-      >
-      <el-button @click="handleSignIn('admin')">sign in as admin</el-button>
-      <el-button @click="handleSignIn('client')">sign in as client</el-button>
-    </el-card>
-    <el-card>
-      <ly-btn v-if="state.showBtn"></ly-btn>
-      <el-switch v-model="state.showBtn"></el-switch>
-    </el-card>
-  </div>
+      <home-aside-menu />
+    </el-aside>
+    <el-container>
+      <el-header>
+        <el-switch v-model="state.collapse"></el-switch>
+        <home-header />
+      </el-header>
+      <el-main>
+        <router-view #default="{ Component }">
+          <keep-alive :max="10">
+            <component :is="Component"></component>
+          </keep-alive>
+        </router-view>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <style lang="scss" scoped>
