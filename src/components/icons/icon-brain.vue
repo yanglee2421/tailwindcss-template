@@ -8,6 +8,8 @@ const props = withDefaults(defineProps<props>(), {
   color: "black",
   size: 20,
 });
+
+defineOptions({ inheritAttrs: true });
 </script>
 
 <template>
@@ -41,6 +43,3 @@ const props = withDefaults(defineProps<props>(), {
 </template>
 
 <style lang="scss" scoped></style>
-<script lang="ts">
-export default { inheritAttrs: true };
-</script>
