@@ -1,15 +1,19 @@
 <script lang="ts" setup>
-import { onMounted } from "vue";
+// Vue Imports
+import { onMounted, ref, unref } from "vue";
+
+const boxRef = ref<HTMLDivElement>();
 
 onMounted(() => {
+  const container = unref(boxRef);
+  if (!container) return;
+
   const sort = document.getElementById("sort")!;
   sort.onclick = () => {
     record(container);
     change();
     play(container);
   };
-
-  const container = document.querySelector(".container");
 
   function record(container: Element | null) {
     if (!container) return;
@@ -67,61 +71,27 @@ defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <div class="btns">
-    <button id="sort">随机排序</button>
+  <div class="text-center">
+    <el-button
+      size="large"
+      type="primary"
+      class="bg-sky-500 uppercase"
+      id="sort"
+      >random order</el-button
+    >
   </div>
-  <div class="container">
+  <div
+    ref="boxRef"
+    class="grid grid-cols-12 gap-2 p-2 overflow-hidden mx-auto mt-6 border"
+  >
     <div
       v-for="item in 50"
       :key="item"
-      class="item"
+      class="bg-red-300 flex justify-center items-center h-16 border rounded text-white text-2xl"
     >
       {{ item }}
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-* {
-  margin: 0;
-  padding: 0;
-}
-
-.btns {
-  text-align: center;
-}
-
-.btns button {
-  margin: 0 1em;
-  outline: none;
-  border: none;
-  background: #579ef8;
-  color: #fff;
-  padding: 7px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btns button:hover {
-  opacity: 0.8;
-}
-
-.container {
-  width: 500px;
-  overflow: hidden;
-  margin: 20px auto;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.item {
-  width: 50px;
-  height: 50px;
-  box-sizing: border-box;
-  text-align: center;
-  background: #eef5fe;
-  border: 1px solid #ddebfd;
-  line-height: 50px;
-  margin: 5px;
-}
-</style>
+<style lang="scss" scoped></style>
