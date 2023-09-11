@@ -68,7 +68,7 @@ function server({ mode }: ConfigEnv): UserConfig["server"] {
       "/dev": {
         ws: true,
         changeOrigin: true,
-        target: "http://localhost",
+        target: "http://localhost:5173",
         rewrite(path) {
           return path.replace(/^\/dev/, "");
         },

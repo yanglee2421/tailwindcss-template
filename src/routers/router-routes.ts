@@ -52,6 +52,14 @@ export const routes: RouterOptions["routes"] = [
         name: "scroll",
         meta: { title: "scroll" },
       },
+      {
+        path: "performance",
+        name: "performance",
+        meta: { title: "Performance" },
+        component() {
+          return import("@/pages/performance");
+        },
+      },
     ],
   },
 ];
