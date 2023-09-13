@@ -60,6 +60,14 @@ export const routes: RouterOptions["routes"] = [
           return import("@/pages/performance");
         },
       },
+      {
+        path: "cropperjs",
+        name: "cropperjs",
+        meta: { title: "cropperjs" },
+        component() {
+          return import("@/pages/cropperjs");
+        },
+      },
     ],
   },
 ];

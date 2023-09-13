@@ -32,6 +32,9 @@ dependencies:
   axios-mock-adapter:
     specifier: ^1.21.5
     version: 1.21.5(axios@1.5.0)
+  cropperjs:
+    specifier: ^1.6.0
+    version: 1.6.0
   element-plus:
     specifier: ^2.3.12
     version: 2.3.12(vue@3.3.4)
@@ -813,6 +816,10 @@ packages:
   /concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
+
+  /cropperjs@1.6.0:
+    resolution: {integrity: sha512-BzLU/ecrfsbflwxgu+o7sQTrTlo52pVRZkTVrugEK5uyj6n8qKwAHP4s6+DWHqlXLqQ5B9+cM2MKeXiNfAsF6Q==}
+    dev: false
 
   /cssesc@3.0.0:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
