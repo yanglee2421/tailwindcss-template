@@ -2,6 +2,6 @@
 defineOptions({ inheritAttrs: false });
 </script>
 
-<template>189165165161</template>
+<template></template>
 
 <style lang="scss" scoped></style>

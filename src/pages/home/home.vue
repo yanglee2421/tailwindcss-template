@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 // Components Imports
 import homeHeader from "./home-header.vue";
-import homeAsideMenu from "./home-aside-menu.vue";
+// import homeAsideMenu from "./home-aside-menu.vue";
 import { reactive } from "vue";
 
 const state = reactive({
@@ -13,7 +13,7 @@ defineOptions({ inheritAttrs: false });
 
 <template>
   <el-container class="h-full">
-    <el-aside
+    <!-- <el-aside
       width="auto"
       :class="[
         'transition-all',
@@ -22,7 +22,7 @@ defineOptions({ inheritAttrs: false });
       ]"
     >
       <home-aside-menu />
-    </el-aside>
+    </el-aside> -->
     <el-container>
       <el-header>
         <el-switch v-model="state.collapse"></el-switch>

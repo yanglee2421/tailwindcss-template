@@ -1,37 +1,42 @@
 <script lang="ts" setup>
 // Vue Imports
-import { reactive, watchPostEffect } from "vue";
+import { reactive, ref, watchPostEffect } from "vue";
+
+// Utils Imports
+import { toBase64 } from "@/utils";
 
 const state = reactive({
-  text: "",
+  img: "",
 });
 
-watchPostEffect(async (onClear) => {
-  const controler = new AbortController();
-  const { signal } = controler;
+const cvsRef = ref<HTMLCanvasElement>();
+const fileRef = ref<HTMLInputElement>();
 
-  const url = new URL("/dev/chat/bing", globalThis.location.origin);
-  const res = await fetch(url, { signal });
-  if (!res.body) return;
+const handleFileChange = async (evt: Event) => {
+  const { target } = evt;
+  if (!target) return;
 
-  const reader = res.body.getReader();
-  while (true) {
-    const { done, value } = await reader.read();
-    const detext = new TextDecoder("utf8");
-    const text = detext.decode(value);
+  const [file] = Reflect.get(target, "files") as File[];
+  console.log(file);
+  const dataURL = await toBase64(file);
+  state.img = dataURL;
+};
 
-    state.text += text;
-
-    if (done) break;
-  }
-
-  onClear(() => {
-    controler.abort();
-  });
-});
+watchPostEffect(() => {});
 </script>
 
 <template>
   <h1 class="capitalize">performance</h1>
-  {{ state.text }}
+  <div class="w-96 h-96">
+    <input
+      ref="fileRef"
+      type="file"
+      accept="image/*"
+      multiple="false"
+      value=""
+      @change="handleFileChange"
+    />
+    <canvas ref="cvsRef"></canvas>
+    <img :src="state.img" />
+  </div>
 </template>
