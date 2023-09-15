@@ -17,7 +17,6 @@ const handleFileChange = async (evt: Event) => {
   if (!target) return;
 
   const [file] = Reflect.get(target, "files") as File[];
-  console.log(file);
   const dataURL = await toBase64(file);
   state.img = dataURL;
 };
