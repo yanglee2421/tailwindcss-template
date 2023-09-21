@@ -2,11 +2,11 @@
 import { Plugin } from "vue";
 
 // Icons Imports
-import * as elIcons from "@element-plus/icons-vue";
+import * as icons from "@element-plus/icons-vue";
 
-export const icons: Plugin = {
+export const elIcons: Plugin = {
   install(app) {
-    Object.entries(elIcons).forEach(([key, value]) => {
+    Object.entries(icons).forEach(([key, value]) => {
       app.component(key, value);
     });
   },

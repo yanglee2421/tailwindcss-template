@@ -1,42 +1,12 @@
-// Vue Imports
-import type { Plugin, DefineComponent } from "vue";
-import { router } from "@/routers";
-import { pinia } from "./pinia";
-import { VueQueryPlugin, queryClientConfig } from "./vue-query";
-import { ElementPlus } from "./element-plus";
-import { icons } from "./el-icons";
+// Element UI
+export * from "./el-icons";
+export * from "./el-ui";
 
-const lyComponents = import.meta.glob<DefineComponent<{}, {}, any>>(
-  "@/components/**/ly-*.vue",
-  {
-    eager: true,
-    import: "default",
-  }
-);
+// ** Pinia
+export * from "./pinia";
 
-const iconComponents = import.meta.glob<DefineComponent<{}, {}, any>>(
-  "@/components/**/icon-*.vue",
-  {
-    eager: true,
-    import: "default",
-  }
-);
+// ** Icons
+export * from "./icons";
 
-export const plugin: Plugin = {
-  install(app) {
-    app.use(VueQueryPlugin, queryClientConfig());
-    app.use(pinia);
-    app.use(router);
-    app.use(ElementPlus);
-    app.use(icons);
-
-    Object.entries(lyComponents).forEach(([key, component]) => {
-      const name = key.replace(/(^\/.+\/)|(\.vue$)/g, "");
-      app.component(name, component);
-    });
-    Object.entries(iconComponents).forEach(([key, component]) => {
-      const name = key.replace(/(^\/.+\/)|(\.vue$)/g, "");
-      app.component(name, component);
-    });
-  },
-};
+// ** Default
+export { plugins as default } from "./plugins";
