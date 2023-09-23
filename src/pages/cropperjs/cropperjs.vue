@@ -4,59 +4,57 @@ import Cropper from "cropperjs";
 import "cropperjs/dist/cropper.min.css";
 
 // Vue Imports
-import { ref, unref, watchPostEffect } from "vue";
+import { ref, shallowRef, unref, watchPostEffect } from "vue";
 
 const imgRef = ref<HTMLImageElement>();
-const btnConfirmRef = ref<HTMLButtonElement>();
+const cropperRef = shallowRef<Cropper | null>(null);
 
 watchPostEffect((onClear) => {
   const img = unref(imgRef);
   if (!img) return;
 
-  const btnConfirm = unref(btnConfirmRef);
-  if (!btnConfirm) return;
-
-  const cropper = new Cropper(img, {
-    aspectRatio: 16 / 9,
+  cropperRef.value = new Cropper(img, {
+    aspectRatio: 1,
   });
-
-  btnConfirm.onclick = async () => {
-    const cropedCvs = cropper.getCroppedCanvas();
-    const blob = await new Promise<Blob>((res) => {
-      // @ts-ignore
-      cropedCvs.toBlob(res);
-    });
-
-    console.log(blob);
-
-    // Download Image
-    const href = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.download = "demo.jpeg";
-    a.href = href;
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(href);
-  };
 
   // Clear Effect
   onClear(() => {
-    cropper.clear();
+    const cropper = unref(cropperRef);
+    cropper?.destroy();
   });
 });
+
+const handleDownload = () => {
+  const cropper = unref(cropperRef);
+  if (!cropper) return;
+
+  const cropedCvs = cropper.getCroppedCanvas();
+  const href = cropedCvs.toDataURL();
+  const a = document.createElement("a");
+  a.download = `${Date.now()}.png`;
+  a.href = href;
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(href);
+};
 
 defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <div class="max-w-full">
+  <div class="max-w-full border">
     <img
       ref="imgRef"
-      class="max-w-full block"
+      class="w-96 h-96 block"
       src="https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg"
     />
   </div>
-  <button ref="btnConfirmRef">confirm</button>
+  <button
+    @click="handleDownload"
+    class="bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 outline-sky-500 active:bg-blue-300 rounded py-1 px-2 text-white"
+  >
+    download
+  </button>
 </template>
 
 <style lang="scss" scoped></style>

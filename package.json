@@ -20,6 +20,7 @@
     "axios-mock-adapter": "^1.21.5",
     "cropperjs": "^1.6.0",
     "element-plus": "^2.3.12",
+    "fabric": "^5.3.0",
     "i18next": "^23.4.9",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.6",
@@ -28,6 +29,7 @@
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
+    "@types/fabric": "^5.3.4",
     "@types/node": "^20.5.7",
     "@types/nprogress": "^0.2.0",
     "@vitejs/plugin-vue": "^4.3.4",

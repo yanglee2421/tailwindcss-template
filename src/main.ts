@@ -5,7 +5,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 
 // Plugin Imports
-import { plugin } from "@/plugins";
+import plugins from "@/plugins";
 
 // Styles Imports
 import "@/assets/scss/global.scss";
@@ -15,5 +15,5 @@ import "@/assets/css/style.css";
 import "@/api/fakedb";
 
 const app = createApp(App);
-app.use(plugin);
+app.use(plugins);
 app.mount("#root");
