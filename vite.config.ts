@@ -24,7 +24,7 @@ export default defineConfig((ConfigEnv) => ({
     },
   },
 
-  base: "./",
+  base: "/vite-vue",
   // envDir: resolve(__dirname, "./config"),
 
   // ** Build
@@ -44,14 +44,14 @@ function build({ mode }: ConfigEnv): UserConfig["build"] {
     rollupOptions: {
       output: {
         manualChunks(id) {
-          const isVue = id.includes("node_modules/vue");
-          if (isVue) return "vue";
-          const isAxios = id.includes("node_modules/axios");
-          if (isAxios) return "axios";
+          const isCropperjs = id.includes("node_modules/cropperjs");
+          if (isCropperjs) return "cropperjs";
+          const isFabric = id.includes("node_modules/fabric");
+          if (isFabric) return "fabric";
         },
-        entryFileNames: "assets/wp-vite-main.js",
-        assetFileNames: "assets/[name][extname]",
-        chunkFileNames: "assets/[name]-[hash].js",
+        // entryFileNames: "assets/wp-vite-main.js",
+        // assetFileNames: "assets/[name][extname]",
+        // chunkFileNames: "assets/[name]-[hash].js",
       },
     },
   };
