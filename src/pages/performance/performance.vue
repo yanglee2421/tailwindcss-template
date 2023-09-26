@@ -22,6 +22,12 @@ defineOptions({ inheritAttrs: false });
         temporibus consequatur porro. Consequatur eligendi dicta veniam
         repudiandae sit dignissimos error esse perferendis illo iure!
         Praesentium iste rerum fugit hic!
+        <br />
+        <a
+          href="/vite.svg"
+          download="123.svg"
+          >click me</a
+        >
       </article>
     </div>
   </div>
