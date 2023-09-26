@@ -1,42 +1,13 @@
 <script lang="ts" setup>
-// Components Imports
-import homeHeader from "./home-header.vue";
-// import homeAsideMenu from "./home-aside-menu.vue";
-import { reactive } from "vue";
-
-const state = reactive({
-  collapse: false,
-});
-
 defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <el-container class="h-full">
-    <!-- <el-aside
-      width="auto"
-      :class="[
-        'transition-all',
-        'overflow-hidden',
-        state.collapse ? 'w-36' : 'w-12',
-      ]"
-    >
-      <home-aside-menu />
-    </el-aside> -->
-    <el-container>
-      <el-header>
-        <el-switch v-model="state.collapse"></el-switch>
-        <home-header />
-      </el-header>
-      <el-main>
-        <router-view #default="{ Component }">
-          <keep-alive :max="10">
-            <component :is="Component"></component>
-          </keep-alive>
-        </router-view>
-      </el-main>
-    </el-container>
-  </el-container>
+  <router-view #default="{ Component }">
+    <keep-alive :max="10">
+      <component :is="Component"></component>
+    </keep-alive>
+  </router-view>
 </template>
 
 <style lang="scss" scoped>
