@@ -80,12 +80,12 @@ defineOptions({ inheritAttrs: false });
   </div>
   <div
     ref="boxRef"
-    class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 xl:grid-cols-12 gap-2 p-2 overflow-hidden mx-auto mt-6 border"
+    class="p-2 overflow-hidden mx-auto mt-6 border flex gap-2 flex-wrap"
   >
     <div
       v-for="item in 50"
       :key="item"
-      class="bg-red-300 flex justify-center items-center h-16 border rounded text-white text-2xl"
+      class="basis-1/6 sm:basis-1/12 flex-1 bg-red-300 flex justify-center items-center h-16 border rounded text-white text-2xl"
     >
       {{ item }}
     </div>
