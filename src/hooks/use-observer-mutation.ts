@@ -1,11 +1,11 @@
 // Vue Imports
-import Vue, { readonly, ref, unref, watchPostEffect } from "vue";
+import Vue, { readonly, shallowRef, unref, watchPostEffect } from "vue";
 
 export function useObserverMutation<TRef extends Element>(
   elRef: Vue.Ref<TRef | undefined>
 ) {
   // Prepare Ref
-  const recordRef = ref<MutationRecord | null>(null);
+  const recordRef = shallowRef<MutationRecord | null>(null);
 
   // Observer Element Effect
   watchPostEffect((clearEffect) => {

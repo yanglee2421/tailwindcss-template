@@ -1,11 +1,11 @@
 // Vue Imports
-import Vue, { readonly, ref, unref, watchPostEffect } from "vue";
+import Vue, { readonly, shallowRef, unref, watchPostEffect } from "vue";
 
 export function useObserverResize<TRef extends Element>(
   elRef: Vue.Ref<TRef | undefined>
 ) {
   // Prepare Ref
-  const entryRef = ref<ResizeObserverEntry | null>(null);
+  const entryRef = shallowRef<ResizeObserverEntry | null>(null);
 
   // Observer Element Effect
   watchPostEffect((clearEffect) => {
