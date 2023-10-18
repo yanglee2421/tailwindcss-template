@@ -4,9 +4,9 @@ defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <div class="container">
+  <div class="page">
     <div
-      v-for="item in 10"
+      v-for="item in 20"
       :key="item"
       class="item"
       :style="{ backgroundImage: `url(${itemBg})` }"
@@ -24,10 +24,10 @@ defineOptions({ inheritAttrs: false });
 </template>
 
 <style lang="scss" scoped>
-.container {
+.page {
   //   max-width: 1400px;
   //   margin-inline: auto;
-  //   border: 1px dashed;
+  // border: 1px dashed;
 
   display: grid;
   place-content: space-between;
