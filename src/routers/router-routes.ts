@@ -76,6 +76,14 @@ export const routes: RouterOptions["routes"] = [
           return import("@/pages/grid");
         },
       },
+      {
+        path: "table",
+        name: "table",
+        meta: { title: "table" },
+        component() {
+          return import("@/pages/table");
+        },
+      },
     ],
   },
 ];
