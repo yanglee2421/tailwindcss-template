@@ -3,7 +3,10 @@ import { defineConfig, ConfigEnv, UserConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
 // NodeJs Imports
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath, URL } from "node:url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // https://vitejs.dev/config/
 export default defineConfig((ConfigEnv) => ({
@@ -11,7 +14,9 @@ export default defineConfig((ConfigEnv) => ({
 
   // Path Alias
   resolve: {
-    alias: { "@": resolve(__dirname, "./src") },
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
   },
 
   // ** CSS
