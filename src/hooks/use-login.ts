@@ -74,7 +74,12 @@ export function useLogin() {
     queryClient.clear();
 
     await nextTick();
-    await router.push({ name: "login" });
+    await router.push({
+      name: "login",
+      query: {
+        returnUrl: encodeURIComponent(router.currentRoute.value.fullPath),
+      },
+    });
   };
 
   // Update User
