@@ -2,7 +2,7 @@
 import type { Plugin, DefineComponent } from "vue";
 
 // Plugins Imports
-import { router } from "@/routers";
+import { router } from "@/router";
 import { pinia } from "./pinia";
 import { VueQueryPlugin, queryClientConfig } from "./vue-query";
 import { elUI } from "./el-ui";
