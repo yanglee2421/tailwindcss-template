@@ -12,11 +12,11 @@
     "@casl/ability": "^6.5.0",
     "@casl/vue": "^2.2.1",
     "@element-plus/icons-vue": "^2.1.0",
-    "@tanstack/query-persist-client-core": "^5.0.0",
-    "@tanstack/query-sync-storage-persister": "^5.0.0",
-    "@tanstack/vue-query": "^5.0.0",
+    "@tanstack/query-persist-client-core": "^5.0.5",
+    "@tanstack/query-sync-storage-persister": "^5.0.5",
+    "@tanstack/vue-query": "^5.4.1",
     "@tinymce/tinymce-vue": "^5.1.1",
-    "axios": "^1.5.1",
+    "axios": "^1.6.0",
     "axios-mock-adapter": "^1.22.0",
     "cropperjs": "^1.6.1",
     "element-plus": "^2.4.1",
@@ -25,20 +25,20 @@
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
     "pinia-plugin-persist": "^1.0.0",
-    "vue": "^3.3.5",
+    "vue": "^3.3.7",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@types/fabric": "^5.3.5",
-    "@types/node": "^20.8.7",
+    "@types/node": "^20.8.9",
     "@types/nprogress": "^0.2.2",
     "@vitejs/plugin-vue": "^4.4.0",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.31",
-    "sass": "^1.69.4",
-    "tailwindcss": "^3.3.3",
+    "sass": "^1.69.5",
+    "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2",
     "vite": "^4.5.0",
-    "vue-tsc": "^1.8.19"
+    "vue-tsc": "^1.8.22"
   }
 }
