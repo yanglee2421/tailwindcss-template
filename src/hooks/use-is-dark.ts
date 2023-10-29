@@ -1,32 +1,26 @@
 // Vue Imports
-import { ref, watchPostEffect, readonly } from "vue";
+import { onUnmounted, customRef } from "vue";
 
 export function useIsDark() {
   // Prepare Ref
-  const { matches } = matchMedia("(prefers-color-scheme: dark)");
-  const isDarkRef = ref<boolean>(matches);
+  const mediaQuery = matchMedia("(prefers-color-scheme: dark)");
 
-  // Bind Change
-  watchPostEffect((clearEffect) => {
-    const controller = new AbortController();
-    const { signal } = controller;
-
-    const mediaQuery = matchMedia("(prefers-color-scheme: dark)");
-    isDarkRef.value = mediaQuery.matches;
-
-    mediaQuery.addEventListener(
-      "change",
-      (evt) => {
-        isDarkRef.value = evt.matches;
-      },
-      { signal }
-    );
-
-    // Clear Effect
-    clearEffect(() => {
-      controller.abort();
-    });
+  const controller = new AbortController();
+  onUnmounted(() => {
+    controller.abort();
   });
 
-  return readonly(isDarkRef);
+  return customRef((tarck, trigger) => {
+    return {
+      get() {
+        tarck();
+
+        const { signal } = controller;
+        mediaQuery.addEventListener("change", trigger, { signal });
+
+        return mediaQuery.matches;
+      },
+      set() {},
+    };
+  });
 }
