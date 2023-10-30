@@ -2,7 +2,7 @@
 
 ## Get Started
 
-[Live Preview](https://yanglee2421.github.io/vite-vue)
+[Live Preview](https://yanglee2421.github.io/vue-ele)
 
 ## vue3.3
 
