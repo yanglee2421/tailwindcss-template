@@ -6,47 +6,59 @@ import vue from "@vitejs/plugin-vue";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, URL } from "node:url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
 // https://vitejs.dev/config/
-export default defineConfig((ConfigEnv) => ({
-  plugins: [vue()],
+export default defineConfig((ConfigEnv) => {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const isBuild = ConfigEnv.command === "build";
 
-  // Path Alias
-  resolve: {
-    alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
+  return {
+    plugins: [vue()],
+
+    // Path Alias
+    resolve: {
+      alias: {
+        "@": fileURLToPath(new URL("./src", import.meta.url)),
+      },
     },
-  },
 
-  // ** CSS
-  css: {
-    preprocessorOptions: {
-      scss: { additionalData: `@use "@/assets/scss" as *;` },
+    // ** CSS
+    css: {
+      preprocessorOptions: {
+        scss: { additionalData: `@use "@/assets/scss" as *;` },
+      },
+      modules: {
+        localsConvention: "camelCaseOnly",
+      },
     },
-    modules: {
-      localsConvention: "camelCaseOnly",
-    },
-  },
 
-  base: "/vite-vue",
-  // envDir: resolve(__dirname, "./config"),
+    base: isBuild ? "./" : "/vite-vue",
+    // envDir: resolve(__dirname, "./config"),
 
-  // ** Build
-  build: build(ConfigEnv),
+    // ** Build
+    build: build(ConfigEnv),
 
-  // DEV Server
-  server: server(ConfigEnv),
-}));
+    // DEV Server
+    server: server(ConfigEnv),
 
+    // Env file directory
+    envDir: resolve(__dirname, "./"),
+  };
+});
+
+// Build Config
 function build({ mode }: ConfigEnv): UserConfig["build"] {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
   void mode;
 
   return {
     outDir: "docs",
     emptyOutDir: true,
+    manifest: false,
     chunkSizeWarningLimit: 1024,
     rollupOptions: {
+      input: {
+        main: resolve(__dirname, "./index.html"),
+      },
       output: {
         manualChunks(id) {
           const isCropperjs = id.includes("node_modules/cropperjs");
@@ -62,7 +74,9 @@ function build({ mode }: ConfigEnv): UserConfig["build"] {
   };
 }
 
+// Server Config
 function server({ mode }: ConfigEnv): UserConfig["server"] {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
   void mode;
 
   return {
