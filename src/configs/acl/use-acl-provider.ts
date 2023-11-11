@@ -6,19 +6,17 @@ import { provideAbility } from "@casl/vue";
 import { useStoreLogin } from "@/hooks";
 
 // Vue Imports
-import { watch } from "vue";
+import { watchPostEffect } from "vue";
 
 export function useAclProvider() {
   // Acl Hooks
   const { state } = useStoreLogin();
   const acl = defineAbilityFor(state.usr?.role || "");
   provideAbility(acl);
-  watch(
-    () => state.usr?.role,
-    (role) => {
-      const { rules } = defineAbilityFor(role || "");
-      acl.update(rules);
-    },
-    { flush: "post", immediate: true }
-  );
+
+  watchPostEffect(() => {
+    const role = state.usr?.role;
+    const { rules } = defineAbilityFor(role || "");
+    acl.update(rules);
+  });
 }
