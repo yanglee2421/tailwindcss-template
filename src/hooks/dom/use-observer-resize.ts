@@ -1,5 +1,5 @@
 // Vue Imports
-import Vue from "vue";
+import * as Vue from "vue";
 
 export function useObserverResize<TRef extends Element>(
   elRef: Vue.Ref<TRef | undefined>,
