@@ -7,7 +7,7 @@ export const routes: RouterOptions["routes"] = [
     name: "404",
     meta: { title: "NotFound" },
     component() {
-      return import("@/pages/404/404.vue");
+      return import("@/pages/404");
     },
   },
   {
@@ -15,7 +15,7 @@ export const routes: RouterOptions["routes"] = [
     name: "login",
     meta: { title: "登录" },
     component() {
-      return import("@/pages/login/login.vue");
+      return import("@/pages/login");
     },
   },
   {
@@ -23,7 +23,7 @@ export const routes: RouterOptions["routes"] = [
     name: "home",
     meta: { title: "Home" },
     component() {
-      return import("@/pages/home/home.vue");
+      return import("@/pages/home");
     },
   },
   {
@@ -39,7 +39,7 @@ export const routes: RouterOptions["routes"] = [
     name: "particle",
     meta: { title: "粒子动画" },
     component() {
-      return import("@/pages/particle/particle.vue");
+      return import("@/pages/particle");
     },
   },
   {
@@ -47,7 +47,7 @@ export const routes: RouterOptions["routes"] = [
     name: "snow",
     meta: { title: "雪飘" },
     component() {
-      return import("@/pages/snow/snow.vue");
+      return import("@/pages/snow");
     },
   },
   {
@@ -55,7 +55,7 @@ export const routes: RouterOptions["routes"] = [
     name: "shapes",
     meta: { title: "shapes" },
     component() {
-      return import("@/pages/shapes/page-shapes.vue");
+      return import("@/pages/shapes");
     },
   },
   {

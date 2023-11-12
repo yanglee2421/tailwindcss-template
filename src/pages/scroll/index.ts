@@ -1,1 +1,1 @@
-export { default as default } from "./scroll.vue";
+export { default as default } from "./page-scroll.vue";

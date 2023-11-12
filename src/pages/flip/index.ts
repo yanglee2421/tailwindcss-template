@@ -1,1 +1,1 @@
-export { default as default } from "./flip.vue";
+export { default as default } from "./page-flip.vue";

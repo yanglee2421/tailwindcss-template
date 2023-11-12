@@ -1,1 +1,1 @@
-export { default as default } from "./performance.vue";
+export { default as default } from "./page-performance.vue";
