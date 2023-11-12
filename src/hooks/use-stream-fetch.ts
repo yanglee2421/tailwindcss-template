@@ -1,21 +1,20 @@
 // Vue Imports
-import { reactive, watchPostEffect } from "vue";
+import Vue from "vue";
 
 export function useStreamFetch() {
-  const state = reactive({
+  const state = Vue.reactive({
     text: "",
   });
 
-  watchPostEffect(async (onClear) => {
+  Vue.watchPostEffect(async (onCleanup) => {
     const controler = new AbortController();
-    const { signal } = controler;
 
     const url = new URL("/dev/chat/bing", globalThis.location.origin);
-    const res = await fetch(url, { signal });
+    const res = await fetch(url, { signal: controler.signal });
     if (!res.body) return;
 
     const reader = res.body.getReader();
-    while (true) {
+    while (reader) {
       const { done, value } = await reader.read();
       const detext = new TextDecoder("utf8");
       const text = detext.decode(value);
@@ -25,7 +24,7 @@ export function useStreamFetch() {
       if (done) break;
     }
 
-    onClear(() => {
+    onCleanup(() => {
       controler.abort();
     });
   });

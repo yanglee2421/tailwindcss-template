@@ -1,15 +1,15 @@
 // Vue Imports
-import Vue, { readonly, shallowRef, unref, watchPostEffect } from "vue";
+import Vue from "vue";
 
 export function useObserverIntersection<TRef extends Element>(
   elRef: Vue.Ref<TRef | undefined>
 ) {
   // Prepare Ref
-  const entryRef = shallowRef<IntersectionObserverEntry | null>(null);
+  const entryRef = Vue.shallowRef<IntersectionObserverEntry | null>(null);
 
   // Observer Element Effect
-  watchPostEffect((clearEffect) => {
-    const el = unref(elRef);
+  Vue.watchPostEffect((onCleanup) => {
+    const el = Vue.unref(elRef);
     const isElement = el instanceof Element;
     if (!isElement) {
       console.error("Excepted an element, got falsy!");
@@ -23,11 +23,11 @@ export function useObserverIntersection<TRef extends Element>(
     observer.observe(el);
 
     // Clear Effect
-    clearEffect(() => {
+    onCleanup(() => {
       observer.disconnect();
       entryRef.value = null;
     });
   });
 
-  return readonly(entryRef);
+  return Vue.readonly(entryRef);
 }

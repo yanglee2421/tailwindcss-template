@@ -1,13 +1,14 @@
 <script lang="ts" setup>
-interface props {
+interface Props {
   color?: string;
   size?: number;
 }
 
-const props = withDefaults(defineProps<props>(), {
+const props = withDefaults(defineProps<Props>(), {
   color: "black",
   size: 20,
 });
+void props
 
 defineOptions({ inheritAttrs: true });
 </script>

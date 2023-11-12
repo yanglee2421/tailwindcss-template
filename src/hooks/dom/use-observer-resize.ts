@@ -1,15 +1,16 @@
 // Vue Imports
-import Vue, { readonly, shallowRef, unref, watchPostEffect } from "vue";
+import Vue from "vue";
 
 export function useObserverResize<TRef extends Element>(
-  elRef: Vue.Ref<TRef | undefined>
+  elRef: Vue.Ref<TRef | undefined>,
+  options?: ResizeObserverOptions | Vue.Ref<ResizeObserverOptions>
 ) {
   // Prepare Ref
-  const entryRef = shallowRef<ResizeObserverEntry | null>(null);
+  const entryRef = Vue.shallowRef<ResizeObserverEntry | null>(null);
 
   // Observer Element Effect
-  watchPostEffect((clearEffect) => {
-    const el = unref(elRef);
+  Vue.watchPostEffect((onCleanup) => {
+    const el = Vue.unref(elRef);
     const isElement = el instanceof Element;
     if (!isElement) {
       console.error("Excepted an element, got falsy!");
@@ -20,14 +21,14 @@ export function useObserverResize<TRef extends Element>(
     const observer = new ResizeObserver(([entry]) => {
       entryRef.value = entry;
     });
-    observer.observe(el);
+    observer.observe(el, Vue.unref(options));
 
     // Clear Effect
-    clearEffect(() => {
+    onCleanup(() => {
       observer.disconnect();
       entryRef.value = null;
     });
   });
 
-  return readonly(entryRef);
+  return Vue.readonly(entryRef);
 }
