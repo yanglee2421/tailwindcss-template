@@ -1,14 +1,16 @@
 <script lang="ts" setup>
-import { unref } from "vue";
-import { ref } from "vue";
+// Vue Imports
+import * as Vue from "vue";
+
+// Router Imports
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const btnRef = ref();
+const btnRef = Vue.ref();
 
 const handleClick = () => {
-  console.log("xxxxx", unref(btnRef));
+  console.log("xxxxx", Vue.unref(btnRef));
 };
 </script>
 

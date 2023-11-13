@@ -1,11 +1,11 @@
-import { Directive } from "vue";
+import * as Vue from "vue";
 
 interface _value {
   index: number;
   arr: unknown[];
 }
 
-export const vDrag: Directive<HTMLElement, _value> = (dom, bind) => {
+export const vDrag: Vue.Directive<HTMLElement, _value> = (dom, bind) => {
   try {
     const {
       value: { index, arr },

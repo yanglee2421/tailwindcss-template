@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 // Vue Imports
-import { ref, unref } from "vue";
+import * as Vue from "vue";
 
-const boxRef = ref<HTMLDivElement>();
+const boxRef = Vue.ref<HTMLDivElement>();
 
 const handleSort = () => {
-  const container = unref(boxRef);
+  const container = Vue.unref(boxRef);
   if (!container) return;
 
   record(container);

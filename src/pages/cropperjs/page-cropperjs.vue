@@ -4,13 +4,13 @@ import Cropper from "cropperjs";
 import "cropperjs/dist/cropper.min.css";
 
 // Vue Imports
-import { ref, shallowRef, unref, watchPostEffect } from "vue";
+import * as Vue from "vue";
 
-const imgRef = ref<HTMLImageElement>();
-const cropperRef = shallowRef<Cropper | null>(null);
+const imgRef = Vue.ref<HTMLImageElement>();
+const cropperRef = Vue.shallowRef<Cropper | null>(null);
 
-watchPostEffect((onClear) => {
-  const img = unref(imgRef);
+Vue.watchPostEffect((onCleanup) => {
+  const img = Vue.unref(imgRef);
   if (!img) return;
 
   cropperRef.value = new Cropper(img, {
@@ -18,14 +18,14 @@ watchPostEffect((onClear) => {
   });
 
   // Clear Effect
-  onClear(() => {
-    const cropper = unref(cropperRef);
+  onCleanup(() => {
+    const cropper = Vue.unref(cropperRef);
     cropper?.destroy();
   });
 });
 
 const handleDownload = () => {
-  const cropper = unref(cropperRef);
+  const cropper = Vue.unref(cropperRef);
   if (!cropper) return;
 
   const cropedCvs = cropper.getCroppedCanvas();

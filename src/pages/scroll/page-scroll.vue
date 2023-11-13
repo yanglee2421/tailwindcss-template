@@ -5,11 +5,9 @@ import img2 from "@/assets/image/scroll/img-2.png";
 import img3 from "@/assets/image/scroll/img-3.png";
 
 // Vue Imports
-import { watchPostEffect } from "vue";
+import * as Vue from "vue";
 
-watchPostEffect((clearFn) => {
-  console.log("effect");
-
+Vue.watchPostEffect((clearFn) => {
   const controller = new AbortController();
   const { signal } = controller;
 

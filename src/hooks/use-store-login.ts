@@ -2,19 +2,19 @@
 import { defineStore } from "pinia";
 
 // Vue Imports
-import { reactive } from "vue";
+import * as Vue from "vue";
 
 export const useStoreLogin = defineStore(
   "login",
   () => {
     // ** Local
-    const local = reactive<State>({
+    const local = Vue.reactive<State>({
       usr: null,
     });
     const setLocal = (dispatch: Dispatch) => dispatch(local);
 
     // ** Session
-    const session = reactive<State>({
+    const session = Vue.reactive<State>({
       usr: null,
     });
     const setSession = (dispatch: Dispatch) => dispatch(session);

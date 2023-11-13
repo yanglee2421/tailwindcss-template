@@ -2,13 +2,13 @@
 import { defineStore } from "pinia";
 
 // Vue Imports
-import { reactive } from "vue";
+import Vue from "vue";
 
 export const useStoreTheme = defineStore(
   "theme",
   () => {
     // State && Dispatch
-    const state = reactive({
+    const state = Vue.reactive({
       isDark: false,
     });
     const setState = (dispatch: Dispatch) => {

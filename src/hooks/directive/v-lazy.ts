@@ -1,8 +1,7 @@
-import type { Directive } from "vue";
-/**
- * img标签出现在可视区时才加载图片
- */
-export const vLazy: Directive<HTMLImageElement, string> = {
+// Vue Imports
+import * as Vue from "vue";
+
+export const vLazy: Vue.Directive<HTMLImageElement, string> = {
   mounted(el, { value }) {
     // 类型检查
     if (!(el instanceof HTMLImageElement)) {

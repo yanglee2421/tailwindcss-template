@@ -1,4 +1,4 @@
-import type { Directive } from "vue";
+import * as Vue from "vue";
 import "@/assets/scss/v-vis.scss";
 
 /**
@@ -7,7 +7,7 @@ import "@/assets/scss/v-vis.scss";
  * false，高度为0
  * string，高度为该string
  */
-export const vVis: Directive<HTMLElement, string | boolean> = {
+export const vVis: Vue.Directive<HTMLElement, string | boolean> = {
   mounted(dom, { value }) {
     dom.classList.add("swz-vis-clearfix");
     chgHeight(dom, value);

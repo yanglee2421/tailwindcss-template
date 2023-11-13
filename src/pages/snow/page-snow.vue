@@ -6,37 +6,32 @@ import { useObserverResize } from "@/hooks";
 import { Snow } from "@/utils";
 
 // Vue Imports
-import { ref, unref, watch } from "vue";
+import * as Vue from "vue";
 
 // DOM Ref
-const boxRef = ref<HTMLDivElement>();
-const cvsRef = ref<HTMLCanvasElement>();
+const boxRef = Vue.ref<HTMLDivElement>();
+const cvsRef = Vue.ref<HTMLCanvasElement>();
 const sizeRef = useObserverResize(boxRef);
 
-watch(
-  sizeRef,
-  (size, prev, onClear) => {
-    void prev;
-    if (!size) return;
-    const [box] = size.contentBoxSize;
+Vue.watchPostEffect((onCleanup) => {
+  const size = Vue.unref(sizeRef);
+  if (!size) return;
 
-    const cvs = unref(cvsRef);
-    if (!cvs) return;
+  const [box] = size.contentBoxSize;
+  const cvs = Vue.unref(cvsRef);
+  if (!cvs) return;
 
-    Object.assign(cvs, {
-      width: box.inlineSize,
-      height: box.blockSize,
-    });
-    const snow = new Snow(cvs, (box.inlineSize / 1920) * 200);
-    snow.animation();
+  Object.assign(cvs, {
+    width: box.inlineSize,
+    height: box.blockSize,
+  });
+  const snow = new Snow(cvs, (box.inlineSize / 1920) * 200);
+  snow.animation();
 
-    // Clear Effect
-    onClear(() => {
-      snow.abortAnimation();
-    });
-  },
-  { flush: "post", immediate: true }
-);
+  onCleanup(() => {
+    snow.abortAnimation();
+  });
+});
 
 defineOptions({ inheritAttrs: true });
 </script>

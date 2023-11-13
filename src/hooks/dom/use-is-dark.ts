@@ -1,22 +1,23 @@
 // Vue Imports
-import { onUnmounted, customRef } from "vue";
+import * as Vue from "vue";
 
 export function useIsDark() {
   // Prepare Ref
   const mediaQuery = matchMedia("(prefers-color-scheme: dark)");
 
   const controller = new AbortController();
-  onUnmounted(() => {
+  Vue.onUnmounted(() => {
     controller.abort();
   });
 
-  return customRef((tarck, trigger) => {
+  return Vue.customRef((tarck, trigger) => {
     return {
       get() {
         tarck();
 
-        const { signal } = controller;
-        mediaQuery.addEventListener("change", trigger, { signal });
+        mediaQuery.addEventListener("change", trigger, {
+          signal: controller.signal,
+        });
 
         return mediaQuery.matches;
       },

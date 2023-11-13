@@ -1,37 +1,34 @@
 <script lang="ts" setup>
 import { Particles } from "@/utils";
 import { useObserverResize } from "@/hooks";
-import { ref, unref, watch } from "vue";
 
-const canRef = ref();
-const boxRef = ref<HTMLDivElement>();
+// Vue Imports
+import * as Vue from "vue";
+
+const canRef = Vue.ref();
+const boxRef = Vue.ref<HTMLDivElement>();
 const sizeRef = useObserverResize(boxRef);
-watch(
-  sizeRef,
-  (size, prev, onClear) => {
-    void prev;
-    if (!size) return;
 
-    const [box] = size.contentBoxSize;
+Vue.watchPostEffect((onCleanup) => {
+  const size = Vue.unref(sizeRef);
+  if (!size) return;
 
-    const canvas = unref(canRef);
-    if (!canvas) return;
+  const [box] = size.contentBoxSize;
+  const canvas = Vue.unref(canRef);
+  if (!canvas) return;
 
-    Object.assign(canvas, {
-      width: box.inlineSize,
-      height: box.blockSize,
-    });
+  Object.assign(canvas, {
+    width: box.inlineSize,
+    height: box.blockSize,
+  });
 
-    const p = new Particles(canvas, (box.inlineSize / 1920) * 120, 110);
-    p.animate();
+  const p = new Particles(canvas, (box.inlineSize / 1920) * 120, 110);
+  p.animate();
 
-    // Clear Effect
-    onClear(() => {
-      p.abortAnimate();
-    });
-  },
-  { flush: "post", immediate: true }
-);
+  onCleanup(() => {
+    p.abortAnimate();
+  });
+});
 </script>
 
 <template>
