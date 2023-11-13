@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 // Vue Imports
-import { reactive } from "vue";
+import * as Vue from "vue";
 
-const pagiStat = reactive({
+const pagiStat = Vue.reactive({
   page: 1,
   pageSize: 20,
 });
 
-defineOptions({ inheritAttrs: false });
+Vue.defineOptions({ inheritAttrs: false });
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 // Vue Imports
-import { Plugin, DefineComponent } from "vue";
+import * as Vue from "vue";
 
-const iconComponents = import.meta.glob<DefineComponent<{}, {}, any>>(
+const iconComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
   "@/components/**/icon-*.vue",
   {
     eager: true,
@@ -9,7 +9,7 @@ const iconComponents = import.meta.glob<DefineComponent<{}, {}, any>>(
   }
 );
 
-export const icons: Plugin = {
+export const icons: Vue.Plugin = {
   install(app) {
     Object.entries(iconComponents).forEach(([key, component]) => {
       const name = key.replace(/(^\/.+\/)|(\.vue$)/g, "");

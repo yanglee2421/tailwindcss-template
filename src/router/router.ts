@@ -9,7 +9,9 @@ import { useLogin } from "@/hooks";
 
 // Nprogress Imports
 import NProgress from "nprogress";
-import { unref } from "vue";
+
+// Vue Imports
+import * as Vue from "vue";
 // import "nprogress/nprogress.css";
 
 const history = createWebHashHistory();
@@ -21,7 +23,7 @@ router.beforeEach((to) => {
   // Pinia Hooks
   const { usr } = useLogin();
 
-  const isLogined = unref(usr);
+  const isLogined = Vue.unref(usr);
   const nextName = String(to.name);
 
   // To Login
@@ -36,7 +38,12 @@ router.beforeEach((to) => {
 
   // Not Logged
   const returnUrl = encodeURIComponent(to.fullPath);
-  if (!isLogined) return { name: "login", query: { returnUrl } };
+  if (!isLogined) {
+    return {
+      name: "login",
+      query: { returnUrl },
+    };
+  }
 
   // Has Logged
   return true;
@@ -45,7 +52,9 @@ router.beforeEach((to) => {
 // ** Title
 router.afterEach((to) => {
   const title = to.meta.title;
-  if (typeof title === "string") document.title = title;
+  if (typeof title === "string") {
+    document.title = title;
+  }
 });
 
 // ** Nprogress

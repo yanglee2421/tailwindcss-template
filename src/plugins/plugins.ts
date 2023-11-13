@@ -1,5 +1,5 @@
 // Vue Imports
-import type { Plugin, DefineComponent } from "vue";
+import * as Vue from "vue";
 
 // Plugins Imports
 import { router } from "@/router";
@@ -9,7 +9,7 @@ import { elUI } from "./el-ui";
 import { elIcons } from "./el-icons";
 import { icons } from "./icons";
 
-const lyComponents = import.meta.glob<DefineComponent<{}, {}, any>>(
+const lyComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
   "@/components/**/ly-*.vue",
   {
     eager: true,
@@ -17,7 +17,7 @@ const lyComponents = import.meta.glob<DefineComponent<{}, {}, any>>(
   }
 );
 
-export const plugins: Plugin = {
+export const plugins: Vue.Plugin = {
   install(app) {
     app.use(VueQueryPlugin, queryClientConfig());
     app.use(pinia);
