@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 // Vue Imoprts
-import { inject, ref, unref } from "vue";
+import * as Vue from "vue";
 
 // Symbol Imports
 import { symbolForm } from "./login-symbols";
@@ -14,26 +14,27 @@ import { FormInstance } from "element-plus";
 // Hooks Imports
 import { useUsrPost, useLogin } from "@/hooks";
 
-const formValues = inject<FormValues>(symbolForm);
+const formValues = Vue.inject<FormValues>(symbolForm);
 if (!formValues) throw new Error("No Provider symbolForm!");
 
 // API Hooks
-const { mutate, isLoading } = useUsrPost();
+const mutation = useUsrPost();
+const loading = mutation.isPending;
 
 // ** Form
-const formRef = ref<FormInstance>();
+const formRef = Vue.ref<FormInstance>();
 
 // Login Hooks
-const { signIn } = useLogin();
+const login = useLogin();
 
 const handleSubmit = () => {
-  unref(formRef)?.validate((isVali) => {
+  Vue.unref(formRef)?.validate((isVali) => {
     if (!isVali) return;
-    mutate(
+    mutation.mutate(
       { data: formValues },
       {
         onSuccess(data) {
-          signIn(data, formValues.isRemember);
+          login.signIn(data, formValues.isRemember);
         },
       }
     );
@@ -92,7 +93,7 @@ defineOptions({ inheritAttrs: false });
     <el-form-item>
       <el-button
         @click="handleSubmit"
-        :loading="isLoading"
+        :loading="loading"
         type="primary"
         class="w-full uppercase bg-none bg-sky-500 font-semibold"
         >sign in</el-button

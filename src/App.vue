@@ -3,7 +3,7 @@
 import { useStoreTheme, useIsDark } from "@/hooks";
 
 // Vue Imports
-import { watch } from "vue";
+import * as Vue from "vue";
 
 // Acl Imports
 import { useAclProvider } from "@/configs/acl";
@@ -15,29 +15,21 @@ useLoginMe();
 
 // Dark mode and theme binding
 const { state, setState } = useStoreTheme();
-watch(
-  () => state.isDark,
-  (isDark) => {
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-      return;
-    }
-    document.documentElement.classList.remove("dark");
-  },
-  { flush: "post", immediate: true }
-);
+Vue.watchPostEffect(() => {
+  if (state.isDark) {
+    document.documentElement.classList.add("dark");
+    return;
+  }
+  document.documentElement.classList.remove("dark");
+});
 
 // Dark theme follows browser mode
 const isDarkRef = useIsDark();
-watch(
-  isDarkRef,
-  (isDark) => {
-    setState((state) => {
-      state.isDark = isDark;
-    });
-  },
-  { flush: "post", immediate: true }
-);
+Vue.watchPostEffect(() => {
+  setState((state) => {
+    state.isDark = Vue.unref(isDarkRef);
+  });
+});
 
 // Acl Provider
 useAclProvider();

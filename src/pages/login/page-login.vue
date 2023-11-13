@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 // Vue Imports
-import { reactive, provide } from "vue";
+import * as Vue from "vue";
 
 // Components Imports
 import iconBtn from "./icon-btn.vue";
@@ -16,12 +16,12 @@ import { FormValues } from "@/types/page-login";
 import bgImg from "@/assets/image/bg/justHer.jpg";
 
 // ** Form
-const formValues = reactive<FormValues>({
+const formValues = Vue.reactive<FormValues>({
   email: "",
   passwd: "",
   isRemember: true,
 });
-provide(symbolForm, formValues);
+Vue.provide(symbolForm, formValues);
 
 defineOptions({ inheritAttrs: false });
 </script>

@@ -1,5 +1,5 @@
 // Vue Imports
-import { createApp } from "vue";
+import * as Vue from "vue";
 
 // App Imports
 import App from "./App.vue";
@@ -14,6 +14,6 @@ import "@/assets/css/style.css";
 // FakeDB
 import "@/api/fakedb";
 
-const app = createApp(App);
+const app = Vue.createApp(App);
 app.use(plugins);
 app.mount("#root");

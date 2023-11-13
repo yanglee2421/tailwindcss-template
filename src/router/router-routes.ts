@@ -51,14 +51,6 @@ export const routes: RouterOptions["routes"] = [
     },
   },
   {
-    path: "/shapes",
-    name: "shapes",
-    meta: { title: "shapes" },
-    component() {
-      return import("@/pages/shapes");
-    },
-  },
-  {
     path: "/scroll",
     name: "scroll",
     meta: { title: "scroll" },
