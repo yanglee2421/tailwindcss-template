@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, watchPostEffect } from "vue";
+import * as Vue from "vue";
 
 interface Props {
   class: string;
@@ -9,14 +9,14 @@ const props = withDefaults(defineProps<Partial<Props>>(), {
 });
 void props;
 
-watchPostEffect((onClear) => {
+Vue.watchPostEffect((onClear) => {
   console.log("effect");
   onClear(() => {
     console.log("clear effect");
   });
 });
 
-const btnRef = ref();
+const btnRef = Vue.ref();
 defineExpose({ btnRef });
 defineOptions({ inheritAttrs: true });
 </script>

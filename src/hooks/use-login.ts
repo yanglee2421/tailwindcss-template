@@ -1,14 +1,11 @@
-// Store Imports
-import { computed, nextTick } from "vue";
+// Vue Imports
+import * as Vue from "vue";
 
 // Store Imports
 import { useStoreLogin, Usr } from "./use-store-login";
 
 // API Imports
 import { useQueryClient } from "@tanstack/vue-query";
-
-// Vue Imports
-import {} from "vue";
 
 // Router Imports
 import { useRouter, useRoute } from "vue-router";
@@ -19,10 +16,10 @@ import { ElMessage } from "element-plus";
 
 export function useLogin() {
   // Store Hooks
-  const { session, setSession, local, setLocal } = useStoreLogin();
+  const store = useStoreLogin();
 
-  const usr = computed(() => {
-    return local.usr || session.usr;
+  const usr = Vue.computed(() => {
+    return store.local.usr || store.session.usr;
   });
 
   // Router Hooks
@@ -35,20 +32,20 @@ export function useLogin() {
     switch (Boolean(remember)) {
       // ** Local
       case true:
-        setLocal((state) => {
+        store.setLocal((state) => {
           state.usr = data;
         });
         break;
       // ** Session
       case false:
-        setSession((state) => {
+        store.setSession((state) => {
           state.usr = data;
         });
         break;
     }
 
     // ** Router
-    await nextTick();
+    await Vue.nextTick();
     const homeRoute = toHomeRoute(route.query.returnUrl);
     await router.push(homeRoute);
 
@@ -63,17 +60,17 @@ export function useLogin() {
   // Sign Out
   const signOut = async () => {
     // Clear Store
-    setSession((state) => {
+    store.setSession((state) => {
       state.usr = null;
     });
-    setLocal((state) => {
+    store.setLocal((state) => {
       state.usr = null;
     });
 
     // Clear Query
     queryClient.clear();
 
-    await nextTick();
+    await Vue.nextTick();
     await router.push({
       name: "login",
       query: {
@@ -85,14 +82,14 @@ export function useLogin() {
   // Update User
   const updateUsr = (usr: Partial<Usr>) => {
     // ** Session
-    setSession((state) => {
+    store.setSession((state) => {
       const prev = state.usr;
       if (!prev) return;
       Object.assign(prev, usr);
     });
 
     // ** Local
-    setLocal((state) => {
+    store.setLocal((state) => {
       const prev = state.usr;
       if (!prev) return;
       Object.assign(prev, usr);
