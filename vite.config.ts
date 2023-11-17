@@ -31,7 +31,7 @@ export default defineConfig((ConfigEnv) => {
       },
     },
 
-    base: isBuild ? "./" : "/vite-vue",
+    base: isBuild ? "./" : "/vue-ele",
     // envDir: resolve(__dirname, "./config"),
 
     // ** Build

@@ -2,7 +2,7 @@
 import { defineStore } from "pinia";
 
 // Vue Imports
-import Vue from "vue";
+import * as Vue from "vue";
 
 export const useStoreTheme = defineStore(
   "theme",
