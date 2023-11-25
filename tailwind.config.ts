@@ -20,6 +20,6 @@ function defineConfig(): Config {
     corePlugins: {
       preflight: true,
     },
-    important: "#root",
+    // important: "#root",
   };
 }
