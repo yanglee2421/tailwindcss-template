@@ -9,9 +9,6 @@ import { useLogin } from "./use-login";
 // Vue Imports
 import * as Vue from "vue";
 
-// Element Imports
-import { ElMessage } from "element-plus";
-
 export function useLoginMe() {
   // Login Hooks
   const login = useLogin();
@@ -48,18 +45,16 @@ export function useLoginMe() {
   });
 
   Vue.watchPostEffect(async () => {
-    // ** Success
     const data = Vue.unref(query.data);
+    const isError = Vue.unref(query.isError);
+
     if (data) {
       login.updateUsr(data);
       return;
     }
 
-    // ** Error
-    const error = Vue.unref(query.error);
-    if (error) {
+    if (isError) {
       await login.signOut();
-      ElMessage.error(error.message);
       return;
     }
   });

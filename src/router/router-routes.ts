@@ -98,4 +98,12 @@ export const routes: RouterOptions["routes"] = [
       return import("@/pages/flip");
     },
   },
+  {
+    path: "/fabric",
+    meta: { title: "fabric" },
+    name: "fabric",
+    component() {
+      return import("@/pages/fabric");
+    },
+  },
 ];
