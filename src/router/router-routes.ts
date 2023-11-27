@@ -106,4 +106,12 @@ export const routes: RouterOptions["routes"] = [
       return import("@/pages/fabric");
     },
   },
+  {
+    path: "/lab",
+    meta: { title: "Lab" },
+    name: "lab",
+    component() {
+      return import("@/pages/lab");
+    },
+  },
 ];
