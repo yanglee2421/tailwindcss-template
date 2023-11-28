@@ -1,16 +1,22 @@
 // Query Imports
-import type {
+import {
   VueQueryPluginOptions,
   DefaultOptions,
+  VueQueryPlugin,
 } from "@tanstack/vue-query";
-
-// Persist Imports
-import { persistQueryClient } from "@tanstack/query-persist-client-core";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
+import { persistQueryClient } from "@tanstack/query-persist-client-core";
 
-export { VueQueryPlugin } from "@tanstack/vue-query";
+// Vue Imports
+import * as Vue from "vue";
 
-export function queryClientConfig(): VueQueryPluginOptions {
+export const vueQuery: Vue.Plugin = {
+  install(app) {
+    app.use(VueQueryPlugin, clientConfig());
+  },
+};
+
+function clientConfig(): VueQueryPluginOptions {
   return {
     queryClientConfig: {
       defaultOptions: {
@@ -30,7 +36,7 @@ export function queryClientConfig(): VueQueryPluginOptions {
   };
 }
 
-// ** Config
+// Client configuration
 function queries(): DefaultOptions["queries"] {
   return {
     staleTime: 1000 * 60,
@@ -39,7 +45,7 @@ function queries(): DefaultOptions["queries"] {
     refetchOnWindowFocus: true,
     refetchOnReconnect: true,
     retryDelay(attemptIndex) {
-      return Math.min(1000 * 2 ** attemptIndex, 30000);
+      return Math.min(1000 * 2 ** attemptIndex, 1000 * 8);
     },
   };
 }

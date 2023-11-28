@@ -4,7 +4,7 @@ import * as Vue from "vue";
 // Plugins Imports
 import { router } from "@/router";
 import { pinia } from "./pinia";
-import { VueQueryPlugin, queryClientConfig } from "./vue-query";
+import { vueQuery } from "./vue-query";
 import { elUI } from "./el-ui";
 import { elIcons } from "./el-icons";
 import { icons } from "./icons";
@@ -19,7 +19,7 @@ const lyComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
 
 export const plugins: Vue.Plugin = {
   install(app) {
-    app.use(VueQueryPlugin, queryClientConfig());
+    app.use(vueQuery);
     app.use(pinia);
     app.use(router);
     app.use(elUI);
