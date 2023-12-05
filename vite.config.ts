@@ -80,7 +80,6 @@ function server({ mode }: ConfigEnv): UserConfig["server"] {
   void mode;
 
   return {
-    https: false,
     fs: { allow: [resolve(__dirname, "../../")] },
     port: 3007,
     proxy: {
