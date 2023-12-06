@@ -1,5 +1,5 @@
 // Vite Imports
-import { defineConfig, ConfigEnv, UserConfig } from "vite";
+import { defineConfig, UserConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
 // NodeJs Imports
@@ -32,13 +32,12 @@ export default defineConfig((ConfigEnv) => {
     },
 
     base: isBuild ? "./" : "/vue-ele",
-    // envDir: resolve(__dirname, "./config"),
 
     // ** Build
-    build: build(ConfigEnv),
+    build: build(),
 
     // DEV Server
-    server: server(ConfigEnv),
+    server: server(),
 
     // Env file directory
     envDir: resolve(__dirname, "./"),
@@ -46,50 +45,57 @@ export default defineConfig((ConfigEnv) => {
 });
 
 // Build Config
-function build({ mode }: ConfigEnv): UserConfig["build"] {
+function build(): UserConfig["build"] {
   const __dirname = dirname(fileURLToPath(import.meta.url));
-  void mode;
 
   return {
     outDir: "docs",
     emptyOutDir: true,
+
     manifest: false,
     chunkSizeWarningLimit: 1024,
+
     rollupOptions: {
       input: {
         main: resolve(__dirname, "./index.html"),
       },
       output: {
         manualChunks(id) {
-          const isCropperjs = id.includes("node_modules/cropperjs");
-          if (isCropperjs) return "cropperjs";
-          const isFabric = id.includes("node_modules/fabric");
-          if (isFabric) return "fabric";
+          if (id.includes("node_modules/cropperjs")) {
+            return "cropperjs";
+          }
+
+          if (id.includes("node_modules/fabric")) {
+            return "fabric";
+          }
         },
-        // entryFileNames: "assets/wp-vite-main.js",
-        // assetFileNames: "assets/[name][extname]",
-        // chunkFileNames: "assets/[name]-[hash].js",
+        entryFileNames: "assets/[name]-[hash].js",
+        assetFileNames: "assets/[name]-[hash][extname]",
+        chunkFileNames: "assets/[name]-[hash].js",
       },
     },
   };
 }
 
 // Server Config
-function server({ mode }: ConfigEnv): UserConfig["server"] {
+function server(): UserConfig["server"] {
   const __dirname = dirname(fileURLToPath(import.meta.url));
-  void mode;
 
   return {
-    fs: { allow: [resolve(__dirname, "../../")] },
+    fs: { allow: [resolve(__dirname, "./")] },
     port: 3007,
+    strictPort: true,
+    hmr: {
+      port: 3007,
+    },
     proxy: {
       "/dev": {
-        ws: true,
-        changeOrigin: true,
         target: "http://localhost:5173",
         rewrite(path) {
           return path.replace(/^\/dev/, "");
         },
+        changeOrigin: true,
+        ws: true,
       },
     },
   };
