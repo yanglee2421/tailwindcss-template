@@ -33,7 +33,7 @@ export default defineConfig((ConfigEnv) => {
 
     base: isBuild ? "./" : "/vue-ele",
 
-    // Env file directory
+    // Env File Directory
     envDir: resolve(__dirname, "./"),
 
     // ** Build
@@ -71,7 +71,8 @@ export default defineConfig((ConfigEnv) => {
       target: "modules",
       minify: "esbuild",
     },
-    // DEV Server
+
+    // Dev Server
     server: {
       port: 3007,
       strictPort: true,
