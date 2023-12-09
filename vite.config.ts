@@ -42,7 +42,8 @@ export default defineConfig((ConfigEnv) => {
       emptyOutDir: true,
 
       manifest: false,
-      chunkSizeWarningLimit: 1024,
+      sourcemap: false,
+      chunkSizeWarningLimit: 500,
 
       rollupOptions: {
         input: {
@@ -57,6 +58,10 @@ export default defineConfig((ConfigEnv) => {
             if (id.includes("node_modules/fabric")) {
               return "fabric";
             }
+
+            if (id.includes("node_modules/element-plus")) {
+              return "element-plus";
+            }
           },
           entryFileNames: "assets/[name]-[hash].js",
           chunkFileNames: "assets/[name]-[hash].js",
@@ -64,12 +69,12 @@ export default defineConfig((ConfigEnv) => {
         },
       },
 
-      cssTarget: ["es2020", "edge88", "firefox78", "chrome87", "safari14"],
-      cssMinify: true,
-      cssCodeSplit: true,
-
       target: "modules",
       minify: "esbuild",
+
+      cssTarget: ["es2020", "edge88", "firefox78", "chrome87", "safari14"],
+      cssMinify: "esbuild",
+      cssCodeSplit: true,
     },
 
     // Dev Server
@@ -89,7 +94,9 @@ export default defineConfig((ConfigEnv) => {
           ws: true,
         },
       },
-      fs: { allow: [resolve(__dirname, "./")] },
+      fs: {
+        allow: [resolve(__dirname, "./")],
+      },
     },
   };
 });

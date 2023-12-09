@@ -74,14 +74,7 @@ export const routes: RouterOptions["routes"] = [
       return import("@/pages/cropperjs");
     },
   },
-  {
-    path: "/grid",
-    name: "grid",
-    meta: { title: "grid" },
-    component() {
-      return import("@/pages/grid");
-    },
-  },
+
   {
     path: "/table",
     name: "table",
@@ -104,14 +97,6 @@ export const routes: RouterOptions["routes"] = [
     name: "fabric",
     component() {
       return import("@/pages/fabric");
-    },
-  },
-  {
-    path: "/lab",
-    meta: { title: "Lab" },
-    name: "lab",
-    component() {
-      return import("@/pages/lab");
     },
   },
 ];
