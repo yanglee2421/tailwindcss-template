@@ -26,32 +26,33 @@ router.beforeEach((to) => {
   const isLogined = Vue.unref(usr);
   const nextName = String(to.name);
 
-  // To Login
-  const isInLogin = nextName === "login";
-  if (isInLogin) {
-    return isLogined ? toHomeRoute(to.query.returnUrl) : true;
+  // Login page
+  if (nextName === "login") {
+    return isLogined ? toHomeRoute(to.query.returnURL) : true;
   }
 
-  // To Whitelist
+  // Whitelist
   const isInWl = toIsWhitelist(nextName);
   if (isInWl) return true;
 
-  // Not Logged
-  const returnUrl = encodeURIComponent(to.fullPath);
-  if (!isLogined) {
-    return {
-      name: "login",
-      query: { returnUrl },
-    };
-  }
-
   // Has Logged
-  return true;
+  if (isLogined) return true;
+
+  // Not Logged
+  return {
+    name: "login",
+    query: {
+      returnURL: encodeURIComponent(to.fullPath),
+    },
+  };
 });
 
 // ** Title
 router.afterEach((to) => {
   const title = to.meta.title;
+
+  if (!title) return;
+
   if (typeof title === "string") {
     document.title = title;
   }
