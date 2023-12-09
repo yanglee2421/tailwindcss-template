@@ -15,8 +15,6 @@ export function useAclProvider() {
   provideAbility(acl);
 
   Vue.watchPostEffect(() => {
-    const role = state.usr?.role;
-    const { rules } = defineAbilityFor(role || "");
-    acl.update(rules);
+    acl.update(defineAbilityFor(state.usr?.role || "").rules);
   });
 }
