@@ -28,20 +28,17 @@ export function useLogin() {
 
   // Sign In
   const signIn = async (data: Usr, remember?: boolean) => {
-    // Change Store
-    switch (Boolean(remember)) {
-      // ** Local
-      case true:
-        store.setLocal((state) => {
-          state.usr = data;
-        });
-        break;
-      // ** Session
-      case false:
-        store.setSession((state) => {
-          state.usr = data;
-        });
-        break;
+    // Local
+    if (remember) {
+      store.setLocal((state) => {
+        state.usr = data;
+      });
+
+      // Session
+    } else {
+      store.setSession((state) => {
+        state.usr = data;
+      });
     }
 
     // ** Router
