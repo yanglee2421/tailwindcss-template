@@ -4,8 +4,7 @@ import {
   createWebHashHistory,
   createWebHistory,
 } from "vue-router";
-import { routes } from "./router-routes";
-import { toIsWhitelist } from "./router-whitelist";
+import { routes } from "./routes";
 
 // Nprogress Imports
 import NProgress from "nprogress";
@@ -17,11 +16,7 @@ export const router = createRouter({
 
 // Router Guard
 router.beforeEach((to) => {
-  const nextName = String(to.name);
-
-  // Whitelist
-  const isInWl = toIsWhitelist(nextName);
-  if (isInWl) return true;
+  return true;
 
   // Not Logged
   return {
