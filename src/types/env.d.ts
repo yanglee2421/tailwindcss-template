@@ -9,33 +9,11 @@ declare module "*.vue" {
   const component: DefineComponent<{}, {}, any>;
   export default component;
 }
-declare module "qrcode" {
-  interface _option {
-    width: number;
-    margin: number;
-    color: {
-      light?: string;
-      dark?: string;
-    };
-    scale: number;
-    small: boolean;
-    version: number;
-    errorCorrectionLevel: "H" | "Q" | "M" | "L";
-    maskPattern: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
-  }
-  type _params = [string | string[], Partial<_option>?, Function?];
-  interface _qrcode {
-    toString(...params: _params): Promise<string>;
-    toDataURL(...params: _params): Promise<string>;
-    toCanvas(...params: _params): Promise<HTMLCanvasElement>;
-    toCanvas(
-      dom: HTMLCanvasElement,
-      ...params: _params
-    ): Promise<HTMLCanvasElement>;
-  }
-  const qrcode: _qrcode;
-  export default qrcode;
-}
+
+type FunctionAction<TData> = (prevData: TData) => TData;
+type SetStateAction<TData> = TData | FunctionAction<TData>;
+type Dispatch<TAction> = (action: TAction) => void;
+
 /**
  * declare，宣言一个变量必定存在，并为其指定类型
  * 给模块指定类型
