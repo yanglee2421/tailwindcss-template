@@ -11,33 +11,17 @@ import { FormValues } from "@/types/page-login";
 // Element Imports
 import { FormInstance } from "element-plus";
 
-// Hooks Imports
-import { useUsrPost, useLogin } from "@/hooks";
-
 const formValues = Vue.inject<FormValues>(symbolForm);
-if (!formValues) throw new Error("No Provider symbolForm!");
-
-// API Hooks
-const mutation = useUsrPost();
-const loading = mutation.isPending;
+if (!formValues) {
+  throw new Error("No Provider symbolForm!");
+}
 
 // ** Form
 const formRef = Vue.ref<FormInstance>();
 
-// Login Hooks
-const login = useLogin();
-
 const handleSubmit = () => {
   Vue.unref(formRef)?.validate((isVali) => {
     if (!isVali) return;
-    mutation.mutate(
-      { data: formValues },
-      {
-        onSuccess(data) {
-          login.signIn(data, formValues.isRemember);
-        },
-      }
-    );
   });
 };
 
@@ -93,7 +77,6 @@ defineOptions({ inheritAttrs: false });
     <el-form-item>
       <el-button
         @click="handleSubmit"
-        :loading="loading"
         type="primary"
         class="w-full uppercase bg-none bg-sky-500 font-semibold"
         >sign in</el-button

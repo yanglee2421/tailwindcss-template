@@ -2,6 +2,9 @@
 // Vue Imports
 import * as Vue from "vue";
 
+// Acl Imports
+import AclProvider from "./configs/acl/AclProvider.vue";
+
 // Control DOM by vue state
 Vue.watchPostEffect(() => {
   // state.isDark
@@ -12,11 +15,13 @@ Vue.watchPostEffect(() => {
 </script>
 
 <template>
-  <router-view #default="{ Component }">
-    <keep-alive :max="10">
-      <component :is="Component" />
-    </keep-alive>
-  </router-view>
+  <acl-provider>
+    <router-view #default="{ Component }">
+      <keep-alive :max="10">
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
+  </acl-provider>
 </template>
 
 <style lang="scss" scoped></style>

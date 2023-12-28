@@ -1,25 +1,13 @@
 <script lang="ts" setup>
-import { useLogin } from "@/hooks";
+// Vue Imports
 import * as Vue from "vue";
 
 void Vue;
-
-const login = useLogin();
-
-const handleSignout = () => {
-  login.signOut();
-};
 
 defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <el-button
-    @click="handleSignout"
-    type="danger"
-    tag="label"
-    >logout</el-button
-  >
   <div class="p-2">
     <div class="flex justify-center">
       <div class="w-36 h-36 border border-solid border-gray-400 mr-auto">1</div>

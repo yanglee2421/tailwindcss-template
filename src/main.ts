@@ -11,9 +11,6 @@ import plugins from "@/plugins";
 import "@/assets/scss/global.scss";
 import "@/assets/css/style.css";
 
-// FakeDB
-import "@/api/fakedb";
-
 const app = Vue.createApp(App);
 app.use(plugins);
 app.mount("#root");
