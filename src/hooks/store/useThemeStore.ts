@@ -9,6 +9,7 @@ export const useThemeStore = defineStore(
   () => {
     const bgAlphaRef = Vue.ref(0);
     const bgBlurRef = Vue.ref(0);
+    const modeRef = Vue.ref<Mode>("auto");
 
     const setBgAlpha: Dispatch<SetStateAction<number>> = (action) => {
       const bgAlpha = (() => {
@@ -34,11 +35,26 @@ export const useThemeStore = defineStore(
       bgBlurRef.value = bgBlur;
     };
 
+    const setMode: Dispatch<SetStateAction<Mode>> = (action) => {
+      const mode = (() => {
+        if (typeof action === "function") {
+          return action(Vue.unref(modeRef));
+        }
+
+        return action;
+      })();
+
+      modeRef.value = mode;
+    };
+
     return {
-      bgAlpha: Vue.readonly(bgAlphaRef),
-      bgBlur: Vue.readonly(bgBlurRef),
+      bgAlpha: bgAlphaRef,
+      bgBlur: bgBlurRef,
       setBgAlpha,
       setBgBlur,
+
+      mode: modeRef,
+      setMode,
     };
   },
   {
@@ -48,3 +64,5 @@ export const useThemeStore = defineStore(
     },
   }
 );
+
+type Mode = "auto" | "dark" | "light";

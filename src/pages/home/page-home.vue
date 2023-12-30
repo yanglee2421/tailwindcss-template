@@ -3,21 +3,48 @@
 import * as Vue from "vue";
 
 // Store Imports
-import { useAuth } from "@/hooks/store";
+import { useAuth, useThemeStore } from "@/hooks/store";
+
+// Clsx Imports
+import clsx from "clsx";
 
 void Vue;
 
 const [auth] = useAuth();
+const themeStore = useThemeStore();
 
 defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <el-button
-    @click="auth.signOut()"
-    type="danger"
-    >sign out</el-button
-  >
+  <div :class="clsx(['p-2', ''])">
+    <el-row :gutter="16">
+      <el-col
+        :xs="24"
+        :sm="12"
+      >
+        <div :class="clsx(['border'])">
+          <el-button
+            @click="auth.signOut()"
+            type="danger"
+            >sign out</el-button
+          >
+        </div>
+      </el-col>
+      <el-col
+        :xs="24"
+        :sm="12"
+      >
+        <div :class="clsx(['border'])">
+          <el-radio-group v-model="themeStore.mode">
+            <el-radio label="auto">auto</el-radio>
+            <el-radio label="dark">dark</el-radio>
+            <el-radio label="light">light</el-radio>
+          </el-radio-group>
+        </div>
+      </el-col>
+    </el-row>
+  </div>
   <div class="p-2">
     <div class="flex justify-center">
       <div class="w-36 h-36 border border-solid border-gray-400 mr-auto">1</div>
