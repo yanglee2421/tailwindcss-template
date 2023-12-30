@@ -4,9 +4,6 @@ import * as Vue from "vue";
 // App Imports
 import App from "./App.vue";
 
-// Plugin Imports
-import plugins from "@/plugins";
-
 // Styles Imports
 import "@/assets/scss/global.scss";
 import "@/assets/css/style.css";
@@ -17,8 +14,9 @@ import { router } from "@/router";
 // Acl Imports
 import { AclPlugin } from "@/configs/acl";
 
-// Pinia Imports
+// Plugin Imports
 import { Pinia, ElementIcons, ElementPlus, Icons, VueQuery } from "@/plugins";
+import plugins from "@/plugins";
 
 const app = Vue.createApp(App);
 
