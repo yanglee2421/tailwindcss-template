@@ -8,6 +8,7 @@ import { vueQuery } from "./vue-query";
 import { elUI } from "./el-ui";
 import { elIcons } from "./el-icons";
 import { icons } from "./icons";
+import { abilitiesPlugin, acl } from "./acl";
 
 const lyComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
   "@/components/**/ly-*.vue",
@@ -19,6 +20,7 @@ const lyComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
 
 export const plugins: Vue.Plugin = {
   install(app) {
+    app.use(abilitiesPlugin, acl);
     app.use(vueQuery);
     app.use(pinia);
     app.use(router);

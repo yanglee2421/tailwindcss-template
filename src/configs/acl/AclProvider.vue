@@ -4,13 +4,17 @@ import * as Vue from "vue";
 
 // Acl Imports
 import { defineAbilityFor } from "./defineAbilityFor";
-import { provideAbility } from "@casl/vue";
+import { useAcl } from "./useAcl";
 
-const acl = defineAbilityFor("");
-provideAbility(acl);
+// Store Imports
+import { useAuth } from "@/hooks/store";
+
+const [authRef] = useAuth();
+const acl = useAcl();
 
 Vue.watchPostEffect(() => {
-  acl.update(defineAbilityFor("").rules);
+  const auth = Vue.unref(authRef);
+  acl.update(defineAbilityFor(auth.currentUser ? "" : "").rules);
 });
 </script>
 

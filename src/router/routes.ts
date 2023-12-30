@@ -1,3 +1,4 @@
+// Router Imports
 import type { RouterOptions } from "vue-router";
 
 export const routes: RouterOptions["routes"] = [
@@ -5,7 +6,10 @@ export const routes: RouterOptions["routes"] = [
   {
     path: "/404",
     name: "404",
-    meta: { title: "NotFound" },
+    meta: {
+      title: "NotFound",
+      auth: "none",
+    },
     component() {
       return import("@/pages/404");
     },
@@ -13,7 +17,10 @@ export const routes: RouterOptions["routes"] = [
   {
     path: "/login",
     name: "login",
-    meta: { title: "登录" },
+    meta: {
+      title: "Login",
+      auth: "guest",
+    },
     component() {
       return import("@/pages/login");
     },

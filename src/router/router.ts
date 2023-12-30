@@ -9,6 +9,15 @@ import { routes } from "./routes";
 // Nprogress Imports
 import NProgress from "nprogress";
 
+// Store Imports
+import { useAuth } from "@/hooks/store";
+
+// Acl Imports
+import { useAcl } from "@/configs/acl";
+
+// Vue Imports
+import * as Vue from "vue";
+
 export const router = createRouter({
   history: import.meta.env.DEV ? createWebHistory() : createWebHashHistory(),
   routes,
@@ -16,15 +25,44 @@ export const router = createRouter({
 
 // Router Guard
 router.beforeEach((to) => {
-  return true;
+  const [authRef] = useAuth();
+  const acl = useAcl();
 
-  // Not Logged
-  return {
-    name: "login",
-    query: {
-      returnURL: encodeURIComponent(to.fullPath),
-    },
-  };
+  const auth = Vue.unref(authRef);
+
+  switch (to.meta.auth) {
+    case "guest": {
+      if (auth.currentUser) {
+        return { name: "home" };
+      }
+
+      return true;
+    }
+
+    case "none":
+      return true;
+
+    case "auth":
+    default: {
+      // Not logged in
+      if (!auth.currentUser) {
+        return { name: "login" };
+      }
+
+      // Can access route
+      const canAccess = acl.can(
+        String(to.meta.aclAction) || "read",
+        String(to.meta.aclSubject) || "fallback"
+      );
+
+      if (canAccess) {
+        return true;
+      }
+
+      // Can not access route
+      return { name: "401" };
+    }
+  }
 });
 
 // ** Title

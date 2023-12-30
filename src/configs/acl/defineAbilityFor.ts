@@ -6,24 +6,20 @@ import {
 } from "@casl/ability";
 
 export function defineAbilityFor(role: string) {
-  const { can, cannot, build } = new AbilityBuilder<AppAbility>(
-    createMongoAbility
-  );
+  const builder = new AbilityBuilder<AppAbility>(createMongoAbility);
 
   switch (role) {
     case "admin":
-      can("manage", "all");
+      builder.can("manage", "all");
       break;
     case "client":
-      can("read", "all");
+      builder.can("read", "all");
       break;
     default:
-      cannot("manage", "all");
+      builder.cannot("manage", "all");
   }
 
-  return build();
+  return builder.build();
 }
 
-export type AppAbility = MongoAbility<[Actions, Subjects]>;
-type Actions = "create" | "read" | "update" | "delete" | "manage";
-type Subjects = "all" | "User" | "Article";
+export type AppAbility = MongoAbility<[string, string]>;

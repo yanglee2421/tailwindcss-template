@@ -2,8 +2,9 @@
 // Vue Imports
 import * as Vue from "vue";
 
-// Acl Imports
+// Provider Imports
 import AclProvider from "./configs/acl/AclProvider.vue";
+import AuthGuard from "@/router/AuthGuard.vue";
 
 // Control DOM by vue state
 Vue.watchPostEffect(() => {
@@ -16,11 +17,13 @@ Vue.watchPostEffect(() => {
 
 <template>
   <acl-provider>
-    <router-view #default="{ Component }">
-      <keep-alive :max="10">
-        <component :is="Component" />
-      </keep-alive>
-    </router-view>
+    <auth-guard>
+      <router-view #default="{ Component }">
+        <keep-alive :max="10">
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
+    </auth-guard>
   </acl-provider>
 </template>
 

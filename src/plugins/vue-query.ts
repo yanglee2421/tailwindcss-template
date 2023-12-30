@@ -4,7 +4,7 @@ import {
   DefaultOptions,
   VueQueryPlugin,
 } from "@tanstack/vue-query";
-import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
+import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
 import { persistQueryClient } from "@tanstack/query-persist-client-core";
 
 // Vue Imports
@@ -27,7 +27,7 @@ function clientConfig(): VueQueryPluginOptions {
     clientPersister(queryClient) {
       return persistQueryClient({
         queryClient,
-        persister: createSyncStoragePersister({
+        persister: createAsyncStoragePersister({
           storage: sessionStorage,
           key: import.meta.env.VITE_QUERY_PERSISTER_KEY,
         }),
