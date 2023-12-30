@@ -9,7 +9,7 @@ const iconComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
   }
 );
 
-export const icons: Vue.Plugin = {
+export const Icons: Vue.Plugin = {
   install(app) {
     Object.entries(iconComponents).forEach(([key, component]) => {
       const name = key.replace(/(^\/.+\/)|(\.vue$)/g, "");

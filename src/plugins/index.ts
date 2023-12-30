@@ -1,12 +1,14 @@
 // Element UI
-export * from "./el-icons";
-export * from "./el-ui";
+export * from "./ElementIcons";
+export * from "./ElementPlus";
 
 // ** Pinia
-export * from "./pinia";
+export * from "./Pinia";
 
 // ** Icons
-export * from "./icons";
+export * from "./Icons";
 
 // ** Default
 export { plugins as default } from "./plugins";
+
+export * from "./VueQuery";

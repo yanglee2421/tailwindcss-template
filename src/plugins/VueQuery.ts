@@ -10,7 +10,7 @@ import { persistQueryClient } from "@tanstack/query-persist-client-core";
 // Vue Imports
 import * as Vue from "vue";
 
-export const vueQuery: Vue.Plugin = {
+export const VueQuery: Vue.Plugin = {
   install(app) {
     app.use(VueQueryPlugin, clientConfig());
   },
