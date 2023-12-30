@@ -10,27 +10,31 @@ const canRef = Vue.ref<HTMLCanvasElement>();
 const boxRef = Vue.ref<HTMLDivElement>();
 const sizeRef = useObserverResize(boxRef);
 
-Vue.watchPostEffect((onCleanup) => {
-  const size = Vue.unref(sizeRef);
-  const canvas = Vue.unref(canRef);
+Vue.watch(
+  [sizeRef, canRef],
+  ([size, canvas], [], onCleanup) => {
+    if (!size) return;
+    if (!canvas) return;
 
-  if (!size) return;
-  const [box] = size.contentBoxSize;
+    const [box] = size.contentBoxSize;
 
-  if (!canvas) return;
+    Object.assign(canvas, {
+      width: box.inlineSize,
+      height: box.blockSize,
+    });
 
-  Object.assign(canvas, {
-    width: box.inlineSize,
-    height: box.blockSize,
-  });
+    const p = new Particles(canvas, (box.inlineSize / 1920) * 120, 110);
+    p.animate();
 
-  const p = new Particles(canvas, (box.inlineSize / 1920) * 120, 110);
-  p.animate();
-
-  onCleanup(() => {
-    p.abortAnimate();
-  });
-});
+    onCleanup(() => {
+      p.abortAnimate();
+    });
+  },
+  {
+    immediate: true,
+    flush: "post",
+  }
+);
 
 defineOptions({ inheritAttrs: true });
 </script>

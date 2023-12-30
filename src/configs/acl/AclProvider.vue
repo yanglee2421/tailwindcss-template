@@ -12,10 +12,16 @@ import { useAuth } from "@/hooks/store";
 const [authRef] = useAuth();
 const acl = useAcl();
 
-Vue.watchPostEffect(() => {
-  const auth = Vue.unref(authRef);
-  acl.update(defineAbilityFor(auth.currentUser ? "" : "").rules);
-});
+Vue.watch(
+  authRef,
+  (auth) => {
+    acl.update(defineAbilityFor(auth.currentUser ? "" : "").rules);
+  },
+  {
+    immediate: true,
+    flush: "post",
+  }
+);
 </script>
 
 <template>

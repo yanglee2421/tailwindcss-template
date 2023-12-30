@@ -15,11 +15,21 @@ defineOptions({ inheritAttrs: false });
         :xl="4"
       >
         <label
-          class="flex flex-col items-center h-84 p-4 border border-solid cursor-pointer text-center"
+          :class="[
+            'flex',
+            'flex-col',
+            'items-center',
+            'h-84',
+            'p-4',
+            'border',
+            'border-solid',
+            'cursor-pointer',
+            'text-center',
+          ]"
         >
           <el-avatar size="large">Y</el-avatar>
-          <p class="mt-3 font-medium">Visual Search</p>
-          <p class="mt-1 mb-auto overflow-hidden max-h-36">
+          <p :class="['mt-3', 'font-medium']">Visual Search</p>
+          <p :class="['mt-1', 'mb-auto', 'overflow-hidden', 'max-h-36']">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
             maiores doloribus dicta est error recusandae eum labore minus sequi,
             iusto repudiandae ab debitis maxime ipsum, aspernatur veritatis

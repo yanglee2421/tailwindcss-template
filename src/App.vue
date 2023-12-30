@@ -13,27 +13,30 @@ import { useIsDark } from "@/hooks/dom";
 const themeStore = useThemeStore();
 const isDarkRef = useIsDark();
 
-// Control DOM by vue state
-Vue.watchPostEffect(() => {
-  const themeMode = themeStore.mode;
-  const isDark = Vue.unref(isDarkRef);
+Vue.watch(
+  [() => themeStore.mode, isDarkRef],
+  ([themeMode, isDark]) => {
+    const mode = (() => {
+      switch (themeMode) {
+        case "light":
+          return false;
+        case "dark":
+          return true;
+        case "auto":
+        default:
+          return isDark;
+      }
+    })();
 
-  const mode = (() => {
-    switch (themeMode) {
-      case "light":
-        return false;
-      case "dark":
-        return true;
-      case "auto":
-      default:
-        return isDark;
-    }
-  })();
-
-  mode
-    ? document.documentElement.classList.add("dark")
-    : document.documentElement.classList.remove("dark");
-});
+    mode
+      ? document.documentElement.classList.add("dark")
+      : document.documentElement.classList.remove("dark");
+  },
+  {
+    immediate: true,
+    flush: "post",
+  }
+);
 </script>
 
 <template>

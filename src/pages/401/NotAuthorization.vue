@@ -13,25 +13,30 @@ const boxRef = Vue.ref<HTMLDivElement>();
 const cvsRef = Vue.ref<HTMLCanvasElement>();
 const sizeRef = useObserverResize(boxRef);
 
-Vue.watchPostEffect((onCleanup) => {
-  const size = Vue.unref(sizeRef);
-  if (!size) return;
+Vue.watch(
+  [sizeRef, cvsRef],
+  ([size, cvs], [], onCleanup) => {
+    if (!size) return;
+    if (!cvs) return;
 
-  const [box] = size.contentBoxSize;
-  const cvs = Vue.unref(cvsRef);
-  if (!cvs) return;
+    const [box] = size.contentBoxSize;
 
-  Object.assign(cvs, {
-    width: box.inlineSize,
-    height: box.blockSize,
-  });
-  const snow = new Snow(cvs, (box.inlineSize / 1920) * 200);
-  snow.animation();
+    Object.assign(cvs, {
+      width: box.inlineSize,
+      height: box.blockSize,
+    });
+    const snow = new Snow(cvs, (box.inlineSize / 1920) * 200);
+    snow.animation();
 
-  onCleanup(() => {
-    snow.abortAnimation();
-  });
-});
+    onCleanup(() => {
+      snow.abortAnimation();
+    });
+  },
+  {
+    immediate: true,
+    flush: "post",
+  }
+);
 
 defineOptions({ inheritAttrs: true });
 </script>
