@@ -1,6 +1,7 @@
 <script lang="ts" setup>
+// Utils Imports
 import { Particles } from "./Particle";
-import { useObserverResize } from "@/hooks";
+import { useObserverResize } from "@/hooks/dom";
 
 // Vue Imports
 import * as Vue from "vue";
@@ -11,10 +12,11 @@ const sizeRef = useObserverResize(boxRef);
 
 Vue.watchPostEffect((onCleanup) => {
   const size = Vue.unref(sizeRef);
-  if (!size) return;
-
-  const [box] = size.contentBoxSize;
   const canvas = Vue.unref(canRef);
+
+  if (!size) return;
+  const [box] = size.contentBoxSize;
+
   if (!canvas) return;
 
   Object.assign(canvas, {
