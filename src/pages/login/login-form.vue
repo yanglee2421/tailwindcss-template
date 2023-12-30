@@ -5,16 +5,16 @@ import * as Vue from "vue";
 // Symbol Imports
 import { symbolForm } from "./login-symbols";
 
-// Types Imports
-import { FormValues } from "@/types/page-login";
-
 // Element Imports
-import { FormInstance } from "element-plus";
+import { ElMessage, FormInstance } from "element-plus";
 
 // Query Imports
 import { useLoginMutation } from "@/hooks/api-firebase";
 
-const formValues = Vue.inject<FormValues>(symbolForm);
+const formValues = Vue.inject<{
+  email: string;
+  passwd: string;
+}>(symbolForm);
 if (!formValues) {
   throw new Error("No Provider symbolForm!");
 }
@@ -28,10 +28,20 @@ const handleSubmit = () => {
   Vue.unref(formRef)?.validate((isVali) => {
     if (!isVali) return;
 
-    mutation.mutate({
-      email: formValues.email,
-      password: formValues.passwd,
-    });
+    mutation.mutate(
+      {
+        email: formValues.email,
+        password: formValues.passwd,
+      },
+      {
+        onError(error) {
+          ElMessage.error(error.message);
+        },
+        onSuccess() {
+          ElMessage.success("Wellcome to here!");
+        },
+      }
+    );
   });
 };
 
@@ -74,9 +84,8 @@ defineOptions({ inheritAttrs: false });
         placeholder="Password"
       ></el-input>
     </el-form-item>
-    <el-form-item prop="prop">
+    <el-form-item>
       <div class="flex justify-between w-full">
-        <el-checkbox v-model="formValues.isRemember">Remember Me</el-checkbox>
         <el-button
           type="primary"
           link

@@ -6,20 +6,17 @@ import * as Vue from "vue";
 import iconBtn from "./icon-btn.vue";
 import loginForm from "./login-form.vue";
 
-// Symbols Imports
-import { symbolForm } from "./login-symbols";
-
-// Types Imports
-import { FormValues } from "@/types/page-login";
-
 // Assets Imports
 import bgImg from "@/assets/image/bg/justHer.jpg";
 
+// Utils Imports
+import { symbolForm } from "./login-symbols";
+import clsx from "clsx";
+
 // ** Form
-const formValues = Vue.reactive<FormValues>({
+const formValues = Vue.reactive({
   email: "",
   passwd: "",
-  isRemember: true,
 });
 Vue.provide(symbolForm, formValues);
 
@@ -29,7 +26,9 @@ defineOptions({ inheritAttrs: false });
 <template>
   <div class="flex h-full">
     <div
-      class="relative flex-1 overflow-hidden bg-fixed bg-cover"
+      :class="
+        clsx(['relative', 'flex-1', 'overflow-hidden', 'bg-fixed', 'bg-cover'])
+      "
       :style="{ backgroundImage: `url(${bgImg})` }"
     >
       <div class="absolute top-6 left-6 flex gap-3">
@@ -53,24 +52,14 @@ defineOptions({ inheritAttrs: false });
         <el-text class="text-basic text-slate-400"
           >Please sign-in to your account and start the adventure.</el-text
         >
-        <el-alert
-          :closable="false"
-          class="my-3"
-        >
-          <el-text class="text-gray-500"
-            >Admin:
-            <b class="font-semibold">admin@yang.com</b>
-            / Pass:
-            <b class="font-semibold">admin123456</b>
-          </el-text>
-          <br />
-          <el-text class="text-gray-500"
-            >Client:
-            <b class="font-semibold">client@yang.com</b>
-            / Pass:
-            <b class="font-semibold">client123456</b></el-text
+        <div :class="clsx(['my-3'])">
+          <el-alert
+            :closable="false"
+            type="success"
           >
-        </el-alert>
+            Hello
+          </el-alert>
+        </div>
         <login-form />
         <div class="flex justify-center gap-3 w-full">
           <el-text size="default">New on out platform?</el-text>
