@@ -12,8 +12,9 @@ const route = useRoute();
 const [authRef] = useAuth();
 const acl = useAcl();
 
-Vue.watchPostEffect(async (onCleanup) => {
+Vue.watchPostEffect(async () => {
   const auth = Vue.unref(authRef);
+  void acl;
 
   switch (route.meta.auth) {
     case "guest": {
@@ -49,8 +50,6 @@ Vue.watchPostEffect(async (onCleanup) => {
       await router.replace({ name: "401" });
     }
   }
-
-  onCleanup(() => {});
 });
 </script>
 

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+// Vue Imports
 import * as Vue from "vue";
 
 interface Props {
@@ -8,13 +9,6 @@ const props = withDefaults(defineProps<Partial<Props>>(), {
   class: "",
 });
 void props;
-
-Vue.watchPostEffect((onClear) => {
-  console.log("effect");
-  onClear(() => {
-    console.log("clear effect");
-  });
-});
 
 const btnRef = Vue.ref();
 defineExpose({ btnRef });

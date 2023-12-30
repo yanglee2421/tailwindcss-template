@@ -19,7 +19,9 @@ import { useAcl } from "@/configs/acl";
 import * as Vue from "vue";
 
 export const router = createRouter({
-  history: import.meta.env.DEV ? createWebHistory() : createWebHashHistory(),
+  history: import.meta.env.DEV
+    ? createWebHistory("/vue-ele")
+    : createWebHashHistory(),
   routes,
 });
 

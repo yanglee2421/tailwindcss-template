@@ -2,12 +2,22 @@
 // Vue Imports
 import * as Vue from "vue";
 
+// Store Imports
+import { useAuth } from "@/hooks/store";
+
 void Vue;
+
+const [auth] = useAuth();
 
 defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
+  <el-button
+    @click="auth.signOut()"
+    type="danger"
+    >sign out</el-button
+  >
   <div class="p-2">
     <div class="flex justify-center">
       <div class="w-36 h-36 border border-solid border-gray-400 mr-auto">1</div>

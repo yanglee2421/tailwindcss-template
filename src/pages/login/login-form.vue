@@ -11,6 +11,9 @@ import { FormValues } from "@/types/page-login";
 // Element Imports
 import { FormInstance } from "element-plus";
 
+// Query Imports
+import { useLoginMutation } from "@/hooks/api-firebase";
+
 const formValues = Vue.inject<FormValues>(symbolForm);
 if (!formValues) {
   throw new Error("No Provider symbolForm!");
@@ -19,9 +22,16 @@ if (!formValues) {
 // ** Form
 const formRef = Vue.ref<FormInstance>();
 
+const mutation = useLoginMutation();
+
 const handleSubmit = () => {
   Vue.unref(formRef)?.validate((isVali) => {
     if (!isVali) return;
+
+    mutation.mutate({
+      email: formValues.email,
+      password: formValues.passwd,
+    });
   });
 };
 
@@ -77,6 +87,7 @@ defineOptions({ inheritAttrs: false });
     <el-form-item>
       <el-button
         @click="handleSubmit"
+        :loading="Vue.unref(mutation.isPending)"
         type="primary"
         class="w-full uppercase bg-none bg-sky-500 font-semibold"
         >sign in</el-button

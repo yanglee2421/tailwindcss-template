@@ -9,35 +9,52 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "@/api/firebase";
 
 export function useAuth() {
-  const authStateRef = Vue.shallowRef(getAuth(app));
-  const authRef = Vue.readonly(authStateRef);
+  const authStore = useAuthStore();
 
-  const updateAuth = () => {
-    authStateRef.value = getAuth(app);
-  };
+  const authRef = Vue.computed(() => {
+    void authStore.updateAt;
+    return getAuth(app);
+  });
+
+  const setUpdateAt = authStore.setUpdateAt.bind(authStore);
 
   Vue.watchPostEffect((onCleanup) => {
-    const unsubscribe = onAuthStateChanged(getAuth(app), updateAuth);
+    const unsubscribe = onAuthStateChanged(getAuth(app), () => {
+      authStore.setUpdateAt(Date.now());
+    });
 
     onCleanup(() => {
       unsubscribe();
     });
   });
 
-  return [Vue.readonly(authRef), updateAuth] as [
-    typeof authRef,
-    typeof updateAuth
-  ];
+  return [authRef, setUpdateAt] as [typeof authRef, typeof setUpdateAt];
 }
 
 export const useAuthStore = defineStore(
   "auth",
   () => {
+    const updateAtRef = Vue.ref(0);
     const localTokenRef = Vue.ref("");
     const sessionTokenRef = Vue.ref("");
     const accessToken = Vue.computed(() => {
-      return Vue.unref(localTokenRef) || Vue.unref(sessionTokenRef);
+      const localToken = Vue.unref(localTokenRef);
+      const sessionToken = Vue.unref(sessionTokenRef);
+
+      return localToken || sessionToken;
     });
+
+    const setUpdateAt: Dispatch<SetStateAction<number>> = (action) => {
+      const updateAt = (() => {
+        if (typeof action === "function") {
+          return action(Vue.unref(updateAtRef));
+        }
+
+        return action;
+      })();
+
+      updateAtRef.value = updateAt;
+    };
 
     const setLocalToken: Dispatch<SetStateAction<string>> = (action) => {
       const localToken = (() => {
@@ -64,11 +81,14 @@ export const useAuthStore = defineStore(
     };
 
     return {
-      localToken: Vue.readonly(localTokenRef),
-      sessionToken: Vue.readonly(sessionTokenRef),
+      localToken: localTokenRef,
+      sessionToken: sessionTokenRef,
       accessToken,
       setLocalToken,
       setSessionToken,
+
+      updateAt: updateAtRef,
+      setUpdateAt,
     };
   },
   {
