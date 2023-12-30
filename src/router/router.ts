@@ -53,8 +53,8 @@ router.beforeEach((to) => {
 
       // Can access route
       const canAccess = acl.can(
-        String(to.meta.aclAction) || "read",
-        String(to.meta.aclSubject) || "fallback"
+        String(to.meta.aclAction || "read"),
+        String(to.meta.aclSubject || "fallback")
       );
 
       if (canAccess) {

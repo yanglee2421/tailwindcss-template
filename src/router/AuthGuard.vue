@@ -4,24 +4,16 @@ import * as Vue from "vue";
 
 // Store Imports
 import { useAuth } from "@/hooks/store";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { useAcl } from "@/configs/acl";
 
 const router = useRouter();
-const route = useRoute();
 const [authRef] = useAuth();
 const acl = useAcl();
 
-const canAccessRef = Vue.computed(() => {
-  return acl.can(
-    String(route.meta.aclAction) || "read",
-    String(route.meta.aclSubject) || "fallback"
-  );
-});
-
 Vue.watch(
-  [authRef, canAccessRef],
-  async ([auth, canAccess]) => {
+  [router.currentRoute, authRef],
+  async ([route, auth]) => {
     switch (route.meta.auth) {
       case "guest": {
         if (auth.currentUser) {
@@ -43,6 +35,11 @@ Vue.watch(
         }
 
         // Can access route
+        const canAccess = acl.can(
+          String(route.meta.aclAction || "read"),
+          String(route.meta.aclSubject || "fallback")
+        );
+
         if (canAccess) {
           break;
         }
