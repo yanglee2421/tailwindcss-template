@@ -15,8 +15,8 @@ const sizeRef = useObserverResize(boxRef);
 
 Vue.watch(
   [sizeRef, cvsRef],
-  ([size, cvs], [], onCleanup) => {
-    if (!size) return;
+  ([size, cvs], prevArgs, onCleanup) => {
+    if (!size) return prevArgs;
     if (!cvs) return;
 
     const [box] = size.contentBoxSize;

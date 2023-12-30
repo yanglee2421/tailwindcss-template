@@ -35,12 +35,12 @@ Vue.watch(
         }
 
         // Can access route
-        const canAccess = acl.can(
-          String(route.meta.aclAction || "read"),
-          String(route.meta.aclSubject || "fallback")
-        );
-
-        if (canAccess) {
+        if (
+          acl.can(
+            String(route.meta.aclAction || "read"),
+            String(route.meta.aclSubject || "fallback")
+          )
+        ) {
           break;
         }
 
