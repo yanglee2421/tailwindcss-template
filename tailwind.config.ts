@@ -18,7 +18,7 @@ function defineConfig(): Config {
     },
     plugins: [],
     corePlugins: {
-      preflight: true,
+      preflight: false,
     },
     // important: "#root",
   };
