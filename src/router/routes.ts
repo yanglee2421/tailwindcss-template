@@ -15,6 +15,19 @@ export const routes: RouterOptions["routes"] = [
     },
   },
   {
+    path: "/401",
+    name: "401",
+    meta: {
+      title: "Not Authorization",
+      auth: "auth",
+      aclAction: "read",
+      aclSubject: "401",
+    },
+    component() {
+      return import("@/pages/401/NotAuthorization.vue");
+    },
+  },
+  {
     path: "/login",
     name: "login",
     meta: {
@@ -46,15 +59,7 @@ export const routes: RouterOptions["routes"] = [
     name: "particle",
     meta: { title: "粒子动画" },
     component() {
-      return import("@/pages/particle");
-    },
-  },
-  {
-    path: "/snow",
-    name: "snow",
-    meta: { title: "雪飘" },
-    component() {
-      return import("@/pages/snow");
+      return import("@/pages/particle/page-particle.vue");
     },
   },
   {

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { Particles } from "@/utils";
+import { Particles } from "./Particle";
 import { useObserverResize } from "@/hooks";
 
 // Vue Imports
 import * as Vue from "vue";
 
-const canRef = Vue.ref();
+const canRef = Vue.ref<HTMLCanvasElement>();
 const boxRef = Vue.ref<HTMLDivElement>();
 const sizeRef = useObserverResize(boxRef);
 
@@ -29,42 +29,27 @@ Vue.watchPostEffect((onCleanup) => {
     p.abortAnimate();
   });
 });
+
+defineOptions({ inheritAttrs: true });
 </script>
 
 <template>
   <div
     ref="boxRef"
-    class="particle-box"
+    :class="['relative', 'h-full', 'particle-box']"
   >
     <canvas
-      :ref="(dom) => (canRef = dom)"
-      class="particle-canvas"
+      ref="canRef"
+      :class="['absolute', 'inset-0']"
     ></canvas>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .particle-box {
-  position: relative;
-  height: 100%;
   background-image: linear-gradient(
     rgba(193, 35, 35, 0.71),
     rgba(32, 39, 216, 0.71)
   );
 }
-.particle-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.particle-content {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  overflow: overlay;
-}
 </style>
-<script lang="ts">
-export default { inheritAttrs: true };
-</script>

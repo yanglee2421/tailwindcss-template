@@ -11,7 +11,6 @@ import bgImg from "@/assets/image/bg/justHer.jpg";
 
 // Utils Imports
 import { symbolForm } from "./login-symbols";
-import clsx from "clsx";
 
 // ** Form
 const formValues = Vue.reactive({
@@ -26,9 +25,7 @@ defineOptions({ inheritAttrs: false });
 <template>
   <div class="flex h-full">
     <div
-      :class="
-        clsx(['relative', 'flex-1', 'overflow-hidden', 'bg-fixed', 'bg-cover'])
-      "
+      :class="['relative', 'flex-1', 'overflow-hidden', 'bg-fixed', 'bg-cover']"
       :style="{ backgroundImage: `url(${bgImg})` }"
     >
       <div class="absolute top-6 left-6 flex gap-3">
@@ -52,7 +49,7 @@ defineOptions({ inheritAttrs: false });
         <el-text class="text-basic text-slate-400"
           >Please sign-in to your account and start the adventure.</el-text
         >
-        <div :class="clsx(['my-3'])">
+        <div :class="['my-3']">
           <el-alert
             :closable="false"
             type="success"

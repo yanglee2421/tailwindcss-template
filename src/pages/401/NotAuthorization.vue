@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 // Hooks Imports
-import { useObserverResize } from "@/hooks";
+import { useObserverResize } from "@/hooks/dom";
 
 // Utils Imports
-import { Snow } from "@/utils";
+import { Snow } from "./Snow";
 
 // Vue Imports
 import * as Vue from "vue";
@@ -39,29 +39,47 @@ defineOptions({ inheritAttrs: true });
 <template>
   <div
     ref="boxRef"
-    class="box"
+    :class="[
+      'relative',
+      'h-full',
+      'p-0',
+      'border-0',
+      'm-0',
+      'bg-cover',
+      'bg-fixed',
+      'snow-warpper',
+    ]"
   >
     <canvas
       ref="cvsRef"
-      class="cvs"
+      :class="['absolute', 'inset-0']"
     ></canvas>
+    <div
+      :class="[
+        'relative',
+        'z-10',
+        'flex',
+        'h-full',
+        'justify-center',
+        'items-center',
+      ]"
+    >
+      <div :class="['mt-96']">
+        <router-link :to="{ name: 'home' }">
+          <el-button
+            size="large"
+            type="primary"
+            >Take me home</el-button
+          >
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.box {
-  position: relative;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  margin: 0;
+.snow-warpper {
   background-image: url("@/assets/image/bg/snow.jpg");
-  background-size: cover;
   background-position: top center;
-  background-attachment: fixed;
-}
-.cvs {
-  position: absolute;
-  inset: 0;
 }
 </style>

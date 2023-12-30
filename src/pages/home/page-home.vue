@@ -5,9 +5,6 @@ import * as Vue from "vue";
 // Store Imports
 import { useAuth, useThemeStore } from "@/hooks/store";
 
-// Clsx Imports
-import clsx from "clsx";
-
 void Vue;
 
 const [auth] = useAuth();
@@ -17,13 +14,13 @@ defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <div :class="clsx(['p-2', ''])">
+  <div :class="['p-2', '']">
     <el-row :gutter="16">
       <el-col
         :xs="24"
         :sm="12"
       >
-        <div :class="clsx(['border'])">
+        <div :class="['border']">
           <el-button
             @click="auth.signOut()"
             type="danger"
@@ -35,7 +32,7 @@ defineOptions({ inheritAttrs: false });
         :xs="24"
         :sm="12"
       >
-        <div :class="clsx(['border'])">
+        <div :class="['border']">
           <el-radio-group v-model="themeStore.mode">
             <el-radio label="auto">auto</el-radio>
             <el-radio label="dark">dark</el-radio>

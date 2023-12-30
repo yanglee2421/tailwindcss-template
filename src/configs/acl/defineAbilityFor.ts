@@ -16,7 +16,7 @@ export function defineAbilityFor(role: string) {
       builder.can("read", "all");
       break;
     default:
-      builder.can("manage", "all");
+      builder.can("read", "401");
   }
 
   return builder.build();
