@@ -11,7 +11,7 @@ export const routes: RouterOptions["routes"] = [
       auth: "guest",
     },
     component() {
-      return import("@/pages/login");
+      return import("@/pages/401/NotLogged.vue");
     },
   },
   {
@@ -22,7 +22,7 @@ export const routes: RouterOptions["routes"] = [
       auth: "none",
     },
     component() {
-      return import("@/pages/401/NotAuthorization.vue");
+      return import("@/pages/403/NotAuthorization.vue");
     },
   },
   {
@@ -33,7 +33,7 @@ export const routes: RouterOptions["routes"] = [
       auth: "none",
     },
     component() {
-      return import("@/pages/404");
+      return import("@/pages/404/NotFound.vue");
     },
   },
   {
@@ -44,7 +44,7 @@ export const routes: RouterOptions["routes"] = [
       auth: "none",
     },
     component() {
-      return import("@/pages/404");
+      return import("@/pages/500/SystemError.vue");
     },
   },
 
