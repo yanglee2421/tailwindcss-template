@@ -30,7 +30,7 @@ Vue.watch(
       default: {
         // Not logged in
         if (!auth.currentUser) {
-          await router.replace({ name: "login" });
+          await router.replace({ name: "401" });
           break;
         }
 
@@ -45,7 +45,7 @@ Vue.watch(
         }
 
         // Can not access route
-        await router.replace({ name: "401" });
+        await router.replace({ name: "403" });
       }
     }
   },

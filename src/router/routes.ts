@@ -4,6 +4,28 @@ import type { RouterOptions } from "vue-router";
 export const routes: RouterOptions["routes"] = [
   { path: "/:pathMatch(.*)*", redirect: "/404" },
   {
+    path: "/401",
+    name: "401",
+    meta: {
+      title: "Login",
+      auth: "guest",
+    },
+    component() {
+      return import("@/pages/login");
+    },
+  },
+  {
+    path: "/403",
+    name: "403",
+    meta: {
+      title: "Not Authorization",
+      auth: "none",
+    },
+    component() {
+      return import("@/pages/401/NotAuthorization.vue");
+    },
+  },
+  {
     path: "/404",
     name: "404",
     meta: {
@@ -15,29 +37,17 @@ export const routes: RouterOptions["routes"] = [
     },
   },
   {
-    path: "/401",
-    name: "401",
+    path: "/500",
+    name: "500",
     meta: {
-      title: "Not Authorization",
-      auth: "auth",
-      aclAction: "read",
-      aclSubject: "401",
+      title: "System Error",
+      auth: "none",
     },
     component() {
-      return import("@/pages/401/NotAuthorization.vue");
+      return import("@/pages/404");
     },
   },
-  {
-    path: "/login",
-    name: "login",
-    meta: {
-      title: "Login",
-      auth: "guest",
-    },
-    component() {
-      return import("@/pages/login");
-    },
-  },
+
   {
     path: "/",
     name: "home",

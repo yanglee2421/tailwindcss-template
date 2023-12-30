@@ -48,7 +48,7 @@ router.beforeEach((to) => {
     default: {
       // Not logged in
       if (!auth.currentUser) {
-        return { name: "login" };
+        return { name: "401" };
       }
 
       // Can access route
@@ -62,7 +62,7 @@ router.beforeEach((to) => {
       }
 
       // Can not access route
-      return { name: "401" };
+      return { name: "403" };
     }
   }
 });
