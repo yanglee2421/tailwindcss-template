@@ -26,7 +26,9 @@ const mutation = useLoginMutation();
 
 const handleSubmit = () => {
   Vue.unref(formRef)?.validate((isVali) => {
-    if (!isVali) return;
+    if (!isVali) {
+      return;
+    }
 
     mutation.mutate(
       {

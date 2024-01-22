@@ -9,7 +9,6 @@ import { fileURLToPath, URL } from "node:url";
 // https://vitejs.dev/config/
 export default defineConfig((ConfigEnv) => {
   const __dirname = dirname(fileURLToPath(import.meta.url));
-  const isBuild = ConfigEnv.command === "build";
 
   return {
     plugins: [vue()],
@@ -31,14 +30,14 @@ export default defineConfig((ConfigEnv) => {
       },
     },
 
-    base: isBuild ? "./" : "/vue-ele",
+    base: ConfigEnv.command === "build" ? "./" : "/vue-ele",
 
     // Env File Directory
     envDir: resolve(__dirname, "./"),
 
     // ** Build
     build: {
-      outDir: "docs",
+      outDir: resolve(__dirname, "./docs"),
       emptyOutDir: true,
 
       manifest: false,
