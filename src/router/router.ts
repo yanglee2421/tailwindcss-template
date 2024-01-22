@@ -10,13 +10,10 @@ import { routes } from "./routes";
 import NProgress from "nprogress";
 
 // Store Imports
-import { useAuth } from "@/hooks/store";
+import { useAuthStore } from "@/hooks/store";
 
 // Acl Imports
 import { useAcl } from "@/configs/acl";
-
-// Vue Imports
-import * as Vue from "vue";
 
 export const router = createRouter({
   history: import.meta.env.DEV
@@ -27,10 +24,10 @@ export const router = createRouter({
 
 // Router Guard
 router.beforeEach((to) => {
-  const [authRef] = useAuth();
+  const authStore = useAuthStore();
   const acl = useAcl();
 
-  const auth = Vue.unref(authRef);
+  const auth = authStore.value.auth;
 
   switch (to.meta.auth) {
     case "guest": {

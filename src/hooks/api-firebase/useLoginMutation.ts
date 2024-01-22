@@ -10,20 +10,20 @@ import {
 import { app } from "@/api/firebase";
 
 // Store Imports
-import { useAuth } from "@/hooks/store";
+import { useAuthStore } from "@/hooks/store";
 
 export function useLoginMutation() {
-  const [, updateAuth] = useAuth();
+  const authStore = useAuthStore();
 
   return useMutation<UserCredential, Error, Req>({
-    async mutationFn(req) {
+    mutationFn(req) {
       return signInWithEmailAndPassword(getAuth(app), req.email, req.password);
     },
     onError(error) {
       console.error(error);
     },
     onSuccess() {
-      updateAuth(Date.now());
+      authStore.update();
     },
   });
 }

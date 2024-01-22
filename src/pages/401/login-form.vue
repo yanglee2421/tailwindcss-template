@@ -15,6 +15,7 @@ const formValues = Vue.inject<{
   email: string;
   passwd: string;
 }>(symbolForm);
+
 if (!formValues) {
   throw new Error("No Provider symbolForm!");
 }

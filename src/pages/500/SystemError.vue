@@ -4,6 +4,8 @@ import * as Vue from "vue";
 void Vue;
 </script>
 
-<template></template>
+<template>
+  <slot></slot>
+</template>
 
 <style lang="scss" scoped></style>

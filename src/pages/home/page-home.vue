@@ -3,12 +3,16 @@
 import * as Vue from "vue";
 
 // Store Imports
-import { useAuth, useThemeStore } from "@/hooks/store";
+import { useThemeStore, useAuthStore } from "@/hooks/store";
 
 void Vue;
 
-const [auth] = useAuth();
+const authStore = useAuthStore();
 const themeStore = useThemeStore();
+
+const handleSignout = () => {
+  authStore.value.auth.signOut();
+};
 
 defineOptions({ inheritAttrs: false });
 </script>
@@ -22,7 +26,7 @@ defineOptions({ inheritAttrs: false });
       >
         <div :class="['border']">
           <el-button
-            @click="auth.signOut()"
+            @click="handleSignout"
             type="danger"
             >sign out</el-button
           >
