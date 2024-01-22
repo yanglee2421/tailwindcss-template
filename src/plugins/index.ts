@@ -3,10 +3,10 @@ export * from "./ElementIcons";
 export * from "./ElementPlus";
 
 // ** Pinia
-export * from "./Pinia";
+export * from "./pinia";
 
 // ** Icons
-export * from "./Icons";
+export * from "./icons";
 
 // ** Default
 export { plugins as default } from "./plugins";

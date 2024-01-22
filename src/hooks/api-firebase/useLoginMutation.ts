@@ -23,7 +23,7 @@ export function useLoginMutation() {
       console.error(error);
     },
     onSuccess() {
-      updateAuth();
+      updateAuth(Date.now());
     },
   });
 }

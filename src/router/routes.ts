@@ -118,7 +118,7 @@ export const routes: RouterOptions["routes"] = [
     meta: { title: "fabric" },
     name: "fabric",
     component() {
-      return import("@/pages/fabricMain.vue");
+      return import("@/pages/fabricMain/fabricMain.vue");
     },
   },
 ];
