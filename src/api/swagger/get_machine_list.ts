@@ -2,7 +2,7 @@ import { axiosSwagger } from "./axiosSwagger";
 import { AxiosRequestConfig } from "axios";
 
 export function get_machine_list(req: Req, brand_id: string) {
-  return axiosSwagger({
+  return axiosSwagger<unknown, Res>({
     url: `/getMachineList/${brand_id}`,
     ...req,
   });

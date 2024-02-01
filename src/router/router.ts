@@ -30,6 +30,9 @@ router.beforeEach((to) => {
   const auth = authStore.value.auth;
 
   switch (to.meta.auth) {
+    case "none":
+      return true;
+
     case "guest": {
       if (auth.currentUser) {
         return { name: "home" };
@@ -37,9 +40,6 @@ router.beforeEach((to) => {
 
       return true;
     }
-
-    case "none":
-      return true;
 
     case "auth":
     default: {

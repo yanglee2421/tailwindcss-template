@@ -121,4 +121,15 @@ export const routes: RouterOptions["routes"] = [
       return import("@/pages/fabricMain/fabricMain.vue");
     },
   },
+  {
+    path: "/test-lab",
+    meta: {
+      title: "Test Lab",
+      auth: "none",
+    },
+    name: "test-lab",
+    component() {
+      return import("@/pages/test-lab.vue");
+    },
+  },
 ];

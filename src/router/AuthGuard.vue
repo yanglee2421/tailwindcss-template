@@ -32,19 +32,20 @@ Vue.watchPostEffect((onCleanup) => {
 });
 
 Vue.watchPostEffect(async () => {
+  return;
   const route = Vue.unref(router.currentRoute);
   const auth = authStore.value.auth;
 
   acl.update(defineAbilityFor(auth.currentUser ? "admin" : "").rules);
 
   switch (route.meta.auth) {
+    case "none":
+      break;
+
     case "guest":
       if (auth.currentUser) {
         await router.replace({ name: "home" });
       }
-      break;
-
-    case "none":
       break;
 
     case "auth":

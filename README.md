@@ -2,8 +2,6 @@
 
 ## Get Started
 
-[Live Preview](https://yanglee2421.github.io/vue-ele)
-
 ## vue3.3
 
 ### TypeScript 与 setup 改进

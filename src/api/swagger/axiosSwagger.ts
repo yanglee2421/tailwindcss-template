@@ -9,8 +9,10 @@ axiosSwagger.interceptors.request.use((config) => {
   return config;
 });
 
-axios.interceptors.response.use(
+axiosSwagger.interceptors.response.use(
   (res) => {
+    console.log(res.data);
+
     if (res.data.code === 200) {
       return res.data.data;
     }
