@@ -129,7 +129,7 @@ export const routes: RouterOptions["routes"] = [
     },
     name: "test-lab",
     component() {
-      return import("@/pages/test-lab.vue");
+      return import("@/pages/test-lab/test-lab.vue");
     },
   },
 ];
