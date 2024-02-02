@@ -122,14 +122,14 @@ export const routes: RouterOptions["routes"] = [
     },
   },
   {
-    path: "/test-lab",
+    path: "/branch-list",
     meta: {
-      title: "Test Lab",
+      title: "Branch List",
       auth: "none",
     },
     name: "test-lab",
     component() {
-      return import("@/pages/test-lab/test-lab.vue");
+      return import("@/pages/branch-list/BranchList.vue");
     },
   },
 ];

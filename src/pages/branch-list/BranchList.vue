@@ -2,7 +2,7 @@
 // Vue Imports
 import * as Vue from "vue";
 import { useBrandList } from "@/hooks/api-swagger";
-import asideRadios from "./aside-radios.vue";
+import MachineList from "./MachineList.vue";
 
 const category = {
   J: "手机",
@@ -62,11 +62,11 @@ const query = useBrandList(categoryRef);
       v-else-if="Vue.unref(query.isSuccess)"
       :class="['flex-1', 'overflow-hidden']"
     >
-      <aside-radios
+      <machine-list
         v-if="Vue.unref(query.data)?.length"
         :key="Vue.unref(categoryRef)"
         :branchs="Vue.unref(query.data) || []"
-      ></aside-radios>
+      ></machine-list>
     </div>
   </div>
 </template>

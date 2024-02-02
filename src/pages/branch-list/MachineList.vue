@@ -16,7 +16,7 @@ const query = useMachineList(branchIdRef);
 <template>
   <div :class="['grid', 'gap-2', 'grid-cols-4', 'grid-rows-2']">
     <div
-      v-for="item in branchs.splice(0, 8)"
+      v-for="item in branchs.slice(0, 8)"
       :key="item.brand_id"
       :span="6"
       :class="[

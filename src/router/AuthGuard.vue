@@ -32,11 +32,14 @@ Vue.watchPostEffect((onCleanup) => {
 });
 
 Vue.watchPostEffect(async () => {
-  return;
   const route = Vue.unref(router.currentRoute);
   const auth = authStore.value.auth;
 
   acl.update(defineAbilityFor(auth.currentUser ? "admin" : "").rules);
+
+  if (!route.matched.length) {
+    return;
+  }
 
   switch (route.meta.auth) {
     case "none":
@@ -50,13 +53,11 @@ Vue.watchPostEffect(async () => {
 
     case "auth":
     default:
-      // Not logged in
       if (!auth.currentUser) {
         await router.replace({ name: "401" });
         break;
       }
 
-      // Can access route
       if (
         acl.can(
           String(route.meta.aclAction || "read"),
@@ -66,7 +67,6 @@ Vue.watchPostEffect(async () => {
         break;
       }
 
-      // Can not access route
       await router.replace({ name: "403" });
   }
 });

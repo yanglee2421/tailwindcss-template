@@ -11,8 +11,6 @@ axiosSwagger.interceptors.request.use((config) => {
 
 axiosSwagger.interceptors.response.use(
   (res) => {
-    console.log(res.data);
-
     if (res.data.code === 200) {
       return res.data.data;
     }
