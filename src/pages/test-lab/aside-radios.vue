@@ -14,7 +14,27 @@ const query = useMachineList(branchIdRef);
 </script>
 
 <template>
-  <div :class="['flex', 'gap-2', 'overflow-hidden', 'h-full']">
+  <div :class="['grid', 'gap-2', 'grid-cols-4', 'grid-rows-2']">
+    <div
+      v-for="item in branchs.splice(0, 8)"
+      :key="item.brand_id"
+      :span="6"
+      :class="[
+        'flex',
+        'justify-center',
+        'items-center',
+        'p-1',
+        'bg-slate-50',
+        'rounded',
+      ]"
+    >
+      <img
+        :src="item.brand_img"
+        :class="['w-11/12']"
+      />
+    </div>
+  </div>
+  <div :class="['flex', 'gap-2', 'mt-2', 'overflow-hidden', 'h-full']">
     <div>
       <el-scrollbar>
         <el-radio-group
