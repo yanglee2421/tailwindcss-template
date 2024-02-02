@@ -22,7 +22,7 @@ const query = useBrandList(categoryRef);
 <template>
   <div
     :class="[
-      'max-w-96',
+      'max-w-md',
       'h-full',
       'box-border',
       'min-h-[32rem]',
