@@ -45,7 +45,7 @@ const query = useMachineList(branchIdRef);
             v-for="item in branchs"
             :key="item.brand_id"
             :label="item.brand_id"
-            :class="['!block']"
+            :class="['!block', '!mr-3']"
             >{{ item.brand_name }}</el-radio
           >
         </el-radio-group>
