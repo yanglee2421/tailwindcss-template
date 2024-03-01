@@ -1,8 +1,5 @@
-// Vite Imports
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-
-// NodeJs Imports
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, URL } from "node:url";
 
@@ -11,16 +8,18 @@ export default defineConfig((ConfigEnv) => {
   const __dirname = dirname(fileURLToPath(import.meta.url));
 
   return {
-    plugins: [vue()],
-
-    // Path Alias
+    plugins: [
+      vue({
+        template: {
+          transformAssetUrls: false,
+        },
+      }),
+    ],
     resolve: {
       alias: {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
       },
     },
-
-    // ** CSS
     css: {
       preprocessorOptions: {
         scss: { additionalData: `@use "@/assets/scss" as *;` },
@@ -31,11 +30,9 @@ export default defineConfig((ConfigEnv) => {
     },
 
     base: ConfigEnv.command === "build" ? "./" : "/vue-ele",
-
-    // Env File Directory
     envDir: resolve(__dirname, "./"),
+    assetsInclude: [],
 
-    // ** Build
     build: {
       outDir: resolve(__dirname, "./docs"),
       emptyOutDir: true,
@@ -76,7 +73,6 @@ export default defineConfig((ConfigEnv) => {
       cssCodeSplit: true,
     },
 
-    // Dev Server
     server: {
       port: 3007,
       strictPort: true,
@@ -89,6 +85,11 @@ export default defineConfig((ConfigEnv) => {
           rewrite(path) {
             return path.replace(/^\/dev/, "");
           },
+          changeOrigin: true,
+          ws: true,
+        },
+        "/wp-content": {
+          target: "http://www.osmosisai.co",
           changeOrigin: true,
           ws: true,
         },

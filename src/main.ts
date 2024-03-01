@@ -1,27 +1,17 @@
-// Vue Imports
 import * as Vue from "vue";
-
-// App Imports
 import App from "./App.vue";
-
-// Styles Imports
+import { router } from "@/router";
+import { AclPlugin } from "@/configs/acl";
+import { Pinia, ElementIcons, Icons, VueQuery } from "@/plugins";
+import plugins from "@/plugins";
+import "element-plus/dist/index.css";
+import "element-plus/theme-chalk/dark/css-vars.css";
 import "@/assets/scss/global.scss";
 import "@/assets/css/style.css";
-
-// Router Imports
-import { router } from "@/router";
-
-// Acl Imports
-import { AclPlugin } from "@/configs/acl";
-
-// Plugin Imports
-import { Pinia, ElementIcons, ElementPlus, Icons, VueQuery } from "@/plugins";
-import plugins from "@/plugins";
 
 const app = Vue.createApp(App);
 
 app.use(ElementIcons);
-app.use(ElementPlus);
 
 app.use(router);
 app.use(Pinia);

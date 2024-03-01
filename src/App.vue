@@ -1,13 +1,10 @@
 <script lang="ts" setup>
-// Vue Imports
 import * as Vue from "vue";
-
-// Provider Imports
-import AuthGuard from "@/router/AuthGuard.vue";
-
-// Store Imports
 import { useThemeStore } from "@/hooks/store";
 import { useIsDark } from "@/hooks/dom";
+import { RouterView } from "vue-router";
+import { ElConfigProvider } from "element-plus";
+import locale from "element-plus/es/locale/lang/zh-cn";
 
 const themeStore = useThemeStore();
 const isDarkRef = useIsDark();
@@ -32,13 +29,13 @@ Vue.watchPostEffect(() => {
 </script>
 
 <template>
-  <auth-guard>
-    <router-view #default="{ Component }">
-      <keep-alive :max="10">
+  <RouterView #default="{ Component }">
+    <KeepAlive :max="10">
+      <ElConfigProvider :locale="locale">
         <component :is="Component" />
-      </keep-alive>
-    </router-view>
-  </auth-guard>
+      </ElConfigProvider>
+    </KeepAlive>
+  </RouterView>
 </template>
 
 <style lang="scss" scoped></style>

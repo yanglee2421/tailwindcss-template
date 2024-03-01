@@ -123,13 +123,16 @@ export const routes: RouterOptions["routes"] = [
   },
   {
     path: "/branch-list",
-    meta: {
-      title: "Branch List",
-      auth: "none",
-    },
     name: "test-lab",
     component() {
       return import("@/pages/branch-list/BranchList.vue");
+    },
+  },
+  {
+    path: "/autono",
+    name: "autono",
+    component() {
+      return import("@/pages/autono/AutoNo.vue");
     },
   },
 ];

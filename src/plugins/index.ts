@@ -1,6 +1,5 @@
 // Element UI
 export * from "./ElementIcons";
-export * from "./ElementPlus";
 
 // ** Pinia
 export * from "./pinia";
