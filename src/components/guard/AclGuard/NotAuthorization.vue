@@ -1,42 +1,41 @@
 <script lang="ts" setup>
-// Hooks Imports
-import { useObserverResize } from "@/hooks/dom";
-
-// Utils Imports
+import * as Vue from "vue";
 import { Snow } from "./Snow";
 
-// Vue Imports
-import * as Vue from "vue";
-
-// DOM Ref
 const boxRef = Vue.ref<HTMLDivElement>();
 const cvsRef = Vue.ref<HTMLCanvasElement>();
-const sizeRef = useObserverResize(boxRef);
 
-Vue.watch(
-  [sizeRef, cvsRef],
-  ([size, cvs], prevArgs, onCleanup) => {
-    if (!size) return prevArgs;
-    if (!cvs) return;
+Vue.watchPostEffect((onCleanup) => {
+  const boxEl = Vue.unref(boxRef);
+  const cvs = Vue.unref(cvsRef);
 
-    const [box] = size.contentBoxSize;
+  if (!(cvs instanceof HTMLElement)) {
+    return;
+  }
+
+  if (!(boxEl instanceof HTMLElement)) {
+    return;
+  }
+
+  let snow: null | Snow = null;
+  const observer = new ResizeObserver(([{ contentBoxSize }]) => {
+    const [box] = contentBoxSize;
 
     Object.assign(cvs, {
       width: box.inlineSize,
       height: box.blockSize,
     });
-    const snow = new Snow(cvs, (box.inlineSize / 1920) * 200);
+    snow = new Snow(cvs, (box.inlineSize / 1920) * 200);
     snow.animation();
+  });
 
-    onCleanup(() => {
-      snow.abortAnimation();
-    });
-  },
-  {
-    immediate: true,
-    flush: "post",
-  }
-);
+  observer.observe(boxEl);
+
+  onCleanup(() => {
+    observer.disconnect();
+    snow?.abortAnimation();
+  });
+});
 
 defineOptions({ inheritAttrs: true });
 </script>

@@ -2,49 +2,21 @@
 import type { RouterOptions } from "vue-router";
 
 export const routes: RouterOptions["routes"] = [
-  { path: "/:pathMatch(.*)*", redirect: "/404" },
   {
-    path: "/401",
-    name: "401",
-    meta: {
-      title: "Login",
-      auth: "guest",
-    },
-    component() {
-      return import("@/pages/401/NotLogged.vue");
-    },
-  },
-  {
-    path: "/403",
-    name: "403",
-    meta: {
-      title: "Not Authorization",
-      auth: "none",
-    },
-    component() {
-      return import("@/pages/403/NotAuthorization.vue");
-    },
-  },
-  {
-    path: "/404",
-    name: "404",
-    meta: {
-      title: "NotFound",
-      auth: "none",
-    },
+    path: "/:pathMatch(.*)*",
     component() {
       return import("@/pages/404/NotFound.vue");
     },
   },
   {
-    path: "/500",
-    name: "500",
+    path: "/login",
+    name: "Login",
     meta: {
-      title: "System Error",
-      auth: "none",
+      title: "Login",
+      auth: "guest",
     },
     component() {
-      return import("@/pages/500/SystemError.vue");
+      return import("@/pages/login/NotLogged.vue");
     },
   },
 

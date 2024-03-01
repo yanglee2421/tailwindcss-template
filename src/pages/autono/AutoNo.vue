@@ -22,7 +22,7 @@ const state = Vue.reactive({
 </script>
 
 <template>
-  <div class="shopeo-px-6 shopeo-py-2">
+  <div class="px-6 py-2">
     <ElRadioGroup v-model="state.tab">
       <ElRadio label="home">Home</ElRadio>
       <ElRadio label="technology">Technology</ElRadio>

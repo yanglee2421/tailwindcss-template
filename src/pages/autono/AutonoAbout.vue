@@ -1,15 +1,13 @@
 <script setup lang="ts"></script>
 
 <template>
-  <section class="shopeo-h-[520px] shopeo-text-center">
+  <section class="h-[520px] text-center">
     <h1
-      class="shopeo-w-[922px] shopeo-mx-auto shopeo-my-[55px] shopeo-text-[64px] shopeo-font-normal shopeo-tracking-[0.08em] shopeo-leading-[1.5em]"
+      class="w-[922px] mx-auto my-[55px] text-[64px] font-normal tracking-[0.08em] leading-[1.5em]"
     >
       OUR JOURNEY
     </h1>
-    <p
-      class="shopeo-w-[710px] shopeo-mx-auto shopeo-text-[24px] shopeo-tracking-[0.04em] shopeo-leading-[1.8em]"
-    >
+    <p class="w-[710px] mx-auto text-[24px] tracking-[0.04em] leading-[1.8em]">
       I'm a paragraph. Click here to add your own text and edit me. It’s easy.
       Just click “Edit Text” or double click me to add your own content and make
       changes to the font. I’m a great place for you to tell a story and let
@@ -17,29 +15,27 @@
     </p>
   </section>
   <hr />
-  <section class="shopeo-grid shopeo-grid-cols-2 shopeo-h-[820px]">
-    <div class="shopeo-flex shopeo-justify-center shopeo-items-center">
+  <section class="grid grid-cols-2 h-[820px]">
+    <div class="flex justify-center items-center">
       <div
-        class="shopeo-h-[600px] shopeo-grid shopeo-grid-cols-[140px_60px_340px] shopeo-grid-rows-[auto_auto_1fr] shopeo-grid-flow-col"
+        class="h-[600px] grid grid-cols-[140px_60px_340px] grid-rows-[auto_auto_1fr] grid-flow-col"
       >
         <div
-          class="shopeo-col-span-1 shopeo-row-span-full shopeo-border-0 shopeo-border-r shopeo-border-solid shopeo-border-[currentColor]"
+          class="col-span-1 row-span-full border-0 border-r border-solid border-[currentColor]"
         ></div>
         <div></div>
         <div
-          class="shopeo-border-0 shopeo-border-l-2 shopeo-border-solid shopeo-border-[currentColor]"
+          class="border-0 border-l-2 border-solid border-[currentColor]"
         ></div>
         <div></div>
 
-        <div class="shopeo-mb-[41px] shopeo-text-[14px]">OUR MISSION</div>
-        <div
-          class="shopeo-leading-[1.8em] shopeo-text-[24px] shopeo-tracking-[0.08em]"
-        >
+        <div class="mb-[41px] text-[14px]">OUR MISSION</div>
+        <div class="leading-[1.8em] text-[24px] tracking-[0.08em]">
           Redefining the Way <br />
           We Move
         </div>
         <div
-          class="shopeo-self-end shopeo-space-y-10 shopeo-text-[16px] shopeo-leading-[1.8em] shopeo-tracking-[0.04em]"
+          class="self-end space-y-10 text-[16px] leading-[1.8em] tracking-[0.04em]"
         >
           <p>
             I'm a paragraph. Click here to add your own text and edit me. It’s
@@ -56,74 +52,61 @@
         </div>
       </div>
     </div>
-    <div class="shopeo-flex shopeo-justify-center shopeo-items-center">
+    <div class="flex justify-center items-center">
       <img
         src="/wp-content/uploads/2024/03/1709265023146.png"
         alt=""
         width="400"
-        class="shopeo-rounded-2xl"
+        class="rounded-2xl"
       />
     </div>
   </section>
   <hr />
-  <section class="shopeo-h-[160px] shopeo-grid shopeo-grid-cols-2">
-    <div class="shopeo-flex shopeo-justify-center shopeo-items-end">
-      <span
-        class="shopeo-text-[24px] shopeo-tracking-[0.08em] shopeo-leading-[1.8em]"
+  <section class="h-[160px] grid grid-cols-2">
+    <div class="flex justify-center items-end">
+      <span class="text-[24px] tracking-[0.08em] leading-[1.8em]"
         >Our Journey So Far</span
       >
     </div>
     <div></div>
   </section>
-  <section
-    class="shopeo-h-[768px] shopeo-flex shopeo-flex-col shopeo-justify-center"
-  >
+  <section class="h-[768px] flex flex-col justify-center">
     <div>
-      <div class="shopeo-flex shopeo-justify-center">
+      <div class="flex justify-center">
         <div
-          class="shopeo-w-[640px] shopeo-mr-64 shopeo-border shopeo-border-solid shopeo-border-black shopeo-box-border shopeo-p-8 shopeo-rounded-xl"
+          class="w-[640px] mr-64 border border-solid border-black box-border p-8 rounded-xl"
         >
-          <h3 class="shopeo-mt-0 shopeo-mb-8">
+          <h3 class="mt-0 mb-8">
             <span
-              class="shopeo-border-0 shopeo-border-b shopeo-border-solid shopeo-border-black shopeo-font-normal shopeo-text-[40px] shopeo-text-[#e15f09]"
+              class="border-0 border-b border-solid border-black font-normal text-[40px] text-[#e15f09]"
               >2018</span
             >
           </h3>
-          <p
-            class="shopeo-text-[14px] shopeo-leading-[1.8em] shopeo-tracking-[0.16em]"
-          >
+          <p class="text-[14px] leading-[1.8em] tracking-[0.16em]">
             PARTNERSHIP WITH TRI-NEX & GENERAL TRANSPORT INITIATED
           </p>
-          <p
-            class="shopeo-text-[16px] shopeo-leading-[1.8em] shopeo-tracking-[0.05em]"
-          >
+          <p class="text-[16px] leading-[1.8em] tracking-[0.05em]">
             I'm a paragraph. Click here to add your own text and edit me. It’s
             easy. Just click “Edit Text” or double click me to add your own
             content and make changes to the font.
           </p>
         </div>
       </div>
-      <div
-        class="shopeo-my-12 shopeo-border-t shopeo-border-0 shopeo-border-solid"
-      ></div>
-      <div class="shopeo-flex shopeo-justify-center">
+      <div class="my-12 border-t border-0 border-solid"></div>
+      <div class="flex justify-center">
         <div
-          class="shopeo-w-[640px] shopeo-ml-64 shopeo-border shopeo-border-solid shopeo-border-black shopeo-box-border shopeo-p-8 shopeo-rounded-xl"
+          class="w-[640px] ml-64 border border-solid border-black box-border p-8 rounded-xl"
         >
-          <h3 class="shopeo-mt-0 shopeo-mb-8">
+          <h3 class="mt-0 mb-8">
             <span
-              class="shopeo-border-0 shopeo-border-b shopeo-border-solid shopeo-border-black shopeo-font-normal shopeo-text-[40px] shopeo-text-[#e15f09]"
+              class="border-0 border-b border-solid border-black font-normal text-[40px] text-[#e15f09]"
               >2019</span
             >
           </h3>
-          <p
-            class="shopeo-text-[14px] shopeo-leading-[1.8em] shopeo-tracking-[0.16em]"
-          >
+          <p class="text-[14px] leading-[1.8em] tracking-[0.16em]">
             TESTING EXPANDS TO ARIZONA & NEW MEXICO
           </p>
-          <p
-            class="shopeo-text-[16px] shopeo-leading-[1.8em] shopeo-tracking-[0.05em]"
-          >
+          <p class="text-[16px] leading-[1.8em] tracking-[0.05em]">
             I'm a paragraph. Click here to add your own text and edit me. It’s
             easy. Just click “Edit Text” or double click me to add your own
             content and make changes to the font.
@@ -132,26 +115,26 @@
       </div>
     </div>
   </section>
-  <section class="shopeo-h-[80px]"></section>
+  <section class="h-[80px]"></section>
   <section
-    class="shopeo-h-[760px] shopeo-bg-[url(/wp-content/uploads/2024/03/1709264175435.png)] shopeo-bg-fixed shopeo-bg-cover"
+    class="h-[760px] bg-[url(/wp-content/uploads/2024/03/1709264175435.png)] bg-fixed bg-cover"
   ></section>
-  <section class="shopeo-h-[640px] shopeo-bg-black shopeo-text-white">
-    <div class="shopeo-grid shopeo-grid-cols-2">
-      <div class="shopeo-flex shopeo-justify-center shopeo-items-center">
+  <section class="h-[640px] bg-black text-white">
+    <div class="grid grid-cols-2">
+      <div class="flex justify-center items-center">
         <div
-          class="shopeo-m-36 shopeo-h-[60px] shopeo-grid shopeo-grid-cols-[140px_60px_340px] shopeo-grid-rows-[auto_1fr] shopeo-grid-flow-col"
+          class="m-36 h-[60px] grid grid-cols-[140px_60px_340px] grid-rows-[auto_1fr] grid-flow-col"
         >
           <div
-            class="shopeo-col-span-1 shopeo-row-span-full shopeo-border-0 shopeo-border-r shopeo-border-solid shopeo-border-[currentColor]"
+            class="col-span-1 row-span-full border-0 border-r border-solid border-[currentColor]"
           ></div>
           <div></div>
           <div
-            class="shopeo-border-0 shopeo-border-l-2 shopeo-border-solid shopeo-border-[currentColor]"
+            class="border-0 border-l-2 border-solid border-[currentColor]"
           ></div>
-          <div class="shopeo-mb-[41px] shopeo-text-[14px]">NEWS</div>
+          <div class="mb-[41px] text-[14px]">NEWS</div>
           <div
-            class="shopeo-w-[710px] shopeo-mx-auto shopeo-text-[24px] shopeo-tracking-[0.04em] shopeo-leading-[1.8em]"
+            class="w-[710px] mx-auto text-[24px] tracking-[0.04em] leading-[1.8em]"
           >
             Autono In The Press
           </div>
@@ -160,7 +143,7 @@
       <div></div>
     </div>
     <div
-      class="shopeo-w-[980px] shopeo-mx-auto shopeo-grid shopeo-grid-cols-5 shopeo-gap-[32px] shopeo-place-items-center"
+      class="w-[980px] mx-auto grid grid-cols-5 gap-[32px] place-items-center"
     >
       <img
         src="/wp-content/uploads/2024/03/1709264608644.png"

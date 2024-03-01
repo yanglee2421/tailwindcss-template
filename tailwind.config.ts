@@ -20,7 +20,7 @@ function defineConfig(): Config {
     corePlugins: {
       preflight: false,
     },
-    prefix: "shopeo-",
+    // prefix: "shopeo-",
     // important: "#root",
   };
 }
