@@ -43,7 +43,9 @@
         </div>
       </div>
     </div>
-    <div></div>
+    <div
+      class="shopeo-bg-[url(/wp-content/uploads/2024/03/1709279630032.png)] shopeo-bg-cover shopeo-bg-no-repeat shopeo-bg-center"
+    ></div>
   </section>
   <section
     class="shopeo-h-[440px] shopeo-grid shopeo-grid-cols-2 shopeo-bg-black shopeo-text-white shopeo-place-items-center"
@@ -103,7 +105,9 @@
         </div>
       </div>
     </div>
-    <div></div>
+    <div
+      class="shopeo-bg-[url(/wp-content/uploads/2024/03/1709279107865.png)] shopeo-bg-cover shopeo-bg-no-repeat shopeo-bg-left"
+    ></div>
   </section>
   <section
     class="shopeo-h-[440px] shopeo-grid shopeo-grid-cols-2 shopeo-place-items-center"
@@ -140,7 +144,6 @@
     </div>
   </section>
   <hr />
-  <footer class="shopeo-h-96"></footer>
 </template>
 
 <style lang="scss" scoped></style>

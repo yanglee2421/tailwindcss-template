@@ -1,32 +1,40 @@
 <script lang="ts" setup>
+import { ElButton } from "element-plus";
+import {
+  WindPower,
+  ElementPlus,
+  SwitchFilled,
+  ChromeFilled,
+} from "@element-plus/icons-vue";
+
 defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
   <div class="flex justify-center">
-    <el-button
-      icon="WindPower"
+    <ElButton
+      :icon="WindPower"
       size="large"
       circle
       text
       class="text-2xl"
-    />
-    <el-button
-      icon="ElementPlus"
+    ></ElButton>
+    <ElButton
+      :icon="ElementPlus"
       size="large"
       circle
       text
       class="text-2xl"
-    />
-    <el-button
-      icon="SwitchFilled"
+    ></ElButton>
+    <ElButton
+      :icon="SwitchFilled"
       size="large"
       circle
       text
       class="text-2xl"
-    />
-    <el-button
-      icon="ChromeFilled"
+    ></ElButton>
+    <ElButton
+      :icon="ChromeFilled"
       size="large"
       circle
       text
@@ -35,7 +43,7 @@ defineOptions({ inheritAttrs: false });
       target="_blank"
       class="text-2xl"
       title="github"
-    />
+    ></ElButton>
   </div>
 </template>
 

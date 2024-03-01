@@ -56,10 +56,12 @@
         </div>
       </div>
     </div>
-    <div>
+    <div class="shopeo-flex shopeo-justify-center shopeo-items-center">
       <img
-        src=""
+        src="/wp-content/uploads/2024/03/1709265023146.png"
         alt=""
+        width="400"
+        class="shopeo-rounded-2xl"
       />
     </div>
   </section>
@@ -73,10 +75,66 @@
     </div>
     <div></div>
   </section>
-  <section class="shopeo-h-[768px]"></section>
+  <section
+    class="shopeo-h-[768px] shopeo-flex shopeo-flex-col shopeo-justify-center"
+  >
+    <div>
+      <div class="shopeo-flex shopeo-justify-center">
+        <div
+          class="shopeo-w-[640px] shopeo-mr-64 shopeo-border shopeo-border-solid shopeo-border-black shopeo-box-border shopeo-p-8 shopeo-rounded-xl"
+        >
+          <h3 class="shopeo-mt-0 shopeo-mb-8">
+            <span
+              class="shopeo-border-0 shopeo-border-b shopeo-border-solid shopeo-border-black shopeo-font-normal shopeo-text-[40px] shopeo-text-[#e15f09]"
+              >2018</span
+            >
+          </h3>
+          <p
+            class="shopeo-text-[14px] shopeo-leading-[1.8em] shopeo-tracking-[0.16em]"
+          >
+            PARTNERSHIP WITH TRI-NEX & GENERAL TRANSPORT INITIATED
+          </p>
+          <p
+            class="shopeo-text-[16px] shopeo-leading-[1.8em] shopeo-tracking-[0.05em]"
+          >
+            I'm a paragraph. Click here to add your own text and edit me. It’s
+            easy. Just click “Edit Text” or double click me to add your own
+            content and make changes to the font.
+          </p>
+        </div>
+      </div>
+      <div
+        class="shopeo-my-12 shopeo-border-t shopeo-border-0 shopeo-border-solid"
+      ></div>
+      <div class="shopeo-flex shopeo-justify-center">
+        <div
+          class="shopeo-w-[640px] shopeo-ml-64 shopeo-border shopeo-border-solid shopeo-border-black shopeo-box-border shopeo-p-8 shopeo-rounded-xl"
+        >
+          <h3 class="shopeo-mt-0 shopeo-mb-8">
+            <span
+              class="shopeo-border-0 shopeo-border-b shopeo-border-solid shopeo-border-black shopeo-font-normal shopeo-text-[40px] shopeo-text-[#e15f09]"
+              >2019</span
+            >
+          </h3>
+          <p
+            class="shopeo-text-[14px] shopeo-leading-[1.8em] shopeo-tracking-[0.16em]"
+          >
+            TESTING EXPANDS TO ARIZONA & NEW MEXICO
+          </p>
+          <p
+            class="shopeo-text-[16px] shopeo-leading-[1.8em] shopeo-tracking-[0.05em]"
+          >
+            I'm a paragraph. Click here to add your own text and edit me. It’s
+            easy. Just click “Edit Text” or double click me to add your own
+            content and make changes to the font.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="shopeo-h-[80px]"></section>
   <section
-    class="shopeo-h-[760px] shopeo-bg-[url(/wp-content/uploads/2024/03/1709264175435.png)] shopeo-bg-fixed"
+    class="shopeo-h-[760px] shopeo-bg-[url(/wp-content/uploads/2024/03/1709264175435.png)] shopeo-bg-fixed shopeo-bg-cover"
   ></section>
   <section class="shopeo-h-[640px] shopeo-bg-black shopeo-text-white">
     <div class="shopeo-grid shopeo-grid-cols-2">
@@ -102,23 +160,32 @@
       <div></div>
     </div>
     <div
-      class="shopeo-w-[980px] shopeo-grid shopeo-grid-cols-4 shopeo-gap-[32px]"
+      class="shopeo-w-[980px] shopeo-mx-auto shopeo-grid shopeo-grid-cols-5 shopeo-gap-[32px] shopeo-place-items-center"
     >
       <img
-        src=""
+        src="/wp-content/uploads/2024/03/1709264608644.png"
         alt=""
+        width="136"
       />
       <img
-        src=""
+        src="/wp-content/uploads/2024/03/1709264628058.png"
         alt=""
+        width="136"
       />
       <img
-        src=""
+        src="/wp-content/uploads/2024/03/1709264863297.png"
         alt=""
+        width="136"
       />
       <img
-        src=""
+        src="/wp-content/uploads/2024/03/1709264576616.png"
         alt=""
+        width="136"
+      />
+      <img
+        src="/wp-content/uploads/2024/03/1709264637541.png"
+        alt=""
+        width="136"
       />
     </div>
   </section>

@@ -4,7 +4,6 @@ import AutonoHome from "./AutonoHome.vue";
 import AutonoTechnology from "./AutonoTechnology.vue";
 import AutonoAbout from "./AutonoAbout.vue";
 import AutonoCareers from "./AutonoCareers.vue";
-import AutonoSubscribe from "./AutonoSubscribe.vue";
 import { ElRadioGroup, ElRadio } from "element-plus";
 
 import "@fontsource/montserrat/100.css";
@@ -29,7 +28,6 @@ const state = Vue.reactive({
       <ElRadio label="technology">Technology</ElRadio>
       <ElRadio label="about">About</ElRadio>
       <ElRadio label="careers">Careers</ElRadio>
-      <ElRadio label="subscribe">Subscribe</ElRadio>
     </ElRadioGroup>
   </div>
   <div>
@@ -57,12 +55,6 @@ const state = Vue.reactive({
         key="careers"
       >
         <AutonoCareers></AutonoCareers>
-      </div>
-      <div
-        v-if="state.tab === 'subscribe'"
-        key="subscribe"
-      >
-        <AutonoSubscribe></AutonoSubscribe>
       </div>
     </TransitionGroup>
   </div>

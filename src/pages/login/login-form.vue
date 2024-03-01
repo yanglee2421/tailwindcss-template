@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-// Vue Imoprts
 import * as Vue from "vue";
-
-// Symbol Imports
 import { symbolForm } from "./login-symbols";
-
-// Element Imports
-import { ElMessage, FormInstance } from "element-plus";
-
-// Query Imports
+import {
+  ElMessage,
+  FormInstance,
+  ElForm,
+  ElFormItem,
+  ElButton,
+  ElInput,
+} from "element-plus";
 import { useLoginMutation } from "@/hooks/api-firebase";
 
 const formValues = Vue.inject<{
@@ -20,9 +20,7 @@ if (!formValues) {
   throw new Error("No Provider symbolForm!");
 }
 
-// ** Form
 const formRef = Vue.ref<FormInstance>();
-
 const mutation = useLoginMutation();
 
 const handleSubmit = () => {
@@ -52,7 +50,7 @@ defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <el-form
+  <ElForm
     ref="formRef"
     :model="formValues"
     :rules="{}"
@@ -105,7 +103,7 @@ defineOptions({ inheritAttrs: false });
         >sign in</el-button
       >
     </el-form-item>
-  </el-form>
+  </ElForm>
 </template>
 
 <style lang="scss" scoped></style>

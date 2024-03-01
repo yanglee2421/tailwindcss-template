@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import * as Vue from "vue";
-import { useThemeStore } from "@/hooks/store";
+import { useThemeStore } from "@/hooks/store/useThemeStore";
 import { useIsDark } from "@/hooks/dom";
 import { RouterView } from "vue-router";
 import { ElConfigProvider } from "element-plus";
@@ -13,12 +13,12 @@ Vue.watchPostEffect(() => {
   const isDark = Vue.unref(isDarkRef);
 
   (() => {
-    switch (themeStore.mode) {
+    switch (themeStore.state.mode) {
       case "light":
         return false;
       case "dark":
         return true;
-      case "auto":
+      case "system":
       default:
         return isDark;
     }

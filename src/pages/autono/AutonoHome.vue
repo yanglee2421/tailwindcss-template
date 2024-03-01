@@ -34,7 +34,7 @@
       </div>
     </div>
     <div
-      class="shopeo-bg-[url(/wp-content/uploads/2024/02/a6ivb-vdno2.png)] shopeo-bg-left"
+      class="shopeo-bg-[url(/wp-content/uploads/2024/02/a6ivb-vdno2.png)] shopeo-bg-left shopeo-bg-no-repeat"
     ></div>
   </section>
 
@@ -61,6 +61,95 @@
     </div>
     <div></div>
   </section>
+
+  <section class="shopeo-h-[680px] shopeo-grid shopeo-grid-cols-2">
+    <div class="shopeo-flex shopeo-justify-center shopeo-items-center">
+      <div class="shopeo-w-[320px] shopeo-space-y-12">
+        <h3
+          class="shopeo-font-normal shopeo-text-[40px] shopeo-leading-[1.5em] shopeo-tracking-[0.08em]"
+        >
+          AUTONOMOUS DRIVING
+        </h3>
+        <p
+          class="shopeo-text-[16px] shopeo-tracking-[0.05em] shopeo-leading-[1.8em]"
+        >
+          I'm a paragraph. Click here to add your own text and edit me. It’s
+          easy. Just click “Edit Text” or double click me to add your own
+          content and make changes to the font. I’m a great place for you to
+          tell a story and let your users know a little more about you.
+        </p>
+        <div>
+          <span
+            class="shopeo-border shopeo-border-solid shopeo-px-4 shopeo-py-2 shopeo-rounded-lg hover:shopeo-bg-black hover:shopeo-text-white shopeo-transition-colors shopeo-cursor-pointer"
+            >Read More</span
+          >
+        </div>
+      </div>
+    </div>
+    <div
+      class="shopeo-bg-[url(/wp-content/uploads/2024/02/1709112986382.png)] shopeo-bg-cover shopeo-bg-left shopeo-bg-no-repeat"
+    ></div>
+  </section>
+  <section class="shopeo-h-[680px] shopeo-grid shopeo-grid-cols-2">
+    <div
+      class="shopeo-bg-[url(/wp-content/uploads/2024/02/1709113045779.png)] shopeo-bg-cover shopeo-bg-no-repeat shopeo-bg-right"
+    ></div>
+    <div class="shopeo-flex shopeo-justify-center shopeo-items-center">
+      <div class="shopeo-w-[320px] shopeo-space-y-12">
+        <h3
+          class="shopeo-font-normal shopeo-text-[40px] shopeo-leading-[1.5em] shopeo-tracking-[0.08em]"
+        >
+          REAL-TIME INFORMATION
+        </h3>
+        <p
+          class="shopeo-text-[16px] shopeo-tracking-[0.05em] shopeo-leading-[1.8em]"
+        >
+          I'm a paragraph. Click here to add your own text and edit me. It’s
+          easy. Just click “Edit Text” or double click me to add your own
+          content and make changes to the font. I’m a great place for you to
+          tell a story and let your users know a little more about you.
+        </p>
+        <div>
+          <span
+            class="shopeo-border shopeo-border-solid shopeo-px-4 shopeo-py-2 shopeo-rounded-lg hover:shopeo-bg-black hover:shopeo-text-white shopeo-transition-colors shopeo-cursor-pointer"
+            >Read More</span
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="shopeo-h-[680px] shopeo-grid shopeo-grid-cols-2">
+    <div class="shopeo-flex shopeo-justify-center shopeo-items-center">
+      <div class="shopeo-w-[320px] shopeo-space-y-12">
+        <h3
+          class="shopeo-font-normal shopeo-text-[40px] shopeo-leading-[1.5em] shopeo-tracking-[0.08em]"
+        >
+          PERCEPTION ENABLED
+        </h3>
+        <p
+          class="shopeo-text-[16px] shopeo-tracking-[0.05em] shopeo-leading-[1.8em]"
+        >
+          I'm a paragraph. Click here to add your own text and edit me. It’s
+          easy. Just click “Edit Text” or double click me to add your own
+          content and make changes to the font. I’m a great place for you to
+          tell a story and let your users know a little more about you.
+        </p>
+        <div>
+          <span
+            class="shopeo-border shopeo-border-solid shopeo-px-4 shopeo-py-2 shopeo-rounded-lg hover:shopeo-bg-black hover:shopeo-text-white shopeo-transition-colors shopeo-cursor-pointer"
+            >Read More</span
+          >
+        </div>
+      </div>
+    </div>
+    <div
+      class="shopeo-bg-[url(/wp-content/uploads/2024/02/1709113736292.png)] shopeo-bg-cover shopeo-bg-no-repeat shopeo-bg-left"
+    ></div>
+  </section>
+
+  <section
+    class="shopeo-h-[880px] shopeo-bg-[url(/wp-content/uploads/2024/02/1709177470240.png)] shopeo-bg-fixed shopeo-bg-cover"
+  ></section>
 
   <!-- Autono In Numbers -->
   <section class="shopeo-grid shopeo-grid-cols-2">
@@ -235,7 +324,35 @@
         </div>
       </div>
     </div>
-    <div class="shopeo-flex shopeo-justify-center shopeo-items-center"></div>
+    <div class="shopeo-flex shopeo-justify-center shopeo-items-center">
+      <div
+        class="shopeo-w-[420px] shopeo-border shopeo-border-white shopeo-box-border shopeo-border-solid shopeo-p-10 shopeo-rounded-xl"
+      >
+        <h3
+          class="shopeo-font-normal shopeo-text-[18px] shopeo-tracking-[0.08em] shopeo-leading-[1.8em]"
+        >
+          ARTIFICIAL INTELLIGENCE RESEARCHER
+        </h3>
+        <p
+          class="shopeo-mt-12 shopeo-text-[14px] shopeo-tracking-[0.08em] shopeo-leading-[1.8em] shopeo-text-[#b4b4b4]"
+        >
+          San Francisco, CA
+        </p>
+        <p
+          class="shopeo-text-[16px] shopeo-tracking-[0.04em] shopeo-leading-[1.8em]"
+        >
+          I'm a paragraph. Click here to add your own text and edit me. It’s
+          easy. Just click “Edit Text” or double click me to add your own
+          content and make changes to the font.
+        </p>
+        <div class="shopeo-mt-24 shopeo-mb-4">
+          <span
+            class="shopeo-border shopeo-border-solid shopeo-px-4 shopeo-py-2 shopeo-rounded-lg hover:shopeo-bg-white hover:shopeo-text-black shopeo-transition-colors shopeo-cursor-pointer"
+            >Apply Now</span
+          >
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 

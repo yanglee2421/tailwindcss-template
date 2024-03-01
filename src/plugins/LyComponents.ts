@@ -1,4 +1,3 @@
-// Vue Imports
 import * as Vue from "vue";
 
 const lyComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
