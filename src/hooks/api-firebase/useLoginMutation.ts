@@ -1,16 +1,11 @@
-// Query Imports
 import { useMutation } from "@tanstack/vue-query";
-
-// Firebase Imports
 import {
   getAuth,
   signInWithEmailAndPassword,
   UserCredential,
 } from "firebase/auth";
 import { app } from "@/api/firebase";
-
-// Store Imports
-import { useAuthStore } from "@/hooks/store";
+import { useAuthStore } from "@/hooks/store/useAuthStore";
 
 export function useLoginMutation() {
   const authStore = useAuthStore();

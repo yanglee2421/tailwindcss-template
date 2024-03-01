@@ -1,10 +1,5 @@
-// Pinia Imports
 import { defineStore } from "pinia";
-
-// Vue Imports
 import * as Vue from "vue";
-
-// Firebase Imports
 import { getAuth } from "firebase/auth";
 import { app } from "@/api/firebase";
 

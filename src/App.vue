@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import * as Vue from "vue";
 import { useThemeStore } from "@/hooks/store/useThemeStore";
-import { useIsDark } from "@/hooks/dom";
+import { useIsDark } from "@/hooks/dom/useIsDark";
 import { RouterView } from "vue-router";
 import { ElConfigProvider } from "element-plus";
 import locale from "element-plus/es/locale/lang/zh-cn";
@@ -30,11 +30,9 @@ Vue.watchPostEffect(() => {
 
 <template>
   <RouterView #default="{ Component }">
-    <KeepAlive :max="10">
-      <ElConfigProvider :locale="locale">
-        <component :is="Component" />
-      </ElConfigProvider>
-    </KeepAlive>
+    <ElConfigProvider :locale="locale">
+      <component :is="Component" />
+    </ElConfigProvider>
   </RouterView>
 </template>
 

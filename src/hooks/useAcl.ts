@@ -1,5 +1,5 @@
 import { useAbility } from "@casl/vue";
-import { AppAbility } from "./defineAbilityFor";
+import { AppAbility } from "@/utils/defineAbilityFor";
 
 export function useAcl() {
   return useAbility<AppAbility>();
