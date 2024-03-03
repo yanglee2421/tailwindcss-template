@@ -1,24 +1,26 @@
 <script setup lang="ts"></script>
 
 <template>
-  <section class="h-[520px] text-center">
+  <section class="text-center sm:h-[520px]">
     <h1
-      class="w-[922px] mx-auto my-[55px] text-[64px] font-normal tracking-[0.08em] leading-[1.5em]"
+      class="mx-auto my-[55px] text-2xl font-normal leading-[1.5em] tracking-[0.08em] sm:w-[922px] sm:text-[64px]"
     >
       OUR JOURNEY
     </h1>
-    <p class="w-[710px] mx-auto text-[24px] tracking-[0.04em] leading-[1.8em]">
+    <p
+      class="mx-auto w-96 text-lg leading-[1.8em] tracking-[0.04em] sm:w-[710px] sm:text-[24px]"
+    >
       I'm a paragraph. Click here to add your own text and edit me. It’s easy.
       Just click “Edit Text” or double click me to add your own content and make
       changes to the font. I’m a great place for you to tell a story and let
       your users know a little more about you.
     </p>
   </section>
-  <hr />
-  <section class="grid grid-cols-2 h-[820px]">
-    <div class="flex justify-center items-center">
+  <hr class="my-12" />
+  <section class="grid grid-cols-1 sm:h-[820px] sm:grid-cols-2">
+    <div class="flex items-center justify-center">
       <div
-        class="h-[600px] grid grid-cols-[140px_60px_340px] grid-rows-[auto_auto_1fr] grid-flow-col"
+        class="grid h-[600px] grid-flow-col grid-cols-[0px_30px_320px] grid-rows-[auto_auto_1fr] sm:grid-cols-[140px_60px_340px]"
       >
         <div
           class="col-span-1 row-span-full border-0 border-r border-solid border-[currentColor]"
@@ -30,12 +32,12 @@
         <div></div>
 
         <div class="mb-[41px] text-[14px]">OUR MISSION</div>
-        <div class="leading-[1.8em] text-[24px] tracking-[0.08em]">
+        <div class="text-[24px] leading-[1.8em] tracking-[0.08em]">
           Redefining the Way <br />
           We Move
         </div>
         <div
-          class="self-end space-y-10 text-[16px] leading-[1.8em] tracking-[0.04em]"
+          class="space-y-10 self-end text-[16px] leading-[1.8em] tracking-[0.04em]"
         >
           <p>
             I'm a paragraph. Click here to add your own text and edit me. It’s
@@ -52,7 +54,7 @@
         </div>
       </div>
     </div>
-    <div class="flex justify-center items-center">
+    <div class="flex items-center justify-center py-12 sm:py-0">
       <img
         src="/wp-content/uploads/2024/03/1709265023146.png"
         alt=""
@@ -62,23 +64,23 @@
     </div>
   </section>
   <hr />
-  <section class="h-[160px] grid grid-cols-2">
-    <div class="flex justify-center items-end">
-      <span class="text-[24px] tracking-[0.08em] leading-[1.8em]"
+  <section class="grid grid-cols-1 sm:h-[160px] sm:grid-cols-2">
+    <div class="my-12 flex items-end justify-center sm:my-0">
+      <span class="text-[24px] leading-[1.8em] tracking-[0.08em]"
         >Our Journey So Far</span
       >
     </div>
     <div></div>
   </section>
-  <section class="h-[768px] flex flex-col justify-center">
+  <section class="flex flex-col justify-center sm:h-[768px]">
     <div>
       <div class="flex justify-center">
         <div
-          class="w-[640px] mr-64 border border-solid border-black box-border p-8 rounded-xl"
+          class="mx-6 box-border rounded-xl border border-solid border-black p-8 sm:mx-0 sm:mr-64 sm:w-[640px]"
         >
-          <h3 class="mt-0 mb-8">
+          <h3 class="mb-8 mt-0">
             <span
-              class="border-0 border-b border-solid border-black font-normal text-[40px] text-[#e15f09]"
+              class="border-0 border-b border-solid border-black text-[40px] font-normal text-[#e15f09]"
               >2018</span
             >
           </h3>
@@ -92,14 +94,14 @@
           </p>
         </div>
       </div>
-      <div class="my-12 border-t border-0 border-solid"></div>
+      <div class="my-12 border-0 border-t border-solid"></div>
       <div class="flex justify-center">
         <div
-          class="w-[640px] ml-64 border border-solid border-black box-border p-8 rounded-xl"
+          class="mx-6 box-border rounded-xl border border-solid border-black p-8 sm:mx-0 sm:ml-64 sm:w-[640px]"
         >
-          <h3 class="mt-0 mb-8">
+          <h3 class="mb-8 mt-0">
             <span
-              class="border-0 border-b border-solid border-black font-normal text-[40px] text-[#e15f09]"
+              class="border-0 border-b border-solid border-black text-[40px] font-normal text-[#e15f09]"
               >2019</span
             >
           </h3>
@@ -117,13 +119,13 @@
   </section>
   <section class="h-[80px]"></section>
   <section
-    class="h-[760px] bg-[url(/wp-content/uploads/2024/03/1709264175435.png)] bg-fixed bg-cover"
+    class="h-96 bg-[url(/wp-content/uploads/2024/03/1709264175435.png)] bg-cover bg-fixed sm:h-[760px]"
   ></section>
-  <section class="h-[640px] bg-black text-white">
-    <div class="grid grid-cols-2">
-      <div class="flex justify-center items-center">
+  <section class="bg-black text-white sm:h-[640px]">
+    <div class="grid grid-cols-1 sm:grid-cols-2">
+      <div class="flex items-center justify-center">
         <div
-          class="m-36 h-[60px] grid grid-cols-[140px_60px_340px] grid-rows-[auto_1fr] grid-flow-col"
+          class="m-36 grid h-[60px] grid-flow-col grid-cols-[0px_30px_320px] grid-rows-[auto_1fr] sm:grid-cols-[140px_60px_340px]"
         >
           <div
             class="col-span-1 row-span-full border-0 border-r border-solid border-[currentColor]"
@@ -134,7 +136,7 @@
           ></div>
           <div class="mb-[41px] text-[14px]">NEWS</div>
           <div
-            class="w-[710px] mx-auto text-[24px] tracking-[0.04em] leading-[1.8em]"
+            class="mx-auto text-[24px] leading-[1.8em] tracking-[0.04em] sm:w-[710px]"
           >
             Autono In The Press
           </div>
@@ -143,7 +145,7 @@
       <div></div>
     </div>
     <div
-      class="w-[980px] mx-auto grid grid-cols-5 gap-[32px] place-items-center"
+      class="mx-auto grid grid-cols-2 place-items-center gap-[32px] pb-12 sm:w-[980px] sm:grid-cols-5 sm:pb-0"
     >
       <img
         src="/wp-content/uploads/2024/03/1709264608644.png"

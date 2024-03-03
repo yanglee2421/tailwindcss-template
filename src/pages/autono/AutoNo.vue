@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import * as Vue from "vue";
 import AutonoHome from "./AutonoHome.vue";
 import AutonoTechnology from "./AutonoTechnology.vue";
@@ -24,10 +24,10 @@ const state = Vue.reactive({
 <template>
   <div class="px-6 py-2">
     <ElRadioGroup v-model="state.tab">
-      <ElRadio label="home">Home</ElRadio>
-      <ElRadio label="technology">Technology</ElRadio>
-      <ElRadio label="about">About</ElRadio>
-      <ElRadio label="careers">Careers</ElRadio>
+      <ElRadio value="home">Home</ElRadio>
+      <ElRadio value="technology">Technology</ElRadio>
+      <ElRadio value="about">About</ElRadio>
+      <ElRadio value="careers">Careers</ElRadio>
     </ElRadioGroup>
   </div>
   <div>
