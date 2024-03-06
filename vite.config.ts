@@ -37,10 +37,6 @@ export default defineConfig((ConfigEnv) => {
       outDir: resolve(__dirname, "./docs"),
       emptyOutDir: true,
 
-      manifest: false,
-      sourcemap: false,
-      chunkSizeWarningLimit: 500,
-
       rollupOptions: {
         input: {
           main: resolve(__dirname, "./index.html"),
@@ -71,6 +67,11 @@ export default defineConfig((ConfigEnv) => {
       cssTarget: ["es2020", "edge88", "firefox78", "chrome87", "safari14"],
       cssMinify: "esbuild",
       cssCodeSplit: true,
+
+      manifest: false,
+      sourcemap: false,
+      chunkSizeWarningLimit: 500,
+      assetsInlineLimit: 0,
     },
 
     server: {

@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-// Vue Imports
 import * as Vue from "vue";
 
 const boxRef = Vue.ref<HTMLDivElement>();
@@ -59,7 +58,7 @@ function play(container: Element | null) {
         },
         { transform: `translate(0px, 0px)` },
       ],
-      { duration: 600 }
+      { duration: 600 },
     );
   }
 }
@@ -80,12 +79,12 @@ defineOptions({ inheritAttrs: false });
   </div>
   <div
     ref="boxRef"
-    class="p-2 overflow-hidden mx-auto mt-6 border flex gap-2 flex-wrap"
+    class="mx-auto mt-6 flex flex-wrap gap-2 overflow-hidden border p-2"
   >
     <div
       v-for="item in 50"
       :key="item"
-      class="basis-1/6 sm:basis-1/12 flex-1 bg-red-300 flex justify-center items-center h-16 border rounded text-white text-2xl"
+      class="flex h-16 flex-1 basis-1/6 items-center justify-center rounded border bg-red-300 text-2xl text-white sm:basis-1/12"
     >
       {{ item }}
     </div>

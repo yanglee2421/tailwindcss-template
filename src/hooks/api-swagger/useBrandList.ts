@@ -1,8 +1,6 @@
-//
-import { get_brand_list } from "@/api/swagger";
 import { useQuery } from "@tanstack/vue-query";
 import * as Vue from "vue";
-import { ID } from "@/api/swagger/get_brand_list";
+import { ID, get_brand_list } from "@/api/swagger/get_brand_list";
 
 export function useBrandList(brandIdRef: Vue.Ref<ID>) {
   return useQuery({

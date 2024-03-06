@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
   UserCredential,
 } from "firebase/auth";
-import { app } from "@/api/firebase";
+import { app } from "@/api/firebase/app";
 import { useAuthStore } from "@/hooks/store/useAuthStore";
 
 export function useLoginMutation() {

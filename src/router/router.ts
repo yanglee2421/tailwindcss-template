@@ -13,16 +13,6 @@ export const router = createRouter({
   routes,
 });
 
-router.afterEach((to) => {
-  const title = to.meta.title;
-
-  if (!title) return;
-
-  if (typeof title === "string") {
-    document.title = title;
-  }
-});
-
 router.beforeEach(() => {
   NProgress.start();
 });

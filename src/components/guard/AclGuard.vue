@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import NotAuthorization from "./NotAuthorization.vue";
 import { useAcl } from "@/hooks/useAcl";
 
@@ -9,8 +9,10 @@ const props = defineProps<{
 
 const acl = useAcl();
 </script>
+
 <template>
   <slot v-if="acl.can(props.action, props.subject)"></slot>
-  <NotAuthorization v-else></NotAuthorization>
+  <NotAuthorization v-else />
 </template>
+
 <style lang="scss" scoped></style>

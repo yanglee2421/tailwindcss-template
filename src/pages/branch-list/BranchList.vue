@@ -1,7 +1,6 @@
-<script setup lang="ts">
-// Vue Imports
+<script lang="ts" setup>
 import * as Vue from "vue";
-import { useBrandList } from "@/hooks/api-swagger";
+import { useBrandList } from "@/hooks/api-swagger/useBrandList";
 import MachineList from "./MachineList.vue";
 
 const category = {

@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import * as Vue from "vue";
 import { getAuth } from "firebase/auth";
-import { app } from "@/api/firebase";
+import { app } from "@/api/firebase/app";
 
 export const useAuthStore = defineStore("auth", () => {
   const valueRef = Vue.shallowRef({

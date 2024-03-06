@@ -1,6 +1,6 @@
 import * as Vue from "vue";
 import App from "./App.vue";
-import { router } from "@/router";
+import { router } from "@/router/router";
 import { VueQuery } from "@/plugins/VueQuery";
 import { createPinia } from "pinia";
 import { abilitiesPlugin } from "@casl/vue";

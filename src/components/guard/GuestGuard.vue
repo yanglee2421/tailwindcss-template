@@ -3,39 +3,48 @@ import * as Vue from "vue";
 import { useAuthStore } from "@/hooks/store/useAuthStore";
 import { useRouter } from "vue-router";
 import LoadingScreen from "@/components/shared/LoadingScreen.vue";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
+import { app } from "@/api/firebase/app";
 
 const store = useAuthStore();
 const router = useRouter();
 
-Vue.watchPostEffect(() => {
+Vue.watchPostEffect((onCleanup) => {
+  onCleanup(onAuthStateChanged(getAuth(app), store.update));
+});
+
+Vue.watchPostEffect((onCleanup) => {
   if (!store.value.auth.currentUser) {
     return;
   }
 
-  if (!router.currentRoute.value.matched.length) {
-    return;
-  }
+  const timer = setTimeout(() => {
+    router.push({
+      path: (() => {
+        const redirect_url =
+          router.currentRoute.value.query.redirect_url || "/";
 
-  router.push({
-    path: (() => {
-      const redirect_url = router.currentRoute.value.query.redirect_url || "/";
+        if (typeof redirect_url === "string") {
+          return decodeURIComponent(redirect_url);
+        }
 
-      if (typeof redirect_url === "string") {
-        return redirect_url;
-      }
+        return "/";
+      })(),
 
-      return "/";
-    })(),
+      query: {
+        ...router.currentRoute.value.query,
+        redirect_url: void 0,
+      },
+    });
+  }, 300);
 
-    query: {
-      ...router.currentRoute.value.query,
-      redirect_url: void 0,
-    },
+  onCleanup(() => {
+    clearTimeout(timer);
   });
 });
 </script>
 <template>
-  <slot v-if="store.value.auth.currentUser"></slot>
-  <LoadingScreen v-else></LoadingScreen>
+  <LoadingScreen v-if="store.value.auth.currentUser" />
+  <slot v-else></slot>
 </template>
 <style lang="scss" scoped></style>
