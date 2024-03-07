@@ -15,10 +15,19 @@ export const routes: RouterOptions["routes"] = [
     },
   },
   {
-    path: "/",
-    name: "home",
+    name: "layout",
+    path: "",
     component() {
-      return import("@/pages/home/HomePage.vue");
+      return import("@/components/layout/DesktopLayout.vue");
     },
+    children: [
+      {
+        path: "",
+        name: "home",
+        component() {
+          return import("@/pages/home/HomePage.vue");
+        },
+      },
+    ],
   },
 ];
