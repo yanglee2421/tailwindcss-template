@@ -24,27 +24,29 @@ function record(container: Element | null) {
 }
 
 function change(container: Element | null) {
-  if (!container) return;
+  if (!container) {
+    return;
+  }
 
   const childrens = [...container.children];
-  for (let i = 0, l = childrens.length; i < l; i++) {
-    const children = childrens[i];
-    const j = Math.floor(Math.random() * l);
-    if (i !== j) {
-      // 获取当前dom的下一个元素
-      const inextDom = children.nextElementSibling;
-      // 把i插入j之前
-      container.insertBefore(children, childrens[j]);
-      // 把下标j的元素插入到i元素之前
-      container.insertBefore(childrens[j], inextDom);
+  for (let i = 0; i < childrens.length; i++) {
+    const el = childrens[i];
+    const randomIdx = Math.floor(Math.random() * childrens.length);
+
+    if (i !== randomIdx) {
+      const inextDom = el.nextElementSibling;
+      container.insertBefore(el, childrens[randomIdx]);
+      container.insertBefore(childrens[randomIdx], inextDom);
     }
   }
 }
 
 function play(container: Element | null) {
-  if (!container) return;
+  if (!container) {
+    return;
+  }
 
-  for (let i = 0, len = container.children.length; i < len; i++) {
+  for (let i = 0; i < container.children.length; i++) {
     const dom = container.children[i];
     const { left, top } = dom.getBoundingClientRect();
 
