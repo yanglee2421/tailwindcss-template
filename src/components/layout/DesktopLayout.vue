@@ -9,7 +9,7 @@ const state = Vue.reactive({
 </script>
 
 <template>
-  <div class="flex">
+  <div class="text-el-text-color-regular flex">
     <aside
       :class="[
         'sticky top-0 z-10 h-[100dvh] transition-all',
@@ -22,14 +22,16 @@ const state = Vue.reactive({
         class="relative h-full w-full transition-all hover:w-56"
       >
         <div
-          class="relative box-border flex h-full w-full flex-col overflow-hidden border-0 border-r border-solid border-slate-200 bg-white"
+          class="bg-el-bg-color border-el-border-color relative box-border flex h-full w-full flex-col overflow-hidden border-0 border-r border-solid"
         >
           <div class="flex overflow-hidden px-4 py-2">
             <RouterLink
               :to="{ name: 'home' }"
-              class="flex"
+              class="flex no-underline dark:text-red-500"
             >
-              <span>icon</span>
+              <ElIcon :size="28">
+                <ElementPlus />
+              </ElIcon>
               <span
                 v-if="state.isHovered || !state.collapsed"
                 class="ml-3"
@@ -46,7 +48,7 @@ const state = Vue.reactive({
             />
           </div>
           <hr
-            class="my-0 w-full border-0 border-b border-solid border-slate-200"
+            class="border-el-border-color my-0 w-full border-0 border-b border-solid"
           />
           <ElScrollbar>
             <div>

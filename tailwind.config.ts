@@ -15,7 +15,14 @@ function defineConfig(): Config {
         xl: "1920px",
         "2xl": "1920px",
       },
+      colors: {
+        "el-bg-color": "var(--el-bg-color)",
+        "el-text-color-regular": "var(--el-text-color-regular)",
+        "el-border-color": "var(--el-border-color)",
+        "el-color-primary": "var(--el-color-primary)",
+      },
     },
+    darkMode: ["selector", ".dark"],
     plugins: [],
     corePlugins: {
       preflight: false,
