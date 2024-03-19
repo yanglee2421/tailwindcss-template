@@ -27,6 +27,77 @@ defineOptions({ inheritAttrs: false });
       <ElRadio value="dark">dark</ElRadio>
       <ElRadio value="light">light</ElRadio>
     </ElRadioGroup>
+    <div>
+      <div>
+        <p>We’ll respond to your request within 1 business day.</p>
+        <a
+          href="#"
+          class="bg-green-500 hover:bg-green-700 block rounded p-3 text-center no-underline transition-colors"
+        >
+          <span class="text-white text-sm font-semibold"
+            >REQUEST FOR QUOTE</span
+          >
+        </a>
+      </div>
+      <div>
+        <div class="space-y-12">
+          <a
+            href="#"
+            class="bg-green-500 hover:bg-green-700 block rounded p-3 text-center no-underline transition-colors"
+          >
+            <span class="text-white text-sm font-semibold"
+              >REQUEST FOR QUOTE</span
+            >
+          </a>
+          <a
+            href="#"
+            class="bg-green-500 hover:bg-green-700 block rounded p-3 text-center no-underline transition-colors"
+          >
+            <span class="text-white text-sm font-semibold"
+              >REQUEST FOR QUOTE</span
+            >
+          </a>
+          <a
+            href="#"
+            class="bg-green-500 hover:bg-green-700 block rounded p-3 text-center no-underline transition-colors"
+          >
+            <span class="text-white text-sm font-semibold"
+              >REQUEST FOR QUOTE</span
+            >
+          </a>
+        </div>
+      </div>
+      <ul class="list-none pl-0">
+        <li>
+          <a
+            href="#"
+            class="text-green-500 hover:text-green-700 no-underline hover:underline"
+            >My Account</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="text-green-500 hover:text-green-700 no-underline hover:underline"
+            >My Orders</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="text-green-500 hover:text-green-700 no-underline hover:underline"
+            >Checkout</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="text-green-500 hover:text-green-700 no-underline hover:underline"
+            >Terms & Conditions</a
+          >
+        </li>
+      </ul>
+    </div>
   </AuthGuard>
 </template>
 

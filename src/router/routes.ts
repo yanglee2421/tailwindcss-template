@@ -30,4 +30,11 @@ export const routes: RouterOptions["routes"] = [
       },
     ],
   },
+  {
+    path: "/caronseal",
+    name: "caronseal",
+    component() {
+      return import("@/pages/caronseal/CaronsealPage.vue");
+    },
+  },
 ];
