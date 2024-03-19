@@ -216,6 +216,37 @@
       </div>
     </article>
   </div>
+  <hr />
+  <div class="border-slate-200 border-0 border-y border-solid py-2">
+    <a href="#">previous</a>
+  </div>
+  <div class="flex items-center gap-3">
+    <h5 class="m-0 leading-none text-[var(--e-global-color-50826f9)]">
+      Related Posts
+    </h5>
+    <hr class="border-slate-200 h-2 flex-grow border-0 border-y border-solid" />
+  </div>
+  <hr />
+  <div class="grid grid-cols-4">
+    <div class="flex items-center justify-center">
+      <div class="group relative">
+        <img
+          src=""
+          alt=""
+          width="150"
+          height="150"
+        />
+        <div
+          class="bg-green-500 absolute inset-0 flex items-center justify-center text-center opacity-0 transition group-hover:opacity-100"
+        >
+          <h6 class="font-normal">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="h-96"></div>
 </template>
 
 <style lang="scss" scoped></style>
