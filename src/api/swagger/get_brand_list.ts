@@ -1,5 +1,5 @@
-import { AxiosRequestConfig } from "axios";
 import { axiosSwagger } from "./axiosSwagger";
+import type { AxiosRequestConfig } from "axios";
 
 export function get_brand_list(req: Req, id: ID) {
   return axiosSwagger<unknown, Res>({

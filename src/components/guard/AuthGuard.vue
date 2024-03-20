@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import * as Vue from "vue";
-import { useAuthStore } from "@/hooks/store/useAuthStore";
-import { useRouter } from "vue-router";
-import LoadingScreen from "@/components/shared/LoadingScreen.vue";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
+import * as Vue from "vue";
+import { useRouter } from "vue-router";
 import { app } from "@/api/firebase/app";
+import LoadingScreen from "@/components/shared/LoadingScreen.vue";
+import { useAuthStore } from "@/hooks/store/useAuthStore";
 
 const store = useAuthStore();
 const router = useRouter();

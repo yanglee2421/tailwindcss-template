@@ -1,11 +1,11 @@
-import * as Vue from "vue";
+import type * as Vue from "vue";
 
 const lyComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
   "@/components/**/ly-*.vue",
   {
     eager: true,
     import: "default",
-  }
+  },
 );
 
 export const plugins: Vue.Plugin = {

@@ -1,5 +1,8 @@
 class GetRandom {
-  constructor(private readonly min: number, private readonly max: number) {}
+  constructor(
+    private readonly min: number,
+    private readonly max: number,
+  ) {}
   get() {
     return Math.random() * (this.max - this.min) + this.min;
   }
@@ -54,7 +57,10 @@ class Snowflake {
 
 export class Snow {
   #snowflake: Snowflake[] = [];
-  constructor(private readonly canvas: HTMLCanvasElement, number = 100) {
+  constructor(
+    private readonly canvas: HTMLCanvasElement,
+    number = 100,
+  ) {
     for (let i = 0; i < number; i++) {
       this.#snowflake.push(new Snowflake(canvas));
     }

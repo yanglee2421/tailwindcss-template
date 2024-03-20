@@ -1,5 +1,4 @@
-// Tailwind Imports
-import { Config } from "tailwindcss";
+import type { Config } from "tailwindcss";
 
 export default defineConfig();
 

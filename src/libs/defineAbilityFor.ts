@@ -1,8 +1,5 @@
-import {
-  MongoAbility,
-  createMongoAbility,
-  AbilityBuilder,
-} from "@casl/ability";
+import { createMongoAbility, AbilityBuilder } from "@casl/ability";
+import type { MongoAbility } from "@casl/ability";
 
 export function defineAbilityFor(role: string) {
   const builder = new AbilityBuilder<AppAbility>(createMongoAbility);

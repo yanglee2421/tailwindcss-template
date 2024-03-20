@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import * as Vue from "vue";
-import type { Res } from "@/api/swagger/get_brand_list";
 import { useMachineList } from "@/hooks/api-swagger/useMachineList";
+import type { Res } from "@/api/swagger/get_brand_list";
 
 const props = defineProps<{
   branchs: Res;

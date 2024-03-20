@@ -1,6 +1,6 @@
+import { getAuth } from "firebase/auth";
 import { defineStore } from "pinia";
 import * as Vue from "vue";
-import { getAuth } from "firebase/auth";
 import { app } from "@/api/firebase/app";
 
 export const useAuthStore = defineStore("auth", () => {

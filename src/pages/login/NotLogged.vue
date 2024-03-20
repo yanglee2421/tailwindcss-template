@@ -1,23 +1,23 @@
 <script lang="ts" setup>
-import * as Vue from "vue";
-import GuestGuard from "@/components/guard/GuestGuard.vue";
+import { User, Lock, ChromeFilled } from "@element-plus/icons-vue";
+import { useMutation } from "@tanstack/vue-query";
 import {
   ElCard,
   ElText,
   ElDivider,
   ElButton,
   ElMessage,
-  FormInstance,
   ElForm,
   ElFormItem,
   ElInput,
   ElLink,
 } from "element-plus";
-import { User, Lock, ChromeFilled } from "@element-plus/icons-vue";
-import { useLoginMutation } from "@/hooks/api-firebase/useLoginMutation";
-import { useMutation } from "@tanstack/vue-query";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import * as Vue from "vue";
 import { app } from "@/api/firebase/app";
+import GuestGuard from "@/components/guard/GuestGuard.vue";
+import { useLoginMutation } from "@/hooks/api-firebase/useLoginMutation";
+import type { FormInstance } from "element-plus";
 
 const formValues = Vue.reactive({
   email: "",

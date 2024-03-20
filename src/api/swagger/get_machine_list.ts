@@ -1,5 +1,5 @@
 import { axiosSwagger } from "./axiosSwagger";
-import { AxiosRequestConfig } from "axios";
+import type { AxiosRequestConfig } from "axios";
 
 export function get_machine_list(req: Req, brand_id: string) {
   return axiosSwagger<unknown, Res>({

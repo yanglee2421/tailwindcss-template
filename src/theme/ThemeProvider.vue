@@ -2,8 +2,8 @@
 import { ElConfigProvider } from "element-plus";
 import locale from "element-plus/es/locale/lang/zh-cn";
 import * as Vue from "vue";
-import { useThemeStore } from "@/hooks/store/useThemeStore";
 import { useIsDark } from "@/hooks/dom/useIsDark";
+import { useThemeStore } from "@/hooks/store/useThemeStore";
 
 const themeStore = useThemeStore();
 const isDarkRef = useIsDark();

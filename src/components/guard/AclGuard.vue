@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import NotAuthorization from "./NotAuthorization.vue";
 import { useAcl } from "@/hooks/useAcl";
+import NotAuthorization from "./NotAuthorization.vue";
 
 const props = defineProps<{
   action: string;

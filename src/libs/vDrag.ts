@@ -1,4 +1,4 @@
-import * as Vue from "vue";
+import type * as Vue from "vue";
 
 interface _value {
   index: number;

@@ -1,11 +1,4 @@
 <script lang="ts" setup>
-import * as Vue from "vue";
-import AutonoHome from "./AutonoHome.vue";
-import AutonoTechnology from "./AutonoTechnology.vue";
-import AutonoAbout from "./AutonoAbout.vue";
-import AutonoCareers from "./AutonoCareers.vue";
-import { ElRadioGroup, ElRadio } from "element-plus";
-
 import "@fontsource/montserrat/100.css";
 import "@fontsource/montserrat/200.css";
 import "@fontsource/montserrat/300.css";
@@ -15,6 +8,12 @@ import "@fontsource/montserrat/600.css";
 import "@fontsource/montserrat/700.css";
 import "@fontsource/montserrat/800.css";
 import "@fontsource/montserrat/900.css";
+import { ElRadioGroup, ElRadio } from "element-plus";
+import * as Vue from "vue";
+import AutonoAbout from "./AutonoAbout.vue";
+import AutonoCareers from "./AutonoCareers.vue";
+import AutonoHome from "./AutonoHome.vue";
+import AutonoTechnology from "./AutonoTechnology.vue";
 
 const state = Vue.reactive({
   tab: "home",

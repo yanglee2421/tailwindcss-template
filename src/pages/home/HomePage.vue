@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { useThemeStore } from "@/hooks/store/useThemeStore";
-import { useAuthStore } from "@/hooks/store/useAuthStore";
 import { ElButton, ElRadio, ElRadioGroup } from "element-plus";
 import AuthGuard from "@/components/guard/AuthGuard.vue";
 import { useHeadTitle } from "@/hooks/dom/useHeadTitle";
+import { useAuthStore } from "@/hooks/store/useAuthStore";
+import { useThemeStore } from "@/hooks/store/useThemeStore";
 
 useHeadTitle("Home");
 const authStore = useAuthStore();
@@ -69,36 +69,6 @@ defineOptions({ inheritAttrs: false });
           </a>
         </div>
       </div>
-      <ul class="list-none pl-0">
-        <li>
-          <a
-            href="#"
-            class="text-green-500 no-underline hover:text-green-700 hover:underline"
-            >My Account</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="text-green-500 no-underline hover:text-green-700 hover:underline"
-            >My Orders</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="text-green-500 no-underline hover:text-green-700 hover:underline"
-            >Checkout</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="text-green-500 no-underline hover:text-green-700 hover:underline"
-            >Terms & Conditions</a
-          >
-        </li>
-      </ul>
     </div>
   </AuthGuard>
 </template>

@@ -1,4 +1,5 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
+import type { AxiosError } from "axios";
 
 export const axiosSwagger = axios.create({
   baseURL: "http://121.43.121.210:8000",
@@ -19,5 +20,5 @@ axiosSwagger.interceptors.response.use(
   },
   (error: AxiosError) => {
     throw new Error(error.message);
-  }
+  },
 );

@@ -1,7 +1,7 @@
-import { VueQueryPlugin } from "@tanstack/vue-query";
 import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
 import { persistQueryClient } from "@tanstack/query-persist-client-core";
-import * as Vue from "vue";
+import { VueQueryPlugin } from "@tanstack/vue-query";
+import type * as Vue from "vue";
 
 export const VueQuery: Vue.Plugin = (app) => {
   app.use(VueQueryPlugin, {

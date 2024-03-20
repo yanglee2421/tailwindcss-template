@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 // Assets Imports
+import * as Vue from "vue";
 import img1 from "@/assets/image/scroll/img-1.png";
 import img2 from "@/assets/image/scroll/img-2.png";
 import img3 from "@/assets/image/scroll/img-3.png";
 
 // Vue Imports
-import * as Vue from "vue";
 
 Vue.watchPostEffect((clearFn) => {
   const controller = new AbortController();

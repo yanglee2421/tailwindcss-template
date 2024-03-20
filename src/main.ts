@@ -1,15 +1,14 @@
-import * as Vue from "vue";
-import App from "./App.vue";
-import { router } from "@/router/router";
-import { VueQuery } from "@/plugins/VueQuery";
-import { createPinia } from "pinia";
 import { abilitiesPlugin } from "@casl/vue";
-import { defineAbilityFor } from "@/utils/defineAbilityFor";
-
 import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/dark/css-vars.css";
-import "@/assets/scss/global.scss";
+import { createPinia } from "pinia";
+import * as Vue from "vue";
 import "@/assets/css/style.css";
+import "@/assets/scss/global.scss";
+import { VueQuery } from "@/plugins/VueQuery";
+import { router } from "@/router/router";
+import { defineAbilityFor } from "@/libs/defineAbilityFor";
+import App from "./App.vue";
 
 const app = Vue.createApp(App);
 

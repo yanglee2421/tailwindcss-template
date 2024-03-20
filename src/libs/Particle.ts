@@ -1,5 +1,8 @@
 class GetRandom {
-  constructor(private readonly min: number, private readonly max: number) {}
+  constructor(
+    private readonly min: number,
+    private readonly max: number,
+  ) {}
   get() {
     return Math.random() * (this.max - this.min) + this.min;
   }
@@ -14,7 +17,10 @@ class Particle {
   radius = getRadius.get();
   x: number;
   y: number;
-  constructor(private canvas: HTMLCanvasElement, private color: string) {
+  constructor(
+    private canvas: HTMLCanvasElement,
+    private color: string,
+  ) {
     this.x = Math.random() * canvas.width;
     this.y = Math.random() * canvas.height;
     this.color = `rgba(${color}, ${1 - 1 / this.radius})`;
@@ -51,7 +57,7 @@ export class Particles {
     private canvas: HTMLCanvasElement,
     particleNum = 100,
     private lineMax: number = 100,
-    private color: string = `254, 250, 244`
+    private color: string = `254, 250, 244`,
   ) {
     for (let i = 0; i < particleNum; i++) {
       this.#arr.push(new Particle(this.canvas, this.color));
@@ -118,7 +124,7 @@ export class Particles {
         this.#one.ySpeed = 0;
         this.#arr.push(this.#one);
       },
-      { signal }
+      { signal },
     );
     this.canvas.addEventListener(
       "mousemove",
@@ -128,7 +134,7 @@ export class Particles {
         this.#one.x = clientX;
         this.#one.y = clientY;
       },
-      { signal }
+      { signal },
     );
     this.canvas.addEventListener(
       "mouseout",
@@ -139,7 +145,7 @@ export class Particles {
           this.#one = null;
         }
       },
-      { signal }
+      { signal },
     );
   }
   abortEvent() {

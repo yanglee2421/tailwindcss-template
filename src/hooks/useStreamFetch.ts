@@ -1,4 +1,3 @@
-// Vue Imports
 import * as Vue from "vue";
 
 export function useStreamFetch() {
