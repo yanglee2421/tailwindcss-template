@@ -11,7 +11,7 @@ export default defineConfig((ConfigEnv) => {
     plugins: [
       vue({
         template: {
-          // transformAssetUrls: false,
+          transformAssetUrls: false,
         },
       }),
     ],
@@ -80,6 +80,7 @@ export default defineConfig((ConfigEnv) => {
       hmr: {
         port: 3007,
       },
+      host: false,
       proxy: {
         "/dev": {
           target: "http://localhost:5173",

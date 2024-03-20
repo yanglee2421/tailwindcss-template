@@ -3,7 +3,9 @@ import { useThemeStore } from "@/hooks/store/useThemeStore";
 import { useAuthStore } from "@/hooks/store/useAuthStore";
 import { ElButton, ElRadio, ElRadioGroup } from "element-plus";
 import AuthGuard from "@/components/guard/AuthGuard.vue";
+import { useHeadTitle } from "@/hooks/dom/useHeadTitle";
 
+useHeadTitle("Home");
 const authStore = useAuthStore();
 const themeStore = useThemeStore();
 
@@ -32,9 +34,9 @@ defineOptions({ inheritAttrs: false });
         <p>We’ll respond to your request within 1 business day.</p>
         <a
           href="#"
-          class="bg-green-500 hover:bg-green-700 block rounded p-3 text-center no-underline transition-colors"
+          class="block rounded bg-green-500 p-3 text-center no-underline transition-colors hover:bg-green-700"
         >
-          <span class="text-white text-sm font-semibold"
+          <span class="text-sm font-semibold text-white"
             >REQUEST FOR QUOTE</span
           >
         </a>
@@ -43,25 +45,25 @@ defineOptions({ inheritAttrs: false });
         <div class="space-y-12">
           <a
             href="#"
-            class="bg-green-500 hover:bg-green-700 block rounded p-3 text-center no-underline transition-colors"
+            class="block rounded bg-green-500 p-3 text-center no-underline transition-colors hover:bg-green-700"
           >
-            <span class="text-white text-sm font-semibold"
+            <span class="text-sm font-semibold text-white"
               >REQUEST FOR QUOTE</span
             >
           </a>
           <a
             href="#"
-            class="bg-green-500 hover:bg-green-700 block rounded p-3 text-center no-underline transition-colors"
+            class="block rounded bg-green-500 p-3 text-center no-underline transition-colors hover:bg-green-700"
           >
-            <span class="text-white text-sm font-semibold"
+            <span class="text-sm font-semibold text-white"
               >REQUEST FOR QUOTE</span
             >
           </a>
           <a
             href="#"
-            class="bg-green-500 hover:bg-green-700 block rounded p-3 text-center no-underline transition-colors"
+            class="block rounded bg-green-500 p-3 text-center no-underline transition-colors hover:bg-green-700"
           >
-            <span class="text-white text-sm font-semibold"
+            <span class="text-sm font-semibold text-white"
               >REQUEST FOR QUOTE</span
             >
           </a>
@@ -71,28 +73,28 @@ defineOptions({ inheritAttrs: false });
         <li>
           <a
             href="#"
-            class="text-green-500 hover:text-green-700 no-underline hover:underline"
+            class="text-green-500 no-underline hover:text-green-700 hover:underline"
             >My Account</a
           >
         </li>
         <li>
           <a
             href="#"
-            class="text-green-500 hover:text-green-700 no-underline hover:underline"
+            class="text-green-500 no-underline hover:text-green-700 hover:underline"
             >My Orders</a
           >
         </li>
         <li>
           <a
             href="#"
-            class="text-green-500 hover:text-green-700 no-underline hover:underline"
+            class="text-green-500 no-underline hover:text-green-700 hover:underline"
             >Checkout</a
           >
         </li>
         <li>
           <a
             href="#"
-            class="text-green-500 hover:text-green-700 no-underline hover:underline"
+            class="text-green-500 no-underline hover:text-green-700 hover:underline"
             >Terms & Conditions</a
           >
         </li>
