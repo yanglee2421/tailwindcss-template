@@ -5,9 +5,9 @@ import { createPinia } from "pinia";
 import * as Vue from "vue";
 import "@/assets/css/style.css";
 import "@/assets/scss/global.scss";
+import { defineAbilityFor } from "@/libs/defineAbilityFor";
 import { VueQuery } from "@/plugins/VueQuery";
 import { router } from "@/router/router";
-import { defineAbilityFor } from "@/libs/defineAbilityFor";
 import App from "./App.vue";
 
 const app = Vue.createApp(App);
