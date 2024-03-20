@@ -1,12 +1,4 @@
-class GetRandom {
-  constructor(
-    private readonly min: number,
-    private readonly max: number,
-  ) {}
-  get() {
-    return Math.random() * (this.max - this.min) + this.min;
-  }
-}
+import { GetRandom } from "./GetRandom";
 
 const getXV = new GetRandom(-0.5, 0.5);
 const getYV = new GetRandom(2, 3);

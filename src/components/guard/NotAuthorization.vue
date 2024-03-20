@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import * as Vue from "vue";
-import { Snow } from "./Snow";
+import { Snow } from "@/libs/Snow";
 
 const boxRef = Vue.ref<HTMLDivElement>();
 const cvsRef = Vue.ref<HTMLCanvasElement>();
