@@ -13,6 +13,8 @@
         alt=""
         width="465"
         height="310"
+        loading="lazy"
+        class="align-middle"
       /> </a
     >&nbsp;
     <a href="#">
@@ -21,6 +23,8 @@
         alt=""
         width="465"
         height="310"
+        loading="lazy"
+        class="align-middle"
       />
     </a>
   </p>
@@ -55,18 +59,22 @@
   <p class="text-center">
     <a href="#">
       <img
-        src="https://www.globaloring.com/wp-content/uploads/2020/01/Bill-DeSpain.jpg"
+        src="https://www.globaloring.com/wp-content/uploads/2020/01/Global-O-Ring-and-Seal-History-2-2008.jpg"
         alt=""
-        width="465"
-        height="310"
+        width="464"
+        height="348"
+        loading="lazy"
+        class="align-middle"
       /> </a
     >&nbsp;
     <a href="#">
       <img
-        src="https://www.globaloring.com/wp-content/uploads/2020/01/Rhonda-DeSpain.jpg"
+        src="https://www.globaloring.com/wp-content/uploads/2020/01/Global-O-Ring-and-Seal-History-2-2008-2.jpg"
         alt=""
-        width="465"
-        height="310"
+        width="464"
+        height="348"
+        loading="lazy"
+        class="align-middle"
       />
     </a>
   </p>
@@ -101,18 +109,22 @@
   <p class="text-center">
     <a href="#">
       <img
-        src="https://www.globaloring.com/wp-content/uploads/2020/01/Bill-DeSpain.jpg"
+        src="https://www.globaloring.com/wp-content/uploads/2016/08/building.jpg"
         alt=""
-        width="465"
-        height="310"
+        width="464"
+        height="348"
+        loading="lazy"
+        class="align-middle"
       /> </a
     >&nbsp;
     <a href="#">
       <img
-        src="https://www.globaloring.com/wp-content/uploads/2020/01/Rhonda-DeSpain.jpg"
+        src="https://www.globaloring.com/wp-content/uploads/2016/08/Warehouse1_th.jpg"
         alt=""
-        width="465"
-        height="310"
+        width="464"
+        height="348"
+        loading="lazy"
+        class="align-middle"
       />
     </a>
   </p>
@@ -249,6 +261,171 @@
     that quality is consistently improved.” Global O-Ring had always strived to
     provide the highest level of quality throughout the organization and now
     they had this audited proof of an ongoing commitment to quality.
+  </p>
+  <h2
+    class="text-center font-[Oswald] text-3xl font-normal tracking-tight text-sky-500"
+  >
+    – July 2016 –
+  </h2>
+  <h2
+    class="text-center font-[Oswald] text-3xl font-normal tracking-tight text-green-500"
+  >
+    Global O-Ring and Seal Gets a Face-Lift
+  </h2>
+  <p class="text-center">
+    <a href="#">
+      <img
+        src="https://www.globaloring.com/wp-content/uploads/2016/08/presentation-NewLogoKOEdit1-2.jpg"
+        alt=""
+        width="464"
+        height="279"
+        loading="lazy"
+        class="align-middle" /></a
+    >&nbsp;
+    <a href="#">
+      <img
+        src="https://www.globaloring.com/wp-content/uploads/2016/08/Global-Logo2.jpg"
+        alt=""
+        width="464"
+        height="100"
+        loading="lazy"
+        class="align-middle"
+      />
+    </a>
+  </p>
+  <p class="text-center">
+    <em
+      >As part of an overall effort by Global O-Ring to enhance their marketing
+      efforts, they began by refreshing their logo.</em
+    >
+  </p>
+  <p>
+    Like many companies in the industrial space, building their infrastructure,
+    developing the right team, and servicing customers was our first priority.
+    However, as the company continued to grow, it was important to evolve and
+    grow the marketing portion of the business. In that effort, the company
+    began the process of clearly defining who they were as a company and the
+    unique value proposition they offered. As part of that initiative, they
+    introduced a new logo, tagline, and commitment to be an All-Around Better
+    company. The end result is the alignment of their image with their brand
+    identity.
+  </p>
+  <h2
+    class="text-center font-[Oswald] text-3xl font-normal tracking-tight text-sky-500"
+  >
+    – March 2018 –
+  </h2>
+  <h2
+    class="text-center font-[Oswald] text-3xl font-normal tracking-tight text-green-500"
+  >
+    Introducing the Next Generation of Leadership
+  </h2>
+  <p class="text-center">
+    <a href="#">
+      <img
+        src="https://www.globaloring.com/wp-content/uploads/2018/09/Brian-Lauren-e1538147218178.jpg"
+        alt=""
+        width="699"
+        height="466"
+      />
+    </a>
+  </p>
+  <p>
+    In March of 2018, Bill and Rhonda announced their retirement and Brian’s
+    promotion to President of Global O-Ring and Seal. The two founders were
+    removing themselves from the day-to-day details of the business while
+    continuing to cheer the company on from the sidelines. The transition in
+    leadership had been part of the long-term strategy for the business. Brian
+    had been preparing to continue to lead Global O-Ring and Seal well into the
+    future. Brian completed his MBA from Texas A&M’s Mays Business School in May
+    of 2018, shortly after this announcement and his promotion.
+  </p>
+  <h2
+    class="text-center font-[Oswald] text-3xl font-normal tracking-tight text-sky-500"
+  >
+    – July 2018 –
+  </h2>
+  <h2
+    class="text-center font-[Oswald] text-3xl font-normal tracking-tight text-green-500"
+  >
+    Moving Into a New Facility; Enabling Additional Growth
+  </h2>
+  <p class="text-center">
+    <a href="#">
+      <img
+        src="https://www.globaloring.com/wp-content/uploads/2018/10/14450-Building.jpg"
+        alt=""
+        width="464"
+        height="263"
+        loading="lazy"
+        class="align-middle"
+      /> </a
+    >&nbsp;
+    <a href="#">
+      <img
+        src="https://www.globaloring.com/wp-content/uploads/2018/10/VLM3.jpg"
+        alt=""
+        width="464"
+        height="260"
+        loading="lazy"
+        class="align-middle"
+      />
+    </a>
+  </p>
+  <p class="text-center">
+    <em
+      >Global O-Ring and Seal purchased a new building to accommodate the
+      continued growth of the company and to strategically position themselves
+      for the next chapter.</em
+    >
+  </p>
+  <p>
+    In July of 2018, Global O-Ring and Seal moved into a larger facility. As
+    part of that move, the company made the strategic decision to invest in
+    automated warehousing technologies. Bill, Rhonda, and Brian knew that
+    investing in the business would ensure the company could service their
+    customers effectively even as it continued to grow. The most significant
+    investment was in a state-of-art Vertical Lift Module (VLM) system. This
+    system automates the storage and retrieval of inventory parts. With it, the
+    company not only increased our order picking capacity, but we have also
+    improved the efficiency of picking orders while reducing the risk of injury.
+  </p>
+  <h2
+    class="text-center font-[Oswald] text-3xl font-normal tracking-tight text-sky-500"
+  >
+    – October 2018 –
+  </h2>
+  <h2
+    class="text-center font-[Oswald] text-3xl font-normal tracking-tight text-green-500"
+  >
+    Introducing the Leadership Team
+  </h2>
+  <p class="text-center">
+    <a href="#">
+      <img
+        src="https://www.globaloring.com/wp-content/uploads/2018/09/Staff.jpg"
+        alt=""
+        width="699"
+        height="450"
+      />
+    </a>
+  </p>
+  <p style="text-align: center">
+    <em>Pictured left to right: </em><strong>Lisa Knight</strong
+    ><em>, VP, Finance and Accounting; </em><strong>Jeff Korkowski</strong
+    ><em>, VP, Sales and Marketing; </em><strong>Adam Earnhardt</strong
+    ><em>, VP, Operations; </em><strong>Brian DeSpain</strong
+    ><em>, President; </em><strong>Lauren DeSpain</strong
+    ><em>, Vice President</em>
+  </p>
+  <p>
+    With the retirement of Bill and Rhonda DeSpain in March, Brian and Lauren
+    began assembling a team that would help Global O-Ring usher in the next
+    chapter of the company’s history. In October of 2018, the promotion and
+    additions of Lisa Knight, Adam Earnhardt, and Jeff Korkowski helped complete
+    the Global O-Ring Executive team. Lauren also assumed a formal role with the
+    company as Vice President. Together they are creating a long-term plan for
+    the future success of the company.
   </p>
 </template>
 
