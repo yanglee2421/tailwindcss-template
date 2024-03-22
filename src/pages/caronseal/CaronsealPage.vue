@@ -16,6 +16,7 @@ import * as Vue from "vue";
 import PageOne from "./PageOne.vue";
 import PageThree from "./PageThree.vue";
 import PageTwo from "./PageTwo.vue";
+import PageFour from "./PageFour.vue";
 
 const state = Vue.reactive({
   radio: "one",
@@ -29,6 +30,7 @@ const state = Vue.reactive({
         <ElRadio value="one">one</ElRadio>
         <ElRadio value="two">two</ElRadio>
         <ElRadio value="three">three</ElRadio>
+        <ElRadio value="four">four</ElRadio>
       </ElRadioGroup>
     </div>
     <div class="container mx-auto grid grid-cols-4 gap-4">
@@ -36,6 +38,7 @@ const state = Vue.reactive({
         <PageOne v-if="state.radio === 'one'" />
         <PageTwo v-if="state.radio === 'two'" />
         <PageThree v-if="state.radio === 'three'" />
+        <PageFour v-if="state.radio === 'four'" />
       </div>
       <div class="col-span-1">
         <p>We’ll respond to your request within 1 business day.</p>
