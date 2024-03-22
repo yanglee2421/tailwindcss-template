@@ -58,7 +58,7 @@
     </div>
   </div>
   <hr />
-  <div class="relative my-12 bg-[#0093d0] py-10 text-center text-white">
+  <div class="relative my-12 bg-sky-600/80 py-10 text-center text-white">
     <div class="absolute inset-0 overflow-hidden">
       <div
         class="absolute left-1/2 top-0 size-10 -translate-y-1/2 rotate-45 bg-white"

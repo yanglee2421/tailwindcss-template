@@ -13,10 +13,11 @@ import "@fontsource/oswald/600.css";
 import "@fontsource/oswald/700.css";
 import { ElRadioGroup, ElRadio } from "element-plus";
 import * as Vue from "vue";
+import PageFive from "./PageFive.vue";
+import PageFour from "./PageFour.vue";
 import PageOne from "./PageOne.vue";
 import PageThree from "./PageThree.vue";
 import PageTwo from "./PageTwo.vue";
-import PageFour from "./PageFour.vue";
 
 const state = Vue.reactive({
   radio: "one",
@@ -31,6 +32,7 @@ const state = Vue.reactive({
         <ElRadio value="two">two</ElRadio>
         <ElRadio value="three">three</ElRadio>
         <ElRadio value="four">four</ElRadio>
+        <ElRadio value="five">five</ElRadio>
       </ElRadioGroup>
     </div>
     <div class="container mx-auto grid grid-cols-4 gap-4">
@@ -39,6 +41,7 @@ const state = Vue.reactive({
         <PageTwo v-if="state.radio === 'two'" />
         <PageThree v-if="state.radio === 'three'" />
         <PageFour v-if="state.radio === 'four'" />
+        <PageFive v-if="state.radio === 'five'" />
       </div>
       <div class="col-span-1">
         <p>We’ll respond to your request within 1 business day.</p>
