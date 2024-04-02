@@ -14,27 +14,26 @@ export const routes: RouterOptions["routes"] = [
       return import("@/pages/login/NotLogged.vue");
     },
   },
-  {
-    name: "layout",
-    path: "",
-    component() {
-      return import("@/components/layout/DesktopLayout.vue");
-    },
-    children: [
-      {
-        path: "",
-        name: "home",
-        component() {
-          return import("@/pages/home/HomePage.vue");
-        },
-      },
-    ],
-  },
+  // {
+  //   name: "layout",
+  //   path: "",
+  //   component() {
+  //     return import("@/components/layout/DesktopLayout.vue");
+  //   },
+  //   children: [],
+  // },
   {
     path: "/caronseal",
     name: "caronseal",
     component() {
       return import("@/pages/caronseal/CaronsealPage.vue");
+    },
+  },
+  {
+    path: "/",
+    name: "home",
+    component() {
+      return import("@/pages/home/HomePage.vue");
     },
   },
 ];

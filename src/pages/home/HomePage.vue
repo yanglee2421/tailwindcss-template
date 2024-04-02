@@ -1,9 +1,15 @@
 <script lang="ts" setup>
-import { ElButton, ElRadio, ElRadioGroup } from "element-plus";
-import AuthGuard from "@/components/guard/AuthGuard.vue";
+import {
+  ElButton,
+  ElDivider,
+  ElRadio,
+  ElRadioGroup,
+  ElScrollbar,
+} from "element-plus";
 import { useHeadTitle } from "@/hooks/dom/useHeadTitle";
 import { useAuthStore } from "@/hooks/store/useAuthStore";
 import { useThemeStore } from "@/hooks/store/useThemeStore";
+import PerfectScrollbar from "./PerfectScrollbar.vue";
 
 useHeadTitle("Home");
 const authStore = useAuthStore();
@@ -17,60 +23,50 @@ defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <AuthGuard>
-    <ElButton
-      @click="handleSignout"
-      type="danger"
-      class="uppercase"
-      >sign out</ElButton
-    >
-    <ElRadioGroup v-model="themeStore.state.mode">
-      <ElRadio value="system">system</ElRadio>
-      <ElRadio value="dark">dark</ElRadio>
-      <ElRadio value="light">light</ElRadio>
-    </ElRadioGroup>
-    <div>
-      <div>
-        <p>We’ll respond to your request within 1 business day.</p>
-        <a
-          href="#"
-          class="block rounded bg-green-500 p-3 text-center no-underline transition-colors hover:bg-green-700"
+  <ElButton
+    v-if="false"
+    @click="handleSignout"
+    type="danger"
+    class="uppercase"
+    >sign out</ElButton
+  >
+  <ElRadioGroup
+    v-if="false"
+    v-model="themeStore.state.mode"
+  >
+    <ElRadio value="system">system</ElRadio>
+    <ElRadio value="dark">dark</ElRadio>
+    <ElRadio value="light">light</ElRadio>
+  </ElRadioGroup>
+  <div class="flex h-[100vh] flex-col border border-solid p-6">
+    <div class="h-96">
+      <PerfectScrollbar>
+        <p
+          v-for="item in 10"
+          :key="item"
         >
-          <span class="text-sm font-semibold text-white"
-            >REQUEST FOR QUOTE</span
-          >
-        </a>
-      </div>
-      <div>
-        <div class="space-y-12">
-          <a
-            href="#"
-            class="block rounded bg-green-500 p-3 text-center no-underline transition-colors hover:bg-green-700"
-          >
-            <span class="text-sm font-semibold text-white"
-              >REQUEST FOR QUOTE</span
-            >
-          </a>
-          <a
-            href="#"
-            class="block rounded bg-green-500 p-3 text-center no-underline transition-colors hover:bg-green-700"
-          >
-            <span class="text-sm font-semibold text-white"
-              >REQUEST FOR QUOTE</span
-            >
-          </a>
-          <a
-            href="#"
-            class="block rounded bg-green-500 p-3 text-center no-underline transition-colors hover:bg-green-700"
-          >
-            <span class="text-sm font-semibold text-white"
-              >REQUEST FOR QUOTE</span
-            >
-          </a>
-        </div>
-      </div>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere
+          blanditiis explicabo itaque numquam exercitationem optio ea nostrum
+          quam commodi officiis. Molestiae culpa quod aperiam fuga incidunt
+          consectetur asperiores maiores recusandae.
+        </p>
+      </PerfectScrollbar>
     </div>
-  </AuthGuard>
+    <ElDivider>divider</ElDivider>
+    <div class="h-full overflow-auto">
+      <p
+        v-for="item in 10"
+        :key="item"
+      >
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere
+        blanditiis explicabo itaque numquam exercitationem optio ea nostrum quam
+        commodi officiis. Molestiae culpa quod aperiam fuga incidunt consectetur
+        asperiores maiores recusandae.
+      </p>
+    </div>
+  </div>
+
+  <!-- <div class="h-[2000px]"></div> -->
 </template>
 
 <style lang="scss" scoped></style>
