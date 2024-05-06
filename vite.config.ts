@@ -1,26 +1,25 @@
-// Vite Imports
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-
-// NodeJs Imports
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, URL } from "node:url";
+import vue from "@vitejs/plugin-vue";
+import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig((ConfigEnv) => {
   const __dirname = dirname(fileURLToPath(import.meta.url));
 
   return {
-    plugins: [vue()],
-
-    // Path Alias
+    plugins: [
+      vue({
+        template: {
+          transformAssetUrls: false,
+        },
+      }),
+    ],
     resolve: {
       alias: {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
       },
     },
-
-    // ** CSS
     css: {
       preprocessorOptions: {
         scss: { additionalData: `@use "@/assets/scss" as *;` },
@@ -31,18 +30,12 @@ export default defineConfig((ConfigEnv) => {
     },
 
     base: ConfigEnv.command === "build" ? "./" : "/vue-ele",
-
-    // Env File Directory
     envDir: resolve(__dirname, "./"),
+    assetsInclude: [],
 
-    // ** Build
     build: {
       outDir: resolve(__dirname, "./docs"),
       emptyOutDir: true,
-
-      manifest: false,
-      sourcemap: false,
-      chunkSizeWarningLimit: 500,
 
       rollupOptions: {
         input: {
@@ -74,21 +67,31 @@ export default defineConfig((ConfigEnv) => {
       cssTarget: ["es2020", "edge88", "firefox78", "chrome87", "safari14"],
       cssMinify: "esbuild",
       cssCodeSplit: true,
+
+      manifest: false,
+      sourcemap: false,
+      chunkSizeWarningLimit: 500,
+      assetsInlineLimit: 0,
     },
 
-    // Dev Server
     server: {
       port: 3007,
       strictPort: true,
       hmr: {
         port: 3007,
       },
+      host: false,
       proxy: {
         "/dev": {
           target: "http://localhost:5173",
           rewrite(path) {
             return path.replace(/^\/dev/, "");
           },
+          changeOrigin: true,
+          ws: true,
+        },
+        "/wp-content": {
+          target: "http://www.osmosisai.co",
           changeOrigin: true,
           ws: true,
         },

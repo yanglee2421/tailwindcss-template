@@ -1,5 +1,4 @@
-// Tailwind Imports
-import { Config } from "tailwindcss";
+import type { Config } from "tailwindcss";
 
 export default defineConfig();
 
@@ -9,17 +8,19 @@ function defineConfig(): Config {
     theme: {
       extend: {},
       screens: {
-        sm: "768px",
-        md: "992px",
-        lg: "1200px",
-        xl: "1920px",
-        "2xl": "1920px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
       },
     },
+    darkMode: ["selector", ".dark"],
     plugins: [],
     corePlugins: {
       preflight: false,
     },
+    // prefix: "shopeo-",
     // important: "#root",
   };
 }
