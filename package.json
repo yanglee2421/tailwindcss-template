@@ -29,7 +29,6 @@
     "i18next": "^23.10.1",
     "i18next-vue": "^3.0.0",
     "nprogress": "^0.2.0",
-    "perfect-scrollbar": "^1.5.5",
     "pinia": "^2.1.7",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
