@@ -24,20 +24,21 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'pull_request' || github.event.pull_request.merged == true }}
     steps:
-      - uses: actions/checkout@latest
-      - uses: pnpm/action-setup@latest
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
         with:
           version: latest
           run_install: false
-      - uses: actions/setup-node@vlatest
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
-      - run: pnpm i
-      - run: pnpm build
-      - uses: actions/configure-pages@latest
-      - uses: actions/upload-pages-artifact@latest
+      - run: |
+          pnpm i
+          pnpm build
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: "./docs"
       - id: deployment
-        uses: actions/deploy-pages@latest
+        uses: actions/deploy-pages@v4
