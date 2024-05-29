@@ -18,7 +18,7 @@ function defineConfig(): Config {
     darkMode: ["selector", ".dark"],
     plugins: [],
     corePlugins: {
-      preflight: false,
+      preflight: true,
     },
     // prefix: "shopeo-",
     // important: "#root",
