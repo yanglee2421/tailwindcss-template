@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import * as Vue from "vue";
-import AuthGuard from "@/components/guard/AuthGuard.vue";
 import { signOut, getAuth } from "firebase/auth";
+import * as Vue from "vue";
 import { app } from "@/api/firebase/app";
+import AuthGuard from "@/components/guard/AuthGuard.vue";
 
 const formValues = Vue.reactive<{
   checkbox: number[];

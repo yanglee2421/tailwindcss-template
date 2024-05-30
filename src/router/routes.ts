@@ -21,4 +21,11 @@ export const routes: RouterOptions["routes"] = [
       return import("@/pages/home/HomePage.vue");
     },
   },
+  {
+    path: "/tailwindcss",
+    name: "tailwindcss",
+    component() {
+      return import("@/pages/tailwindcss/TailwindCSS.vue");
+    },
+  },
 ];
