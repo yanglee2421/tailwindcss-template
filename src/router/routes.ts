@@ -14,21 +14,6 @@ export const routes: RouterOptions["routes"] = [
       return import("@/pages/login/NotLogged.vue");
     },
   },
-  // {
-  //   name: "layout",
-  //   path: "",
-  //   component() {
-  //     return import("@/components/layout/DesktopLayout.vue");
-  //   },
-  //   children: [],
-  // },
-  {
-    path: "/caronseal",
-    name: "caronseal",
-    component() {
-      return import("@/pages/caronseal/CaronsealPage.vue");
-    },
-  },
   {
     path: "/",
     name: "home",

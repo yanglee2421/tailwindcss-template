@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import * as Vue from "vue";
+import { RouterLink } from "vue-router";
 import { Snow } from "@/libs/Snow";
 
 const boxRef = Vue.ref<HTMLDivElement>();
@@ -69,13 +70,7 @@ defineOptions({ inheritAttrs: true });
       ]"
     >
       <div :class="['mt-96']">
-        <router-link :to="{ name: 'home' }">
-          <el-button
-            size="large"
-            type="primary"
-            >Take me home</el-button
-          >
-        </router-link>
+        <RouterLink :to="{ name: 'home' }"> Take me home </RouterLink>
       </div>
     </div>
   </div>

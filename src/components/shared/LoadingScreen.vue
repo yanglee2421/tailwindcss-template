@@ -1,11 +1,7 @@
-<script setup lang="ts">
-import { vLoading } from "element-plus";
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div
-    v-loading="{ fullscreen: true, text: 'Loading...', body: true, lock: true }"
-  ></div>
+  <div>loading...</div>
 </template>
 
 <style lang="scss" scoped></style>

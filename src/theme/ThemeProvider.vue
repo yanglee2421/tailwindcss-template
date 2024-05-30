@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { ElConfigProvider } from "element-plus";
-import locale from "element-plus/es/locale/lang/zh-cn";
 import * as Vue from "vue";
 import { useIsDark } from "@/hooks/dom/useIsDark";
 import { useThemeStore } from "@/hooks/store/useThemeStore";
@@ -28,9 +26,7 @@ Vue.watchPostEffect(() => {
 </script>
 
 <template>
-  <ElConfigProvider :locale="locale">
-    <slot></slot>
-  </ElConfigProvider>
+  <slot></slot>
 </template>
 
 <style lang="scss" scoped></style>

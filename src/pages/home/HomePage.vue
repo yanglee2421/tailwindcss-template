@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import { ElRow, ElCol } from "element-plus";
 import * as Vue from "vue";
+import AuthGuard from "@/components/guard/AuthGuard.vue";
+import { signOut, getAuth } from "firebase/auth";
+import { app } from "@/api/firebase/app";
 
 const formValues = Vue.reactive<{
   checkbox: number[];
@@ -10,39 +12,36 @@ const formValues = Vue.reactive<{
 </script>
 
 <template>
-  <div class="p-3">
-    <ElRow>
-      <ElCol
+  <AuthGuard>
+    <div>
+      <button @click="signOut(getAuth(app))">sign out</button>
+    </div>
+    <div
+      class="grid grid-cols-1 gap-3 p-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+    >
+      <label
         v-for="item in 20"
         :key="item"
-        :xs="24"
-        :sm="12"
-        :md="8"
-        :lg="6"
+        :class="[
+          'block cursor-pointer rounded border p-3 transition-colors',
+          formValues.checkbox.includes(item) && ' border-red-500 text-red-500',
+        ]"
+        @click="
+          () => {
+            console.log(formValues.checkbox);
+          }
+        "
       >
-        <label
-          :class="[
-            'block cursor-pointer rounded border p-3 transition-colors',
-            formValues.checkbox.includes(item) &&
-              ' border-red-500 text-red-500',
-          ]"
-        >
-          <input
-            v-model="formValues.checkbox"
-            @change="
-              () => {
-                console.log(formValues.checkbox);
-              }
-            "
-            type="checkbox"
-            hidden
-            :value="item"
-          />
-          {{ item }}</label
-        >
-      </ElCol>
-    </ElRow>
-  </div>
+        <input
+          v-model="formValues.checkbox"
+          type="checkbox"
+          hidden
+          :value="item"
+        />
+        {{ item }}</label
+      >
+    </div>
+  </AuthGuard>
 </template>
 
 <style lang="scss" scoped></style>
