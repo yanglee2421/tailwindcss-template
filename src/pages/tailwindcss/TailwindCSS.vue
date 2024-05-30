@@ -3,6 +3,8 @@ import CategoriesTag from "./CategoriesTag.vue";
 import CheckboxInput from "./CheckboxInput.vue";
 import ChitChat from "./ChitChat.vue";
 import ChooseColor from "./ChooseColor.vue";
+import CompanyCard from "./CompanyCard.vue";
+import ContributorsCard from "./ContributorsCard.vue";
 import DarkMode from "./DarkMode.vue";
 import DetailsSummary from "./DetailsSummary.vue";
 import DirectionDoc from "./DirectionDoc.vue";
@@ -16,6 +18,7 @@ import ListWithBorder from "./ListWithBorder.vue";
 import ListWithDot from "./ListWithDot.vue";
 import ListWithLink from "./ListWithLink.vue";
 import LoadingButton from "./LoadingButton.vue";
+import NavLink from "./NavLink.vue";
 import NewProject from "./NewProject.vue";
 import NumberInput from "./NumberInput.vue";
 import PaymentMethod from "./PaymentMethod.vue";
@@ -28,6 +31,7 @@ import TableWithBorder from "./TableWithBorder.vue";
 import TitleAnnoyed from "./TitleAnnoyed.vue";
 import TypographySelection from "./TypographySelection.vue";
 import TypographyWithFirstLine from "./TypographyWithFirstLine.vue";
+import VacationCard from "./VacationCard.vue";
 </script>
 
 <template>
@@ -120,6 +124,18 @@ import TypographyWithFirstLine from "./TypographyWithFirstLine.vue";
     </div>
     <div class="overflow-auto rounded border p-3">
       <DetailsSummary />
+    </div>
+    <div class="overflow-auto rounded border p-3">
+      <CompanyCard />
+    </div>
+    <div class="overflow-auto rounded border p-3">
+      <ContributorsCard />
+    </div>
+    <div class="overflow-auto rounded border p-3">
+      <NavLink />
+    </div>
+    <div class="overflow-auto rounded border p-3">
+      <VacationCard />
     </div>
   </div>
 </template>
