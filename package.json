@@ -19,9 +19,6 @@
     "@tanstack/vue-query": "^5.40.0",
     "@tanstack/zod-form-adapter": "^0.20.2",
     "axios": "^1.7.2",
-    "browser-image-compression": "^2.0.2",
-    "cropperjs": "^1.6.2",
-    "fabric": "^5.3.0",
     "firebase": "^10.12.2",
     "i18next": "^23.11.5",
     "i18next-vue": "^3.0.0",
@@ -33,7 +30,6 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.10.3",
-    "@types/fabric": "^5.3.7",
     "@types/node": "^20.12.13",
     "@types/nprogress": "^0.2.3",
     "@vitejs/plugin-vue": "^5.0.4",
