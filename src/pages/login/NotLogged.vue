@@ -1,76 +1,122 @@
 <script lang="ts" setup>
+import { useForm } from "@tanstack/vue-form";
+import { zodValidator } from "@tanstack/zod-form-adapter";
+import { z } from "zod";
 import GuestGuard from "@/components/guard/GuestGuard.vue";
 
-defineOptions({ inheritAttrs: false });
+const form = useForm({
+  defaultValues: {
+    email: "yanglee2421@gmail.com",
+    password: "",
+  },
+
+  async onSubmit(props) {
+    console.log(props.value);
+  },
+});
 </script>
 
 <template>
   <GuestGuard>
     <div class="fixed inset-0 flex h-full">
-      <div class="hidden md:block">
-        <div
-          class="mx-auto flex max-w-sm items-center space-x-4 rounded-xl bg-white p-6 shadow-lg"
-        >
-          <div class="shrink-0">
-            <img
-              class="h-12 w-12"
-              src="/img/logo.svg"
-              alt="ChitChat Logo"
-            />
-          </div>
-          <div>
-            <div class="text-xl font-medium text-black">ChitChat</div>
-            <p class="text-slate-500">You have a new message!</p>
-          </div>
-        </div>
-      </div>
+      <!-- Empty Container -->
+      <div class="hidden md:block"></div>
+
+      <!-- Login Form -->
       <div
-        class="ms-auto flex w-full flex-col justify-center border-l p-6 md:max-w-96"
+        class="ms-auto flex w-full flex-col justify-center border-l p-8 md:max-w-md md:p-6"
       >
-        <form>
+        <form
+          @submit="
+            (evt) => {
+              evt.preventDefault();
+              evt.stopPropagation();
+              form.handleSubmit();
+            }
+          "
+          @reset="
+            () => {
+              form.reset();
+            }
+          "
+          novalidate
+          autocomplete="off"
+          class="space-y-4"
+        >
           <div>
-            <label class="block text-sm font-medium text-slate-700"
-              >Username</label
+            <form.Field
+              name="email"
+              :validatorAdapter="zodValidator"
+              :validators="{ onChange: z.string().email() }"
             >
-            <div class="mt-1">
-              <input
-                type="text"
-                class="block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm"
-                disabled
-              />
-            </div>
+              <template #default="{ field, state }">
+                <label
+                  :for="field.name"
+                  class="block text-sm font-medium text-slate-700"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm"
+                  placeholder="you@example.com"
+                  :id="field.name"
+                  :name="field.name"
+                  :value="field.state.value"
+                  @blur="field.handleBlur"
+                  @input="
+                    (e) => {
+                      field.handleChange((e.target as HTMLInputElement).value);
+                    }
+                  "
+                />
+                <p
+                  v-for="(error, idx) in state.meta.errors"
+                  :key="idx"
+                  class="mt-2 text-sm text-pink-600"
+                >
+                  {{ error }}
+                </p>
+              </template>
+            </form.Field>
           </div>
-          <div class="mt-6">
-            <label class="block text-sm font-medium text-slate-700"
-              >Email</label
-            >
-            <div class="mt-1">
-              <input
-                type="email"
-                class="block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm"
-                placeholder="you@example.com"
-              />
-            </div>
-          </div>
-          <div class="mt-6">
+          <div>
             <label
               for="password"
               class="block text-sm font-medium text-slate-700"
               >Password</label
             >
-            <div class="mt-1">
-              <input
-                type="password"
-                class="block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm"
-                value="Bosco"
-              />
-            </div>
+            <input
+              type="password"
+              class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm"
+              value="Bosco"
+            />
           </div>
-          <div class="mt-6 text-right">
+          <div>
+            <a
+              href="#"
+              class="text-sm font-medium capitalize text-sky-500 underline hover:text-sky-600 focus:text-sky-300 focus:outline-none"
+              >forgot password?</a
+            >
+          </div>
+          <div>
             <button
-              class="w-full rounded-md bg-sky-500 px-5 py-2.5 text-sm uppercase leading-5 text-white hover:bg-sky-700"
+              type="submit"
+              class="w-full rounded-md bg-sky-500 px-5 py-2.5 text-sm uppercase leading-5 text-white ring-sky-200 hover:bg-sky-700 focus:bg-sky-400 focus:outline-none"
             >
               login
+            </button>
+          </div>
+          <div class="flex items-center gap-3">
+            <hr class="flex-grow border-t" />
+            <span class="text-base">or</span>
+            <hr class="flex-grow border-t" />
+          </div>
+          <div class="flex justify-center">
+            <button
+              type="button"
+              class="rounded-md border px-3 py-2 text-sm uppercase text-slate-400 transition-colors hover:border-slate-300 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 active:bg-slate-50"
+            >
+              sign in with google
             </button>
           </div>
         </form>
