@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import { useForm } from "@tanstack/vue-form";
 import { zodValidator } from "@tanstack/zod-form-adapter";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import * as Vue from "vue";
 import { z } from "zod";
+import { app } from "@/api/firebase/app";
 import GuestGuard from "@/components/guard/GuestGuard.vue";
+import { timeout } from "@/utils/timeout";
 
 const form = useForm({
   defaultValues: {
@@ -12,11 +15,12 @@ const form = useForm({
   },
 
   async onSubmit(props) {
+    await timeout(1000);
     console.log(props.value);
   },
 });
 
-const state = Vue.reactive({
+const formState = Vue.reactive({
   showPassword: false,
 });
 </script>
@@ -39,31 +43,34 @@ const state = Vue.reactive({
               form.handleSubmit();
             }
           "
-          @reset="form.reset()"
+          @reset="
+            (evt) => {
+              evt.preventDefault();
+              evt.stopPropagation();
+              form.reset();
+            }
+          "
           novalidate
           autocomplete="off"
           class="space-y-4"
         >
-          <div>
-            <form.Field
-              name="email"
-              :validatorAdapter="zodValidator"
-              :validators="{ onChange: z.string().email() }"
-            >
-              <template #default="{ field, state }">
+          <form.Field
+            name="email"
+            :validatorAdapter="zodValidator"
+            :validators="{ onChange: z.string().email() }"
+          >
+            <template #default="{ field, state }">
+              <div
+                class="group space-y-1"
+                :data-errors="!!state.meta.errors.length"
+              >
                 <label
                   :for="field.name"
-                  class="block text-sm font-medium text-slate-700"
+                  class="block text-sm font-medium text-slate-700 group-data-[errors=true]:text-red-500"
                   >Email</label
                 >
                 <input
                   type="email"
-                  :class="[
-                    'mt-1 block w-full rounded-md border  bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:outline-none focus:ring-1   disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm',
-                    state.meta.errors.length
-                      ? 'border-pink-500 text-pink-600 focus:border-pink-500 focus:ring-pink-500'
-                      : 'border-slate-300 focus:border-sky-500 focus:ring-sky-500',
-                  ]"
                   placeholder="you@example.com"
                   :id="field.name"
                   :name="field.name"
@@ -74,62 +81,96 @@ const state = Vue.reactive({
                       field.handleChange((e.target as HTMLInputElement).value);
                     }
                   "
+                  class="block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus-visible:border-sky-500 focus-visible:outline-none group-data-[errors=true]:border-red-500 group-data-[errors=true]:text-red-500 sm:text-sm"
                 />
                 <p
                   v-for="(error, idx) in state.meta.errors"
                   :key="idx"
-                  class="mt-2 text-sm text-pink-600"
+                  class="text-sm text-red-500"
                 >
                   {{ error }}
                 </p>
-              </template>
-            </form.Field>
-          </div>
-          <div>
-            <label
-              for="password"
-              class="block text-sm font-medium text-slate-700"
-              >Password</label
-            >
-            <div
-              class="mt-1 flex w-full overflow-hidden rounded-md border border-slate-300 bg-white shadow-sm focus-within:border-sky-500 focus-within:ring-1 focus-within:ring-sky-500"
-            >
-              <input
-                :type="state.showPassword ? 'text' : 'password'"
-                class="flex-grow px-3 py-2 placeholder-slate-400 invalid:border-pink-500 invalid:text-pink-600 focus:outline-none focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm"
-                value="Bosco"
-              />
-              <button
-                @click="state.showPassword = !state.showPassword"
-                type="button"
-                class="px-2 hover:bg-slate-50 focus:bg-slate-100 focus:outline-none active:bg-slate-200"
+              </div>
+            </template>
+          </form.Field>
+          <form.Field
+            name="password"
+            :validatorAdapter="zodValidator"
+            :validators="{ onChange: z.string().min(8).max(16) }"
+          >
+            <template #default="{ field, state }">
+              <div
+                class="group space-y-1"
+                :data-errors="!!state.meta.errors.length"
               >
-                {{ state.showPassword ? "eye" : "0y0" }}
-              </button>
-            </div>
-          </div>
+                <label
+                  :for="field.name"
+                  class="block text-sm font-medium text-slate-700 group-data-[errors=true]:text-red-500"
+                  >Password</label
+                >
+                <div
+                  class="flex w-full overflow-hidden rounded-md border border-slate-300 bg-white shadow-sm focus-within:border-sky-500 group-data-[errors=true]:border-red-500 group-data-[errors=true]:text-red-500"
+                >
+                  <input
+                    :type="formState.showPassword ? 'text' : 'password'"
+                    class="flex-grow px-3 py-2 placeholder-slate-400 focus-visible:outline-none sm:text-sm"
+                    :value="field.state.value"
+                    @input="
+                      (evt) => {
+                        field.handleChange(
+                          (evt.target as HTMLInputElement).value,
+                        );
+                      }
+                    "
+                    @blur="field.handleBlur"
+                    :id="field.name"
+                    :name="field.name"
+                  />
+                  <button
+                    @click="formState.showPassword = !formState.showPassword"
+                    type="button"
+                    class="px-2 hover:bg-slate-50 focus-visible:bg-slate-100 focus-visible:outline-none active:bg-slate-200"
+                  >
+                    {{ formState.showPassword ? "0" : "O" }}
+                  </button>
+                </div>
+                <p
+                  v-for="(error, idx) in state.meta.errors"
+                  :key="idx"
+                  class="text-sm text-red-500"
+                >
+                  {{ error }}
+                </p>
+              </div>
+            </template>
+          </form.Field>
           <div>
             <a
               href="#"
-              class="text-sm font-medium capitalize text-sky-500 underline hover:text-sky-600 focus:text-sky-300 focus:outline-none"
+              class="text-sm font-medium capitalize text-sky-500 underline hover:text-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
               >forgot password?</a
             >
           </div>
-          <div>
-            <button
-              type="submit"
-              class="w-full rounded-md bg-sky-500 px-5 py-2.5 text-sm uppercase leading-5 text-white ring-sky-200 hover:bg-sky-700 focus:bg-sky-400 focus:outline-none"
-            >
-              login
-            </button>
-          </div>
+          <form.Subscribe>
+            <template #default="{ canSubmit }">
+              <div>
+                <button
+                  type="submit"
+                  :disabled="!canSubmit"
+                  class="w-full rounded-md bg-sky-500 px-5 py-2.5 text-sm uppercase leading-5 text-white ring-sky-200 hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 disabled:cursor-not-allowed disabled:bg-sky-300 disabled:text-white"
+                >
+                  login
+                </button>
+              </div>
+            </template>
+          </form.Subscribe>
           <div
             class="flex items-center justify-center gap-3 text-sm font-medium"
           >
             <span class="text-slate-500">New on out platform?</span>
             <a
               href="#"
-              class="text-sky-500 underline"
+              class="text-sky-500 underline hover:text-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
               >Create an account</a
             >
           </div>
@@ -140,8 +181,13 @@ const state = Vue.reactive({
           </div>
           <div class="flex justify-center">
             <button
+              @click="
+                () => {
+                  signInWithPopup(getAuth(app), new GoogleAuthProvider());
+                }
+              "
               type="button"
-              class="rounded-md border px-3 py-2 text-sm uppercase text-slate-400 transition-colors hover:border-slate-300 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 active:bg-slate-50"
+              class="rounded-md border px-3 py-2 text-sm uppercase text-slate-400 transition-colors hover:border-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 active:bg-slate-50"
             >
               sign in with google
             </button>

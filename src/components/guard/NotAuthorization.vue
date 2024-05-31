@@ -37,39 +37,19 @@ Vue.watchPostEffect((onCleanup) => {
     snow?.abortAnimation();
   });
 });
-
-defineOptions({ inheritAttrs: true });
 </script>
 
 <template>
   <div
     ref="boxRef"
-    :class="[
-      'relative',
-      'h-full',
-      'p-0',
-      'border-0',
-      'm-0',
-      'bg-cover',
-      'bg-fixed',
-      'snow-warpper',
-    ]"
+    class="snow-warpper relative m-0 h-full border-0 bg-cover bg-fixed p-0"
   >
     <canvas
       ref="cvsRef"
-      :class="['absolute', 'inset-0']"
+      class="absolute inset-0"
     ></canvas>
-    <div
-      :class="[
-        'relative',
-        'z-10',
-        'flex',
-        'h-full',
-        'justify-center',
-        'items-center',
-      ]"
-    >
-      <div :class="['mt-96']">
+    <div class="relative z-10 flex h-full items-center justify-center">
+      <div class="mt-96">
         <RouterLink :to="{ name: 'home' }"> Take me home </RouterLink>
       </div>
     </div>
