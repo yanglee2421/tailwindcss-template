@@ -1,0 +1,107 @@
+<script lang="ts" setup>
+import { useForm } from "@tanstack/vue-form";
+import { useMutation } from "@tanstack/vue-query";
+import { zodValidator } from "@tanstack/zod-form-adapter";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { RouterLink } from "vue-router";
+import { z } from "zod";
+import { app } from "@/api/firebase/app";
+import AuthPage from "@/components/layout/AuthPage.vue";
+import GuestGuard from "@/components/guard/GuestGuard.vue";
+
+const mutation = useMutation<void, Error, string>({
+  mutationFn(email) {
+    return sendPasswordResetEmail(getAuth(app), email);
+  },
+});
+
+const form = useForm({
+  defaultValues: {
+    email: "",
+  },
+
+  async onSubmit(props) {
+    await mutation.mutateAsync(props.value.email);
+  },
+});
+
+const { Field, Subscribe } = form;
+</script>
+
+<template>
+  <GuestGuard>
+    <AuthPage>
+      <form
+        @submit="
+          async (evt) => {
+            evt.preventDefault();
+            evt.stopPropagation();
+
+            await form.handleSubmit();
+          }
+        "
+        @reset="form.reset()"
+        novalidate
+        autocomplete="off"
+        class="space-y-5"
+      >
+        <Field
+          name="email"
+          :validatorAdapter="zodValidator"
+          :validators="{ onChange: z.string().email() }"
+        >
+          <template #default="{ field, state }">
+            <div
+              class="group space-y-1"
+              :data-errors="!!state.meta.errors.length"
+            >
+              <label
+                class="text-sm font-medium text-slate-700 group-data-[errors=true]:text-red-500"
+              >
+                Email
+              </label>
+              <input
+                :value="field.state.value"
+                @input="
+                  (evt) => {
+                    field.handleChange((evt.target as HTMLInputElement).value);
+                  }
+                "
+                @blur="field.handleBlur;"
+                type="email"
+                class="block w-full rounded-md border px-3 py-3 text-sm shadow-sm hover:border-sky-500 focus-visible:border-sky-500 focus-visible:outline-none group-data-[errors=true]:border-red-500 group-data-[errors=true]:text-red-500"
+              />
+              <p
+                v-for="(error, idx) in state.meta.errors"
+                :key="idx"
+                class="text-sm text-red-500"
+              >
+                {{ error }}
+              </p>
+            </div>
+          </template>
+        </Field>
+
+        <Subscribe>
+          <template #default="{ canSubmit }">
+            <button
+              :disabled="!canSubmit"
+              type="submit"
+              class="block w-full rounded bg-sky-500 px-3 py-2 uppercase text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 disabled:cursor-not-allowed disabled:bg-sky-300"
+            >
+              send reset email
+            </button>
+          </template>
+        </Subscribe>
+      </form>
+      <RouterLink
+        :to="{ name: 'login' }"
+        class="mt-2 rounded px-3 py-2 text-center uppercase text-sky-500 hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 active:bg-slate-200"
+      >
+        back to login
+      </RouterLink>
+    </AuthPage>
+  </GuestGuard>
+</template>
+
+<style lang="scss" scoped></style>

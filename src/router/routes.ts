@@ -11,7 +11,7 @@ export const routes: RouterOptions["routes"] = [
     path: "/login",
     name: "login",
     component() {
-      return import("@/pages/login/NotLogged.vue");
+      return import("@/pages/login/LoginPage.vue");
     },
   },
   {
@@ -26,6 +26,20 @@ export const routes: RouterOptions["routes"] = [
     name: "tailwindcss",
     component() {
       return import("@/pages/tailwindcss/TailwindCSS.vue");
+    },
+  },
+  {
+    path: "/forgot-password",
+    name: "forgot-password",
+    component() {
+      return import("@/pages/fotgot-password/ForgotPassword.vue");
+    },
+  },
+  {
+    path: "/register",
+    name: "register",
+    component() {
+      return import("@/pages/register/RegisterPage.vue");
     },
   },
 ];
