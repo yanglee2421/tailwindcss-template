@@ -1,14 +1,38 @@
 <script lang="ts" setup>
 import { useForm } from "@tanstack/vue-form";
 import { zodValidator } from "@tanstack/zod-form-adapter";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  UserCredential,
+} from "firebase/auth";
 import * as Vue from "vue";
 import { RouterLink } from "vue-router";
 import { z } from "zod";
 import { app } from "@/api/firebase/app";
 import GuestGuard from "@/components/guard/GuestGuard.vue";
 import AuthPage from "@/components/layout/AuthPage.vue";
-import { timeout } from "@/utils/timeout";
+import { useMutation } from "@tanstack/vue-query";
+
+type LoginParams = {
+  email: string;
+  password: string;
+};
+
+const mutation = useMutation<UserCredential, Error, LoginParams>({
+  mutationFn(params) {
+    return signInWithEmailAndPassword(
+      getAuth(app),
+      params.email,
+      params.password,
+    );
+  },
+  onError(error) {
+    console.error(error);
+  },
+});
 
 const form = useForm({
   defaultValues: {
@@ -17,8 +41,7 @@ const form = useForm({
   },
 
   async onSubmit(props) {
-    await timeout(1000);
-    console.log(props.value);
+    await mutation.mutateAsync(props.value);
   },
 });
 
@@ -85,11 +108,11 @@ const formState = Vue.reactive({
               <label
                 :for="field.name"
                 class="block text-sm font-medium text-slate-700 group-data-[errors=true]:text-red-500"
-                >Email</label
               >
+                Email
+              </label>
               <input
                 type="email"
-                placeholder="you@example.com"
                 :id="field.name"
                 :name="field.name"
                 :value="field.state.value"
@@ -99,7 +122,8 @@ const formState = Vue.reactive({
                     field.handleChange((e.target as HTMLInputElement).value);
                   }
                 "
-                class="block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus-visible:border-sky-500 focus-visible:outline-none group-data-[errors=true]:border-red-500 group-data-[errors=true]:text-red-500 sm:text-sm"
+                placeholder="you@email.com"
+                class="block w-full rounded-md border border-slate-300 px-3 py-2 placeholder-slate-400 shadow-sm focus-visible:border-blue-500 focus-visible:outline-none group-data-[errors=true]:border-red-500 group-data-[errors=true]:text-red-500 sm:text-sm"
               />
               <p
                 v-for="(error, idx) in state.meta.errors"
@@ -128,7 +152,7 @@ const formState = Vue.reactive({
                 Password
               </label>
               <div
-                class="flex w-full overflow-hidden rounded-md border border-slate-300 bg-white shadow-sm focus-within:border-sky-500 group-data-[errors=true]:border-red-500 group-data-[errors=true]:text-red-500"
+                class="flex w-full overflow-hidden rounded-md border border-slate-300 bg-white shadow-sm focus-within:border-blue-500 group-data-[errors=true]:border-red-500 group-data-[errors=true]:text-red-500"
               >
                 <input
                   :type="formState.showPassword ? 'text' : 'password'"
@@ -166,18 +190,18 @@ const formState = Vue.reactive({
         <div>
           <RouterLink
             :to="{ name: 'forgot-password' }"
-            class="text-sm font-medium capitalize text-sky-500 hover:text-sky-600 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+            class="text-sm font-medium capitalize text-blue-500 hover:text-blue-600 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
           >
             forgot password?
           </RouterLink>
         </div>
-        <Subscribe :selector="(state) => state.canSubmit">
+        <Subscribe>
           <template #default="{ canSubmit }">
             <div>
               <button
                 type="submit"
                 :disabled="!canSubmit"
-                class="w-full rounded-md bg-sky-500 px-5 py-2.5 text-sm uppercase leading-5 text-white ring-sky-200 hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 disabled:cursor-not-allowed disabled:bg-sky-300 disabled:text-white"
+                class="w-full rounded-md bg-blue-500 px-5 py-2.5 text-sm uppercase leading-5 text-white ring-blue-200 transition-colors hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 disabled:cursor-not-allowed disabled:bg-blue-300 disabled:text-white"
               >
                 login
               </button>
@@ -190,7 +214,7 @@ const formState = Vue.reactive({
           <span class="text-slate-500">New on out platform?</span>
           <RouterLink
             :to="{ name: 'register' }"
-            class="text-sky-500 hover:text-sky-600 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+            class="text-blue-500 hover:text-blue-600 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
           >
             Create an account
           </RouterLink>
@@ -204,7 +228,7 @@ const formState = Vue.reactive({
           <button
             @click="signInWithPopup(getAuth(app), new GoogleAuthProvider())"
             type="button"
-            class="rounded-md border px-3 py-2 text-sm uppercase text-slate-400 transition-colors hover:border-sky-500 hover:text-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 active:bg-slate-50"
+            class="rounded-md border px-3 py-2 text-sm uppercase text-slate-400 transition-colors hover:border-blue-500 hover:text-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 active:bg-slate-50"
           >
             sign in with google
           </button>
