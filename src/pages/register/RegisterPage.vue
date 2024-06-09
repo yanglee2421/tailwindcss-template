@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import AuthPage from "@/components/layout/AuthPage.vue";
-import GuestGuard from "@/components/guard/GuestGuard.vue";
 import { useForm } from "@tanstack/vue-form";
+import GuestGuard from "@/components/guard/GuestGuard.vue";
+import AuthPage from "@/components/layout/AuthPage.vue";
 
 const form = useForm({
   defaultValues: {},

@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { useForm } from "@tanstack/vue-form";
+import { useMutation } from "@tanstack/vue-query";
 import { zodValidator } from "@tanstack/zod-form-adapter";
 import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
-  UserCredential,
 } from "firebase/auth";
 import * as Vue from "vue";
 import { RouterLink } from "vue-router";
@@ -14,7 +14,7 @@ import { z } from "zod";
 import { app } from "@/api/firebase/app";
 import GuestGuard from "@/components/guard/GuestGuard.vue";
 import AuthPage from "@/components/layout/AuthPage.vue";
-import { useMutation } from "@tanstack/vue-query";
+import type { UserCredential } from "firebase/auth";
 
 type LoginParams = {
   email: string;

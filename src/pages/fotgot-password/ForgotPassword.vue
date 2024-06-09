@@ -6,8 +6,8 @@ import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { RouterLink } from "vue-router";
 import { z } from "zod";
 import { app } from "@/api/firebase/app";
-import AuthPage from "@/components/layout/AuthPage.vue";
 import GuestGuard from "@/components/guard/GuestGuard.vue";
+import AuthPage from "@/components/layout/AuthPage.vue";
 
 const mutation = useMutation<void, Error, string>({
   mutationFn(email) {
