@@ -15,8 +15,8 @@ const formValues = Vue.reactive<{
   <AuthGuard>
     <div class="p-3">
       <button
-        @click="signOut(getAuth(app))"
         class="rounded bg-red-500 px-3 py-1.5 text-white hover:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500/50 active:bg-red-700 disabled:cursor-not-allowed disabled:bg-red-500/50"
+        @click="signOut(getAuth(app))"
       >
         sign out
       </button>

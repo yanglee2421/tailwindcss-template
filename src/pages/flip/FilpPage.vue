@@ -71,9 +71,9 @@ defineOptions({ inheritAttrs: false });
 <template>
   <div class="text-center">
     <button
-      @click="handleSort"
-      class="bg-sky-500 uppercase"
       id="sort"
+      class="bg-sky-500 uppercase"
+      @click="handleSort"
     >
       random order
     </button>

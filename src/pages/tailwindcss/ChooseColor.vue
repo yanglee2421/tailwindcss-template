@@ -13,9 +13,9 @@
             class="relative grid h-16 w-16 items-center justify-center rounded-xl border border-transparent bg-transparent text-white hover:bg-slate-50 has-[:checked]:border-cyan-500 has-[:checked]:bg-cyan-50 has-[:checked]:text-cyan-50 forced-colors:border-0"
           >
             <input
+              id="theme-1"
               type="radio"
               name="themes"
-              id="theme-1"
               class="appearance-none forced-colors:appearance-auto"
               checked
             />
@@ -36,9 +36,9 @@
             class="relative grid h-16 w-16 items-center justify-center rounded-xl border border-transparent bg-transparent text-white hover:bg-slate-50 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50 has-[:checked]:text-blue-50 forced-colors:border-0"
           >
             <input
+              id="theme-2"
               type="radio"
               name="themes"
-              id="theme-2"
               class="appearance-none forced-colors:appearance-auto"
             />
             <p class="hidden forced-colors:block">Blue</p>
@@ -58,9 +58,9 @@
             class="relative grid h-16 w-16 items-center justify-center rounded-xl border border-transparent bg-transparent text-white hover:bg-slate-50 has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-50 has-[:checked]:text-indigo-50 forced-colors:border-0"
           >
             <input
+              id="theme-3"
               type="radio"
               name="themes"
-              id="theme-3"
               class="appearance-none forced-colors:appearance-auto"
             />
             <p class="hidden forced-colors:block">Indigo</p>
@@ -80,9 +80,9 @@
             class="relative grid h-16 w-16 items-center justify-center rounded-xl border border-transparent bg-transparent text-white hover:bg-slate-50 has-[:checked]:border-purple-500 has-[:checked]:bg-purple-50 has-[:checked]:text-purple-50 forced-colors:border-0"
           >
             <input
+              id="theme-4"
               type="radio"
               name="themes"
-              id="theme-4"
               class="appearance-none forced-colors:appearance-auto"
             />
             <p class="hidden forced-colors:block">Purple</p>

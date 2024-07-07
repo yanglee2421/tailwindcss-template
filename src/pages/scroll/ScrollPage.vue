@@ -59,20 +59,20 @@ defineOptions({ inheritAttrs: false });
 <template>
   <div class="imgs">
     <img
+      id="img-1"
       :src="img1"
       data-img
-      id="img-1"
       class="top-section-img show"
     />
     <img
+      id="img-2"
       :src="img2"
       data-img
-      id="img-2"
     />
     <img
+      id="img-3"
       :src="img3"
       data-img
-      id="img-3"
     />
   </div>
   <section class="top-section full-screen-section">

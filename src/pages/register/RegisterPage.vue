@@ -6,6 +6,8 @@ import AuthPage from "@/components/layout/AuthPage.vue";
 const form = useForm({
   defaultValues: {},
 });
+
+const { Field } = form;
 </script>
 
 <template>
@@ -16,10 +18,12 @@ const form = useForm({
           <label class="text-sm font-medium capitalize text-slate-700"
             >email</label
           >
-          <input
-            type="text"
-            class="block w-full rounded-md border border-slate-200 px-3 py-2 text-sm shadow-sm"
-          />
+          <Field>
+            <input
+              type="text"
+              class="block w-full rounded-md border border-slate-200 px-3 py-2 text-sm shadow-sm"
+            />
+          </Field>
         </div>
       </form>
     </AuthPage>

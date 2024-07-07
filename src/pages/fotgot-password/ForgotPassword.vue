@@ -32,6 +32,9 @@ const { Field, Subscribe } = form;
   <GuestGuard>
     <AuthPage>
       <form
+        novalidate
+        autocomplete="off"
+        class="space-y-5"
         @submit="
           async (evt) => {
             evt.preventDefault();
@@ -41,13 +44,10 @@ const { Field, Subscribe } = form;
           }
         "
         @reset="form.reset()"
-        novalidate
-        autocomplete="off"
-        class="space-y-5"
       >
         <Field
           name="email"
-          :validatorAdapter="zodValidator"
+          :validator-adapter="zodValidator"
           :validators="{ onChange: z.string().email() }"
         >
           <template #default="{ field, state }">
@@ -62,14 +62,14 @@ const { Field, Subscribe } = form;
               </label>
               <input
                 :value="field.state.value"
+                type="email"
+                class="block w-full rounded-md border px-3 py-3 text-sm shadow-sm hover:border-sky-500 focus-visible:border-sky-500 focus-visible:outline-none group-data-[errors=true]:border-red-500 group-data-[errors=true]:text-red-500"
                 @input="
                   (evt) => {
                     field.handleChange((evt.target as HTMLInputElement).value);
                   }
                 "
                 @blur="field.handleBlur;"
-                type="email"
-                class="block w-full rounded-md border px-3 py-3 text-sm shadow-sm hover:border-sky-500 focus-visible:border-sky-500 focus-visible:outline-none group-data-[errors=true]:border-red-500 group-data-[errors=true]:text-red-500"
               />
               <p
                 v-for="(error, idx) in state.meta.errors"

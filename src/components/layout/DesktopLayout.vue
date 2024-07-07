@@ -15,9 +15,9 @@ const state = Vue.reactive({
       ]"
     >
       <div
+        class="relative h-full w-full transition-all hover:w-56"
         @mouseenter="state.isHovered = true"
         @mouseleave="state.isHovered = false"
-        class="relative h-full w-full transition-all hover:w-56"
       >
         <div
           class="bg-el-bg-color border-el-border-color relative box-border flex h-full w-full flex-col overflow-hidden border-0 border-r border-solid"
@@ -44,7 +44,7 @@ const state = Vue.reactive({
     <div class="flex-auto">
       <header></header>
       <main>
-        <RouterView #default="{ Component }">
+        <RouterView v-slot="{ Component }">
           <component :is="Component"></component>
         </RouterView>
       </main>

@@ -24,8 +24,8 @@
           </svg>
           Google Pay
           <input
-            name="payment_method"
             id="apple"
+            name="payment_method"
             value="google"
             type="radio"
             class="box-content h-1.5 w-1.5 appearance-none rounded-full border-[5px] border-white bg-white bg-clip-padding outline-none ring-1 ring-gray-950/10 checked:border-indigo-500 checked:ring-indigo-500"
@@ -47,8 +47,8 @@
           </svg>
           Apple Pay
           <input
-            name="payment_method"
             id="google"
+            name="payment_method"
             value="apple"
             type="radio"
             class="box-content h-1.5 w-1.5 appearance-none rounded-full border-[5px] border-white bg-white bg-clip-padding outline-none ring-1 ring-gray-950/10 checked:border-indigo-500 checked:ring-indigo-500"
@@ -78,8 +78,8 @@
           </svg>
           Credit Card
           <input
-            name="payment_method"
             id="credit-card"
+            name="payment_method"
             value="credit-card"
             type="radio"
             class="box-content h-1.5 w-1.5 appearance-none rounded-full border-[5px] border-white bg-white bg-clip-padding outline-none ring-1 ring-gray-950/10 checked:border-indigo-500 checked:ring-indigo-500"

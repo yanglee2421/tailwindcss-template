@@ -56,6 +56,9 @@ const formState = Vue.reactive({
   <GuestGuard>
     <AuthPage>
       <form
+        novalidate
+        autocomplete="off"
+        class="space-y-4"
         @submit="
           async (evt) => {
             evt.preventDefault();
@@ -91,13 +94,10 @@ const formState = Vue.reactive({
             form.reset();
           }
         "
-        novalidate
-        autocomplete="off"
-        class="space-y-4"
       >
         <Field
           name="email"
-          :validatorAdapter="zodValidator"
+          :validator-adapter="zodValidator"
           :validators="{ onChange: z.string().email() }"
         >
           <template #default="{ field, state }">
@@ -112,18 +112,18 @@ const formState = Vue.reactive({
                 Email
               </label>
               <input
-                type="email"
                 :id="field.name"
+                type="email"
                 :name="field.name"
                 :value="field.state.value"
+                placeholder="you@email.com"
+                class="block w-full rounded-md border border-slate-300 px-3 py-2 placeholder-slate-400 shadow-sm focus-visible:border-blue-500 focus-visible:outline-none group-data-[errors=true]:border-red-500 group-data-[errors=true]:text-red-500 sm:text-sm"
                 @blur="field.handleBlur"
                 @input="
                   (e) => {
                     field.handleChange((e.target as HTMLInputElement).value);
                   }
                 "
-                placeholder="you@email.com"
-                class="block w-full rounded-md border border-slate-300 px-3 py-2 placeholder-slate-400 shadow-sm focus-visible:border-blue-500 focus-visible:outline-none group-data-[errors=true]:border-red-500 group-data-[errors=true]:text-red-500 sm:text-sm"
               />
               <p
                 v-for="(error, idx) in state.meta.errors"
@@ -137,7 +137,7 @@ const formState = Vue.reactive({
         </Field>
         <Field
           name="password"
-          :validatorAdapter="zodValidator"
+          :validator-adapter="zodValidator"
           :validators="{ onChange: z.string().min(8).max(16) }"
         >
           <template #default="{ field, state }">
@@ -155,9 +155,11 @@ const formState = Vue.reactive({
                 class="flex w-full overflow-hidden rounded-md border border-slate-300 bg-white shadow-sm focus-within:border-blue-500 group-data-[errors=true]:border-red-500 group-data-[errors=true]:text-red-500"
               >
                 <input
+                  :id="field.name"
                   :type="formState.showPassword ? 'text' : 'password'"
                   class="flex-grow px-3 py-2 placeholder-slate-400 focus-visible:outline-none sm:text-sm"
                   :value="field.state.value"
+                  :name="field.name"
                   @input="
                     (evt) => {
                       field.handleChange(
@@ -166,13 +168,11 @@ const formState = Vue.reactive({
                     }
                   "
                   @blur="field.handleBlur"
-                  :id="field.name"
-                  :name="field.name"
                 />
                 <button
-                  @click="formState.showPassword = !formState.showPassword"
                   type="button"
                   class="px-2 hover:bg-slate-50 focus-visible:bg-slate-100 focus-visible:outline-none active:bg-slate-200"
+                  @click="formState.showPassword = !formState.showPassword"
                 >
                   {{ formState.showPassword ? "0" : "O" }}
                 </button>
@@ -226,9 +226,9 @@ const formState = Vue.reactive({
         </div>
         <div class="flex justify-center">
           <button
-            @click="signInWithPopup(getAuth(app), new GoogleAuthProvider())"
             type="button"
             class="rounded-md border px-3 py-2 text-sm uppercase text-slate-400 transition-colors hover:border-blue-500 hover:text-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 active:bg-slate-50"
+            @click="signInWithPopup(getAuth(app), new GoogleAuthProvider())"
           >
             sign in with google
           </button>

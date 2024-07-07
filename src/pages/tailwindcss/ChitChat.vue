@@ -12,11 +12,11 @@
       >
         <defs>
           <linearGradient
+            id="a"
             x1="50%"
             y1="0%"
             x2="50%"
             y2="100%"
-            id="a"
           >
             <stop
               stop-color="#2397B3"
@@ -28,11 +28,11 @@
             ></stop>
           </linearGradient>
           <linearGradient
+            id="b"
             x1="50%"
             y1="0%"
             x2="50%"
             y2="100%"
-            id="b"
           >
             <stop
               stop-color="#73DFF2"

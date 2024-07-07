@@ -1,6 +1,6 @@
 import type * as Vue from "vue";
 
-const lyComponents = import.meta.glob<Vue.DefineComponent<{}, {}, any>>(
+const lyComponents = import.meta.glob<Vue.DefineComponent>(
   "@/components/**/ly-*.vue",
   {
     eager: true,

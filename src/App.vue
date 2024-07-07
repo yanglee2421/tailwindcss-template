@@ -4,7 +4,7 @@ import ThemeProvider from "@/theme/ThemeProvider.vue";
 </script>
 
 <template>
-  <RouterView #default="{ Component }">
+  <RouterView v-slot="{ Component }">
     <ThemeProvider>
       <component :is="Component" />
     </ThemeProvider>
