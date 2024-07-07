@@ -8,7 +8,7 @@ import { routes } from "./routes";
 
 export const router = createRouter({
   history: import.meta.env.DEV
-    ? createWebHistory("/vue-ele")
+    ? createWebHistory("/vue-tailwindcss")
     : createWebHashHistory(),
   routes,
 });
