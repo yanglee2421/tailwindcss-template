@@ -1,5 +1,7 @@
 module.exports = {
   root: true,
+  ignorePatterns: ["dist", "docs", ".eslintrc.cjs"],
+
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -8,10 +10,12 @@ module.exports = {
     "plugin:import/typescript",
     "prettier",
   ],
+
   parser: "vue-eslint-parser",
   parserOptions: {
     parser: "@typescript-eslint/parser",
   },
+
   rules: {
     "@typescript-eslint/consistent-type-imports": "error",
     "import/order": [
@@ -40,7 +44,7 @@ module.exports = {
     "import/no-named-as-default": "off",
     "import/no-named-as-default-member": "off",
   },
-  ignorePatterns: ["dist", "docs", ".eslintrc.cjs"],
+
   settings: {
     "import/resolver": {
       typescript: {
