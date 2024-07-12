@@ -13,34 +13,32 @@ const app = Vue.createApp(App);
 app
   .use(createPinia())
   .use(router)
-  .use((app) => {
-    app.use(VueQueryPlugin, {
-      queryClientConfig: {
-        defaultOptions: {
-          queries: {
-            staleTime: 1000 * 60,
-            gcTime: 1000 * 60 * 2,
+  .use(VueQueryPlugin, {
+    queryClientConfig: {
+      defaultOptions: {
+        queries: {
+          staleTime: 1000 * 60,
+          gcTime: 1000 * 60 * 2,
 
-            refetchOnMount: true,
-            refetchOnWindowFocus: true,
-            refetchOnReconnect: true,
+          refetchOnMount: true,
+          refetchOnWindowFocus: true,
+          refetchOnReconnect: true,
 
-            retry: 1,
-            retryDelay(attemptIndex) {
-              return Math.min(1000 * 2 ** attemptIndex, 1000 * 8);
-            },
+          retry: 1,
+          retryDelay(attemptIndex) {
+            return Math.min(1000 * 2 ** attemptIndex, 1000 * 8);
           },
         },
       },
-      clientPersister(queryClient) {
-        return persistQueryClient({
-          queryClient,
-          persister: createAsyncStoragePersister({
-            storage: sessionStorage,
-            key: import.meta.env.VITE_QUERY_PERSISTER_KEY,
-          }),
-        });
-      },
-    });
+    },
+    clientPersister(queryClient) {
+      return persistQueryClient({
+        queryClient,
+        persister: createAsyncStoragePersister({
+          storage: sessionStorage,
+          key: import.meta.env.VITE_QUERY_PERSISTER_KEY,
+        }),
+      });
+    },
   })
   .mount("#root");
