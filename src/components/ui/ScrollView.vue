@@ -3,21 +3,28 @@ import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import * as Vue from "vue";
 
-const props = defineProps<{
-  options: PerfectScrollbar.Options;
-}>();
+const props = withDefaults(
+  defineProps<{
+    options?: PerfectScrollbar.Options;
+  }>(),
+  {
+    options() {
+      return {};
+    },
+  },
+);
 
 const emits = defineEmits<{
-  (e: "onPsScrollX", evt: Event): void;
-  (e: "onPsScrollY", evt: Event): void;
-  (e: "onPsScrollUp", evt: Event): void;
-  (e: "onPsScrollDown", evt: Event): void;
-  (e: "onPsScrollLeft", evt: Event): void;
-  (e: "onPsScrollRight", evt: Event): void;
-  (e: "onPsXReachStart", evt: Event): void;
-  (e: "onPsXReachEnd", evt: Event): void;
-  (e: "onPsYReachStart", evt: Event): void;
-  (e: "onPsYReachEnd", evt: Event): void;
+  (e: "psScrollX", evt: Event): void;
+  (e: "psScrollY", evt: Event): void;
+  (e: "psScrollUp", evt: Event): void;
+  (e: "psScrollDown", evt: Event): void;
+  (e: "psScrollLeft", evt: Event): void;
+  (e: "psScrollRight", evt: Event): void;
+  (e: "psXReachStart", evt: Event): void;
+  (e: "psXReachEnd", evt: Event): void;
+  (e: "psYReachStart", evt: Event): void;
+  (e: "psYReachEnd", evt: Event): void;
 }>();
 
 const containerRef = Vue.ref<HTMLDivElement>();
@@ -26,12 +33,11 @@ const psRef = Vue.ref<PerfectScrollbar | null>(null);
 
 Vue.watchPostEffect((onClearup) => {
   const containerEl = containerRef.value;
+  const contentEl = contentRef.value;
 
   if (!(containerEl instanceof HTMLElement)) {
     return;
   }
-
-  const contentEl = contentRef.value;
 
   if (!(contentEl instanceof HTMLElement)) {
     return;
@@ -76,7 +82,58 @@ Vue.watchPostEffect((onClearup) => {
   });
 });
 
-Vue.watchPostEffect((onClearup) => {});
+Vue.watchPostEffect((onClearup) => {
+  const containerEl = containerRef.value;
+
+  if (!(containerEl instanceof HTMLElement)) {
+    return;
+  }
+
+  const map = new Map<string, (evt: Event) => void>();
+
+  map.set("ps-scroll-x", (evt) => {
+    emits("psScrollX", evt);
+  });
+  map.set("ps-scroll-y", (evt) => {
+    emits("psScrollY", evt);
+  });
+  map.set("ps-scroll-up", (evt) => {
+    emits("psScrollUp", evt);
+  });
+  map.set("ps-scroll-down", (evt) => {
+    emits("psScrollDown", evt);
+  });
+  map.set("ps-scroll-left", (evt) => {
+    emits("psScrollLeft", evt);
+  });
+  map.set("ps-scroll-right", (evt) => {
+    emits("psScrollRight", evt);
+  });
+  map.set("ps-x-reach-start", (evt) => {
+    emits("psXReachStart", evt);
+  });
+  map.set("ps-x-reach-end", (evt) => {
+    emits("psXReachEnd", evt);
+  });
+  map.set("ps-y-reach-start", (evt) => {
+    emits("psYReachStart", evt);
+  });
+  map.set("ps-y-reach-end", (evt) => {
+    emits("psYReachEnd", evt);
+  });
+
+  const controller = new AbortController();
+
+  map.forEach((handler, name) => {
+    containerEl.addEventListener(name, handler, {
+      signal: controller.signal,
+    });
+  });
+
+  onClearup(() => {
+    controller.abort();
+  });
+});
 </script>
 
 <template>
