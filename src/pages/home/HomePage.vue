@@ -82,7 +82,7 @@ const state = Vue.reactive({
           <div
             v-for="item in 5"
             :key="item"
-            class="h-96"
+            class="h-96 border"
           ></div>
         </main>
         <footer class="border-t px-5 py-2">footer</footer>
