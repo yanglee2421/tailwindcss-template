@@ -6,9 +6,7 @@ import "@/assets/scss/global.scss";
 import { router } from "@/router/router";
 import App from "./App.vue";
 
-const app = Vue.createApp(App);
-
-app
+Vue.createApp(App)
   .use(createPinia())
   .use(router)
   .use(VueQueryPlugin, {

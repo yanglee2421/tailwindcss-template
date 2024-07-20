@@ -7,7 +7,7 @@ const themeStore = useThemeStore();
 const isDarkRef = useIsDark();
 
 Vue.watchPostEffect(() => {
-  const isDark = Vue.unref(isDarkRef);
+  const isDark = isDarkRef.value;
 
   (() => {
     switch (themeStore.state.mode) {
