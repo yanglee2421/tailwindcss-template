@@ -1,5 +1,3 @@
-import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
-import { persistQueryClient } from "@tanstack/query-persist-client-core";
 import { VueQueryPlugin } from "@tanstack/vue-query";
 import { createPinia } from "pinia";
 import * as Vue from "vue";
@@ -30,15 +28,6 @@ app
           },
         },
       },
-    },
-    clientPersister(queryClient) {
-      return persistQueryClient({
-        queryClient,
-        persister: createAsyncStoragePersister({
-          storage: sessionStorage,
-          key: import.meta.env.VITE_QUERY_PERSISTER_KEY,
-        }),
-      });
     },
   })
   .mount("#root");
