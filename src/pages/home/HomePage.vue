@@ -53,7 +53,7 @@ const state = Vue.reactive({
             list
           </button>
         </header>
-        <main class="p-5">
+        <main class="space-y-6 p-5">
           <div class="flex gap-3">
             <button
               class="rounded bg-red-500 px-3 py-1.5 text-white hover:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500/50 active:bg-red-700 disabled:cursor-not-allowed disabled:bg-red-500/50"
@@ -82,7 +82,7 @@ const state = Vue.reactive({
           <div
             v-for="item in 5"
             :key="item"
-            class="h-96 border"
+            class="h-96 rounded border shadow"
           ></div>
         </main>
         <footer class="border-t px-5 py-2">footer</footer>
