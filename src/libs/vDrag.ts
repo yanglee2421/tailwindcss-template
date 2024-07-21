@@ -19,7 +19,12 @@ export const vDrag: Vue.Directive<HTMLElement, _value> = (dom, bind) => {
     };
     dom.ondrop = (event: DragEvent) => {
       event.preventDefault();
-      const targetIndex = event.dataTransfer?.getData("index")!;
+      const targetIndex = event.dataTransfer?.getData("index");
+
+      if (typeof targetIndex !== "string") {
+        return;
+      }
+
       arr.splice(index, 1, ...arr.splice(Number(targetIndex), 1, arr[index]));
     };
   } catch {

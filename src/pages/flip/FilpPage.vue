@@ -70,14 +70,13 @@ defineOptions({ inheritAttrs: false });
 
 <template>
   <div class="text-center">
-    <el-button
-      @click="handleSort"
-      size="large"
-      type="primary"
-      class="bg-sky-500 uppercase"
+    <button
       id="sort"
-      >random order</el-button
+      class="bg-sky-500 uppercase"
+      @click="handleSort"
     >
+      random order
+    </button>
   </div>
   <div
     ref="boxRef"

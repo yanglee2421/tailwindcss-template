@@ -1,20 +1,31 @@
-import { abilitiesPlugin } from "@casl/vue";
-import "element-plus/dist/index.css";
-import "element-plus/theme-chalk/dark/css-vars.css";
+import { VueQueryPlugin } from "@tanstack/vue-query";
 import { createPinia } from "pinia";
 import * as Vue from "vue";
 import "@/assets/css/style.css";
 import "@/assets/scss/global.scss";
-import { defineAbilityFor } from "@/libs/defineAbilityFor";
-import { VueQuery } from "@/plugins/VueQuery";
 import { router } from "@/router/router";
 import App from "./App.vue";
 
-const app = Vue.createApp(App);
+Vue.createApp(App)
+  .use(createPinia())
+  .use(router)
+  .use(VueQueryPlugin, {
+    queryClientConfig: {
+      defaultOptions: {
+        queries: {
+          staleTime: 1000 * 60,
+          gcTime: 1000 * 60 * 2,
 
-app.use(router);
-app.use(createPinia());
-app.use(VueQuery);
-app.use(abilitiesPlugin, defineAbilityFor("guest"));
+          refetchOnMount: true,
+          refetchOnWindowFocus: true,
+          refetchOnReconnect: true,
 
-app.mount("#root");
+          retry: 1,
+          retryDelay(attemptIndex) {
+            return Math.min(1000 * 2 ** attemptIndex, 1000 * 8);
+          },
+        },
+      },
+    },
+  })
+  .mount("#root");

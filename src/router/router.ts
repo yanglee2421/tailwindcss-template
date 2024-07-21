@@ -7,9 +7,7 @@ import {
 import { routes } from "./routes";
 
 export const router = createRouter({
-  history: import.meta.env.DEV
-    ? createWebHistory("/vue-ele")
-    : createWebHashHistory(),
+  history: import.meta.env.DEV ? createWebHistory("/") : createWebHashHistory(),
   routes,
 });
 

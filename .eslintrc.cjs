@@ -1,19 +1,21 @@
-/* eslint-env node */
-require("@rushstack/eslint-patch/modern-module-resolution");
-
 module.exports = {
   root: true,
+  ignorePatterns: ["dist", "docs", ".eslintrc.cjs"],
+
   extends: [
-    "plugin:vue/vue3-essential",
     "eslint:recommended",
-    "@vue/eslint-config-typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
     "prettier",
   ],
+
+  parser: "vue-eslint-parser",
   parserOptions: {
-    ecmaVersion: "latest",
+    parser: "@typescript-eslint/parser",
   },
+
   rules: {
     "@typescript-eslint/consistent-type-imports": "error",
     "import/order": [
@@ -42,7 +44,7 @@ module.exports = {
     "import/no-named-as-default": "off",
     "import/no-named-as-default-member": "off",
   },
-  ignorePatterns: ["dist", "docs", ".eslintrc.cjs"],
+
   settings: {
     "import/resolver": {
       typescript: {

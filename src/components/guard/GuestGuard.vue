@@ -22,7 +22,7 @@ Vue.watchPostEffect((onCleanup) => {
     router.push({
       path: (() => {
         const redirect_url =
-          router.currentRoute.value.query.redirect_url || "/";
+          router.currentRoute.value.query.redirect_url || "/home";
 
         if (typeof redirect_url === "string") {
           return decodeURIComponent(redirect_url);

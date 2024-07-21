@@ -7,33 +7,58 @@ export const routes: RouterOptions["routes"] = [
       return import("@/pages/404/NotFound.vue");
     },
   },
+
+  // Guest Pages
   {
     path: "/login",
     name: "login",
     component() {
-      return import("@/pages/login/NotLogged.vue");
+      return import("@/pages/login/LoginPage.vue");
     },
   },
-  // {
-  //   name: "layout",
-  //   path: "",
-  //   component() {
-  //     return import("@/components/layout/DesktopLayout.vue");
-  //   },
-  //   children: [],
-  // },
   {
-    path: "/caronseal",
-    name: "caronseal",
+    path: "/register",
+    name: "register",
     component() {
-      return import("@/pages/caronseal/CaronsealPage.vue");
+      return import("@/pages/register/RegisterPage.vue");
     },
   },
+  {
+    path: "/forgot-password",
+    name: "forgot-password",
+    component() {
+      return import("@/pages/fotgot-password/ForgotPassword.vue");
+    },
+  },
+
+  // Auth Pages
   {
     path: "/",
-    name: "home",
     component() {
-      return import("@/pages/home/HomePage.vue");
+      return import("@/components/layout/AuthLayout.vue");
     },
+    children: [
+      {
+        path: "home",
+        name: "home",
+        component() {
+          return import("@/pages/home/HomePage.vue");
+        },
+      },
+      {
+        path: "tailwindcss",
+        name: "tailwindcss",
+        component() {
+          return import("@/pages/tailwindcss/TailwindCSS.vue");
+        },
+      },
+      {
+        path: "button",
+        name: "button",
+        component() {
+          return import("@/pages/button/ButtonPage.vue");
+        },
+      },
+    ],
   },
 ];

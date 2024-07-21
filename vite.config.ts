@@ -4,7 +4,7 @@ import vue from "@vitejs/plugin-vue";
 import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
-export default defineConfig((ConfigEnv) => {
+export default defineConfig(() => {
   const __dirname = dirname(fileURLToPath(import.meta.url));
 
   return {
@@ -29,7 +29,7 @@ export default defineConfig((ConfigEnv) => {
       },
     },
 
-    base: ConfigEnv.command === "build" ? "./" : "/vue-ele",
+    base: "./",
     envDir: resolve(__dirname, "./"),
     assetsInclude: [],
 

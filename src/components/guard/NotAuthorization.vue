@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import * as Vue from "vue";
+import { RouterLink } from "vue-router";
 import { Snow } from "@/libs/Snow";
 
 const boxRef = Vue.ref<HTMLDivElement>();
@@ -36,46 +37,20 @@ Vue.watchPostEffect((onCleanup) => {
     snow?.abortAnimation();
   });
 });
-
-defineOptions({ inheritAttrs: true });
 </script>
 
 <template>
   <div
     ref="boxRef"
-    :class="[
-      'relative',
-      'h-full',
-      'p-0',
-      'border-0',
-      'm-0',
-      'bg-cover',
-      'bg-fixed',
-      'snow-warpper',
-    ]"
+    class="snow-warpper relative m-0 h-full border-0 bg-cover bg-fixed p-0"
   >
     <canvas
       ref="cvsRef"
-      :class="['absolute', 'inset-0']"
+      class="absolute inset-0"
     ></canvas>
-    <div
-      :class="[
-        'relative',
-        'z-10',
-        'flex',
-        'h-full',
-        'justify-center',
-        'items-center',
-      ]"
-    >
-      <div :class="['mt-96']">
-        <router-link :to="{ name: 'home' }">
-          <el-button
-            size="large"
-            type="primary"
-            >Take me home</el-button
-          >
-        </router-link>
+    <div class="relative z-10 flex h-full items-center justify-center">
+      <div class="mt-96">
+        <RouterLink :to="{ name: 'home' }"> Take me home </RouterLink>
       </div>
     </div>
   </div>
