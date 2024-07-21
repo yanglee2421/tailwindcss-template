@@ -13,7 +13,7 @@ import { RouterLink } from "vue-router";
 import { z } from "zod";
 import { app } from "@/api/firebase/app";
 import GuestGuard from "@/components/guard/GuestGuard.vue";
-import AuthPage from "@/components/layout/AuthPage.vue";
+import GuestLayout from "@/components/layout/GuestLayout.vue";
 import type { UserCredential } from "firebase/auth";
 
 type LoginParams = {
@@ -43,6 +43,8 @@ const form = useForm({
   async onSubmit(props) {
     await mutation.mutateAsync(props.value);
   },
+
+  validatorAdapter: zodValidator(),
 });
 
 const { Field, Subscribe } = form;
@@ -54,7 +56,7 @@ const formState = Vue.reactive({
 
 <template>
   <GuestGuard>
-    <AuthPage>
+    <GuestLayout>
       <form
         novalidate
         autocomplete="off"
@@ -97,7 +99,6 @@ const formState = Vue.reactive({
       >
         <Field
           name="email"
-          :validator-adapter="zodValidator"
           :validators="{ onChange: z.string().email() }"
         >
           <template #default="{ field, state }">
@@ -234,7 +235,7 @@ const formState = Vue.reactive({
           </button>
         </div>
       </form>
-    </AuthPage>
+    </GuestLayout>
   </GuestGuard>
 </template>
 

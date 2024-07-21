@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useForm } from "@tanstack/vue-form";
 import GuestGuard from "@/components/guard/GuestGuard.vue";
-import AuthPage from "@/components/layout/AuthPage.vue";
+import GuestLayout from "@/components/layout/GuestLayout.vue";
 
 const form = useForm({
   defaultValues: {
@@ -14,7 +14,7 @@ const { Field } = form;
 
 <template>
   <GuestGuard>
-    <AuthPage>
+    <GuestLayout>
       <form action="">
         <div>
           <label class="text-sm font-medium capitalize text-slate-700"
@@ -28,7 +28,7 @@ const { Field } = form;
           </Field>
         </div>
       </form>
-    </AuthPage>
+    </GuestLayout>
   </GuestGuard>
 </template>
 

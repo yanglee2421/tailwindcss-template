@@ -7,6 +7,8 @@ export const routes: RouterOptions["routes"] = [
       return import("@/pages/404/NotFound.vue");
     },
   },
+
+  // Guest Pages
   {
     path: "/login",
     name: "login",
@@ -15,17 +17,10 @@ export const routes: RouterOptions["routes"] = [
     },
   },
   {
-    path: "/",
-    name: "home",
+    path: "/register",
+    name: "register",
     component() {
-      return import("@/pages/home/HomePage.vue");
-    },
-  },
-  {
-    path: "/tailwindcss",
-    name: "tailwindcss",
-    component() {
-      return import("@/pages/tailwindcss/TailwindCSS.vue");
+      return import("@/pages/register/RegisterPage.vue");
     },
   },
   {
@@ -35,11 +30,35 @@ export const routes: RouterOptions["routes"] = [
       return import("@/pages/fotgot-password/ForgotPassword.vue");
     },
   },
+
+  // Auth Pages
   {
-    path: "/register",
-    name: "register",
+    path: "/",
     component() {
-      return import("@/pages/register/RegisterPage.vue");
+      return import("@/components/layout/AuthLayout.vue");
     },
+    children: [
+      {
+        path: "home",
+        name: "home",
+        component() {
+          return import("@/pages/home/HomePage.vue");
+        },
+      },
+      {
+        path: "tailwindcss",
+        name: "tailwindcss",
+        component() {
+          return import("@/pages/tailwindcss/TailwindCSS.vue");
+        },
+      },
+      {
+        path: "button",
+        name: "button",
+        component() {
+          return import("@/pages/button/ButtonPage.vue");
+        },
+      },
+    ],
   },
 ];

@@ -7,7 +7,7 @@ import { RouterLink } from "vue-router";
 import { z } from "zod";
 import { app } from "@/api/firebase/app";
 import GuestGuard from "@/components/guard/GuestGuard.vue";
-import AuthPage from "@/components/layout/AuthPage.vue";
+import GuestLayout from "@/components/layout/GuestLayout.vue";
 
 const mutation = useMutation<void, Error, string>({
   mutationFn(email) {
@@ -31,7 +31,7 @@ const { Field, Subscribe } = form;
 
 <template>
   <GuestGuard>
-    <AuthPage>
+    <GuestLayout>
       <form
         novalidate
         autocomplete="off"
@@ -63,7 +63,7 @@ const { Field, Subscribe } = form;
               <input
                 :value="field.state.value"
                 type="email"
-                class="block w-full rounded-md border px-3 py-3 text-sm shadow-sm hover:border-sky-500 focus-visible:border-sky-500 focus-visible:outline-none group-data-[errors=true]:border-red-500 group-data-[errors=true]:text-red-500"
+                class="block w-full rounded-md border px-3 py-3 text-sm shadow-sm hover:border-blue-500 focus-visible:border-blue-500 focus-visible:outline-none group-data-[errors=true]:border-red-500 group-data-[errors=true]:text-red-500"
                 @input="
                   (evt) => {
                     field.handleChange((evt.target as HTMLInputElement).value);
@@ -87,7 +87,7 @@ const { Field, Subscribe } = form;
             <button
               :disabled="!canSubmit"
               type="submit"
-              class="block w-full rounded bg-sky-500 px-3 py-2 uppercase text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 disabled:cursor-not-allowed disabled:bg-sky-300"
+              class="block w-full rounded bg-blue-500 px-3 py-2 uppercase text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 disabled:cursor-not-allowed disabled:bg-blue-300"
             >
               send reset email
             </button>
@@ -96,11 +96,11 @@ const { Field, Subscribe } = form;
       </form>
       <RouterLink
         :to="{ name: 'login' }"
-        class="mt-2 rounded px-3 py-2 text-center uppercase text-sky-500 hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 active:bg-slate-200"
+        class="mt-2 rounded px-3 py-2 text-center uppercase text-blue-500 hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-slate-200"
       >
         back to login
       </RouterLink>
-    </AuthPage>
+    </GuestLayout>
   </GuestGuard>
 </template>
 
