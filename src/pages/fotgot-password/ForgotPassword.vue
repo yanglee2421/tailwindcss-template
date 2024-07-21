@@ -23,6 +23,7 @@ const form = useForm({
   async onSubmit(props) {
     await mutation.mutateAsync(props.value.email);
   },
+  validatorAdapter: zodValidator(),
 });
 
 const { Field, Subscribe } = form;
@@ -47,7 +48,6 @@ const { Field, Subscribe } = form;
       >
         <Field
           name="email"
-          :validator-adapter="zodValidator"
           :validators="{ onChange: z.string().email() }"
         >
           <template #default="{ field, state }">
