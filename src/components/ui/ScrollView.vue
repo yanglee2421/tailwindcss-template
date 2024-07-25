@@ -139,11 +139,11 @@ Vue.watchPostEffect((onClearup) => {
 <template>
   <div
     ref="containerRef"
-    class="relative h-full overflow-hidden"
+    class="group relative h-full overflow-hidden"
   >
     <div
       ref="contentRef"
-      class="size-fit min-h-full min-w-full"
+      class="min-h-full min-w-full group-[.ps--active-y]:h-fit group-[.ps--active-x]:w-fit"
     >
       <slot></slot>
     </div>
