@@ -69,22 +69,70 @@ import ListWithBorderCode from "./ListWithBorder.vue?raw";
 import ListWithDot from "./ListWithDot.vue";
 // eslint-disable-next-line import/no-duplicates
 import ListWithDotCode from "./ListWithDot.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import ListWithLink from "./ListWithLink.vue";
+// eslint-disable-next-line import/no-duplicates
+import ListWithLinkCode from "./ListWithLink.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import LoadingButton from "./LoadingButton.vue";
+// eslint-disable-next-line import/no-duplicates
+import LoadingButtonCode from "./LoadingButton.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import NavLink from "./NavLink.vue";
+// eslint-disable-next-line import/no-duplicates
+import NavLinkCode from "./NavLink.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import NewProject from "./NewProject.vue";
+// eslint-disable-next-line import/no-duplicates
+import NewProjectCode from "./NewProject.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import NumberInput from "./NumberInput.vue";
+// eslint-disable-next-line import/no-duplicates
+import NumberInputCode from "./NumberInput.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import PaymentMethod from "./PaymentMethod.vue";
+// eslint-disable-next-line import/no-duplicates
+import PaymentMethodCode from "./PaymentMethod.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import RadioInput from "./RadioInput.vue";
+// eslint-disable-next-line import/no-duplicates
+import RadioInputCode from "./RadioInput.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import SaveChanges from "./SaveChanges.vue";
+// eslint-disable-next-line import/no-duplicates
+import SaveChangesCode from "./SaveChanges.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import SaveChanges2 from "./SaveChanges2.vue";
+// eslint-disable-next-line import/no-duplicates
+import SaveChanges2Code from "./SaveChanges2.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import SearchForm from "./SearchForm.vue";
+// eslint-disable-next-line import/no-duplicates
+import SearchFormCode from "./SearchForm.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import TableAria from "./TableAria.vue";
+// eslint-disable-next-line import/no-duplicates
+import TableAriaCode from "./TableAria.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import TableWithBorder from "./TableWithBorder.vue";
+// eslint-disable-next-line import/no-duplicates
+import TableWithBorderCode from "./TableWithBorder.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import TitleAnnoyed from "./TitleAnnoyed.vue";
+// eslint-disable-next-line import/no-duplicates
+import TitleAnnoyedCode from "./TitleAnnoyed.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import TypographySelection from "./TypographySelection.vue";
+// eslint-disable-next-line import/no-duplicates
+import TypographySelectionCode from "./TypographySelection.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import TypographyWithFirstLine from "./TypographyWithFirstLine.vue";
+// eslint-disable-next-line import/no-duplicates
+import TypographyWithFirstLineCode from "./TypographyWithFirstLine.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import VacationCard from "./VacationCard.vue";
+// eslint-disable-next-line import/no-duplicates
+import VacationCardCode from "./VacationCard.vue?raw";
 </script>
 
 <template>
@@ -207,25 +255,118 @@ import VacationCard from "./VacationCard.vue";
         <VueCode :code="ListWithDotCode" />
       </template>
     </CodeBlock>
-  </div>
 
-  <div class="hidden">
-    <SaveChanges />
-    <SaveChanges2 />
-    <TableWithBorder />
-    <NewProject />
-    <RadioInput />
-    <PaymentMethod />
-    <ListWithLink />
-    <TitleAnnoyed />
-    <SearchForm />
-    <TypographySelection />
-    <TypographyWithFirstLine />
-    <LoadingButton />
-    <NumberInput />
-    <TableAria />
-    <NavLink />
-    <VacationCard />
+    <CodeBlock>
+      <ListWithLink />
+      <template #code>
+        <VueCode :code="ListWithLinkCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <LoadingButton />
+      <template #code>
+        <VueCode :code="LoadingButtonCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <NavLink />
+      <template #code>
+        <VueCode :code="NavLinkCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <NewProject />
+      <template #code>
+        <VueCode :code="NewProjectCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <NumberInput />
+      <template #code>
+        <VueCode :code="NumberInputCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <PaymentMethod />
+      <template #code>
+        <VueCode :code="PaymentMethodCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <RadioInput />
+      <template #code>
+        <VueCode :code="RadioInputCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <SaveChanges />
+      <template #code>
+        <VueCode :code="SaveChangesCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <SaveChanges2 />
+      <template #code>
+        <VueCode :code="SaveChanges2Code" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <SearchForm />
+      <template #code>
+        <VueCode :code="SearchFormCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <TableAria />
+      <template #code>
+        <VueCode :code="TableAriaCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <TableWithBorder />
+      <template #code>
+        <VueCode :code="TableWithBorderCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <TitleAnnoyed />
+      <template #code>
+        <VueCode :code="TitleAnnoyedCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <TypographySelection />
+      <template #code>
+        <VueCode :code="TypographySelectionCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <TypographyWithFirstLine />
+      <template #code>
+        <VueCode :code="TypographyWithFirstLineCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <VacationCard />
+      <template #code>
+        <VueCode :code="VacationCardCode" />
+      </template>
+    </CodeBlock>
   </div>
 </template>
 
