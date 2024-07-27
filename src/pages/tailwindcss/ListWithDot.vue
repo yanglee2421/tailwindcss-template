@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div class="mx-auto max-w-sm bg-white px-8 py-8 shadow dark:bg-slate-800">
+  <div class="max-w-sm bg-white px-8 py-8 shadow dark:bg-slate-800">
     <h2 class="text-base font-semibold text-slate-900 dark:text-slate-200">
       Ingredients
     </h2>

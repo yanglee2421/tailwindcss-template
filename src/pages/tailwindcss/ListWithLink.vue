@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="mx-auto grid max-w-md divide-y divide-slate-100 bg-white text-slate-700 shadow"
+    class="grid max-w-md divide-y divide-slate-100 bg-white text-slate-700 shadow"
   >
     <div
       class="group grid grid-cols-[32px_1fr_auto] items-center gap-x-4 px-4 py-4 pt-6"

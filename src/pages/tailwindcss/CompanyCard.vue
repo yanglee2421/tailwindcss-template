@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow-xl ring-1 ring-slate-900/5 sm:max-w-2xl"
+    class="max-w-md overflow-hidden rounded-lg bg-white shadow-xl ring-1 ring-slate-900/5 sm:max-w-2xl"
   >
     <div class="flex flex-col sm:flex-row">
       <div class="sm:shrink-0">

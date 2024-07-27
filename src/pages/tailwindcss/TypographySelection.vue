@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="mx-auto max-w-lg bg-white px-6 py-8 text-slate-700 shadow selection:bg-fuchsia-300 selection:text-fuchsia-900 dark:bg-slate-800 dark:text-slate-400"
+    class="max-w-lg bg-white px-6 py-8 text-slate-700 shadow selection:bg-fuchsia-300 selection:text-fuchsia-900 dark:bg-slate-800 dark:text-slate-400"
   >
     <p>
       So I started to walk into the water. I won't lie to you boys, I was

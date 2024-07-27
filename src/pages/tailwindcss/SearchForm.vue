@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div class="mx-auto max-w-sm">
+  <div class="max-w-sm">
     <form>
       <label class="relative block">
         <span class="absolute inset-y-0 left-0 flex items-center pl-2">

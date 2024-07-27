@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div class="mx-auto max-w-sm bg-white px-6 py-8 shadow">
+  <div class="max-w-sm bg-white px-6 py-8 shadow">
     <form class="flex items-center space-x-6">
       <div class="shrink-0">
         <img

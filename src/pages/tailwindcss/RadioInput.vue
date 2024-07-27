@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <fieldset class="mx-auto max-w-md bg-white p-8 text-sm shadow">
+  <fieldset class="max-w-md bg-white p-8 text-sm shadow">
     <div class="mb-6 border-b border-slate-200 pb-2 text-base font-semibold">
       Published status
     </div>

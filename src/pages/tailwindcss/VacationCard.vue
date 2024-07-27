@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div class="mx-auto w-72 bg-white px-8 py-6 shadow sm:w-96 sm:px-12 sm:py-8">
+  <div class="w-72 bg-white px-8 py-6 shadow sm:w-96 sm:px-12 sm:py-8">
     <div>
       <img
         class="rounded"

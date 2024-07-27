@@ -3,7 +3,7 @@
 <template>
   <a
     href="#"
-    class="group mx-auto block max-w-xs space-y-3 rounded-lg bg-white p-4 shadow-lg ring-1 ring-slate-900/5 hover:bg-sky-500 hover:ring-sky-500"
+    class="group block max-w-xs space-y-3 rounded-lg bg-white p-4 shadow-lg ring-1 ring-slate-900/5 hover:bg-sky-500 hover:ring-sky-500"
   >
     <div class="flex items-center space-x-3">
       <svg

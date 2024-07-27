@@ -59,21 +59,28 @@ const state = Vue.reactive({
       </aside>
       <div class="w-full min-w-0">
         <header
-          class="sticky top-0 z-10 flex justify-between gap-3 border-b bg-white px-5 py-2"
+          class="sticky top-0 z-10 flex items-center border-b bg-white px-5 py-2"
         >
           <span class="text-xl uppercase"> header </span>
 
           <button
-            class="flex size-10 items-center justify-center rounded-full text-2xl hover:bg-slate-500 sm:hidden"
+            class="ms-auto flex size-10 items-center justify-center rounded-full text-2xl hover:bg-slate-500 sm:hidden"
             @click="state.showAside = !state.showAside"
           >
-            <i class="iconify mdi--list-box-outline"></i>
+            <i class="iconify mdi--menu"></i>
           </button>
         </header>
         <main class="p-6">
           <RouterView />
         </main>
-        <footer class="border-t px-5 py-2">footer</footer>
+        <footer class="border-t px-5 py-2">
+          &copy;2024, Made with ❤️ by
+          <a
+            href="https://github.com/yanglee-2421"
+            class="text-blue-500 hover:underline"
+            >YangLee2421</a
+          >
+        </footer>
       </div>
     </div>
   </AuthGuard>
