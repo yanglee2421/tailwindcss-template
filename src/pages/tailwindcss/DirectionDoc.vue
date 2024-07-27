@@ -1,9 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div
-    class="mx-auto grid max-w-lg grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2"
-  >
+  <div class="grid max-w-lg grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2">
     <div dir="ltr">
       <p class="mb-4 text-sm font-medium">Left-to-right</p>
       <div class="group flex items-center">

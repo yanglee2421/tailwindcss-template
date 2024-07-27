@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div class="mx-auto max-w-lg bg-white px-6 py-8 shadow">
+  <div class="max-w-lg bg-white px-6 py-8 shadow">
     <blockquote
       class="text-center text-2xl font-semibold italic text-slate-900"
     >

@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="mx-auto max-w-lg bg-white px-6 py-8 font-serif text-slate-700 shadow dark:bg-slate-800 dark:text-slate-200"
+    class="max-w-lg bg-white px-6 py-8 font-serif text-slate-700 shadow dark:bg-slate-800 dark:text-slate-200"
   >
     <p
       class="first-letter:float-left first-letter:mr-3 first-letter:text-7xl first-letter:font-bold first-letter:leading-none first-letter:text-slate-900 first-line:uppercase first-line:tracking-widest dark:first-letter:text-white"

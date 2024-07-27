@@ -1,4 +1,5 @@
-import type { Config } from "tailwindcss";
+import { addIconSelectors } from "@iconify/tailwind";
+import { type Config } from "tailwindcss";
 
 export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
@@ -13,7 +14,7 @@ export default {
     },
   },
   darkMode: ["selector", ".dark"],
-  plugins: [],
+  plugins: [addIconSelectors(["mdi"])],
   corePlugins: {
     preflight: true,
   },

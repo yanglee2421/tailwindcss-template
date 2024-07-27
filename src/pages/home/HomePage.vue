@@ -11,20 +11,6 @@ const state = Vue.reactive({
 </script>
 
 <template>
-  <div class="flex gap-3">
-    <button
-      class="rounded bg-red-500 px-3 py-1.5 text-white hover:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500/50 active:bg-red-700 disabled:cursor-not-allowed disabled:bg-red-500/50"
-      @click="signOut(getAuth(app))"
-    >
-      sign out
-    </button>
-    <button
-      class="rounded bg-indigo-500 px-3 py-1.5 font-medium uppercase text-white hover:bg-indigo-600 focus-visible:bg-indigo-700"
-      @click="state.showDialog = !state.showDialog"
-    >
-      open
-    </button>
-  </div>
   <TransitionDialog :open="state.showDialog">
     <div class="mt-3 rounded border px-5 py-2">
       <p>hello dialog</p>
@@ -36,11 +22,27 @@ const state = Vue.reactive({
       </button>
     </div>
   </TransitionDialog>
-  <div
-    v-for="item in 5"
-    :key="item"
-    class="h-96 rounded border shadow"
-  ></div>
+  <div class="space-y-6">
+    <div class="flex gap-3">
+      <button
+        class="rounded bg-red-500 px-3 py-1.5 text-white hover:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500/50 active:bg-red-700 disabled:cursor-not-allowed disabled:bg-red-500/50"
+        @click="signOut(getAuth(app))"
+      >
+        sign out
+      </button>
+      <button
+        class="rounded bg-indigo-500 px-3 py-1.5 font-medium uppercase text-white hover:bg-indigo-600 focus-visible:bg-indigo-700"
+        @click="state.showDialog = !state.showDialog"
+      >
+        open
+      </button>
+    </div>
+    <div
+      v-for="item in 5"
+      :key="item"
+      class="h-96 rounded border shadow"
+    ></div>
+  </div>
 </template>
 
 <style lang="scss" scoped></style>

@@ -3,7 +3,7 @@
 <template>
   <ul
     role="list"
-    class="mx-auto max-w-md bg-white p-2 shadow"
+    class="max-w-md bg-white p-2 shadow"
   >
     <li
       class="group/item relative flex items-center justify-between rounded-xl p-4 hover:bg-slate-100"

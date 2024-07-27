@@ -5,10 +5,10 @@ const imgHref = new URL(img, import.meta.url).href;
 
 <template>
   <div
-    class="mx-auto max-w-sm space-y-2 rounded-xl bg-white px-8 py-8 shadow-lg sm:flex sm:items-center sm:space-x-6 sm:space-y-0 sm:py-4"
+    class="max-w-sm space-y-2 rounded-xl bg-white px-8 py-8 shadow-lg sm:flex sm:items-center sm:space-x-6 sm:space-y-0 sm:py-4"
   >
     <img
-      class="mx-auto block h-24 rounded-full sm:mx-0 sm:shrink-0"
+      class="block h-24 rounded-full sm:mx-0 sm:shrink-0"
       :src="imgHref"
       alt="Woman's Face"
     />
