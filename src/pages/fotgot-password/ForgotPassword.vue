@@ -69,7 +69,7 @@ const { Field, Subscribe } = form;
                     field.handleChange((evt.target as HTMLInputElement).value);
                   }
                 "
-                @blur="field.handleBlur;"
+                @blur="field.handleBlur()"
               />
               <p
                 v-for="(error, idx) in state.meta.errors"
