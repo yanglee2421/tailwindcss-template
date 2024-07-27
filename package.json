@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-template",
-  "description": "vue template with tailwindcss",
+  "description": "Vue template with tailwindCSS",
   "private": true,
   "version": "0.0.1",
   "type": "module",
