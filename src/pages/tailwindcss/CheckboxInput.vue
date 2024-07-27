@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div class="mx-auto max-w-md bg-white px-4 py-6 shadow">
+  <div class="max-w-md bg-white px-4 py-6 shadow">
     <fieldset class="space-y-3">
       <legend
         class="text-base font-semibold text-slate-900 dark:text-slate-200"

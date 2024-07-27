@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="mx-auto flex max-w-sm items-center space-x-4 rounded-xl bg-white p-6 shadow-lg"
+    class="flex max-w-sm items-center space-x-4 rounded-xl bg-white p-6 shadow-lg"
   >
     <div class="shrink-0">
       <svg

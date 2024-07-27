@@ -1,8 +1,22 @@
 <script lang="ts" setup>
+import VueCode from "@/components/ui/VueCode.vue";
+// eslint-disable-next-line import/no-duplicates
 import CategoriesTag from "./CategoriesTag.vue";
+// eslint-disable-next-line import/no-duplicates
+import CategoriesTagCode from "./CategoriesTag.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import CheckboxInput from "./CheckboxInput.vue";
+// eslint-disable-next-line import/no-duplicates
+import CheckboxInputCode from "./CheckboxInput.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import ChitChat from "./ChitChat.vue";
+// eslint-disable-next-line import/no-duplicates
+import ChitChatCode from "./ChitChat.vue?raw";
+// eslint-disable-next-line import/no-duplicates
 import ChooseColor from "./ChooseColor.vue";
+// eslint-disable-next-line import/no-duplicates
+import ChooseColorCode from "./ChooseColor.vue?raw";
+import CodeBlock from "./CodeBlock.vue";
 import CompanyCard from "./CompanyCard.vue";
 import ContributorsCard from "./ContributorsCard.vue";
 import DarkMode from "./DarkMode.vue";
@@ -35,107 +49,68 @@ import VacationCard from "./VacationCard.vue";
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-2 p-2 lg:grid-cols-2 xl:grid-cols-3">
-    <div class="rounded border p-3">
-      <ChitChat />
-    </div>
-    <div class="rounded border p-3">
-      <ErinLindford />
-    </div>
-    <div class="rounded border p-3">
-      <SaveChanges />
-    </div>
-    <div class="rounded border p-3">
-      <SaveChanges2 />
-    </div>
-    <div class="rounded border p-3">
-      <ListWithBorder />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <TableWithBorder />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <FormInput />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <NewProject />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <ListHover />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <FormHelperText />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <RadioInput />
-    </div>
-    <div class="overflow-auto rounded border p-3">
+  <div class="space-y-6">
+    <CodeBlock>
       <CategoriesTag />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <PaymentMethod />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <ListWithLink />
-    </div>
-    <div class="overflow-auto rounded border p-3">
+      <template #code>
+        <VueCode :code="CategoriesTagCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
       <CheckboxInput />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <EmailForm />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <TitleAnnoyed />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <SearchForm />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <FileInput />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <ListWithDot />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <TypographySelection />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <TypographyWithFirstLine />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <DarkMode />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <LoadingButton />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <NumberInput />
-    </div>
-    <div class="overflow-auto rounded border p-3">
+      <template #code>
+        <VueCode :code="CheckboxInputCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
+      <ChitChat />
+      <template #code>
+        <VueCode :code="ChitChatCode" />
+      </template>
+    </CodeBlock>
+
+    <CodeBlock>
       <ChooseColor />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <TableAria />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <DirectionDoc />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <DetailsSummary />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <CompanyCard />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <ContributorsCard />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <NavLink />
-    </div>
-    <div class="overflow-auto rounded border p-3">
-      <VacationCard />
-    </div>
+      <template #code>
+        <VueCode :code="ChooseColorCode" />
+      </template>
+    </CodeBlock>
   </div>
+
+  <ErinLindford />
+  <SaveChanges />
+  <SaveChanges2 />
+  <ListWithBorder />
+  <TableWithBorder />
+  <FormInput />
+  <NewProject />
+  <ListHover />
+  <FormHelperText />
+  <RadioInput />
+
+  <PaymentMethod />
+  <ListWithLink />
+  <CheckboxInput />
+  <EmailForm />
+  <TitleAnnoyed />
+  <SearchForm />
+  <FileInput />
+  <ListWithDot />
+  <TypographySelection />
+  <TypographyWithFirstLine />
+  <DarkMode />
+  <LoadingButton />
+  <NumberInput />
+
+  <TableAria />
+  <DirectionDoc />
+  <DetailsSummary />
+  <CompanyCard />
+  <ContributorsCard />
+  <NavLink />
+  <VacationCard />
 </template>
 
 <style lang="scss" scoped></style>

@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div class="mx-auto max-w-sm bg-white px-6 pb-4 pt-6 shadow">
+  <div class="max-w-sm bg-white px-6 pb-4 pt-6 shadow">
     <form>
       <legend>Choose a theme:</legend>
       <div class="mt-4 grid grid-flow-col">

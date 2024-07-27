@@ -11,20 +11,20 @@ const state = Vue.reactive({
 
 <template>
   <AuthGuard>
-    <div class="relative flex dark:bg-black dark:text-white">
+    <div class="relative flex">
       <aside
         :class="[
-          'absolute inset-y-0  z-10 flex h-dvh w-full flex-shrink-0 flex-grow-0 flex-col bg-white transition-all sm:sticky sm:start-0 sm:w-72 sm:border-r dark:bg-black dark:text-white',
+          'absolute inset-y-0 z-20 flex h-dvh w-full flex-shrink-0 flex-grow-0 flex-col bg-white  transition-all sm:sticky sm:start-0 sm:w-72 sm:border-r ',
           state.showAside ? 'start-0' : '-start-full',
         ]"
       >
         <div class="flex justify-between px-5 py-2">
           <h2 class="text-xl font-medium">aside</h2>
           <button
-            class="flex sm:hidden"
+            class="flex size-10 items-center justify-center rounded-full text-2xl text-blue-500 transition-colors hover:bg-slate-500 sm:hidden"
             @click="state.showAside = !state.showAside"
           >
-            list
+            <i class="iconify mdi--close"></i>
           </button>
         </div>
         <div class="flex-1 overflow-hidden border-t">
@@ -57,17 +57,17 @@ const state = Vue.reactive({
           </ScrollView>
         </div>
       </aside>
-      <div class="flex-grow">
+      <div class="w-full min-w-0">
         <header
-          class="sticky top-0 z-10 flex justify-between gap-3 border-b bg-white px-5 py-2 dark:bg-black dark:text-white"
+          class="sticky top-0 z-10 flex justify-between gap-3 border-b bg-white px-5 py-2"
         >
           <span class="text-xl uppercase"> header </span>
 
           <button
-            class="flex sm:hidden"
+            class="flex size-10 items-center justify-center rounded-full text-2xl hover:bg-slate-500 sm:hidden"
             @click="state.showAside = !state.showAside"
           >
-            list
+            <i class="iconify mdi--list-box-outline"></i>
           </button>
         </header>
         <main class="p-6">

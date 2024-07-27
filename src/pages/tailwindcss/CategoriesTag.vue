@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div class="mx-auto max-w-md bg-white p-6 shadow dark:bg-slate-800">
+  <div class="max-w-md bg-white p-6 shadow dark:bg-slate-800">
     <h2 class="text-base font-semibold text-slate-900 dark:text-slate-200">
       Categories
     </h2>
