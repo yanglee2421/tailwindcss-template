@@ -76,7 +76,7 @@ const state = Vue.reactive({
         <footer class="border-t px-5 py-2">
           &copy;2024, Made with ❤️ by
           <a
-            href="https://github.com/yanglee-2421"
+            href="https://github.com/yanglee2421"
             class="text-blue-500 hover:underline"
             >YangLee2421</a
           >
