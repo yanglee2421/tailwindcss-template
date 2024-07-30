@@ -31,6 +31,14 @@ export const routes: RouterOptions["routes"] = [
     },
   },
 
+  {
+    path: "/",
+    name: "index",
+    component() {
+      return import("@/pages/scroll/ScrollPage.vue");
+    },
+  },
+
   // Auth Pages
   {
     path: "/",

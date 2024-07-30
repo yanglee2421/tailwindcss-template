@@ -26,7 +26,7 @@ Vue.watchPostEffect((onCleanup) => {
         redirect_url: encodeURIComponent(router.currentRoute.value.path),
       },
     });
-  }, 300);
+  }, 1000 * 0.4);
 
   onCleanup(() => {
     clearTimeout(timer);

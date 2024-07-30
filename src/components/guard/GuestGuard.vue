@@ -21,14 +21,16 @@ Vue.watchPostEffect((onCleanup) => {
   const timer = setTimeout(() => {
     router.push({
       path: (() => {
+        const fallback = "/home";
+
         const redirect_url =
-          router.currentRoute.value.query.redirect_url || "/home";
+          router.currentRoute.value.query.redirect_url || fallback;
 
         if (typeof redirect_url === "string") {
           return decodeURIComponent(redirect_url);
         }
 
-        return "/";
+        return fallback;
       })(),
 
       query: {
@@ -36,7 +38,7 @@ Vue.watchPostEffect((onCleanup) => {
         redirect_url: void 0,
       },
     });
-  }, 300);
+  }, 1000 * 0.4);
 
   onCleanup(() => {
     clearTimeout(timer);
