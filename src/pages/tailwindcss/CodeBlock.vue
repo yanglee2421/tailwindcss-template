@@ -7,14 +7,14 @@ const state = Vue.reactive({
 </script>
 
 <template>
-  <div class="divide-y rounded border">
+  <div class="divide-y rounded border bg-white">
     <div class="p-6">
       <slot></slot>
     </div>
     <div>
       <div class="flex justify-end p-2">
         <button
-          class="flex size-8 items-center justify-center rounded-full text-xl hover:text-blue-500"
+          class="flex size-8 items-center justify-center rounded-full text-xl text-slate-500 hover:text-blue-500"
           @click="state.showCode = !state.showCode"
         >
           <i class="iconify mdi--xml"></i>

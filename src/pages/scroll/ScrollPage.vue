@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import * as Vue from "vue";
+import { RouterLink } from "vue-router";
 import img1png from "@/assets/image/scroll/img-1.png";
 import img2png from "@/assets/image/scroll/img-2.png";
 import img3png from "@/assets/image/scroll/img-3.png";
@@ -82,6 +83,13 @@ defineOptions({ inheritAttrs: false });
         The only platform that gives AI the ability to autonomously build web
         services.
       </p>
+      <div class="mt-6">
+        <RouterLink
+          :to="{ name: 'home' }"
+          class="rounded bg-blue-500 px-5 py-2 capitalize text-white hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-300 active:bg-blue-700 disabled:bg-blue-400 disabled:text-slate-50"
+          >get started</RouterLink
+        >
+      </div>
     </div>
     <div class="right"></div>
   </section>

@@ -18,8 +18,14 @@ const state = Vue.reactive({
           state.showAside ? 'start-0' : '-start-full',
         ]"
       >
-        <div class="flex justify-between px-5 py-2">
-          <h2 class="text-xl font-medium">aside</h2>
+        <div class="flex items-center justify-between px-5 py-2">
+          <RouterLink
+            :to="{ name: 'index' }"
+            class="flex items-center gap-3"
+          >
+            <i class="iconify text-2xl text-blue-500 mdi--vuejs"></i>
+            <span class="text-xl font-medium uppercase">app name</span>
+          </RouterLink>
           <button
             class="flex size-10 items-center justify-center rounded-full text-2xl text-blue-500 transition-colors hover:bg-slate-500 sm:hidden"
             @click="state.showAside = !state.showAside"
@@ -31,7 +37,7 @@ const state = Vue.reactive({
           <ScrollView
             :options="{ wheelPropagation: false, suppressScrollX: true }"
           >
-            <nav class="flex flex-col gap-2 p-5">
+            <nav class="flex flex-col gap-2 p-5 text-base">
               <RouterLink
                 :to="{ name: 'home' }"
                 class="hover:text-blue-500 aria-[current=page]:text-blue-500"
@@ -70,13 +76,13 @@ const state = Vue.reactive({
             <i class="iconify mdi--menu"></i>
           </button>
         </header>
-        <main class="p-6">
+        <main class="p-6 text-base">
           <RouterView />
         </main>
         <footer class="border-t px-5 py-2">
           &copy;2024, Made with ❤️ by
           <a
-            href="https://github.com/yanglee-2421"
+            href="https://github.com/yanglee2421"
             class="text-blue-500 hover:underline"
             >YangLee2421</a
           >
