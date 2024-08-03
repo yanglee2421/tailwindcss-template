@@ -53,17 +53,18 @@ const state = Vue.reactive({
                 class="hover:text-blue-500 aria-[current=page]:text-blue-500"
                 >button</RouterLink
               >
+              <RouterLink
+                :to="{ name: 'chat' }"
+                class="hover:text-blue-500 aria-[current=page]:text-blue-500"
+                >chat</RouterLink
+              >
             </nav>
-
-            <div
-              v-for="item in 5"
-              :key="item"
-              class="h-96"
-            ></div>
           </ScrollView>
         </div>
       </aside>
-      <div class="w-full min-w-0">
+      <div
+        class="w-full min-w-0 has-[.contentFixed]:flex has-[.contentFixed]:h-dvh has-[.contentFixed]:flex-col"
+      >
         <header
           class="sticky top-0 z-10 flex items-center border-b bg-white px-5 py-2"
         >
@@ -76,7 +77,9 @@ const state = Vue.reactive({
             <i class="iconify mdi--menu"></i>
           </button>
         </header>
-        <main class="p-6 text-base">
+        <main
+          class="p-6 text-base has-[.contentFixed]:min-h-0 has-[.contentFixed]:flex-1"
+        >
           <RouterView />
         </main>
         <footer class="border-t px-5 py-2">

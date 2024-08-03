@@ -8,9 +8,7 @@ const props = withDefaults(
     options?: PerfectScrollbar.Options;
   }>(),
   {
-    options() {
-      return {};
-    },
+    options: () => ({}),
   },
 );
 

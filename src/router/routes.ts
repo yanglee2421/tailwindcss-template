@@ -67,6 +67,13 @@ export const routes: RouterOptions["routes"] = [
           return import("@/pages/button/ButtonPage.vue");
         },
       },
+      {
+        path: "chat",
+        name: "chat",
+        component() {
+          return import("@/pages/chat/ChatPage.vue");
+        },
+      },
     ],
   },
 ];

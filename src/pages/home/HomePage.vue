@@ -38,6 +38,17 @@ const state = Vue.reactive({
       </button>
     </div>
     <div
+      class="flex h-96 snap-x snap-mandatory divide-x overflow-auto border bg-white"
+    >
+      <div
+        v-for="item in 3"
+        :key="item"
+        class="h-full flex-none basis-full snap-center snap-always md:min-w-0 md:flex-1 md:basis-auto"
+      >
+        {{ item }}
+      </div>
+    </div>
+    <div
       v-for="item in 5"
       :key="item"
       class="h-96 rounded border shadow"
