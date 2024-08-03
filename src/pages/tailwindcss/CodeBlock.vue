@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import * as Vue from "vue";
+import ScrollView from "@/components/ui/ScrollView.vue";
 
 const state = Vue.reactive({
   showCode: false,
@@ -9,7 +10,9 @@ const state = Vue.reactive({
 <template>
   <div class="divide-y rounded border bg-white">
     <div class="p-6">
-      <slot></slot>
+      <ScrollView>
+        <slot></slot>
+      </ScrollView>
     </div>
     <div>
       <div class="flex justify-end p-2">
